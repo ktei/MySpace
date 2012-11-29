@@ -22,7 +22,7 @@ namespace LiteApp.MySpace.Views
         public ShellView()
         {
             InitializeComponent();
-            this.Loaded += new RoutedEventHandler(ShellView_Loaded);
+            this.Loaded += ShellView_Loaded;
             this.LayoutUpdated += ShellView_LayoutUpdated;
         }
 
