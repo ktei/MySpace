@@ -1,0 +1,56 @@
+﻿UNIQUE FEATURES OF THIS THEME
+
+This theme has a couple of unique features that we wanted to call out here. You should
+be able to use the theme right out of the box and get a great experience, but if you 
+know a couple of hints, you can use it to make an app that really pops!
+
+COLOR THEMES
+
+First, it's good to know that the theme comes in three different color schemes:
+green (the default), orange and blue. You can enable/disable these by commenting
+or uncommenting the right resources in Brushes.xaml. Notes in that file should
+make it obvious how to do that.
+
+COLOR ALTERNATES
+
+In adittion to the themes, certain control have color alternates. You can use these
+to emphasize a certain control or action in your application. The alternates are:
+
+* DarkTextBox, DarkPasswordBox (a dark color TextBox and PasswordBox)
+* GreenButton, BlueButton, OrangeButton (colored variations of the button)
+
+BACKGROUND IMAGERY
+
+To look it's best, the theme expects to be used on top of a dark background. We wanted
+to have some texture in that background that we could only easily get using an image.
+In order to tile that image, we created a control called TiledBackground. This is a
+simple implementation of that concept and source for the control is included if you
+need to make any modifications.
+
+You use the control like this:
+
+  <controls:TiledBackground SourceUri="Images/backgroundtexture.png" />
+
+In addition to the background texture, we also include an overlay image that gives a
+vignetting effect to the background. That image is called background shadow. To get
+the right background, layer the shadow on the tiled texture like this:
+
+  <Grid>
+    <controls:TiledBackground SourceUri="Images/backgroundtexture.png" />
+	<Image Source="/Images/backgroundshadow.png" Stretch="Fill" />
+  </Grid>
+
+
+FONTS AND TEXT
+
+We designed this theme to very adaptive to fonts. In most cases, font properties are 
+just inherited. Very few controls explicitly specify any font details. That said, this
+theme is optimized and was tested with a certain set of font properties that you may
+need to set yourself. The ideal font properties are:
+
+    FontFamily="Trebuchet MS"
+    FontSize="13.5"
+    TextOptions.TextHintingMode="Animated"
+
+
+That's it. We hope you like it!

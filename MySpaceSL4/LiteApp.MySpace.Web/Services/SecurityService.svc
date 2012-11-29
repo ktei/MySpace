@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="LiteApp.MySpace.Web.Services.SecurityService" CodeBehind="SecurityService.svc.cs" %>
