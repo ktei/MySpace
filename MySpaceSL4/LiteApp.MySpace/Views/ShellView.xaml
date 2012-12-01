@@ -16,7 +16,7 @@
 
         <Border x:Name="BackgroundBorder" Style="{StaticResource BackgroundBorderStyle}" />
 
-        <Border x:Name="LinksBorder" Style="{StaticResource NavLinksBorderStyle}" />
+        <Border x:Name="LinksBorder" Style="{StaticResource NavLinksBorderStyle}"/>
 
         <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
             <Grid.RowDefinitions>
@@ -31,10 +31,17 @@
             </StackPanel>
 
             <Border x:Name="BrandingBorder" Style="{StaticResource NavBrandingBorderStyle}" Grid.Row="1">
-                <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource NavBrandingStackPanelStyle}">
-                    <TextBlock Style="{StaticResource ApplicationNameStyle}" Text="Space of Rui" />
-                    <TextBlock Text="I'm just a coder" VerticalAlignment="Bottom" Margin="10,0,0,3" FontStyle="Italic"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource NavBrandingStackPanelStyle}">
+                        <TextBlock Style="{StaticResource ApplicationNameStyle}" Text="Space of Rui" />
+                        <TextBlock Text="I'm just a coder" VerticalAlignment="Bottom" Margin="10,0,0,3" FontStyle="Italic"/>
+                    </StackPanel>
+                    <controls:LoginStatusPanel Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,40,3" VerticalAlignment="Bottom"/>
+                </Grid>
             </Border>
 
             <ContentControl x:Name="ActiveItem" Grid.Row="2" Padding="30,0"/>

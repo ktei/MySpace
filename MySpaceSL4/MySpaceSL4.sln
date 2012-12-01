@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteApp.MySpace", "LiteApp.MySpace\LiteApp.MySpace.csproj", "{74BC6626-FDA2-4862-AC2C-9F8D31BFAE2B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0CE38DB9-D7D0-4EAD-9992-79E4CBCFCB07} = {0CE38DB9-D7D0-4EAD-9992-79E4CBCFCB07}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteApp.MySpace.Web", "LiteApp.MySpace.Web\LiteApp.MySpace.Web.csproj", "{0CE38DB9-D7D0-4EAD-9992-79E4CBCFCB07}"
 EndProject

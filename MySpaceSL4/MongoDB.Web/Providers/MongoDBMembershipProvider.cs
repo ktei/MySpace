@@ -389,7 +389,7 @@ namespace MongoDB.Web.Providers
             }
 
             var update = Update.Set("ApplicationName", this.ApplicationName)
-                .Set("Comment", user.Comment)
+                .Set("Comment", user.Comment ?? string.Empty)
                 .Set("Email", user.Email)
                 .Set("IsApproved", user.IsApproved)
                 .Set("LastActivityDate", user.LastActivityDate.ToUniversalTime())

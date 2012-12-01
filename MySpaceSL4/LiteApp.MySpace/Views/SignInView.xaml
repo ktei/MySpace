@@ -1,0 +1,28 @@
+﻿<controls:ChildWindow x:Class="LiteApp.MySpace.Views.SignInView"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Style="{StaticResource DefaultWindowStyle}"
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           xmlns:cal="http://www.caliburnproject.org"
+           Width="450">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="User name" Style="{StaticResource BlackLabelTextStyle}"/>
+            <TextBox/>
+            <TextBlock Text="Password" Style="{StaticResource BlackLabelTextStyle}" Margin="0,10,0,0"/>
+            <PasswordBox/>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
+            <TextBlock Text="Not registered yet?" Style="{StaticResource ContentTextStyle}" Foreground="Black"/>
+            <HyperlinkButton x:Name="RegisterLinkButton" cal:Message.Attach="Register" Content="Sign up now" Click="RegisterLinkButton_Click" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
+            <Button x:Name="OKButton" Content="OK" Click="OKButton_Click" Width="75" Height="30" Margin="0,0,10,0" />
+            <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click" Width="75" Height="30" />
+        </StackPanel>
+    </Grid>
+</controls:ChildWindow>

@@ -1083,6 +1083,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="Padding" Value="2,0,2,0" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="FontSize" Value="{StaticResource ContentFontSize}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="HyperlinkButton">
@@ -1090,11 +1091,11 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
-                                <VisualState x:Name="MouseOver">
+                                <!--<VisualState x:Name="MouseOver">
                                     <Storyboard>
                                         <DoubleAnimation Duration="0" To="1.0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Underline" />
                                     </Storyboard>
-                                </VisualState>
+                                </VisualState>-->
                                 <VisualState x:Name="Pressed" />
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
@@ -1113,7 +1114,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <StackPanel Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" UseLayoutRounding="True">
                             <ContentControl x:Name="contentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}" />
-                            <Rectangle x:Name="Underline" Height="1" VerticalAlignment="Bottom" Fill="{TemplateBinding Foreground}" Margin="0,1,0,2" Opacity="0" />
+                            <!--<Rectangle x:Name="Underline" Height="1" VerticalAlignment="Bottom" Fill="{TemplateBinding Foreground}" Margin="0,1,0,2" Opacity="0" />-->
                         </StackPanel>
                         <Rectangle x:Name="FocusVisualElement" IsHitTestVisible="False" Margin="0" Opacity="0" RadiusX="2" RadiusY="2" Stroke="{StaticResource FocusVisualBrush}" StrokeThickness="{StaticResource FocusVisualStrokeThickness}" />
                     </Grid>

@@ -6,6 +6,7 @@ using System.ServiceModel.Activation;
 using LiteApp.MySpace.Web.Entities;
 using System.Threading;
 using System.Web;
+using System.Web.Security;
 
 namespace LiteApp.MySpace.Web.Services
 {
@@ -19,30 +20,40 @@ namespace LiteApp.MySpace.Web.Services
             Thread.CurrentPrincipal = HttpContext.Current.User;
         }
 
-        [OperationContract]
-        public SignInResult SignIn(string userName, string password)
+        //[OperationContract]
+        public SignInStaus SignIn(string userName, string password)
         {
             Thread.Sleep(2500);
-            return new SignInResult(SignInResult.StatusCode.Success, new User() { Username = "ktei" });
-        }
-    }
-
-    public class SignInResult
-    {
-        public SignInResult(StatusCode status, User user)
-        {
-            this.Status = status;
-            this.User = user;
+            return SignInStaus.Success;
         }
 
-        public User User { get; private set; }
-
-        public StatusCode Status { get; private set; }
-
-        public enum StatusCode
+        [OperationContract]
+        public SignUpStatus SignUp(string userName, string password, string email)
         {
-            Success = 0,
-            WrongCredentials
+            Thread.Sleep(5000);
+            SignUpStatus result = SignUpStatus.Success;
+            try
+            {
+                //Membership.CreateUser(userName, password, email);
+            }
+            catch (MembershipCreateUserException ex)
+            {
+                result = MapToSignUpStatus(ex.StatusCode);
+            }
+            return result;
+        }
+
+        static SignUpStatus MapToSignUpStatus(MembershipCreateStatus status)
+        {
+            switch (status)
+            {
+                case MembershipCreateStatus.Success: return SignUpStatus.Success;
+                case MembershipCreateStatus.InvalidPassword: return SignUpStatus.InvalidPassword;
+                case MembershipCreateStatus.InvalidEmail: return SignUpStatus.InvalidEmail;
+                case MembershipCreateStatus.DuplicateUserName: return SignUpStatus.DuplicateUserName;
+                case MembershipCreateStatus.DuplicateEmail: return SignUpStatus.DuplicateEmail;
+                default: return SignUpStatus.OtherError;
+            }
         }
     }
 }

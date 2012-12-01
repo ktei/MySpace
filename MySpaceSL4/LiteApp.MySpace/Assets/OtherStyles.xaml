@@ -14,7 +14,7 @@
     </Style>
 
     <!--LabelTextStyle-->
-    <Style x:Key="LabelTextStyle" TargetType="TextBlock">
+    <Style x:Key="BlackLabelTextStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource ContentFontSize}" />

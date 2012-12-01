@@ -17,7 +17,7 @@ namespace LiteApp.MySpace.Views
 {
     public partial class ShellView : UserControl
     {
-        ShellViewModel _shell;
+        ShellViewModel _model;
 
         public ShellView()
         {
@@ -28,11 +28,11 @@ namespace LiteApp.MySpace.Views
 
         void ShellView_Loaded(object sender, RoutedEventArgs e)
         {
-            _shell = this.DataContext as ShellViewModel;
-            _shell.PageActivatged += _shell_PageActivatged;
+            _model = (ShellViewModel)this.DataContext;
+            _model.PageActivatged += _model_PageActivatged;
         }
 
-        void _shell_PageActivatged(object sender, PageActivatedEventArgs e)
+        void _model_PageActivatged(object sender, PageActivatedEventArgs e)
         {
             UpdateLinkStates();
         }
@@ -44,7 +44,7 @@ namespace LiteApp.MySpace.Views
 
         void UpdateLinkStates()
         {
-            var activePageName = _shell.ActiveItem.Name;
+            var activePageName = _model.ActiveItem.Name;
             foreach (UIElement child in LinksStackPanel.Children)
             {
                 HyperlinkButton hb = child as HyperlinkButton;

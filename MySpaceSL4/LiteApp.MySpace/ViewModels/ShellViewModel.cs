@@ -13,6 +13,7 @@ using LiteApp.MySpace.Framework;
 using Caliburn.Micro;
 using System.Linq;
 using System.Collections.Generic;
+using LiteApp.MySpace.Framework.Validation;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -21,6 +22,7 @@ namespace LiteApp.MySpace.ViewModels
     {
         public ShellViewModel()
         {
+            
         }
 
         [ImportMany]
@@ -37,6 +39,11 @@ namespace LiteApp.MySpace.ViewModels
                 if (PageActivatged != null)
                     PageActivatged(this, new PageActivatedEventArgs(name));
             }
+        }
+
+        public void SignIn()
+        {
+            IoC.Get<IWindowManager>().ShowDialog(new SignInViewModel());
         }
         
         protected override void OnInitialize()

@@ -85,6 +85,8 @@
     <Compile Include="Services\SecurityService.svc.cs">
       <DependentUpon>SecurityService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Services\SignInStatus.cs" />
+    <Compile Include="Services\SignUpStatus.cs" />
     <Compile Include="Services\SilverlightFaultBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,7 +106,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>15456</DevelopmentServerPort>
+          <DevelopmentServerPort>11846</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

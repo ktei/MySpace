@@ -16,7 +16,7 @@ namespace LiteApp.MySpace.Security
     {
         public void SignIn(string userName, string password, Action<SignInOperation> completeAction)
         {
-            return;
+            
         }
     }
 }

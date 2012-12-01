@@ -1,0 +1,17 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <customBinding>
+                <binding name="CustomBinding_SecurityService">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
+            </customBinding>
+        </bindings>
+        <client>
+            <endpoint address="../Services/SecurityService.svc"
+                binding="customBinding" bindingConfiguration="CustomBinding_SecurityService"
+                contract="Services.Security.SecurityService" name="CustomBinding_SecurityService" />
+        </client>
+    </system.serviceModel>
+</configuration>
