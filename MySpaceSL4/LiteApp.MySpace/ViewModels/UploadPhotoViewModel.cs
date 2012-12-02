@@ -4,6 +4,7 @@ using System.Net;
 using System.Windows;
 using Caliburn.Micro;
 using System.Threading;
+using System.Net.Browser;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -91,8 +92,11 @@ namespace LiteApp.MySpace.ViewModels
             _dataLength = _fileStream.Length;
             UriBuilder httpHandlerUrlBuilder = new UriBuilder(string.Format("{0}/Handlers/PhotoReceiver.ashx", _baseUri));
 
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(httpHandlerUrlBuilder.Uri);
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequestCreator.ClientHttp.Create(httpHandlerUrlBuilder.Uri);
+            
             webRequest.AllowWriteStreamBuffering = false;
+            webRequest.ContentType = "multipart/form-data";
+            webRequest.ContentLength = _dataLength;
             webRequest.Method = "POST";
             webRequest.BeginGetRequestStream(new AsyncCallback(WriteToStreamCallback), webRequest);
             FileName = file.Name;

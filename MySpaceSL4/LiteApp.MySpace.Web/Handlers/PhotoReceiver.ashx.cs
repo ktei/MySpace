@@ -25,13 +25,13 @@ namespace LiteApp.MySpace.Web.Handlers
 
         public void ProcessRequest(HttpContext context)
         {
-            //var storage = SharpBoxSupport.OpenDropBoxStorage();
-            //var folder = storage.GetFolderEx(GetPhotoVirtualPath());
-            //var fileName = Guid.NewGuid() + ".png";
-            //storage.UploadFile(context.Request.InputStream, fileName, folder);
+            var storage = SharpBoxSupport.OpenDropBoxStorage();
+            var folder = storage.GetFolderEx(GetPhotoVirtualPath());
+            var fileName = Guid.NewGuid() + ".jpg";
+            storage.UploadFile(context.Request.InputStream, fileName, folder);
 
-            //string photoUri = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken, storage.GetFileSystemObject(fileName, folder)).AbsoluteUri;
-            //storage.Close();
+            string photoUri = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken, storage.GetFileSystemObject(fileName, folder)).AbsoluteUri;
+            storage.Close();
 
             context.Response.Write("OK");
         }
