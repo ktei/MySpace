@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using LiteApp.MySpace.Services.Security;
 
 namespace LiteApp.MySpace.Security
 {
@@ -7,27 +8,44 @@ namespace LiteApp.MySpace.Security
     {
         public SecurityContext()
         {
-            AuthenticationProvider = new AuthenticationProvider();
         }
 
         public static SecurityContext Current { get; private set; }
 
-        public IAuthenticationProvider AuthenticationProvider { get; set; }
-
-        public void SignIn(string userName, string password)
+        public void SignIn(string userName, string password, Action<SignInResult> completeAction)
         {
-            if (this.AuthenticationProvider == null)
+            if (completeAction == null)
+                throw new ArgumentNullException("completeAction");
+            try
             {
-                throw new Exception("AuthenticationService is not set.");
-            }
-            AuthenticationProvider.SignIn(userName, password, result =>
+                var client = new SecurityServiceClient();
+
+                client.SignInCompleted += (sender, e) =>
                 {
-                    if (result.Success)
+                    var status = e.Result;
+                    SignInResult result = null;
+                    if (status == SignInStaus.Success)
                     {
-                        User = result.User;
+                        User = new IdentityImpl(userName);
                         IsAuthenticated = true;
+                        result = new SignInResult(User);
                     }
-                });
+                    else if (status == SignInStaus.WrongCredentials)
+                    {
+                        result = new SignInResult(null, false, "Provided credentials are invalid.");
+                    }
+                    else
+                    {
+                        result = new SignInResult(null, false, "Server had an error while processing the request. Please try again later.");
+                    }
+                    completeAction(result);
+                };
+                client.SignInAsync(userName, password);
+            }
+            catch
+            {
+                completeAction(new SignInResult(null, false, "An error occurred while processing the request. Please try again later."));
+            }
         }
 
         public Identity User
@@ -50,6 +68,20 @@ namespace LiteApp.MySpace.Security
         public void StopService()
         {
             return;
+        }
+
+        public class IdentityImpl : Identity
+        {
+            public IdentityImpl(string name)
+            {
+                Name = name;
+            }
+
+            public string Name
+            {
+                get;
+                private set;
+            }
         }
     }
 }

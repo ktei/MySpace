@@ -130,6 +130,7 @@ namespace LiteApp.MySpace.ViewModels
                 client.SignUpCompleted += (sender, e) =>
                     {
                         IsBusy = false;
+                        
                         if (SignUpCompleted != null)
                             SignUpCompleted(this, EventArgs.Empty);
                     };

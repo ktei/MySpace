@@ -9,43 +9,48 @@
     xmlns:cal="http://www.caliburnproject.org"
     d:DesignWidth="640" d:DesignHeight="300">
 
-    <Grid>
+    
+        <Grid>
 
-        <controls:TiledBackground SourceUri="/LiteApp.MySpace;component/Images/backgroundtexture.png" />
-        <Image Source="/LiteApp.MySpace;component/Images/backgroundshadow.png" Stretch="Fill" />
 
-        <Border x:Name="BackgroundBorder" Style="{StaticResource BackgroundBorderStyle}" />
+            <controls:TiledBackground SourceUri="/LiteApp.MySpace;component/Images/backgroundtexture.png" />
+            <Image Source="/LiteApp.MySpace;component/Images/backgroundshadow.png" Stretch="Fill" />
 
-        <Border x:Name="LinksBorder" Style="{StaticResource NavLinksBorderStyle}"/>
+            <Border x:Name="BackgroundBorder" Style="{StaticResource BackgroundBorderStyle}" />
 
-        <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            <Border x:Name="LinksBorder" Style="{StaticResource NavLinksBorderStyle}"/>
 
-            <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
-                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="Home" Tag="Home" cal:Message.Attach="ActivatePage('Home')" />
-                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="Photos" Tag="Photos" cal:Message.Attach="ActivatePage('Photos')" />
-            </StackPanel>
+            <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-            <Border x:Name="BrandingBorder" Style="{StaticResource NavBrandingBorderStyle}" Grid.Row="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource NavBrandingStackPanelStyle}">
-                        <TextBlock Style="{StaticResource ApplicationNameStyle}" Text="Space of Rui" />
-                        <TextBlock Text="I'm just a coder" VerticalAlignment="Bottom" Margin="10,0,0,3" FontStyle="Italic"/>
-                    </StackPanel>
-                    <controls:LoginStatusPanel Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,40,3" VerticalAlignment="Bottom"/>
-                </Grid>
-            </Border>
+                <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
+                    <HyperlinkButton Style="{StaticResource LinkStyle}" Content="Home" Tag="Home" cal:Message.Attach="ActivatePage('Home')" />
+                    <HyperlinkButton Style="{StaticResource LinkStyle}" Content="Photos" Tag="Photos" cal:Message.Attach="ActivatePage('Photos')" />
+                </StackPanel>
 
-            <ContentControl x:Name="ActiveItem" Grid.Row="2" Padding="30,0"/>
+                <Border x:Name="BrandingBorder" Style="{StaticResource NavBrandingBorderStyle}" Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource NavBrandingStackPanelStyle}">
+                            <TextBlock Style="{StaticResource ApplicationNameStyle}" Text="Space of Rui" />
+                            <TextBlock Text="I'm just a coder" VerticalAlignment="Bottom" Margin="10,0,0,3" FontStyle="Italic"/>
+                        </StackPanel>
+                        <controls:LoginStatusPanel Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,40,3" VerticalAlignment="Bottom"/>
+                    </Grid>
+                </Border>
+
+            
+                <ContentControl x:Name="ActiveItem" Grid.Row="2" Padding="30,0" HorizontalContentAlignment="Stretch"/>
+            
         </Grid>
 
-    </Grid>
+        </Grid>
+    
 </UserControl>

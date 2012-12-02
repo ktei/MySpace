@@ -1,9 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Activation;
-using LiteApp.MySpace.Web.Entities;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
@@ -20,24 +16,36 @@ namespace LiteApp.MySpace.Web.Services
             Thread.CurrentPrincipal = HttpContext.Current.User;
         }
 
-        //[OperationContract]
+        [OperationContract]
         public SignInStaus SignIn(string userName, string password)
         {
-            Thread.Sleep(2500);
-            return SignInStaus.Success;
+            SignInStaus result = SignInStaus.Success;
+            try
+            {
+                if (!Membership.ValidateUser(userName, password))
+                {
+                    result = SignInStaus.WrongCredentials;
+                }
+            }
+            catch
+            {
+                // TODO: log error
+                result = SignInStaus.ServerError;
+            }
+            return result;
         }
 
         [OperationContract]
         public SignUpStatus SignUp(string userName, string password, string email)
         {
-            Thread.Sleep(5000);
             SignUpStatus result = SignUpStatus.Success;
             try
             {
-                //Membership.CreateUser(userName, password, email);
+                Membership.CreateUser(userName, password, email);
             }
             catch (MembershipCreateUserException ex)
             {
+                // TODO: log error
                 result = MapToSignUpStatus(ex.StatusCode);
             }
             return result;
@@ -52,7 +60,7 @@ namespace LiteApp.MySpace.Web.Services
                 case MembershipCreateStatus.InvalidEmail: return SignUpStatus.InvalidEmail;
                 case MembershipCreateStatus.DuplicateUserName: return SignUpStatus.DuplicateUserName;
                 case MembershipCreateStatus.DuplicateEmail: return SignUpStatus.DuplicateEmail;
-                default: return SignUpStatus.OtherError;
+                default: return SignUpStatus.ServerError;
             }
         }
     }

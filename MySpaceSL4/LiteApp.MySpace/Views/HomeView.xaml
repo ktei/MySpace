@@ -4,18 +4,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
-    d:DesignWidth="640" d:DesignHeight="300" mc:Ignorable="d"
-    Style="{StaticResource PageStyle}">
+    d:DesignWidth="640" d:DesignHeight="300" mc:Ignorable="d" Style="{StaticResource PageStyle}">
 
     <Grid>
-        <StackPanel>
-            <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Home" />
-            <TextBlock Style="{StaticResource ContentTextStyle}" Text="" />
-            <Border Style="{StaticResource PhotoFrameBorder}" HorizontalAlignment="Left">
-                <Image Source="../Assets/Images/me.png" Width="256" Height="219" />
-            </Border>
-            <TextBlock Text="{Binding Strings.Intro, Source={StaticResource AppResx}}" Style="{StaticResource ContentTextStyle}"/>
-        </StackPanel>
+        <ScrollViewer x:Name="PageScrollViewer" Style="{StaticResource PageScrollViewerStyle}">
+            <StackPanel>
+                <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Home" />
+                <TextBlock Style="{StaticResource ContentTextStyle}" Text="" />
+                <Border Style="{StaticResource PhotoFrameBorder}" HorizontalAlignment="Left">
+                    <Image Source="../Assets/Images/me.png" Width="256" Height="219" />
+                </Border>
+                <TextBlock Text="{Binding Strings.Intro, Source={StaticResource AppResx}}" Style="{StaticResource ContentTextStyle}"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 
 </navigation:Page>

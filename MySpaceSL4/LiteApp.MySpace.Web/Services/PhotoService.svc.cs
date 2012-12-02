@@ -13,9 +13,8 @@ namespace LiteApp.MySpace.Web.Services
     public class PhotoService
     {
         [OperationContract]
-        public void UploadPhoto()
+        public void UploadPhoto(byte[] stream)
         {
-
             
             
         }

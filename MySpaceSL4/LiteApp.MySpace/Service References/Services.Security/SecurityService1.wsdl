@@ -13,6 +13,15 @@
   <wsdl:binding name="CustomBinding_SecurityService" type="SecurityService">
     <wsp:PolicyReference URI="#CustomBinding_SecurityService_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SignIn">
+      <soap12:operation soapAction="urn:SecurityService/SignIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SignUp">
       <soap12:operation soapAction="urn:SecurityService/SignUp" style="document" />
       <wsdl:input>

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using LiteApp.MySpace.ViewModels;
 
 namespace LiteApp.MySpace.Views
 {
@@ -17,6 +18,7 @@ namespace LiteApp.MySpace.Views
         public PhotosView()
         {
             InitializeComponent();
+            
         }
     }
 }

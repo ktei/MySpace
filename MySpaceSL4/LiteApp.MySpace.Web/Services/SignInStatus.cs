@@ -8,6 +8,7 @@ namespace LiteApp.MySpace.Web.Services
     public enum SignInStaus
     {
         Success = 0,
-        WrongCredentials
+        WrongCredentials,
+        ServerError
     }
 }

@@ -7,6 +7,12 @@
       <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="SecurityService_SignIn_InputMessage">
+    <wsdl:part name="parameters" element="SignIn" />
+  </wsdl:message>
+  <wsdl:message name="SecurityService_SignIn_OutputMessage">
+    <wsdl:part name="parameters" element="SignInResponse" />
+  </wsdl:message>
   <wsdl:message name="SecurityService_SignUp_InputMessage">
     <wsdl:part name="parameters" element="SignUp" />
   </wsdl:message>
@@ -14,6 +20,10 @@
     <wsdl:part name="parameters" element="SignUpResponse" />
   </wsdl:message>
   <wsdl:portType name="SecurityService">
+    <wsdl:operation name="SignIn">
+      <wsdl:input wsaw:Action="urn:SecurityService/SignIn" message="SecurityService_SignIn_InputMessage" />
+      <wsdl:output wsaw:Action="urn:SecurityService/SignInResponse" message="SecurityService_SignIn_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SignUp">
       <wsdl:input wsaw:Action="urn:SecurityService/SignUp" message="SecurityService_SignUp_InputMessage" />
       <wsdl:output wsaw:Action="urn:SecurityService/SignUpResponse" message="SecurityService_SignUp_OutputMessage" />

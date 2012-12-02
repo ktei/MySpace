@@ -27,6 +27,6 @@ namespace LiteApp.MySpace.Web.Services
         //     The e-mail address already exists in the database for the application.
         DuplicateEmail,
 
-        OtherError
+        ServerError
     }
 }

@@ -16,6 +16,20 @@ namespace LiteApp.MySpace.Services.Security {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SignInStaus", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
+    public enum SignInStaus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Success = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WrongCredentials = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ServerError = 2,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SignUpStatus", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
     public enum SignUpStatus : int {
         
@@ -35,12 +49,17 @@ namespace LiteApp.MySpace.Services.Security {
         DuplicateEmail = 4,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        OtherError = 5,
+        ServerError = 5,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="", ConfigurationName="Services.Security.SecurityService")]
     public interface SecurityService {
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/SignIn", ReplyAction="urn:SecurityService/SignInResponse")]
+        System.IAsyncResult BeginSignIn(string userName, string password, System.AsyncCallback callback, object asyncState);
+        
+        LiteApp.MySpace.Services.Security.SignInStaus EndSignIn(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/SignUp", ReplyAction="urn:SecurityService/SignUpResponse")]
         System.IAsyncResult BeginSignUp(string userName, string password, string email, System.AsyncCallback callback, object asyncState);
@@ -50,6 +69,25 @@ namespace LiteApp.MySpace.Services.Security {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface SecurityServiceChannel : LiteApp.MySpace.Services.Security.SecurityService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SignInCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public SignInCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public LiteApp.MySpace.Services.Security.SignInStaus Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((LiteApp.MySpace.Services.Security.SignInStaus)(this.results[0]));
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -74,6 +112,12 @@ namespace LiteApp.MySpace.Services.Security {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class SecurityServiceClient : System.ServiceModel.ClientBase<LiteApp.MySpace.Services.Security.SecurityService>, LiteApp.MySpace.Services.Security.SecurityService {
+        
+        private BeginOperationDelegate onBeginSignInDelegate;
+        
+        private EndOperationDelegate onEndSignInDelegate;
+        
+        private System.Threading.SendOrPostCallback onSignInCompletedDelegate;
         
         private BeginOperationDelegate onBeginSignUpDelegate;
         
@@ -134,11 +178,61 @@ namespace LiteApp.MySpace.Services.Security {
             }
         }
         
+        public event System.EventHandler<SignInCompletedEventArgs> SignInCompleted;
+        
         public event System.EventHandler<SignUpCompletedEventArgs> SignUpCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginSignIn(string userName, string password, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSignIn(userName, password, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        LiteApp.MySpace.Services.Security.SignInStaus LiteApp.MySpace.Services.Security.SecurityService.EndSignIn(System.IAsyncResult result) {
+            return base.Channel.EndSignIn(result);
+        }
+        
+        private System.IAsyncResult OnBeginSignIn(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userName = ((string)(inValues[0]));
+            string password = ((string)(inValues[1]));
+            return ((LiteApp.MySpace.Services.Security.SecurityService)(this)).BeginSignIn(userName, password, callback, asyncState);
+        }
+        
+        private object[] OnEndSignIn(System.IAsyncResult result) {
+            LiteApp.MySpace.Services.Security.SignInStaus retVal = ((LiteApp.MySpace.Services.Security.SecurityService)(this)).EndSignIn(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnSignInCompleted(object state) {
+            if ((this.SignInCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SignInCompleted(this, new SignInCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SignInAsync(string userName, string password) {
+            this.SignInAsync(userName, password, null);
+        }
+        
+        public void SignInAsync(string userName, string password, object userState) {
+            if ((this.onBeginSignInDelegate == null)) {
+                this.onBeginSignInDelegate = new BeginOperationDelegate(this.OnBeginSignIn);
+            }
+            if ((this.onEndSignInDelegate == null)) {
+                this.onEndSignInDelegate = new EndOperationDelegate(this.OnEndSignIn);
+            }
+            if ((this.onSignInCompletedDelegate == null)) {
+                this.onSignInCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSignInCompleted);
+            }
+            base.InvokeAsync(this.onBeginSignInDelegate, new object[] {
+                        userName,
+                        password}, this.onEndSignInDelegate, this.onSignInCompletedDelegate, userState);
+        }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginSignUp(string userName, string password, string email, System.AsyncCallback callback, object asyncState) {
@@ -264,6 +358,20 @@ namespace LiteApp.MySpace.Services.Security {
             
             public SecurityServiceClientChannel(System.ServiceModel.ClientBase<LiteApp.MySpace.Services.Security.SecurityService> client) : 
                     base(client) {
+            }
+            
+            public System.IAsyncResult BeginSignIn(string userName, string password, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = userName;
+                _args[1] = password;
+                System.IAsyncResult _result = base.BeginInvoke("SignIn", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public LiteApp.MySpace.Services.Security.SignInStaus EndSignIn(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                LiteApp.MySpace.Services.Security.SignInStaus _result = ((LiteApp.MySpace.Services.Security.SignInStaus)(base.EndInvoke("SignIn", _args, result)));
+                return _result;
             }
             
             public System.IAsyncResult BeginSignUp(string userName, string password, string email, System.AsyncCallback callback, object asyncState) {

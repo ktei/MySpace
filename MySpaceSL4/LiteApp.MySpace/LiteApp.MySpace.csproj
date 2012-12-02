@@ -155,11 +155,9 @@
     <Compile Include="Framework\Validation\ValidationRuleFactory.cs" />
     <Compile Include="Framework\Validation\ValidationRuleMetadataAttribute.cs" />
     <Compile Include="Framework\Validation\VisualTreeExtensions.cs" />
-    <Compile Include="Security\AuthenticationProvider.cs" />
-    <Compile Include="Security\IAuthenticationProvider.cs" />
     <Compile Include="Security\Identity.cs" />
     <Compile Include="Security\SecurityContext.cs" />
-    <Compile Include="Security\SignInOperation.cs" />
+    <Compile Include="Security\SignInResult.cs" />
     <Compile Include="Service References\Services.Security\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -279,6 +277,9 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\Services.Security\LiteApp.MySpace.Services.Security.SignInStaus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\Services.Security\LiteApp.MySpace.Services.Security.SignUpStatus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

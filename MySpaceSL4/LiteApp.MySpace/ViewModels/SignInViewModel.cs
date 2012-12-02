@@ -9,19 +9,87 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Caliburn.Micro;
+using LiteApp.MySpace.Framework.Validation;
+using LiteApp.MySpace.Services.Security;
+using LiteApp.MySpace.Security;
 
 namespace LiteApp.MySpace.ViewModels
 {
-    public class SignInViewModel : Screen
+    public class SignInViewModel : EditableViewModel
     {
+        string _userName;
+        bool _isBusy;
+
         public SignInViewModel()
         {
             DisplayName = "Sign In";
+            RefreshBindingScope = new RefreshBindingScope();
         }
 
-        public void Register()
+        public event EventHandler SignInCompleted;
+
+        public RefreshBindingScope RefreshBindingScope { get; set; }
+
+        [RequiredField]
+        public string UserName
+        {
+            get { return _userName; }
+            set
+            {
+                if (_userName != value)
+                {
+                    _userName = value;
+                    IsDirty = true;
+                    NotifyOfPropertyChange(() => UserName);
+                }
+            }
+        }
+
+        [RequiredField]
+        public string Password
+        {
+            get { return PasswordAccessor == null ? string.Empty : PasswordAccessor(); }
+            set
+            {
+                IsDirty = true;
+                NotifyOfPropertyChange(() => Password);
+            }
+        }
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                if (_isBusy != value)
+                {
+                    _isBusy = value;
+                    NotifyOfPropertyChange(() => IsBusy);
+                }
+            }
+        }
+
+        internal Func<string> PasswordAccessor { get; set; }
+
+        public void SignUp()
         {
             IoC.Get<IWindowManager>().ShowDialog(new SignUpViewModel());
+        }
+
+        public void SignIn()
+        {
+            RefreshBindingScope.Scope();
+            if (this.Validator.HasErrors)
+                return;
+            IsBusy = true;
+            SecurityContext.Current.SignIn(UserName, Password, result =>
+            {
+                if (!result.Success)
+                {
+                    MessageBox.Show(result.Error);
+                }
+                IsBusy = false;
+            });
         }
     }
 }

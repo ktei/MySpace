@@ -51,7 +51,7 @@
         <Setter Property="MaxWidth" Value="{StaticResource ContentMaxWidth}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Margin" Value="46,0" />
-        <Setter Property="VerticalAlignment" Value="Top" />
+        <!--<Setter Property="VerticalAlignment" Value="Top" />-->
     </Style>
 
     <!--ContentBorderStyle-->
@@ -352,9 +352,9 @@
     <!--PageScrollViewerStyle-->
     <Style x:Key="PageScrollViewerStyle" TargetType="ScrollViewer">
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0,1,0,1" />
-        <Setter Property="Margin" Value="-58,-15,-58,-15" />
-        <Setter Property="Padding" Value="58,0,58,0" />
+        <!--<Setter Property="BorderThickness" Value="0,1,0,1" />-->
+        <!--<Setter Property="Margin" Value="-58,-15,-58,-15" />
+        <Setter Property="Padding" Value="58,0,58,0" />-->
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
     </Style>

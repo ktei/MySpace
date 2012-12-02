@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" />
+  <xs:element name="SignIn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SignInResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" minOccurs="0" name="SignInResult" type="q1:SignInStaus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SignUp">
     <xs:complexType>
       <xs:sequence>
@@ -13,7 +28,7 @@
   <xs:element name="SignUpResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" minOccurs="0" name="SignUpResult" type="q1:SignUpStatus" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" minOccurs="0" name="SignUpResult" type="q2:SignUpStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
