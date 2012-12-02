@@ -92,6 +92,7 @@ namespace LiteApp.MySpace.ViewModels
             UriBuilder httpHandlerUrlBuilder = new UriBuilder(string.Format("{0}/Handlers/PhotoReceiver.ashx", _baseUri));
 
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(httpHandlerUrlBuilder.Uri);
+            webRequest.AllowWriteStreamBuffering = false;
             webRequest.Method = "POST";
             webRequest.BeginGetRequestStream(new AsyncCallback(WriteToStreamCallback), webRequest);
             FileName = file.Name;
