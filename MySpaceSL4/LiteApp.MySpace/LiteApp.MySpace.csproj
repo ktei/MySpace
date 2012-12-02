@@ -294,6 +294,7 @@
     <None Include="Service References\Services.Security\SecurityService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Unique Features of this Theme.txt" />
     <Resource Include="Images\backgroundshadow.png" />

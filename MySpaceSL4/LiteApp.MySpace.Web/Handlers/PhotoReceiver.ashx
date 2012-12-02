@@ -15,7 +15,7 @@ using AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
         /// You will need to configure this handler in the web.config file of your 
         /// web and register it with IIS before being able to use it. For more information
         /// see the following link: http://go.microsoft.com/?linkid=8101007
-        /// </summary>
+        /// </summary>PhotoReceiver
         #region IHttpHandler Members
 
         public bool IsReusable
