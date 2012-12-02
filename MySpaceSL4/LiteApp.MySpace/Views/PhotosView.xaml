@@ -17,7 +17,10 @@
         <ScrollViewer x:Name="PageScrollViewer" Style="{StaticResource PageScrollViewerStyle}">
             <StackPanel>
                 <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Photos" />
-                <Button Height="30" Content="Upload Photo" Width="150" HorizontalAlignment="Left" cal:Message.Attach="UploadPhoto"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Height="30" Content="Upload Photo" Width="150" HorizontalAlignment="Left" cal:Message.Attach="UploadPhoto"/>
+                    <Button Height="30" Content="Create Album" Width="150" HorizontalAlignment="Left" Margin="10,0,0,0" cal:Message.Attach="CreateAlbum"/>
+                </StackPanel>
 
                 <StackPanel>
                     <ItemsControl ItemsSource="{Binding UploadItems, Mode=OneWay}">

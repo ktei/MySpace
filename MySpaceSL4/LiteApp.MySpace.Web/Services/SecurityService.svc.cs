@@ -3,13 +3,14 @@ using System.ServiceModel.Activation;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
+using Ninject.Web;
 
 namespace LiteApp.MySpace.Web.Services
 {
     [ServiceContract(Namespace = "")]
     [SilverlightFaultBehavior]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
-    public class SecurityService
+    public class SecurityService : WebServiceBase
     {
         public SecurityService()
         {

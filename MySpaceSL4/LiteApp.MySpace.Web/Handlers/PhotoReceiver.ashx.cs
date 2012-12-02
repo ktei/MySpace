@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using LiteApp.MySpace.Web.Helpers;
 using AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
+using System.IO;
 
 namespace LiteApp.MySpace.Web.Handlers
 {
@@ -25,13 +26,24 @@ namespace LiteApp.MySpace.Web.Handlers
 
         public void ProcessRequest(HttpContext context)
         {
-            var storage = SharpBoxSupport.OpenDropBoxStorage();
-            var folder = storage.GetFolderEx(GetPhotoVirtualPath());
-            var fileName = Guid.NewGuid() + ".jpg";
-            storage.UploadFile(context.Request.InputStream, fileName, folder);
+            //var storage = SharpBoxSupport.OpenDropBoxStorage();
+            //var folder = storage.GetFolderEx(GetPhotoVirtualPath());
+            //var fileName = context.Request.QueryString["file"];
+            //if (string.IsNullOrEmpty(fileName))
+            //{
+            //    throw new Exception("No file name specified.");
+            //}
+            //var newFileName = Guid.NewGuid() + Path.GetExtension(fileName).ToLower();
+            //storage.UploadFile(context.Request.InputStream, fileName, folder);
 
-            string photoUri = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken, storage.GetFileSystemObject(fileName, folder)).AbsoluteUri;
-            storage.Close();
+            //string photoUri = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken, storage.GetFileSystemObject(fileName, folder)).AbsoluteUri;
+            //storage.Close();
+
+            using (var stream = context.Request.InputStream)
+            {
+                byte[] buffer = new Byte[stream.Length];
+                stream.Read(buffer, 0, buffer.Length);
+            }
 
             context.Response.Write("OK");
         }

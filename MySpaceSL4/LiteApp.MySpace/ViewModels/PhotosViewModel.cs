@@ -36,6 +36,11 @@ namespace LiteApp.MySpace.ViewModels
             IoC.Get<IWindowManager>().ShowDialog(uploadPhotoViewModel);
         }
 
+        public void CreateAlbum()
+        {
+            IoC.Get<IWindowManager>().ShowDialog(new CreateAlbumViewModel());
+        }
+
         void uploadPhotoViewModel_UploadCompleted(object sender, System.EventArgs e)
         {
             var model = (UploadPhotoViewModel)sender;

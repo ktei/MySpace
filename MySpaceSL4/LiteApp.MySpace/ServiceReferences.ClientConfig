@@ -6,12 +6,19 @@
                     <binaryMessageEncoding />
                     <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
                 </binding>
+                <binding name="CustomBinding_PhotoService">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
             </customBinding>
         </bindings>
         <client>
-            <endpoint address="../Services/SecurityService.svc"
-                binding="customBinding" bindingConfiguration="CustomBinding_SecurityService"
-                contract="Services.Security.SecurityService" name="CustomBinding_SecurityService" />
+            <endpoint address="../Services/SecurityService.svc" binding="customBinding"
+                bindingConfiguration="CustomBinding_SecurityService" contract="Services.Security.SecurityService"
+                name="CustomBinding_SecurityService" />
+            <endpoint address="../Services/PhotoService.svc"
+                binding="customBinding" bindingConfiguration="CustomBinding_PhotoService"
+                contract="Services.Photo.PhotoService" name="CustomBinding_PhotoService" />
         </client>
     </system.serviceModel>
 </configuration>

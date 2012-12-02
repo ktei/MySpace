@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1ce91bd7-3360-422a-8a52-a2fe91f06c89" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:11846/Services/PhotoService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PhotoService.wsdl" MetadataType="Wsdl" ID="38baeadc-d540-4ae0-a4cb-2e5e5ee2f7c9" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="PhotoService.disco" MetadataType="Disco" ID="539c778c-c407-4346-b531-13d539818a16" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?disco" />
+    <MetadataFile FileName="PhotoService.xsd" MetadataType="Schema" ID="f75f7206-17d4-4caf-840c-1bdc591bc1fb" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" />
+    <MetadataFile FileName="PhotoService1.xsd" MetadataType="Schema" ID="957a0549-3ff8-437d-9722-c27db69a185c" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PhotoService2.xsd" MetadataType="Schema" ID="5dd97170-5e76-482b-bc45-1ebff4847357" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?xsd=xsd0" />
+    <MetadataFile FileName="PhotoService1.wsdl" MetadataType="Wsdl" ID="50e0018f-f6aa-4b84-a452-85a8d970f4bd" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

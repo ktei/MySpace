@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
+  <xs:element name="GetAllAlbums">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllAlbumsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="GetAllAlbumsResult" nillable="true" type="q1:ArrayOfAlbum" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveAlbum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="album" nillable="true" type="q2:Album" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveAlbumResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

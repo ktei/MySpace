@@ -158,12 +158,18 @@
     <Compile Include="Security\Identity.cs" />
     <Compile Include="Security\SecurityContext.cs" />
     <Compile Include="Security\SignInResult.cs" />
+    <Compile Include="Service References\Services.Photo\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\Services.Security\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ActivePageMessage.cs" />
+    <Compile Include="ViewModels\CreateAlbumViewModel.cs" />
     <Compile Include="ViewModels\EditableViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PageActivatedEventArgs.cs" />
@@ -172,6 +178,9 @@
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\UploadPhotoViewModel.cs" />
+    <Compile Include="Views\CreateAlbumView.xaml.cs">
+      <DependentUpon>CreateAlbumView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PhotosView.xaml.cs">
       <DependentUpon>PhotosView.xaml</DependentUpon>
     </Compile>
@@ -235,6 +244,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CreateAlbumView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PhotosView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -277,6 +290,20 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.Album.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Services.Photo\PhotoService.wsdl" />
+    <None Include="Service References\Services.Photo\PhotoService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Photo\PhotoService1.wsdl" />
+    <None Include="Service References\Services.Photo\PhotoService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Photo\PhotoService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Services.Security\LiteApp.MySpace.Services.Security.SignInStaus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -295,6 +322,13 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
+    <None Include="Service References\Services.Photo\PhotoService.disco" />
+    <None Include="Service References\Services.Photo\configuration91.svcinfo" />
+    <None Include="Service References\Services.Photo\configuration.svcinfo" />
+    <None Include="Service References\Services.Photo\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Unique Features of this Theme.txt" />
     <Resource Include="Images\backgroundshadow.png" />
@@ -318,6 +352,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Services.Photo\" />
     <WCFMetadataStorage Include="Service References\Services.Security\" />
   </ItemGroup>
   <ItemGroup>

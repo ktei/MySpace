@@ -91,10 +91,12 @@ namespace LiteApp.MySpace.ViewModels
             _fileStream = file.OpenRead();
             _dataLength = _fileStream.Length;
             UriBuilder httpHandlerUrlBuilder = new UriBuilder(string.Format("{0}/Handlers/PhotoReceiver.ashx", _baseUri));
+            httpHandlerUrlBuilder.Query = string.Format("{1}file={0}",
+                file.Name,
+                string.IsNullOrEmpty(httpHandlerUrlBuilder.Query) ? "" : httpHandlerUrlBuilder.Query.Remove(0, 1) + "&");
 
             HttpWebRequest webRequest = (HttpWebRequest)WebRequestCreator.ClientHttp.Create(httpHandlerUrlBuilder.Uri);
-            
-            webRequest.AllowWriteStreamBuffering = false;
+            webRequest.AllowWriteStreamBuffering = false; // Enable ongoing progress reporting
             webRequest.ContentType = "multipart/form-data";
             webRequest.ContentLength = _dataLength;
             webRequest.Method = "POST";
@@ -115,56 +117,61 @@ namespace LiteApp.MySpace.ViewModels
         private void WriteToStreamCallback(IAsyncResult asynchronousResult)
         {
             HttpWebRequest webRequest = (HttpWebRequest)asynchronousResult.AsyncState;
-            Stream requestStream = webRequest.EndGetRequestStream(asynchronousResult);
-
-            byte[] buffer = new Byte[4096];
-            int bytesRead = 0;
-
-            //Set the start position
-            _fileStream.Position = 0;
-
-            //Keep reading and flush to server
-            while ((bytesRead = _fileStream.Read(buffer, 0, buffer.Length)) != 0)
+            using (Stream requestStream = webRequest.EndGetRequestStream(asynchronousResult))
             {
-                if (_canceled)
+
+                byte[] buffer = new Byte[4096];
+                int bytesRead = 0;
+
+                //Set the start position
+                _fileStream.Position = 0;
+
+                //Keep reading and flush to server
+                using (_fileStream)
                 {
-                    Status = "Canceled";
-                    break;
+                    while ((bytesRead = _fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                    {
+                        if (_canceled)
+                        {
+                            Status = "Canceled";
+                            break;
+                        }
+
+                        requestStream.Write(buffer, 0, bytesRead);
+                        requestStream.Flush();
+                        _dataSent += bytesRead;
+                        Progress = (double)_dataSent / (double)_dataLength;
+                    }
                 }
 
-                requestStream.Write(buffer, 0, bytesRead);
-                requestStream.Flush();
-                _dataSent += bytesRead;
-                Progress = (double)_dataSent / (double)_dataLength;
-            }
-
-            if (_canceled)
-            {
-                Thread.Sleep(1000); // Pause 1 sec for user to read 'Canceled' message
-                if (UploadCanceled != null)
-                    UploadCanceled(this, EventArgs.Empty);
-            }
-            else
-            {
-                CanCancel = false;
-                Status = "Completing...";
-                //Get the response from the HttpHandler
-                requestStream.Close();
-                webRequest.BeginGetResponse(new AsyncCallback(ReadHttpResponseCallback), webRequest);
+                if (_canceled)
+                {
+                    Thread.Sleep(1000); // Pause 1 sec for user to read 'Canceled' message
+                    if (UploadCanceled != null)
+                        UploadCanceled(this, EventArgs.Empty);
+                }
+                else
+                {
+                    CanCancel = false;
+                    Status = "Completing...";
+                    //Get the response from the HttpHandler
+                    requestStream.Close();
+                    webRequest.BeginGetResponse(new AsyncCallback(ReadHttpResponseCallback), webRequest);
+                }
             }
         }
 
         private void ReadHttpResponseCallback(IAsyncResult asynchronousResult)
         {
-
             try
             {
                 HttpWebRequest webRequest = (HttpWebRequest)asynchronousResult.AsyncState;
                 HttpWebResponse webResponse = (HttpWebResponse)webRequest.EndGetResponse(asynchronousResult);
-                StreamReader reader = new StreamReader(webResponse.GetResponseStream());
-
-                string responsestring = reader.ReadToEnd();
-                reader.Close();
+                using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
+                {
+                    string responsestring = reader.ReadToEnd();
+                    reader.Close();
+                }
                 Status = "Completed";
                 Thread.Sleep(1000); // Pause 1 sec for user to read message
                 if (UploadCompleted != null)
@@ -174,9 +181,6 @@ namespace LiteApp.MySpace.ViewModels
             {
                 Status = "Error";
             }
-
-            _fileStream.Close();
-            _fileStream.Dispose();
         }
     }
 }
