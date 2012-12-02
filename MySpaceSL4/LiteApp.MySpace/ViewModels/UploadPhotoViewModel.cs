@@ -119,49 +119,34 @@ namespace LiteApp.MySpace.ViewModels
             _fileStream.Position = 0;
 
             //Keep reading and flush to server
-            //while ((bytesRead = _fileStream.Read(buffer, 0, buffer.Length)) != 0)
-            //{
-            //    if (_canceled)
-            //    {
-            //        Status = "Canceled";
-            //        break;
-            //    }
-
-            //    requestStream.Write(buffer, 0, bytesRead);
-            //    requestStream.Flush();
-            //    _dataSent += bytesRead;
-            //    Progress = (double)_dataSent / (double)_dataLength;
-            //}
-
-            //if (_canceled)
-            //{
-            //    Thread.Sleep(1000); // Pause 1 sec for user to read 'Canceled' message
-            //    if (UploadCanceled != null)
-            //        UploadCanceled(this, EventArgs.Empty);
-            //}
-            //else
-            //{
-            //    CanCancel = false;
-            //    Status = "Completing...";
-            //    //Get the response from the HttpHandler
-            //    requestStream.Close();
-            //    webRequest.BeginGetResponse(new AsyncCallback(ReadHttpResponseCallback), webRequest);
-            //}
-
             while ((bytesRead = _fileStream.Read(buffer, 0, buffer.Length)) != 0)
             {
+                if (_canceled)
+                {
+                    Status = "Canceled";
+                    break;
+                }
+
                 requestStream.Write(buffer, 0, bytesRead);
                 requestStream.Flush();
-
                 _dataSent += bytesRead;
-
-                    Progress = (double)_dataSent / (double)_dataLength;
+                Progress = (double)_dataSent / (double)_dataLength;
             }
 
-            requestStream.Close();
-
-            //Get the response from the HttpHandler
-            webRequest.BeginGetResponse(new AsyncCallback(ReadHttpResponseCallback), webRequest);
+            if (_canceled)
+            {
+                Thread.Sleep(1000); // Pause 1 sec for user to read 'Canceled' message
+                if (UploadCanceled != null)
+                    UploadCanceled(this, EventArgs.Empty);
+            }
+            else
+            {
+                CanCancel = false;
+                Status = "Completing...";
+                //Get the response from the HttpHandler
+                requestStream.Close();
+                webRequest.BeginGetResponse(new AsyncCallback(ReadHttpResponseCallback), webRequest);
+            }
         }
 
         private void ReadHttpResponseCallback(IAsyncResult asynchronousResult)
@@ -176,13 +161,13 @@ namespace LiteApp.MySpace.ViewModels
                 string responsestring = reader.ReadToEnd();
                 reader.Close();
                 Status = "Completed";
-                Thread.Sleep(1000); // Pause 1 sec for user to read 'Canceled' message
+                Thread.Sleep(1000); // Pause 1 sec for user to read message
                 if (UploadCompleted != null)
                     UploadCompleted(this, EventArgs.Empty);
             }
             catch
             {
-
+                Status = "Error";
             }
 
             _fileStream.Close();
