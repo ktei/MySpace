@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace LiteApp.MySpace.Framework.Validation
+namespace LiteApp.MySpace.Framework
 {
     public static class VisualTreeExtensions
     {

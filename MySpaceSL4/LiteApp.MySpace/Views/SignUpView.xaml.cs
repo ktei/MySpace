@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Automation.Peers;
-using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Input;
 using LiteApp.MySpace.ViewModels;
+using LiteApp.MySpace.Views.Extensions;
 
 namespace LiteApp.MySpace.Views
 {
@@ -51,15 +50,11 @@ namespace LiteApp.MySpace.Views
         {
             if (e.Key == Key.Enter)
             {
-                ButtonAutomationPeer peer = new ButtonAutomationPeer(OKButton);
-                IInvokeProvider invokeProv = (IInvokeProvider)peer.GetPattern(PatternInterface.Invoke);
-                invokeProv.Invoke();
+                OKButton.AutomationPeerInvoke();
             }
             else if (e.Key == Key.Escape)
             {
-                ButtonAutomationPeer peer = new ButtonAutomationPeer(CancelButton);
-                IInvokeProvider invokeProv = (IInvokeProvider)peer.GetPattern(PatternInterface.Invoke);
-                invokeProv.Invoke();
+                CancelButton.AutomationPeerInvoke();
             }
         }
     }

@@ -8,8 +8,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using LiteApp.MySpace.Framework.Validation;
 using LiteApp.MySpace.Services.Photo;
+using LiteApp.MySpace.Framework;
+using LiteApp.Portable.Mvvm.Validation;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -26,6 +27,8 @@ namespace LiteApp.MySpace.ViewModels
         }
 
         public RefreshBindingScope RefreshBindingScope { get; set; }
+
+        public event EventHandler CreateCompleted;
 
         [RequiredField]
         [LengthConstraint(100)]
@@ -85,11 +88,13 @@ namespace LiteApp.MySpace.ViewModels
                 album.Description = Description;
                 svc.SaveAlbumCompleted += (sender, e) =>
                     {
+                        IsBusy = false;
                         if (e.Error != null)
                         {
                             //TODO: show and log error
                         }
-                        IsBusy = false;
+                        if (CreateCompleted != null)
+                            CreateCompleted(this, EventArgs.Empty);
                     };
                 svc.SaveAlbumAsync(album);
             }

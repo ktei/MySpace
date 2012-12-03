@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LiteApp.MySpace.Framework.Validation
+namespace LiteApp.MySpace.Framework
 {
     /// <summary>
     /// Validation Scope

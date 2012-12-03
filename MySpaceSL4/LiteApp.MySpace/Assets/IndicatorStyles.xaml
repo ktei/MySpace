@@ -1,0 +1,57 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:controls="clr-namespace:LiteApp.MySpace.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" mc:Ignorable="d">
+
+    <Style x:Key="TinyIndicator" TargetType="controls:LoadingIndicator">
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Count" Value="20" />
+        <Setter Property="Duration" Value="0:0:1.5" />
+        <Setter Property="AnimationElementTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Rectangle Fill="SlateGray" Height="5" Width="2" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OrangeIndicator" TargetType="controls:LoadingIndicator">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Count" Value="12" />
+        <Setter Property="AnimationElementTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Ellipse Width="5" Height="16">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Orange" Offset="1"/>
+                                <GradientStop Color="Yellow" />
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WhiteIndicator" TargetType="controls:LoadingIndicator">
+        <Setter Property="Width" Value="64" />
+        <Setter Property="Height" Value="64" />
+        <Setter Property="Count" Value="12" />
+        <Setter Property="AnimationElementTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Ellipse Width="12" Height="12" Fill="White" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

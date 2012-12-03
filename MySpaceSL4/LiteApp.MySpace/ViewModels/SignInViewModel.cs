@@ -9,9 +9,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Caliburn.Micro;
-using LiteApp.MySpace.Framework.Validation;
 using LiteApp.MySpace.Services.Security;
 using LiteApp.MySpace.Security;
+using LiteApp.MySpace.Framework;
+using LiteApp.Portable.Mvvm.Validation;
 
 namespace LiteApp.MySpace.ViewModels
 {

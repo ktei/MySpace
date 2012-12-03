@@ -24,6 +24,7 @@
                 <ResourceDictionary Source="Assets/SDKStyles.xaml"/>
                 <ResourceDictionary Source="Assets/ToolkitStyles_Customized.xaml"/>
                 <ResourceDictionary Source="Assets/OtherStyles.xaml"/>
+                <ResourceDictionary Source="Assets/IndicatorStyles.xaml"/>
                 <!--<ResourceDictionary Source="Assets/ToolkitStyles.xaml"/>
                 To extend this theme to include the toolkit controls:
                 1. Install the Silverlight Toolkit for Silverlight 4

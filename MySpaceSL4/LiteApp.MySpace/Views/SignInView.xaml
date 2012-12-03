@@ -4,7 +4,7 @@
            xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
            xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
            xmlns:cal="http://www.caliburnproject.org"
-           xmlns:validation="clr-namespace:LiteApp.MySpace.Framework.Validation" KeyDown="SignInView_KeyDown"
+           xmlns:framework="clr-namespace:LiteApp.MySpace.Framework" KeyDown="SignInView_KeyDown"
            Width="450">
     <toolkit:BusyIndicator IsBusy="{Binding IsBusy, Mode=OneWay}" BusyContent="Signing you up... Please wait">
         <Grid Margin="5">
@@ -13,7 +13,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel validation:RefreshBindingScope.Scope="{Binding RefreshBindingScope}">
+            <StackPanel framework:RefreshBindingScope.Scope="{Binding RefreshBindingScope}">
                 <TextBlock Text="User name" Style="{StaticResource BlackLabelTextStyle}"/>
                 <TextBox Text="{Binding UserName, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                 <TextBlock Text="Password" Style="{StaticResource BlackLabelTextStyle}" Margin="0,10,0,0"/>

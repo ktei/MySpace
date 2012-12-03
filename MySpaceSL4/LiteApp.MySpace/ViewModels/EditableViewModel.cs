@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using Caliburn.Micro;
-using LiteApp.MySpace.Framework.Validation;
+using LiteApp.Portable.Mvvm.Validation;
 
 namespace LiteApp.MySpace.ViewModels
 {

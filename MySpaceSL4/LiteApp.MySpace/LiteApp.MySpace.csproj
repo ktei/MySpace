@@ -132,6 +132,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LoadingIndicator.cs" />
     <Compile Include="Controls\LoginStatusPanel.xaml.cs">
       <DependentUpon>LoginStatusPanel.xaml</DependentUpon>
     </Compile>
@@ -140,21 +141,8 @@
     <Compile Include="Framework\IShell.cs" />
     <Compile Include="Framework\IPage.cs" />
     <Compile Include="Framework\PageMetadataAttribute.cs" />
-    <Compile Include="Framework\Validation\Attributes\LengthConstraintAttribute.cs" />
-    <Compile Include="Framework\Validation\Attributes\RegularExpressionAttribute.cs" />
-    <Compile Include="Framework\Validation\BaseValidator.cs" />
-    <Compile Include="Framework\Validation\IValidationRule.cs" />
-    <Compile Include="Framework\Validation\IValidator.cs" />
-    <Compile Include="Framework\Validation\Attributes\RequiredFieldAttribute.cs" />
-    <Compile Include="Framework\Validation\RefreshBindingScope.cs" />
-    <Compile Include="Framework\Validation\Rules\BaseValidationRule.cs" />
-    <Compile Include="Framework\Validation\Rules\LengthConstraintRule.cs" />
-    <Compile Include="Framework\Validation\Rules\RegularExpressionRule.cs" />
-    <Compile Include="Framework\Validation\Rules\RequiredFieldRule.cs" />
-    <Compile Include="Framework\Validation\ValidationAttribute.cs" />
-    <Compile Include="Framework\Validation\ValidationRuleFactory.cs" />
-    <Compile Include="Framework\Validation\ValidationRuleMetadataAttribute.cs" />
-    <Compile Include="Framework\Validation\VisualTreeExtensions.cs" />
+    <Compile Include="Framework\RefreshBindingScope.cs" />
+    <Compile Include="Framework\VisualTreeExtensions.cs" />
     <Compile Include="Security\Identity.cs" />
     <Compile Include="Security\SecurityContext.cs" />
     <Compile Include="Security\SignInResult.cs" />
@@ -169,6 +157,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ActivePageMessage.cs" />
+    <Compile Include="ViewModels\AlbumViewModel.cs" />
     <Compile Include="ViewModels\CreateAlbumViewModel.cs" />
     <Compile Include="ViewModels\EditableViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -181,6 +170,7 @@
     <Compile Include="Views\CreateAlbumView.xaml.cs">
       <DependentUpon>CreateAlbumView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Extensions\ButtonExtensions.cs" />
     <Compile Include="Views\PhotosView.xaml.cs">
       <DependentUpon>PhotosView.xaml</DependentUpon>
     </Compile>
@@ -220,6 +210,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Assets\IndicatorStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\OtherStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LoginStatusPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -369,6 +367,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LiteApp.Portable\LiteApp.Portable\LiteApp.Portable.Mvvm\LiteApp.Portable.Mvvm.csproj">
+      <Project>{395BBE17-6ECA-4B5D-BF1A-9141171F6236}</Project>
+      <Name>LiteApp.Portable.Mvvm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
