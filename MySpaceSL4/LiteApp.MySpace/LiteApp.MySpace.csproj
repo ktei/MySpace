@@ -369,7 +369,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\LiteApp.Portable\LiteApp.Portable\LiteApp.Portable.Mvvm\LiteApp.Portable.Mvvm.csproj">
+    <ProjectReference Include="..\LiteApp.Portable.Mvvm\LiteApp.Portable.Mvvm.csproj">
       <Project>{395BBE17-6ECA-4B5D-BF1A-9141171F6236}</Project>
       <Name>LiteApp.Portable.Mvvm</Name>
     </ProjectReference>

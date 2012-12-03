@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteApp.MySpace.Web", "Lite
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDB.Web", "MongoDB.Web\MongoDB.Web.csproj", "{90BB8808-E091-463D-AAFD-5134183BDCF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteApp.Portable.Mvvm", "..\..\LiteApp.Portable\LiteApp.Portable\LiteApp.Portable.Mvvm\LiteApp.Portable.Mvvm.csproj", "{395BBE17-6ECA-4B5D-BF1A-9141171F6236}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteApp.Portable.Mvvm", "LiteApp.Portable.Mvvm\LiteApp.Portable.Mvvm.csproj", "{395BBE17-6ECA-4B5D-BF1A-9141171F6236}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
