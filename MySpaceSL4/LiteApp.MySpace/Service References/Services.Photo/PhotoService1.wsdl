@@ -13,8 +13,8 @@
   <wsdl:binding name="CustomBinding_PhotoService" type="PhotoService">
     <wsp:PolicyReference URI="#CustomBinding_PhotoService_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetAllAlbums">
-      <soap12:operation soapAction="urn:PhotoService/GetAllAlbums" style="document" />
+    <wsdl:operation name="GetPagedAlbums">
+      <soap12:operation soapAction="urn:PhotoService/GetPagedAlbums" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -24,6 +24,15 @@
     </wsdl:operation>
     <wsdl:operation name="SaveAlbum">
       <soap12:operation soapAction="urn:PhotoService/SaveAlbum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAlbum">
+      <soap12:operation soapAction="urn:PhotoService/DeleteAlbum" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

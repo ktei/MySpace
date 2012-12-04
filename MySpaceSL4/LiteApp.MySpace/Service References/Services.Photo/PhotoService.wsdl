@@ -4,14 +4,15 @@
     <xsd:schema targetNamespace="/Imports">
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd0" />
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="PhotoService_GetAllAlbums_InputMessage">
-    <wsdl:part name="parameters" element="GetAllAlbums" />
+  <wsdl:message name="PhotoService_GetPagedAlbums_InputMessage">
+    <wsdl:part name="parameters" element="GetPagedAlbums" />
   </wsdl:message>
-  <wsdl:message name="PhotoService_GetAllAlbums_OutputMessage">
-    <wsdl:part name="parameters" element="GetAllAlbumsResponse" />
+  <wsdl:message name="PhotoService_GetPagedAlbums_OutputMessage">
+    <wsdl:part name="parameters" element="GetPagedAlbumsResponse" />
   </wsdl:message>
   <wsdl:message name="PhotoService_SaveAlbum_InputMessage">
     <wsdl:part name="parameters" element="SaveAlbum" />
@@ -19,14 +20,24 @@
   <wsdl:message name="PhotoService_SaveAlbum_OutputMessage">
     <wsdl:part name="parameters" element="SaveAlbumResponse" />
   </wsdl:message>
+  <wsdl:message name="PhotoService_DeleteAlbum_InputMessage">
+    <wsdl:part name="parameters" element="DeleteAlbum" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_DeleteAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="DeleteAlbumResponse" />
+  </wsdl:message>
   <wsdl:portType name="PhotoService">
-    <wsdl:operation name="GetAllAlbums">
-      <wsdl:input wsaw:Action="urn:PhotoService/GetAllAlbums" message="PhotoService_GetAllAlbums_InputMessage" />
-      <wsdl:output wsaw:Action="urn:PhotoService/GetAllAlbumsResponse" message="PhotoService_GetAllAlbums_OutputMessage" />
+    <wsdl:operation name="GetPagedAlbums">
+      <wsdl:input wsaw:Action="urn:PhotoService/GetPagedAlbums" message="PhotoService_GetPagedAlbums_InputMessage" />
+      <wsdl:output wsaw:Action="urn:PhotoService/GetPagedAlbumsResponse" message="PhotoService_GetPagedAlbums_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveAlbum">
       <wsdl:input wsaw:Action="urn:PhotoService/SaveAlbum" message="PhotoService_SaveAlbum_InputMessage" />
       <wsdl:output wsaw:Action="urn:PhotoService/SaveAlbumResponse" message="PhotoService_SaveAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAlbum">
+      <wsdl:input wsaw:Action="urn:PhotoService/DeleteAlbum" message="PhotoService_DeleteAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="urn:PhotoService/DeleteAlbumResponse" message="PhotoService_DeleteAlbum_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

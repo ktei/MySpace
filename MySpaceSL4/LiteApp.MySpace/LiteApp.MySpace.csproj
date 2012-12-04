@@ -138,10 +138,15 @@
     </Compile>
     <Compile Include="Controls\TiledBackground.cs" />
     <Compile Include="Converters\BooleanToVisiblityConverter.cs" />
+    <Compile Include="Framework\IPagedDataSource.cs" />
     <Compile Include="Framework\IShell.cs" />
     <Compile Include="Framework\IPage.cs" />
-    <Compile Include="Framework\PageMetadataAttribute.cs" />
+    <Compile Include="Framework\Pagination\PagedDataReceivedEventArgs.cs" />
+    <Compile Include="Framework\Pagination\PagedDataResponse.cs" />
+    <Compile Include="Framework\Pagination\PageMetadataAttribute.cs" />
+    <Compile Include="Framework\Pagination\ServerSidePagedCollectionView.cs" />
     <Compile Include="Framework\RefreshBindingScope.cs" />
+    <Compile Include="Framework\Command.cs" />
     <Compile Include="Framework\VisualTreeExtensions.cs" />
     <Compile Include="Security\Identity.cs" />
     <Compile Include="Security\SecurityContext.cs" />
@@ -157,16 +162,18 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ActivePageMessage.cs" />
-    <Compile Include="ViewModels\AlbumViewModel.cs" />
-    <Compile Include="ViewModels\CreateAlbumViewModel.cs" />
+    <Compile Include="ViewModels\Photo\AlbumPagedDataSource.cs" />
+    <Compile Include="ViewModels\Photo\AlbumViewModel.cs" />
+    <Compile Include="ViewModels\Photo\CreateAlbumViewModel.cs" />
     <Compile Include="ViewModels\EditableViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PageActivatedEventArgs.cs" />
-    <Compile Include="ViewModels\PhotosViewModel.cs" />
+    <Compile Include="ViewModels\Photo\PhotosViewModel.cs" />
+    <Compile Include="Framework\Pagination\RefreshPagedDataFailedEventArgs.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
-    <Compile Include="ViewModels\UploadPhotoViewModel.cs" />
+    <Compile Include="ViewModels\Photo\UploadPhotoViewModel.cs" />
     <Compile Include="Views\CreateAlbumView.xaml.cs">
       <DependentUpon>CreateAlbumView.xaml</DependentUpon>
     </Compile>
@@ -288,7 +295,7 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.Album.datasource">
+    <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\Services.Photo\PhotoService.wsdl" />
@@ -300,6 +307,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Services.Photo\PhotoService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Photo\PhotoService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Services.Security\LiteApp.MySpace.Services.Security.SignInStaus.datasource">

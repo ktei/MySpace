@@ -13,8 +13,8 @@
         <Grid>
 
 
-            <controls:TiledBackground SourceUri="/LiteApp.MySpace;component/Images/backgroundtexture.png" />
-            <Image Source="/LiteApp.MySpace;component/Images/backgroundshadow.png" Stretch="Fill" />
+        <controls:TiledBackground SourceUri="/LiteApp.MySpace;component/Images/backgroundtexture.png" />
+        <Image Source="/LiteApp.MySpace;component/Images/backgroundshadow.png" Stretch="Fill" />
 
             <Border x:Name="BackgroundBorder" Style="{StaticResource BackgroundBorderStyle}" />
 

@@ -8,8 +8,11 @@ namespace LiteApp.MySpace.Web.DataAccess
 {
     public interface IAlbumRepository
     {
-        IEnumerable<Album> GetAllAlbums();
+        IEnumerable<Album> GetPagedAlbums(int pageIndex, int pageSize);
         void SaveAlbum(Album album);
         void DeleteAlbum(string albumId);
+        int GetTotalAlbumCount();
+
+        
     }
 }

@@ -22,4 +22,19 @@
         <Setter Property="Margin" Value="0,2,0,2" />
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
+
+
+    <Style x:Key="PictureStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="#0076A2F9"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

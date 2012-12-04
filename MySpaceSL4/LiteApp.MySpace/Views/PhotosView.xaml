@@ -8,6 +8,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
     xmlns:converters="clr-namespace:LiteApp.MySpace.Converters"
     xmlns:controls="clr-namespace:LiteApp.MySpace.Controls"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
     mc:Ignorable="d" Style="{StaticResource PageStyle}"
     d:DesignHeight="300" d:DesignWidth="400">
     <navigation:Page.Resources>
@@ -21,7 +22,7 @@
                 <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Photos" />
                 <StackPanel Orientation="Horizontal">
                     <!--<Button Height="30" Content="Upload Photo" Width="150" HorizontalAlignment="Left" cal:Message.Attach="UploadPhoto"/>-->
-                    <Button Height="30" Content="Create Album" Width="150" HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum" Style="{StaticResource OrangeButton}"/>
+                    <Button Height="30" Content="Create Album" Width="150" HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum" Style="{StaticResource BlueButton}"/>
                 </StackPanel>
 
                 <StackPanel>
@@ -48,20 +49,23 @@
                     </ItemsControl>
                 </StackPanel>
 
-                <ItemsControl ItemsSource="{Binding Albums, Mode=OneWay}" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                <ItemsControl x:Name="Albums" ItemsSource="{Binding Albums, Mode=OneWay}" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderThickness="0,0,0,1" Margin="0,15,0,0" Padding="0,5" BorderBrush="Black" Width="860">
+                            <Border BorderThickness="0,0,0,1" Margin="0,15,0,0" Padding="0,5" BorderBrush="Black" Width="870">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Border BorderBrush="Black" BorderThickness="1" Width="256" Height="158" Background="White">
-                                        <Border Margin="5">
-                                            <Image Source="{Binding CoverUri, Mode=OneWay}" Width="246" Height="148" />
+                                    <Grid MaxWidth="256" Height="158">
+                                        <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoadingCover, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">                                            
+                                            <Image Source="{Binding CoverUri, Mode=OneWay}" ImageOpened="Image_ImageOpened" />
                                         </Border>
-                                    </Border>
+                                        <controls:LoadingIndicator Style="{StaticResource WhiteIndicator}"
+                                                               Visibility="{Binding IsLoadingCover, Mode=OneWay, Converter={StaticResource boolToVis}}"/>
+                                    </Grid>
+                                    
                                     <Grid Grid.Column="1" Margin="10,0,0,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -69,14 +73,15 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="{Binding Name, Mode=OneWay}"
-                                            TextWrapping="NoWrap" Style="{StaticResource ContentTextStyle}" FontSize="25" FontWeight="Light" TextTrimming="WordEllipsis" Width="600"/>
+                                            TextWrapping="NoWrap" Style="{StaticResource ContentTextStyle}" FontSize="25" FontWeight="ExtraLight"  TextTrimming="WordEllipsis" Width="600"/>
                                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" BorderThickness="0" Height="80">
                                             <TextBlock Text="{Binding Description, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" 
                                                        FontStyle="Italic" TextWrapping="Wrap" />
                                         </ScrollViewer>
                                         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
-                                            <Button Height="30" Content="Upload Photo" Width="120" Margin="0,0,10,0" Style="{StaticResource OrangeButton}" />
-                                            <Button Height="30" Content="Delete Album" Width="120" Style="{StaticResource RedButton}"/>
+                                            <Button Height="30" Content="Upload Photo" Width="120" Margin="0,0,10,0" Style="{StaticResource BlueButton}" />
+                                            <Button Height="30" Content="Delete Album" Width="120" CommandParameter="{Binding Id, Mode=OneWay}"
+                                                    Style="{StaticResource RedButton}" Command="{Binding DataContext.DeleteAlbumCommand, Mode=OneWay, ElementName=Albums}"/>
                                         </StackPanel>
                                     </Grid>
                                 </Grid>
@@ -87,6 +92,7 @@
                 
                 <controls:LoadingIndicator Style="{StaticResource WhiteIndicator}" Margin="0,100,0,0"
                                            Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVis}}" />
+                <sdk:DataPager Style="{StaticResource DefaultPager}" PageSize="1" Source="{Binding Albums}"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

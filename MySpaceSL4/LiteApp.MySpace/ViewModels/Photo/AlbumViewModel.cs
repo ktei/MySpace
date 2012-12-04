@@ -7,6 +7,13 @@ namespace LiteApp.MySpace.ViewModels
         string _name;
         string _description;
         string _coverUri;
+        bool _isLoadingCover = true;
+
+        public string Id
+        {
+            get;
+            set;
+        }
 
         public string Name
         {
@@ -43,6 +50,19 @@ namespace LiteApp.MySpace.ViewModels
                 {
                     _coverUri = value;
                     NotifyOfPropertyChange(() => CoverUri);
+                }
+            }
+        }
+
+        public bool IsLoadingCover
+        {
+            get { return _isLoadingCover; }
+            set
+            {
+                if (_isLoadingCover != value)
+                {
+                    _isLoadingCover = value;
+                    NotifyOfPropertyChange(() => IsLoadingCover);
                 }
             }
         }

@@ -1777,7 +1777,7 @@ VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 	***************************************************************************
 	-->
     
-    <Style TargetType="sdk:DataPager">
+    <Style TargetType="sdk:DataPager" x:Key="DefaultPager">
     	<Setter Property="Background" Value="{StaticResource StaticControlBackground}"/>
     	<Setter Property="BorderBrush" Value="{x:Null}"/>
     	<Setter Property="BorderThickness" Value="0"/>

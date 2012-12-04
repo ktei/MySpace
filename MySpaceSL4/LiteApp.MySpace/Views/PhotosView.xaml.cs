@@ -20,5 +20,10 @@ namespace LiteApp.MySpace.Views
             InitializeComponent();
             
         }
+
+        private void Image_ImageOpened(object sender, RoutedEventArgs e)
+        {
+            ((AlbumViewModel)(sender as Image).DataContext).IsLoadingCover = false;
+        }
     }
 }

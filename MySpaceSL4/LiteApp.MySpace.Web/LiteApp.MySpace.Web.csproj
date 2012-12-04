@@ -125,6 +125,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SupportFiles.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\PagedResult.cs" />
     <Compile Include="Services\PhotoService.svc.cs">
       <DependentUpon>PhotoService.svc</DependentUpon>
       <SubType>Component</SubType>

@@ -36,7 +36,7 @@
     -->
 
     
-    <LinearGradientBrush x:Key="InputSelectionBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+    <!--<LinearGradientBrush x:Key="InputSelectionBrush" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#ffb629" Offset="0" />
         <GradientStop Color="#FE770A" Offset="1" />
     </LinearGradientBrush>
@@ -58,7 +58,7 @@
     </LinearGradientBrush>
 
     <SolidColorBrush x:Key="ColorAccentHighlightBrush" Color="#FFFFC600" />
-    <SolidColorBrush x:Key="ColorAccentSolidBrush" Color="#FE770A" />
+    <SolidColorBrush x:Key="ColorAccentSolidBrush" Color="#FE770A" />-->
     
 
     <!-- 
@@ -67,7 +67,7 @@
     ***************************************************************************
     -->
 
-    <!--
+    
     <LinearGradientBrush x:Key="InputSelectionBrush" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#42baff" Offset="0" />
         <GradientStop Color="#148cd1" Offset="1" />
@@ -90,7 +90,7 @@
 
     <SolidColorBrush x:Key="ColorAccentHighlightBrush" Color="#8ddbff" />
     <SolidColorBrush x:Key="ColorAccentSolidBrush" Color="#148cd1" />
-    -->
+    
 
     <!-- 
     ***************************************************************************

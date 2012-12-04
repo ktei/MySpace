@@ -22,15 +22,24 @@ namespace LiteApp.MySpace.Web.Services
         public IAlbumRepository AlbumRepository { get; set; }
 
         [OperationContract]
-        public IEnumerable<Album> GetAllAlbums()
+        public PagedResult<Album> GetPagedAlbums(int pageIndex, int pageSize)
         {
-            return AlbumRepository.GetAllAlbums();
+            PagedResult<Album> result = new PagedResult<Album>();
+            result.Entities = AlbumRepository.GetPagedAlbums(pageIndex, pageSize).ToList();
+            result.TotalItemCount = AlbumRepository.GetTotalAlbumCount();
+            return result;
         }
 
         [OperationContract]
         public void SaveAlbum(Album album)
         {
             AlbumRepository.SaveAlbum(album);
+        }
+
+        [OperationContract]
+        public void DeleteAlbum(string albumId)
+        {
+            AlbumRepository.DeleteAlbum(albumId);
         }
     }
 }
