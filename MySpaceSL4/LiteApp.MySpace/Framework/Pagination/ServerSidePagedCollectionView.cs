@@ -22,7 +22,6 @@ namespace LiteApp.MySpace.Framework
             _pagedDataSource.PageSize = PageSize;
         }
 
-        public event EventHandler<PagedDataReceivedEventArgs<T>> DataReceived;
         public event EventHandler<RefreshPagedDataFailedEventArgs> RefreshDataFailed;
 
         public bool MoveToFirstPage()
@@ -67,19 +66,13 @@ namespace LiteApp.MySpace.Framework
                 IsPageChanging = true;
                 if (PageChanging != null)
                     PageChanging(this, new PageChangingEventArgs(newPageIndex));
-
+                
                 _pagedDataSource.FetchData(newPageIndex, response =>
                 {
                     // process the received data
-                    if (DataReceived != null)
-                        DataReceived(this, new PagedDataReceivedEventArgs<T>(response));
-                    this.Clear();
-                    this.AddRange(response.Items);
+                    this.DataReceived(response);
 
                     // set the post-fetch state
-
-                    TotalItemCount = response.TotalItemCount;
-                    ItemCount = response.Items.Count;
                     PageIndex = newPageIndex;
                     if (PageChanged != null)
                         PageChanged(this, EventArgs.Empty);
@@ -99,11 +92,7 @@ namespace LiteApp.MySpace.Framework
             get { return _canChangePage; }
             private set
             {
-                if (_canChangePage != value)
-                {
-                    _canChangePage = value;
-                    NotifyOfPropertyChange("CanChangePage");
-                }
+                SetField(ref _canChangePage, value, "CanChangePage");
             }
         }
 
@@ -112,11 +101,7 @@ namespace LiteApp.MySpace.Framework
             get { return _isPageChanging; }
             private set
             {
-                if (_isPageChanging != value)
-                {
-                    _isPageChanging = value;
-                    NotifyOfPropertyChange("IsPageChanging");
-                }
+                SetField(ref _isPageChanging, value, "IsPageChanging");
             }
         }
 
@@ -125,11 +110,7 @@ namespace LiteApp.MySpace.Framework
             get { return _itemCount; }
             private set
             {
-                if (_itemCount != value)
-                {
-                    _itemCount = value;
-                    NotifyOfPropertyChange("ItemCount");
-                }
+                SetField(ref _itemCount, value, "ItemCount");
             }
         }
 
@@ -142,11 +123,7 @@ namespace LiteApp.MySpace.Framework
             get { return _pageIndex; }
             private set
             {
-                if (_pageIndex != value)
-                {
-                    _pageIndex = value;
-                    NotifyOfPropertyChange("PageIndex");
-                }
+                SetField(ref _pageIndex, value, "PageIndex");
             }
         }
 
@@ -155,11 +132,7 @@ namespace LiteApp.MySpace.Framework
             get { return _pageSize; }
             set
             {
-                if (_pageSize != value)
-                {
-                    _pageSize = value;
-                    NotifyOfPropertyChange("PageSize");
-                }
+                SetField(ref _pageSize, value, "PageSize");
             }
         }
 
@@ -168,23 +141,40 @@ namespace LiteApp.MySpace.Framework
             get { return _totalItemCount; }
             private set
             {
-                if (_totalItemCount != value)
-                {
-                    _totalItemCount = value;
-                    NotifyOfPropertyChange("TotalItemCount");
-                }
+                SetField(ref _totalItemCount, value, "TotalItemCount");
             }
         }
 
         public int TotalPages
         {
-            get 
+            get
             {
-                int remaining = TotalItemCount % PageSize;
-                if (remaining > 0)
-                    return TotalItemCount / PageSize + 1;
-                return TotalItemCount / PageSize;
+                return (int)Math.Ceiling((double)TotalItemCount / (double)PageSize);
             }
+        }
+
+        /// <summary>
+        /// Updates the items exposed by this view with the given data
+        /// </summary>
+        private void DataReceived(PagedDataResponse<T> response)
+        {
+            TotalItemCount = ItemCount = response.TotalItemCount;
+            this.ClearItems();
+
+            foreach (var item in response.Items)
+                this.Add(item);
+        }
+
+        /// <summary>
+        /// Sets the given field, raising a PropertyChanged event
+        /// </summary>
+        private void SetField<T>(ref T field, T value, string propertyName)
+        {
+            if (object.Equals(field, value))
+                return;
+
+            field = value;
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
     }
 }

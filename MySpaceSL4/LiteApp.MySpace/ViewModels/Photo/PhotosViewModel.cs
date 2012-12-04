@@ -80,7 +80,7 @@ namespace LiteApp.MySpace.ViewModels
 
         void LoadAlbums()
         {
-            _albums = new ServerSidePagedCollectionView<AlbumViewModel>(new AlbumPagedDataSource(), 3);
+            _albums = new ServerSidePagedCollectionView<AlbumViewModel>(new AlbumPagedDataSource(), 2);
             _albums.PageChanging += _albums_PageChanging;
             _albums.PageChanged += _albums_PageChanged;
             _albums.MoveToFirstPage();

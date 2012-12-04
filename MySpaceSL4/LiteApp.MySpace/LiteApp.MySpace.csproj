@@ -141,7 +141,6 @@
     <Compile Include="Framework\IPagedDataSource.cs" />
     <Compile Include="Framework\IShell.cs" />
     <Compile Include="Framework\IPage.cs" />
-    <Compile Include="Framework\Pagination\PagedDataReceivedEventArgs.cs" />
     <Compile Include="Framework\Pagination\PagedDataResponse.cs" />
     <Compile Include="Framework\Pagination\PageMetadataAttribute.cs" />
     <Compile Include="Framework\Pagination\ServerSidePagedCollectionView.cs" />
