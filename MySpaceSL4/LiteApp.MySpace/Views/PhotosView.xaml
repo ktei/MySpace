@@ -92,7 +92,7 @@
                 
                 <controls:LoadingIndicator Style="{StaticResource WhiteIndicator}" Margin="0,100,0,0"
                                            Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVis}}" />
-                <sdk:DataPager Style="{StaticResource DefaultPager}" PageSize="1" Source="{Binding Albums}"/>
+                <sdk:DataPager Style="{StaticResource DefaultPager}" Source="{Binding Albums}"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

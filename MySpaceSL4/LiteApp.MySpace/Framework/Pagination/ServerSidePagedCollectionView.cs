@@ -15,10 +15,11 @@ namespace LiteApp.MySpace.Framework
         bool _isPageChanging;
         bool _canChangePage;
 
-        public ServerSidePagedCollectionView(IPagedDataSource<T> pagedDataSource)
+        public ServerSidePagedCollectionView(IPagedDataSource<T> pagedDataSource, int pageSize)
         {
+            PageSize = pageSize;
             _pagedDataSource = pagedDataSource;
-            pagedDataSource.PageSize = PageSize;
+            _pagedDataSource.PageSize = PageSize;
         }
 
         public event EventHandler<PagedDataReceivedEventArgs<T>> DataReceived;
@@ -72,10 +73,13 @@ namespace LiteApp.MySpace.Framework
                     // process the received data
                     if (DataReceived != null)
                         DataReceived(this, new PagedDataReceivedEventArgs<T>(response));
+                    this.Clear();
+                    this.AddRange(response.Items);
 
                     // set the post-fetch state
-                    ItemCount = response.Items.Count;
+
                     TotalItemCount = response.TotalItemCount;
+                    ItemCount = response.Items.Count;
                     PageIndex = newPageIndex;
                     if (PageChanged != null)
                         PageChanged(this, EventArgs.Empty);
@@ -154,7 +158,6 @@ namespace LiteApp.MySpace.Framework
                 if (_pageSize != value)
                 {
                     _pageSize = value;
-                    _pagedDataSource.PageSize = value;
                     NotifyOfPropertyChange("PageSize");
                 }
             }
@@ -175,7 +178,13 @@ namespace LiteApp.MySpace.Framework
 
         public int TotalPages
         {
-            get { return TotalItemCount / PageSize + 1; }
+            get 
+            {
+                int remaining = TotalItemCount % PageSize;
+                if (remaining > 0)
+                    return TotalItemCount / PageSize + 1;
+                return TotalItemCount / PageSize;
+            }
         }
     }
 }
