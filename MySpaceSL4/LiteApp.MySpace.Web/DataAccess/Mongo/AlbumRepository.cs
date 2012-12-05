@@ -33,6 +33,15 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             }
         }
 
+        public void UpdateCover(string albumId, string coverUri)
+        {
+            ObjectId id;
+            if (ObjectId.TryParse(albumId, out id))
+            {
+                Database.GetCollection<Album>(Collections.Albums).Update(Query.EQ("_id", id), Update.Set("CoverUri", coverUri));
+            }
+        }
+
         public int GetTotalAlbumCount()
         {
             return Convert.ToInt32(Database.GetCollection<Album>(Collections.Albums).Count());

@@ -7,9 +7,7 @@ namespace LiteApp.MySpace.ViewModels
 {
     public class AlbumPagedDataSource : IPagedDataSource<AlbumViewModel>
     {
-        public int PageSize { get; set; }
-
-        public void FetchData(int pageIndex, Action<PagedDataResponse<AlbumViewModel>> responseCallback)
+        public void FetchData(int pageIndex, int pageSize, Action<PagedDataResponse<AlbumViewModel>> responseCallback)
         {
             PhotoServiceClient client = new PhotoServiceClient();
             client.GetPagedAlbumsCompleted += (sender, e) =>
@@ -20,32 +18,19 @@ namespace LiteApp.MySpace.ViewModels
                     response.Items.AddRange(e.Result.Entities.Select(x => MapToAlbumViewModel(x)));
                     responseCallback(response);
                 };
-            client.GetPagedAlbumsAsync(pageIndex, PageSize);
+            client.GetPagedAlbumsAsync(pageIndex, pageSize);
         }
 
-        static int idx;
         AlbumViewModel MapToAlbumViewModel(Album album)
         {
-            if (idx == 0)
-            {
-                idx++;
-                return new AlbumViewModel()
-                {
-                    Id = album.Id,
-                    Name = album.Name,
-                    Description = album.Description,
-                    CoverUri = "http://dl.dropbox.com/u/63866164/MySpace/Photos/me.png"
-                };
-
-            }
             return new AlbumViewModel()
             {
                 Id = album.Id,
                 Name = album.Name,
                 Description = album.Description,
-                CoverUri = "http://dl.dropbox.com/u/63866164/MySpace/Photos/thunder.png"
+                CoverUri = string.IsNullOrEmpty(album.CoverUri) ? AlbumViewModel.DefaultCoverUri : album.CoverUri,
+                IsLoadingCover = !string.IsNullOrEmpty(album.CoverUri)
             };
-
         }
     }
 }

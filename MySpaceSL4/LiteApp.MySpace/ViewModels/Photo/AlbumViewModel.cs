@@ -8,6 +8,7 @@ namespace LiteApp.MySpace.ViewModels
         string _description;
         string _coverUri;
         bool _isLoadingCover = true;
+        public static readonly string DefaultCoverUri = "../Assets/Images/picture.png";
 
         public string Id
         {

@@ -9,17 +9,15 @@ namespace LiteApp.MySpace.Framework
     {
         IPagedDataSource<T> _pagedDataSource;
         int _pageIndex;
-        int _pageSize;
+        int _pageSize = 5;
         int _itemCount;
         int _totalItemCount;
         bool _isPageChanging;
         bool _canChangePage;
 
-        public ServerSidePagedCollectionView(IPagedDataSource<T> pagedDataSource, int pageSize)
+        public ServerSidePagedCollectionView(IPagedDataSource<T> pagedDataSource)
         {
-            PageSize = pageSize;
             _pagedDataSource = pagedDataSource;
-            _pagedDataSource.PageSize = PageSize;
         }
 
         public event EventHandler<RefreshPagedDataFailedEventArgs> RefreshDataFailed;
@@ -54,6 +52,12 @@ namespace LiteApp.MySpace.Framework
             return true;
         }
 
+        public bool Refresh()
+        {
+            RefreshData(_pageIndex);
+            return true;
+        }
+
         /// <summary>
         /// Fetches the data for the given page
         /// </summary>
@@ -67,7 +71,7 @@ namespace LiteApp.MySpace.Framework
                 if (PageChanging != null)
                     PageChanging(this, new PageChangingEventArgs(newPageIndex));
                 
-                _pagedDataSource.FetchData(newPageIndex, response =>
+                _pagedDataSource.FetchData(newPageIndex, PageSize, response =>
                 {
                     // process the received data
                     this.DataReceived(response);

@@ -6,24 +6,19 @@ using LiteApp.MySpace.Views.Extensions;
 
 namespace LiteApp.MySpace.Views
 {
-    public partial class UploadPhotoView : ChildWindow
+    public partial class UploadPhotoManagerView : ChildWindow
     {
-        UploadPhotoViewModel _model;
+        UploadPhotoManagerViewModel _model;
 
-        public UploadPhotoView()
+        public UploadPhotoManagerView()
         {
             InitializeComponent();
-            this.Loaded += UploadPhotoView_Loaded;
+            this.Loaded += UploadPhotoManagerView_Loaded;
         }
 
-        void UploadPhotoView_Loaded(object sender, RoutedEventArgs e)
+        void UploadPhotoManagerView_Loaded(object sender, RoutedEventArgs e)
         {
-            _model = this.DataContext as UploadPhotoViewModel;
-        }
-
-        void _model_UploadStarted(object sender, EventArgs e)
-        {
-            this.DialogResult = true;
+            _model = this.DataContext as UploadPhotoManagerViewModel;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -38,11 +33,10 @@ namespace LiteApp.MySpace.Views
             if (dlg.ShowDialog() == true)
             {
                 _model.StartUpload(dlg.File);
-                this.DialogResult = true;
             }
         }
 
-        private void UploadPhotoView_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void UploadPhotoManagerView_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Escape)
             {

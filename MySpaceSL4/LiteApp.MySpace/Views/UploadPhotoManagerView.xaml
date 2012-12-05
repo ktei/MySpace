@@ -1,0 +1,51 @@
+﻿<controls:ChildWindow x:Class="LiteApp.MySpace.Views.UploadPhotoManagerView"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Style="{StaticResource DefaultWindowStyle}"
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           xmlns:converters="clr-namespace:LiteApp.MySpace.Converters"
+           xmlns:cal="http://www.caliburnproject.org"
+           KeyDown="UploadPhotoManagerView_KeyDown"
+           Width="500">
+    <controls:ChildWindow.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVis"/>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVisReverse" Reverse="True"/>
+    </controls:ChildWindow.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Upload photo to album" Style="{StaticResource BlackLabelTextStyle}"/>
+            <TextBlock Text="Click 'Choose File' to choose and start upload your photo immediately." Style="{StaticResource BlackLabelTextStyle}"/>
+            <ScrollViewer MaxHeight="150" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">
+                <ItemsControl ItemsSource="{Binding UploadItems, Mode=OneWay}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Style="{StaticResource BlackLabelTextStyle}" Text="{Binding FileName, Mode=OneWay}" TextTrimming="WordEllipsis"/>
+                                <HyperlinkButton Grid.Column="1" Content="Cancel" Foreground="{StaticResource ColorAccentSolidBrush}"
+                                                 Visibility="{Binding CanCancel, Converter={StaticResource boolToVis}, Mode=OneWay}" cal:Message.Attach="CancelUpload"/>
+                                <TextBlock Style="{StaticResource BlackLabelTextStyle}" Text="{Binding Status, Mode=OneWay}" Grid.Column="1" 
+                                               Visibility="{Binding CanCancel, Converter={StaticResource boolToVisReverse}, Mode=OneWay}"/>
+                                <ProgressBar Value="{Binding Progress, Mode=OneWay}" Height="10" Maximum="1" Minimum="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button x:Name="ChooseFileButton" Content="Choose File" Width="120" Height="30" Margin="0,0,10,0" Click="ChooseFileButton_Click" Style="{StaticResource BlueButton}" />
+            <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click" Width="75" Height="30" Style="{StaticResource BlueButton}" />
+        </StackPanel>
+    </Grid>
+</controls:ChildWindow>

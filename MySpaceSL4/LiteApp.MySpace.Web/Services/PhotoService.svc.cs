@@ -10,6 +10,7 @@ using LiteApp.MySpace.Web.DataAccess;
 using Ninject;
 using Ninject.Web;
 using System.Threading;
+using MongoDB.Bson;
 
 namespace LiteApp.MySpace.Web.Services
 {
@@ -40,6 +41,11 @@ namespace LiteApp.MySpace.Web.Services
         public void DeleteAlbum(string albumId)
         {
             AlbumRepository.DeleteAlbum(albumId);
+        }
+
+        public void UpdateAlbumCover(string albumId, string coverUri)
+        {
+            AlbumRepository.UpdateCover(albumId, coverUri);
         }
     }
 }

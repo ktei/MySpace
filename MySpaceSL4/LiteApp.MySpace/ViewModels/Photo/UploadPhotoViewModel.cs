@@ -8,7 +8,7 @@ using System.Net.Browser;
 
 namespace LiteApp.MySpace.ViewModels
 {
-    public class UploadPhotoViewModel : Screen
+    public class UploadPhotoViewModel : PropertyChangedBase
     {
         string _baseUri;
         private Stream _fileStream;
@@ -81,18 +81,18 @@ namespace LiteApp.MySpace.ViewModels
 
         public UploadPhotoViewModel()
         {
-            DisplayName = "Upload Photo";
             Uri fullUri = Application.Current.Host.Source;
             _baseUri = fullUri.AbsoluteUri.Substring(0, fullUri.AbsoluteUri.IndexOf("/ClientBin"));
         }
 
-        public void StartUpload(FileInfo file)
+        public void StartUpload(FileInfo file, string albumId)
         {
             _fileStream = file.OpenRead();
             _dataLength = _fileStream.Length;
             UriBuilder httpHandlerUrlBuilder = new UriBuilder(string.Format("{0}/Handlers/PhotoReceiver.ashx", _baseUri));
-            httpHandlerUrlBuilder.Query = string.Format("{1}file={0}",
-                file.Name,
+            httpHandlerUrlBuilder.Query = string.Format("{2}extension={0}&albumId={1}",
+                Path.GetExtension(file.Name),
+                albumId,
                 string.IsNullOrEmpty(httpHandlerUrlBuilder.Query) ? "" : httpHandlerUrlBuilder.Query.Remove(0, 1) + "&");
 
             HttpWebRequest webRequest = (HttpWebRequest)WebRequestCreator.ClientHttp.Create(httpHandlerUrlBuilder.Uri);

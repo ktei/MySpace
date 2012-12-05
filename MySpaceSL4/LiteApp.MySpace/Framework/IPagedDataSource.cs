@@ -10,8 +10,6 @@ namespace LiteApp.MySpace.Framework
         /// <summary>
         /// Asynchronously returns the data for the given page
         /// </summary>
-        void FetchData(int pageIndex, Action<PagedDataResponse<TDataType>> responseCallback);
-
-        int PageSize { get; set; }
+        void FetchData(int pageIndex, int pageSize, Action<PagedDataResponse<TDataType>> responseCallback);
     }
 }

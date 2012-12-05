@@ -169,6 +169,7 @@
     <Compile Include="ViewModels\PageActivatedEventArgs.cs" />
     <Compile Include="ViewModels\Photo\PhotosViewModel.cs" />
     <Compile Include="Framework\Pagination\RefreshPagedDataFailedEventArgs.cs" />
+    <Compile Include="ViewModels\Photo\UploadPhotoManagerViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
@@ -199,8 +200,8 @@
     <Compile Include="Views\SignInView.xaml.cs">
       <DependentUpon>SignInView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UploadPhotoView.xaml.cs">
-      <DependentUpon>UploadPhotoView.xaml</DependentUpon>
+    <Compile Include="Views\UploadPhotoManagerView.xaml.cs">
+      <DependentUpon>UploadPhotoManagerView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -272,7 +273,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UploadPhotoView.xaml">
+    <Page Include="Views\UploadPhotoManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -328,6 +329,7 @@
     <None Include="Service References\Services.Security\SecurityService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Resource Include="Assets\Images\picture.png" />
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <None Include="Service References\Services.Photo\PhotoService.disco" />
     <None Include="Service References\Services.Photo\configuration91.svcinfo" />
