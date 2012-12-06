@@ -40,14 +40,14 @@
         </Setter>
     </Style>
 
-    <Style x:Key="WhiteIndicator" TargetType="controls:LoadingIndicator">
+    <Style x:Key="CircleIndicator" TargetType="controls:LoadingIndicator">
         <Setter Property="Width" Value="64" />
         <Setter Property="Height" Value="64" />
         <Setter Property="Count" Value="12" />
         <Setter Property="AnimationElementTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Ellipse Width="12" Height="12" Fill="White" />
+                    <Ellipse Width="12" Height="12" Fill="#FF119EDA" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>

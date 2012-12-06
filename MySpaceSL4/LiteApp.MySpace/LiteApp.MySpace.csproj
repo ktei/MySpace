@@ -32,7 +32,7 @@
     <LinkedServerProject>
     </LinkedServerProject>
     <Utf8Output>true</Utf8Output>
-    <ExpressionBlendVersion>4.0.20408.0</ExpressionBlendVersion>
+    <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <!-- This property group is only here to support building this project using the 
@@ -122,12 +122,12 @@
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Assets\AppResources.cs" />
-    <Compile Include="Assets\AppStrings.Designer.cs">
+    <Compile Include="Assets\Strings\AppStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Assets\ErrorStrings.Designer.cs">
+    <Compile Include="Assets\Strings\ErrorStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorStrings.resx</DependentUpon>
@@ -169,6 +169,7 @@
     <Compile Include="ViewModels\PageActivatedEventArgs.cs" />
     <Compile Include="ViewModels\Photo\PhotosViewModel.cs" />
     <Compile Include="Framework\Pagination\RefreshPagedDataFailedEventArgs.cs" />
+    <Compile Include="ViewModels\Photo\PhotoUploadCompletedEventArgs.cs" />
     <Compile Include="ViewModels\Photo\UploadPhotoManagerViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -312,6 +313,9 @@
     <None Include="Service References\Services.Photo\PhotoService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\Services.Photo\PhotoService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Services.Security\LiteApp.MySpace.Services.Security.SignInStaus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -340,19 +344,17 @@
     </None>
     <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Unique Features of this Theme.txt" />
-    <Resource Include="Images\backgroundshadow.png" />
-    <Resource Include="Images\backgroundtexture.png" />
     <None Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\me.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\AppStrings.resx">
+    <EmbeddedResource Include="Assets\Strings\AppStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Assets\ErrorStrings.resx">
+    <EmbeddedResource Include="Assets\Strings\ErrorStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>

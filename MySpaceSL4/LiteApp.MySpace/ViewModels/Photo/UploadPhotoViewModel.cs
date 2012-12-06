@@ -24,7 +24,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public event EventHandler UploadCanceled;
 
-        public event EventHandler UploadCompleted;
+        public event EventHandler<PhotoUploadCompletedEventArgs> UploadCompleted;
 
         public double Progress
         {
@@ -163,23 +163,31 @@ namespace LiteApp.MySpace.ViewModels
 
         private void ReadHttpResponseCallback(IAsyncResult asynchronousResult)
         {
+            Exception error = null;
+            string newCoverURIs = string.Empty;
             try
             {
                 HttpWebRequest webRequest = (HttpWebRequest)asynchronousResult.AsyncState;
                 HttpWebResponse webResponse = (HttpWebResponse)webRequest.EndGetResponse(asynchronousResult);
                 using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
                 {
-                    string responsestring = reader.ReadToEnd();
+                    newCoverURIs = reader.ReadToEnd();
                     reader.Close();
                 }
                 Status = "Completed";
                 Thread.Sleep(1000); // Pause 1 sec for user to read message
-                if (UploadCompleted != null)
-                    UploadCompleted(this, EventArgs.Empty);
             }
-            catch
+            catch (Exception ex)
             {
                 Status = "Error";
+                error = ex;
+            }
+            finally
+            {
+                if (UploadCompleted != null)
+                {
+                    UploadCompleted(this, new PhotoUploadCompletedEventArgs(newCoverURIs, error));
+                }
             }
         }
     }

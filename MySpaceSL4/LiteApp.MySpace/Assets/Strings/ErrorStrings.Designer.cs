@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LiteApp.MySpace.Assets {
+namespace LiteApp.MySpace.Assets.Strings {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LiteApp.MySpace.Assets {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AppStrings {
+    public class ErrorStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppStrings() {
+        internal ErrorStrings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LiteApp.MySpace.Assets {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LiteApp.MySpace.Assets.AppStrings", typeof(AppStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LiteApp.MySpace.Assets.Strings.ErrorStrings", typeof(ErrorStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,22 +61,11 @@ namespace LiteApp.MySpace.Assets {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A few words about what I planned to create. First of all, it should be a simple, customizable control. The only limitation - I didn&apos;t want to hard code its geometry, a shape of animated element. This element is defined in the Generic.xaml file, but can be redefined as a part of a user&apos;s Style.
-        ///
-        ///If you look at the Generic.xaml, you will see only one animation element AnimationElementTemplate defined as a DataTemplate. The problem was to manifold it. I was surprised to know that deep object cloning is a cha [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to The e-mail address provided is invalid. Please check the value and try again..
         /// </summary>
-        public static string ALot {
+        public static string InvalidEmail {
             get {
-                return ResourceManager.GetString("ALot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string Intro {
-            get {
-                return ResourceManager.GetString("Intro", resourceCulture);
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
             }
         }
     }

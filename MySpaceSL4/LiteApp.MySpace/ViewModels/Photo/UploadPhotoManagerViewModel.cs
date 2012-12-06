@@ -13,7 +13,7 @@ namespace LiteApp.MySpace.ViewModels
             DisplayName = "Upload Photo";
         }
 
-        public string AlbumId { get; set; }
+        public AlbumViewModel Album { get; set; }
 
         public IEnumerable<UploadPhotoViewModel> UploadItems
         {
@@ -23,8 +23,19 @@ namespace LiteApp.MySpace.ViewModels
         public void StartUpload(FileInfo file)
         {
             var uploadPhotoViewModel = new UploadPhotoViewModel();
+            uploadPhotoViewModel.UploadCompleted += uploadPhotoViewModel_UploadCompleted;
             _uploadItems.Add(uploadPhotoViewModel);
-            uploadPhotoViewModel.StartUpload(file, AlbumId);
+            uploadPhotoViewModel.StartUpload(file, Album.Id);
+        }
+
+        void uploadPhotoViewModel_UploadCompleted(object sender, PhotoUploadCompletedEventArgs e)
+        {
+            ((UploadPhotoViewModel)sender).UploadCompleted -= uploadPhotoViewModel_UploadCompleted;
+            if (e.Error == null)
+            {
+                Album.IsLoadingCover = true;
+                Album.CoverURIs = AlbumViewModel.CovertToCoverURIs(e.NewCoverURIs);
+            }
         }
     }
 }

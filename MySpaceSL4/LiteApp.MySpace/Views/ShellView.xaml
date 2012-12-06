@@ -10,7 +10,7 @@
     d:DesignWidth="640" d:DesignHeight="300">
 
     
-        <Grid>
+        <!--<Grid>
 
 
         <controls:TiledBackground SourceUri="/LiteApp.MySpace;component/Images/backgroundtexture.png" />
@@ -51,6 +51,33 @@
             
         </Grid>
 
-        </Grid>
-    
+        </Grid>-->
+
+    <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Border x:Name="BrandingBorder" Style="{StaticResource NavBrandingBorderStyle}">
+            <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource BrandingStackPanelStyle}" >
+                <ContentControl Style="{StaticResource LogoIcon}" />
+                <TextBlock Style="{StaticResource ApplicationNameStyle}" Text="Space of Rui" />
+            </StackPanel>
+        </Border>
+
+        <Border x:Name="LinksBorder" Style="{StaticResource NavLinksBorderStyle}" Grid.Row="1">
+            <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
+                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="Home" Tag="Home" cal:Message.Attach="ActivatePage('Home')" Margin="0,0,20,0" />
+                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="Photos" Tag="Photos" cal:Message.Attach="ActivatePage('Photos')" />
+            </StackPanel>
+        </Border>
+
+        <Border x:Name="ContentBorder" Grid.Row="2" Margin="50,5,50,20">
+            <ContentControl x:Name="ActiveItem" Padding="30,0" HorizontalContentAlignment="Stretch" />
+        </Border>
+    </Grid>
+
 </UserControl>

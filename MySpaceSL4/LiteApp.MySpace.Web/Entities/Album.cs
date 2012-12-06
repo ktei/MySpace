@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 
 namespace LiteApp.MySpace.Web.Entities
 {
@@ -15,7 +16,7 @@ namespace LiteApp.MySpace.Web.Entities
 
         public int PhotoCount { get; set; }
 
-        public string CoverUri { get; set; }
+        public string[] CoverURIs { get; set; }
 
         public string Description { get; set; }
     }

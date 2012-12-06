@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using Caliburn.Micro;
+using System.Linq;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
 
@@ -87,7 +88,7 @@ namespace LiteApp.MySpace.ViewModels
         void UploadPhoto(string albumId)
         {
             var model = new UploadPhotoManagerViewModel();
-            model.AlbumId = albumId;
+            model.Album = _albums.Single(x => x.Id == albumId);
             model.DisplayName = "Upload Photo ";
             IoC.Get<IWindowManager>().ShowDialog(model);
         }

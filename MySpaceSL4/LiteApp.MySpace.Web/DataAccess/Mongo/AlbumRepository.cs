@@ -20,6 +20,8 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
 
         public void SaveAlbum(Album album)
         {
+            if (album.CoverURIs == null)
+                album.CoverURIs = new string[] { };
             Database.GetCollection<Album>(Collections.Albums).Save(album);
             
         }
@@ -33,13 +35,15 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             }
         }
 
-        public void UpdateCover(string albumId, string coverUri)
+        public string[] UpdateCover(string albumId, string coverUri)
         {
             ObjectId id;
             if (ObjectId.TryParse(albumId, out id))
             {
-                Database.GetCollection<Album>(Collections.Albums).Update(Query.EQ("_id", id), Update.Set("CoverUri", coverUri));
+                Database.GetCollection<Album>(Collections.Albums).FindAndModify(Query.EQ("_id", id), SortBy.Ascending("_id"), Update.AddToSet("CoverURIs", coverUri));
+                //Database.GetCollection<Album>(Collections.Albums).Update(Query.EQ("_id", id), Update.PopFirst("CoverURIs").Push("CoverURIs", coverUri));
             }
+            return Database.GetCollection<Album>(Collections.Albums).FindOneAs<Album>(Query.EQ("_id", id)).CoverURIs;
         }
 
         public int GetTotalAlbumCount()

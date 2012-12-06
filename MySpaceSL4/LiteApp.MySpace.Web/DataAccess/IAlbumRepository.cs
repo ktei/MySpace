@@ -12,7 +12,7 @@ namespace LiteApp.MySpace.Web.DataAccess
         void SaveAlbum(Album album);
         void DeleteAlbum(string albumId);
         int GetTotalAlbumCount();
-        void UpdateCover(string albumId, string coverUri);
+        string[] UpdateCover(string albumId, string coverUri);
         
     }
 }

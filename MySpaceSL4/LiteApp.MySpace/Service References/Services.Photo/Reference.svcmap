@@ -9,7 +9,7 @@
     <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
     <CollectionMappings>
-      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
     </CollectionMappings>
     <GenerateSerializableTypes>false</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
@@ -25,6 +25,7 @@
   <Metadata>
     <MetadataFile FileName="PhotoService.wsdl" MetadataType="Wsdl" ID="b3c12aea-e433-4613-a252-a636fadf5fb0" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?wsdl=wsdl0" />
     <MetadataFile FileName="PhotoService.disco" MetadataType="Disco" ID="6c5023fe-b76d-47cd-a406-679ee4bf2025" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?disco" />
+    <MetadataFile FileName="PhotoService4.xsd" MetadataType="Schema" ID="f476c417-d318-425c-bc22-e0b914e4b762" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?xsd=xsd4" />
     <MetadataFile FileName="PhotoService.xsd" MetadataType="Schema" ID="251eeffb-9193-4071-92c7-948d89d96698" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" />
     <MetadataFile FileName="PhotoService1.xsd" MetadataType="Schema" ID="9dc33c72-5b3e-4098-a414-9f9b0206081b" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" />
     <MetadataFile FileName="PhotoService2.xsd" MetadataType="Schema" ID="7749a54b-b690-4fc1-97e6-0d36b9d59156" SourceId="1" SourceUrl="http://localhost:11846/Services/PhotoService.svc?xsd=xsd1" />

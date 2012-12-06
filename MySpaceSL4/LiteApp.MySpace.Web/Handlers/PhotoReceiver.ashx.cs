@@ -40,7 +40,7 @@ namespace LiteApp.MySpace.Web.Handlers
 
             var newFileName = ObjectId.GenerateNewId() + extension.ToLower();
             // Save original file
-            storage.UploadFile(context.Request.InputStream, newFileName, photoFolder);
+            //storage.UploadFile(context.Request.InputStream, newFileName, photoFolder);
             context.Request.InputStream.Position = 0;
             
             using (var img = Image.FromStream(context.Request.InputStream))
@@ -57,14 +57,14 @@ namespace LiteApp.MySpace.Web.Handlers
             storage.Close();
 
             PhotoService svc = new PhotoService();
-            svc.UpdateAlbumCover(albumId, thumbUri);
+            string[] coverURIs = svc.UpdateAlbumCover(albumId, thumbUri);
             //using (var stream = context.Request.InputStream)
             //{
             //    byte[] buffer = new Byte[stream.Length];
             //    stream.Read(buffer, 0, buffer.Length);
             //}
 
-            context.Response.Write("OK");
+            context.Response.Write(string.Join(";", coverURIs));
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿
+using LiteApp.MySpace.Assets.Strings;
 namespace LiteApp.MySpace.Assets
 {
     public class AppResources

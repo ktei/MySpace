@@ -1,6 +1,6 @@
 ﻿<controls:ChildWindow x:Class="LiteApp.MySpace.Views.SignUpView"
            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  Style="{StaticResource DefaultWindowStyle}"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
            xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
            xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
            xmlns:cal="http://www.caliburnproject.org"

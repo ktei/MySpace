@@ -43,9 +43,9 @@ namespace LiteApp.MySpace.Web.Services
             AlbumRepository.DeleteAlbum(albumId);
         }
 
-        public void UpdateAlbumCover(string albumId, string coverUri)
+        public string[] UpdateAlbumCover(string albumId, string coverUri)
         {
-            AlbumRepository.UpdateCover(albumId, coverUri);
+            return AlbumRepository.UpdateCover(albumId, coverUri);
         }
     }
 }

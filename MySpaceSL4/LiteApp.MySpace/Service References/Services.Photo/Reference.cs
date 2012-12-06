@@ -20,12 +20,12 @@ namespace LiteApp.MySpace.Services.Photo {
     [System.Runtime.Serialization.DataContractAttribute(Name="PagedResultOfAlbumYX32z0hB", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
     public partial class PagedResultOfAlbumYX32z0hB : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private System.Collections.ObjectModel.ObservableCollection<LiteApp.MySpace.Services.Photo.Album> EntitiesField;
+        private System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.Album> EntitiesField;
         
         private int TotalItemCountField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<LiteApp.MySpace.Services.Photo.Album> Entities {
+        public System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.Album> Entities {
             get {
                 return this.EntitiesField;
             }
@@ -65,7 +65,7 @@ namespace LiteApp.MySpace.Services.Photo {
     [System.Runtime.Serialization.DataContractAttribute(Name="Album", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities")]
     public partial class Album : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private string CoverUriField;
+        private System.Collections.Generic.List<string> CoverURIsField;
         
         private string CreatedByField;
         
@@ -78,14 +78,14 @@ namespace LiteApp.MySpace.Services.Photo {
         private int PhotoCountField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CoverUri {
+        public System.Collections.Generic.List<string> CoverURIs {
             get {
-                return this.CoverUriField;
+                return this.CoverURIsField;
             }
             set {
-                if ((object.ReferenceEquals(this.CoverUriField, value) != true)) {
-                    this.CoverUriField = value;
-                    this.RaisePropertyChanged("CoverUri");
+                if ((object.ReferenceEquals(this.CoverURIsField, value) != true)) {
+                    this.CoverURIsField = value;
+                    this.RaisePropertyChanged("CoverURIs");
                 }
             }
         }

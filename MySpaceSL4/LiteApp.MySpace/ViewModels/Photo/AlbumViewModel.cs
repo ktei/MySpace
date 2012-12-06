@@ -1,4 +1,6 @@
 ﻿using Caliburn.Micro;
+using System;
+using System.Collections.Generic;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -6,9 +8,11 @@ namespace LiteApp.MySpace.ViewModels
     {
         string _name;
         string _description;
-        string _coverUri;
+        string[] _coverURIs = DefaultCoverURIs;
         bool _isLoadingCover = true;
-        public static readonly string DefaultCoverUri = "../Assets/Images/picture.png";
+        
+        public static readonly string DefaultCoverURI = "../Assets/Images/picture.png";
+        public static readonly string[] DefaultCoverURIs = new string[] { DefaultCoverURI, DefaultCoverURI, DefaultCoverURI };
 
         public string Id
         {
@@ -42,15 +46,15 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-        public string CoverUri
+        public string[] CoverURIs
         {
-            get { return _coverUri; }
+            get { return _coverURIs; }
             set
             {
-                if (_coverUri != value)
+                if (_coverURIs != value)
                 {
-                    _coverUri = value;
-                    NotifyOfPropertyChange(() => CoverUri);
+                    _coverURIs = value;
+                    NotifyOfPropertyChange(() => CoverURIs);
                 }
             }
         }
@@ -66,6 +70,33 @@ namespace LiteApp.MySpace.ViewModels
                     NotifyOfPropertyChange(() => IsLoadingCover);
                 }
             }
+        }
+
+        public static string[] CovertToCoverURIs(string combinedCoverURIs)
+        {
+            string[] splits = combinedCoverURIs.Split(";".ToCharArray(), System.StringSplitOptions.RemoveEmptyEntries);
+            if (splits.Length == 0)
+                return DefaultCoverURIs;
+            string[] coverURIs = new string[] { DefaultCoverURI, DefaultCoverURI, DefaultCoverURI };
+            for (int i = 0; i < Math.Min(3, splits.Length); ++i)
+            {
+                coverURIs[i] = splits[i];
+            }
+            return coverURIs;
+        }
+
+        public static string[] CovertToCoverURIs(IList<string> uris)
+        {
+            if (uris == null)
+                return DefaultCoverURIs;
+            if (uris.Count == 0)
+                return DefaultCoverURIs;
+            string[] coverURIs = new string[] { DefaultCoverURI, DefaultCoverURI, DefaultCoverURI };
+            for (int i = 0; i < Math.Min(3, uris.Count); ++i)
+            {
+                coverURIs[i] = uris[i];
+            }
+            return coverURIs;
         }
     }
 }
