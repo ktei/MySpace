@@ -26,6 +26,11 @@ namespace LiteApp.MySpace.ViewModels
             get { return "Photos"; }
         }
 
+        public bool HasAlbum
+        {
+            get { return _albums != null && _albums.Count > 0; }
+        }
+
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -49,7 +54,7 @@ namespace LiteApp.MySpace.ViewModels
             var model = new CreateAlbumViewModel();
             model.CreateCompleted += (sender, e) =>
                 {
-                    _albums.Refresh();
+                    _albums.RefreshCurrentPage();
                 };
             IoC.Get<IWindowManager>().ShowDialog(model);
         }
@@ -96,6 +101,7 @@ namespace LiteApp.MySpace.ViewModels
         void _albums_PageChanged(object sender, System.EventArgs e)
         {
             IsBusy = false;
+            NotifyOfPropertyChange(() => HasAlbum);
         }
 
         void _albums_PageChanging(object sender, System.ComponentModel.PageChangingEventArgs e)
@@ -117,7 +123,7 @@ namespace LiteApp.MySpace.ViewModels
                         }
                         else
                         {
-                            _albums.Refresh();
+                            _albums.RefreshCurrentPage();
                         }
                     };
                 svc.DeleteAlbumAsync(id);

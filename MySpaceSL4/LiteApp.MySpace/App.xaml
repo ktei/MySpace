@@ -22,7 +22,7 @@
                 <ResourceDictionary Source="Assets/CoreStyles.xaml"/>
                 <ResourceDictionary Source="Assets/Styles.xaml"/>
                 <ResourceDictionary Source="Assets/SDKStyles.xaml"/>
-                <!--<ResourceDictionary Source="Assets/ToolkitStyles_Customized.xaml"/>-->
+                <ResourceDictionary Source="Assets/ToolkitStyles_Trimmed.xaml"/>
                 <ResourceDictionary Source="Assets/OtherStyles.xaml"/>
                 <ResourceDictionary Source="Assets/IndicatorStyles.xaml"/>
                 <!--<ResourceDictionary Source="Assets/ToolkitStyles.xaml"/>

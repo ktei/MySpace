@@ -11,6 +11,7 @@ using Ninject;
 using Ninject.Web;
 using System.Threading;
 using MongoDB.Bson;
+using LiteApp.MySpace.Web.Helpers;
 
 namespace LiteApp.MySpace.Web.Services
 {
@@ -40,6 +41,7 @@ namespace LiteApp.MySpace.Web.Services
         [OperationContract]
         public void DeleteAlbum(string albumId)
         {
+            SharpBoxSupport.DeleteAlbum(albumId);
             AlbumRepository.DeleteAlbum(albumId);
         }
 

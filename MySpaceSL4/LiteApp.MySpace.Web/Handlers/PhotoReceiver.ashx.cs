@@ -1,12 +1,10 @@
 ﻿using System;
-using System.IO;
+using System.Drawing;
 using System.Web;
 using AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
 using LiteApp.MySpace.Web.Helpers;
 using LiteApp.MySpace.Web.Services;
 using MongoDB.Bson;
-using System.Drawing;
-using LiteApp.MySpace.Web.Helpers;
 
 namespace LiteApp.MySpace.Web.Handlers
 {
@@ -28,18 +26,23 @@ namespace LiteApp.MySpace.Web.Handlers
 
         public void ProcessRequest(HttpContext context)
         {
-            var storage = SharpBoxSupport.OpenDropBoxStorage();
-            var photoFolder = storage.GetFolderEx(GetPhotoVirtualPath());
-            var thumbFolder = storage.GetFolderEx(GetThumbVirtualPath());
             var extension = context.Request.QueryString["extension"];
             var albumId = context.Request.QueryString["albumId"];
             if (string.IsNullOrEmpty(extension))
             {
-                throw new Exception("No file extension specified.");
+                throw new ApplicationException("No file extension specified.");
+            }
+            if (string.IsNullOrEmpty(albumId))
+            {
+                throw new ApplicationException("No album ID specified.");
             }
 
+            var storage = SharpBoxSupport.OpenDropBoxStorage();
+            var photoFolder = storage.EnsurePhotoFolder(albumId);
+            var thumbFolder = storage.EnsureThumbFolder(albumId);
+
             var newFileName = ObjectId.GenerateNewId() + extension.ToLower();
-            // Save original file
+            //TODO: Save original file
             //storage.UploadFile(context.Request.InputStream, newFileName, photoFolder);
             context.Request.InputStream.Position = 0;
             
@@ -68,15 +71,5 @@ namespace LiteApp.MySpace.Web.Handlers
         }
 
         #endregion
-
-        private static string GetPhotoVirtualPath()
-        {
-            return "/Public/MySpace/Photos";
-        }
-
-        private static string GetThumbVirtualPath()
-        {
-            return "/Public/MySpace/Thumbs";
-        }
     }
 }

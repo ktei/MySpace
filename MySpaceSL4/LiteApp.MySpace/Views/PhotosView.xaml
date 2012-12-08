@@ -20,11 +20,22 @@
         <ScrollViewer x:Name="PageScrollViewer" Style="{StaticResource PageScrollViewerStyle}">
             <StackPanel>
                 <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Photos" />
-                <StackPanel Orientation="Horizontal">
-                    <Button Height="30" Content="Create Album" Width="150" HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum"/>
+                <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                    <Button Height="30" Content="Create Album" Width="120" HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum"/>
                 </StackPanel>
 
-                <ItemsControl x:Name="Albums" ItemsSource="{Binding Albums, Mode=OneWay}" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                <ItemsControl x:Name="Albums" ItemsSource="{Binding Albums, Mode=OneWay}" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" MinHeight="200">
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <Grid>
+                                <TextBlock Text="No album is found" Style="{StaticResource BlackLabelTextStyle}" VerticalAlignment="Center" FontSize="22" 
+                                           FontFamily="{StaticResource HeaderFontFamily}"
+                                           Foreground="{StaticResource DisabledForegroundBrush}"
+                                           Visibility="{Binding HasAlbum, Mode=OneWay, Converter={StaticResource boolToVisReverse}}"/>
+                                <ItemsPresenter Visibility="{Binding HasAlbum, Mode=OneWay, Converter={StaticResource boolToVis}}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border BorderThickness="0,0,0,1" Margin="0,15,30,0" Padding="0,5" BorderBrush="Black" HorizontalAlignment="Left" Width="800">
@@ -33,29 +44,35 @@
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <controls:LoadingIndicator Style="{StaticResource CircleIndicator}" Margin="0,0,20,0"
-                                                               Visibility="{Binding IsLoadingCover, Mode=OneWay, Converter={StaticResource boolToVis}}"/>
                                     <Grid Margin="60,0" Visibility="{Binding IsLoadingCover, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
-                                        <Grid MaxWidth="192" Height="119">
+                                        <Grid MaxWidth="192" Height="119" DataContext="{Binding Covers[2], Mode=OneWay}">
                                             <Grid.RenderTransform>
                                                 <CompositeTransform Rotation="-3.9" TranslateX="-57"/>
                                             </Grid.RenderTransform>
-                                            <Border Style="{StaticResource PictureStyle}">
-                                                <Image Source="{Binding CoverURIs[2], Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
+                                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                                                <Image Source="{Binding SourceURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
                                             </Border>
-
+                                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVis}}">
+                                                <Image Source="{Binding DefaultSourceURI, Mode=OneWay}"/>
+                                            </Border>
                                         </Grid>
-                                        <Grid MaxWidth="192" Height="119">
+                                        <Grid MaxWidth="192" Height="119" DataContext="{Binding Covers[1], Mode=OneWay}">
                                             <Grid.RenderTransform>
                                                 <CompositeTransform TranslateX="34" Rotation="5.3"/>
                                             </Grid.RenderTransform>
-                                            <Border Style="{StaticResource PictureStyle}">
-                                                <Image Source="{Binding CoverURIs[1], Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
+                                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                                                <Image Source="{Binding SourceURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
+                                            </Border>
+                                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVis}}">
+                                                <Image Source="{Binding DefaultSourceURI, Mode=OneWay}"/>
                                             </Border>
                                         </Grid>
-                                        <Grid MaxWidth="192" Height="119">
-                                            <Border Style="{StaticResource PictureStyle}">
-                                                <Image Source="{Binding CoverURIs[0], Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
+                                        <Grid MaxWidth="192" Height="119" DataContext="{Binding Covers[0], Mode=OneWay}">
+                                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                                                <Image Source="{Binding SourceURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
+                                            </Border>
+                                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVis}}">
+                                                <Image Source="{Binding DefaultSourceURI, Mode=OneWay}"/>
                                             </Border>
                                         </Grid>
                                     </Grid>
@@ -69,7 +86,7 @@
                                         <TextBlock Text="{Binding Name, Mode=OneWay}"
                                             TextWrapping="NoWrap" Style="{StaticResource ContentTextStyle}" FontSize="20" FontWeight="ExtraLight"  TextTrimming="WordEllipsis" Width="600"/>
                                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" BorderThickness="0" Height="60">
-                                            <TextBlock Text="{Binding Strings.ALot, Source={StaticResource AppResx}, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" 
+                                            <TextBlock Text="{Binding Description, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" 
                                                        FontStyle="Italic" TextWrapping="Wrap" />
                                         </ScrollViewer>
                                         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,5,0,0">

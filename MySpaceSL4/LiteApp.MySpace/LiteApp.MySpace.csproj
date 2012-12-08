@@ -167,6 +167,7 @@
     <Compile Include="ViewModels\EditableViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PageActivatedEventArgs.cs" />
+    <Compile Include="ViewModels\Photo\CoverViewModel.cs" />
     <Compile Include="ViewModels\Photo\PhotosViewModel.cs" />
     <Compile Include="Framework\Pagination\RefreshPagedDataFailedEventArgs.cs" />
     <Compile Include="ViewModels\Photo\PhotoUploadCompletedEventArgs.cs" />
@@ -238,7 +239,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <Page Include="Assets\ToolkitStyles_Customized.xaml">
+    <Page Include="Assets\ToolkitStyles_Trimmed.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -333,7 +334,8 @@
     <None Include="Service References\Services.Security\SecurityService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Resource Include="Assets\Images\picture.png" />
+    <Resource Include="Assets\Images\photo.png" />
+    <Resource Include="Assets\Images\add.png" />
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <None Include="Service References\Services.Photo\PhotoService.disco" />
     <None Include="Service References\Services.Photo\configuration91.svcinfo" />

@@ -33,8 +33,7 @@ namespace LiteApp.MySpace.ViewModels
             ((UploadPhotoViewModel)sender).UploadCompleted -= uploadPhotoViewModel_UploadCompleted;
             if (e.Error == null)
             {
-                Album.IsLoadingCover = true;
-                Album.CoverURIs = AlbumViewModel.CovertToCoverURIs(e.NewCoverURIs);
+                Album.Covers = AlbumViewModel.GetCovers(e.NewCoverURIs);
             }
         }
     }

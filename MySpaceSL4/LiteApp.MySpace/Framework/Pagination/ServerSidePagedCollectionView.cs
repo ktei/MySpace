@@ -52,7 +52,7 @@ namespace LiteApp.MySpace.Framework
             return true;
         }
 
-        public bool Refresh()
+        public bool RefreshCurrentPage()
         {
             RefreshData(_pageIndex);
             return true;

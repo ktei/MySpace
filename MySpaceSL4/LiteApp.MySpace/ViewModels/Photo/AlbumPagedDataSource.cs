@@ -23,14 +23,12 @@ namespace LiteApp.MySpace.ViewModels
 
         AlbumViewModel MapToAlbumViewModel(Album album)
         {
-            var coverURIs = AlbumViewModel.CovertToCoverURIs(album.CoverURIs);
             return new AlbumViewModel()
             {
                 Id = album.Id,
                 Name = album.Name,
                 Description = album.Description,
-                CoverURIs = coverURIs,
-                IsLoadingCover = !coverURIs.All(x => x == AlbumViewModel.DefaultCoverURI) 
+                Covers = AlbumViewModel.GetCovers(album.CoverURIs)
             };
         }
     }

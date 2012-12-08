@@ -40,8 +40,8 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             ObjectId id;
             if (ObjectId.TryParse(albumId, out id))
             {
-                Database.GetCollection<Album>(Collections.Albums).FindAndModify(Query.EQ("_id", id), SortBy.Ascending("_id"), Update.AddToSet("CoverURIs", coverUri));
-                //Database.GetCollection<Album>(Collections.Albums).Update(Query.EQ("_id", id), Update.PopFirst("CoverURIs").Push("CoverURIs", coverUri));
+                Database.GetCollection<Album>(Collections.Albums).Update(Query.And(Query.EQ("_id", id), Query.Size("CoverURIs", 3)), Update.PopFirst("CoverURIs"));
+                Database.GetCollection<Album>(Collections.Albums).Update(Query.EQ("_id", id), Update.AddToSet("CoverURIs", coverUri));
             }
             return Database.GetCollection<Album>(Collections.Albums).FindOneAs<Album>(Query.EQ("_id", id)).CoverURIs;
         }
