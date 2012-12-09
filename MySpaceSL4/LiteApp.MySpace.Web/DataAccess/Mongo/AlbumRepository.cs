@@ -12,9 +12,9 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
     {
         public IEnumerable<Album> GetPagedAlbums(int pageIndex, int pageSize)
         {
-            Database.GetCollection<Album>(Collections.Albums).EnsureIndex("Name");
+            Database.GetCollection<Album>(Collections.Albums).EnsureIndex("CreatedOn");
             var cursor = Database.GetCollection<Album>(Collections.Albums).FindAllAs<Album>();
-            cursor.SetSortOrder(SortBy.Ascending("Name")).SetSkip(pageIndex * pageSize).SetLimit(pageSize);
+            cursor.SetSortOrder(SortBy.Descending("CreatedOn")).SetSkip(pageIndex * pageSize).SetLimit(pageSize);
             return cursor;
         }
 
@@ -22,8 +22,8 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
         {
             if (album.CoverURIs == null)
                 album.CoverURIs = new string[] { };
+            album.CreatedOn = DateTime.Now;
             Database.GetCollection<Album>(Collections.Albums).Save(album);
-            
         }
 
         public void DeleteAlbum(string albumId)

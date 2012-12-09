@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using LiteApp.MySpace.Web.Entities;
+
+namespace LiteApp.MySpace.Web.DataAccess
+{
+    public interface IPhotoRepository
+    {
+        IEnumerable<Photo> GetPagedPhotos(int pageIndex, int pageSize);
+        void SavePhoto(Photo photo);
+        void DeletePhoto(string photoId);
+        int GetTotalPhotoCount();
+    }
+}

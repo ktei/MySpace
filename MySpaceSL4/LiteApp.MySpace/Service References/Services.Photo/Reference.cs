@@ -69,6 +69,8 @@ namespace LiteApp.MySpace.Services.Photo {
         
         private string CreatedByField;
         
+        private System.DateTime CreatedOnField;
+        
         private string DescriptionField;
         
         private string IdField;
@@ -99,6 +101,19 @@ namespace LiteApp.MySpace.Services.Photo {
                 if ((object.ReferenceEquals(this.CreatedByField, value) != true)) {
                     this.CreatedByField = value;
                     this.RaisePropertyChanged("CreatedBy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreatedOn {
+            get {
+                return this.CreatedOnField;
+            }
+            set {
+                if ((this.CreatedOnField.Equals(value) != true)) {
+                    this.CreatedOnField = value;
+                    this.RaisePropertyChanged("CreatedOn");
                 }
             }
         }

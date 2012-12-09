@@ -10,10 +10,11 @@ namespace LiteApp.MySpace.ViewModels
 {
     [Export(typeof(IPage))]
     [PageMetadata("Photos")]
-    public class PhotosViewModel : Screen, IPage
+    public class PhotosViewModel : Conductor<AlbumViewModel>, IPage
     {
         ServerSidePagedCollectionView<AlbumViewModel> _albums;
         bool _isBusy;
+        ViewState _state;
 
         protected override void OnInitialize()
         {
@@ -44,6 +45,19 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
+        public ViewState State
+        {
+            get { return _state; }
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    NotifyOfPropertyChange(() => State);
+                }
+            }
+        }
+
         public IEnumerable<AlbumViewModel> Albums
         {
             get { return _albums; }
@@ -57,6 +71,12 @@ namespace LiteApp.MySpace.ViewModels
                     _albums.RefreshCurrentPage();
                 };
             IoC.Get<IWindowManager>().ShowDialog(model);
+        }
+
+        public void ViewAlbum(AlbumViewModel album)
+        {
+            State = ViewState.Detail;
+            ActivateItem(album);
         }
 
         public ICommand UploadPhotoCommand

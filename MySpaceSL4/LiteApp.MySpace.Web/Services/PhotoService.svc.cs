@@ -23,6 +23,11 @@ namespace LiteApp.MySpace.Web.Services
         [Inject]
         public IAlbumRepository AlbumRepository { get; set; }
 
+        [Inject]
+        public IPhotoRepository PhotoRepository { get; set; }
+
+        #region Album API
+
         [OperationContract]
         public PagedResult<Album> GetPagedAlbums(int pageIndex, int pageSize)
         {
@@ -49,5 +54,24 @@ namespace LiteApp.MySpace.Web.Services
         {
             return AlbumRepository.UpdateCover(albumId, coverUri);
         }
+
+        #endregion // Album API
+
+        #region Photo API
+
+        [OperationContract]
+        public PagedResult<Photo> GetPagedPhotos(int pageIndex, int pageSize)
+        {
+            PagedResult<Photo> result = new PagedResult<Photo>();
+            result.Entities = PhotoRepository.GetPagedPhotos(pageIndex, pageSize).ToList();
+            result.TotalItemCount = PhotoRepository.GetTotalPhotoCount();
+            return result;
+        }
+
+        public void SavePhoto(Photo photo)
+        {
+        }
+
+        #endregion // Photo API
     }
 }

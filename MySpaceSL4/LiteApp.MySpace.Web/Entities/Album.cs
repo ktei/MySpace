@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
+using System;
 
 namespace LiteApp.MySpace.Web.Entities
 {
@@ -13,6 +14,8 @@ namespace LiteApp.MySpace.Web.Entities
         public string Name { get; set; }
 
         public string CreatedBy { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public int PhotoCount { get; set; }
 

@@ -111,9 +111,13 @@
     <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="DataAccess\IAlbumRepository.cs" />
+    <Compile Include="DataAccess\IPhotoRepository.cs" />
     <Compile Include="DataAccess\Mongo\AlbumRepository.cs" />
     <Compile Include="DataAccess\Mongo\BaseRepository.cs" />
+    <Compile Include="DataAccess\Mongo\PhotoRepository.cs" />
     <Compile Include="Entities\Album.cs" />
+    <Compile Include="Entities\Photo.cs" />
+    <Compile Include="Entities\PhotoComment.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Handlers\PhotoReceiver.ashx.cs">
       <DependentUpon>PhotoReceiver.ashx</DependentUpon>

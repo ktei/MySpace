@@ -176,12 +176,22 @@
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\Photo\UploadPhotoViewModel.cs" />
+    <Compile Include="ViewModels\ViewState.cs" />
+    <Compile Include="Views\AlbumView.xaml.cs">
+      <DependentUpon>AlbumView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateAlbumView.xaml.cs">
       <DependentUpon>CreateAlbumView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Extensions\ButtonExtensions.cs" />
     <Compile Include="Views\PhotosView.xaml.cs">
       <DependentUpon>PhotosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Photos\Detail.xaml.cs">
+      <DependentUpon>Detail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Photos\Master.xaml.cs">
+      <DependentUpon>Master.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
@@ -251,11 +261,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AlbumView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CreateAlbumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PhotosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Photos\Detail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Photos\Master.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

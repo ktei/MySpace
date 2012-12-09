@@ -5,6 +5,7 @@ using AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
 using LiteApp.MySpace.Web.Helpers;
 using LiteApp.MySpace.Web.Services;
 using MongoDB.Bson;
+using LiteApp.MySpace.Web.Entities;
 
 namespace LiteApp.MySpace.Web.Handlers
 {
@@ -42,8 +43,7 @@ namespace LiteApp.MySpace.Web.Handlers
             var thumbFolder = storage.EnsureThumbFolder(albumId);
 
             var newFileName = ObjectId.GenerateNewId() + extension.ToLower();
-            //TODO: Save original file
-            //storage.UploadFile(context.Request.InputStream, newFileName, photoFolder);
+            storage.UploadFile(context.Request.InputStream, newFileName, photoFolder);
             context.Request.InputStream.Position = 0;
             
             using (var img = Image.FromStream(context.Request.InputStream))
@@ -57,10 +57,17 @@ namespace LiteApp.MySpace.Web.Handlers
 
             string thumbUri = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
                 storage.GetFileSystemObject(newFileName, thumbFolder)).AbsoluteUri;
+            string photoUri = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
+                storage.GetFileSystemObject(newFileName, photoFolder)).AbsoluteUri;
             storage.Close();
 
             PhotoService svc = new PhotoService();
             string[] coverURIs = svc.UpdateAlbumCover(albumId, thumbUri);
+            Photo photo = new Photo();
+            photo.PhotoUri = photoUri;
+            photo.ThumbUri = thumbUri;
+            photo.AlbumId = albumId;
+            svc.SavePhoto(photo);
             //using (var stream = context.Request.InputStream)
             //{
             //    byte[] buffer = new Byte[stream.Length];

@@ -13,6 +13,5 @@ namespace LiteApp.MySpace.Web.DataAccess
         void DeleteAlbum(string albumId);
         int GetTotalAlbumCount();
         string[] UpdateCover(string albumId, string coverUri);
-        
     }
 }

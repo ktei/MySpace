@@ -6,7 +6,7 @@ namespace LiteApp.MySpace.ViewModels
     {
         bool _isLoading = true;
         string _sourceURI;
-        static readonly string _defaultSourceURI = "../Assets/Images/photo.png";
+        static readonly string _defaultSourceURI = "../../Assets/Images/photo.png";
 
         /// <summary>
         /// Gets a value indicating whether the image is being loaded
