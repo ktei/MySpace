@@ -79,6 +79,11 @@ namespace LiteApp.MySpace.ViewModels
             ActivateItem(album);
         }
 
+        public void ViewAlbums()
+        {
+            State = ViewState.Master;
+        }
+
         public ICommand UploadPhotoCommand
         {
             get

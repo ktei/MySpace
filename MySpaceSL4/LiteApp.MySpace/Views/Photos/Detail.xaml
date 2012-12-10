@@ -3,8 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cal="http://www.caliburnproject.org"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
-    
-    <ContentControl x:Name="ActiveItem"/>
+
+    <StackPanel>
+        <TextBlock Style="{StaticResource HeaderTextStyle}" Text="{Binding ActiveItem.Name, Mode=OneWay}" />
+        <Button Content="View Albums" Width="120" Height="30" Margin="0,15,0,0" cal:Message.Attach="ViewAlbums" />
+        <ContentControl x:Name="ActiveItem" Margin="0,15,0,0"/>
+    </StackPanel>
 </UserControl>

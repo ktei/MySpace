@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LiteApp.MySpace.ViewModels
 {
-    public class AlbumViewModel : PropertyChangedBase
+    public class AlbumViewModel : Screen
     {
         string _name;
         string _description;
