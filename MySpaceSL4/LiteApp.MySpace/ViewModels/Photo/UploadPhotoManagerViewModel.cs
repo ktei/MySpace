@@ -34,6 +34,10 @@ namespace LiteApp.MySpace.ViewModels
             if (e.Error == null)
             {
                 Album.Covers = AlbumViewModel.GetCovers(e.NewCoverURIs);
+                if (Album.IsActive)
+                {
+                    Album.RefreshPhotos();
+                }
             }
         }
     }

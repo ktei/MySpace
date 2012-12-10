@@ -66,8 +66,11 @@ namespace LiteApp.MySpace.Framework
             try
             {
                 // set the pre-fetch state
-                CanChangePage = false;
-                IsPageChanging = true;
+                Execute.OnUIThread(() =>
+                    {
+                        CanChangePage = false;
+                        IsPageChanging = true;
+                    });
                 if (PageChanging != null)
                     PageChanging(this, new PageChangingEventArgs(newPageIndex));
                 
@@ -76,12 +79,17 @@ namespace LiteApp.MySpace.Framework
                     // process the received data
                     this.DataReceived(response);
 
+                    Execute.OnUIThread(() =>
+                        {
+                            PageIndex = newPageIndex;
+                            IsPageChanging = false;
+                            CanChangePage = true;
+                        });
+
+
                     // set the post-fetch state
-                    PageIndex = newPageIndex;
                     if (PageChanged != null)
                         PageChanged(this, EventArgs.Empty);
-                    IsPageChanging = false;
-                    CanChangePage = true;
                 });
             }
             catch (Exception ex)
@@ -162,7 +170,10 @@ namespace LiteApp.MySpace.Framework
         /// </summary>
         private void DataReceived(PagedDataResponse<T> response)
         {
-            TotalItemCount = ItemCount = response.TotalItemCount;
+            Execute.OnUIThread(() =>
+                {
+                    TotalItemCount = ItemCount = response.TotalItemCount;
+                });
             this.ClearItems();
 
             foreach (var item in response.Items)

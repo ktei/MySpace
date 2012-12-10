@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using LiteApp.MySpace.Views.Extensions;
+using LiteApp.MySpace.Views.Helpers;
 using LiteApp.MySpace.ViewModels;
 
 namespace LiteApp.MySpace.Views

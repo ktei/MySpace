@@ -6,6 +6,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:framework="clr-namespace:LiteApp.MySpace.Framework"
     mc:Ignorable="d">
 
     <!-- Global Settings-->
@@ -1266,6 +1268,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
                     <Grid Background="{TemplateBinding Background}">
+                        <i:Interaction.Behaviors>
+                            <framework:DoubleClickBehavior ClickInterval="0.2" CommandToExecute="{Binding DoubleClickCommand, Mode=OneWay}"/>
+                        </i:Interaction.Behaviors>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal"/>

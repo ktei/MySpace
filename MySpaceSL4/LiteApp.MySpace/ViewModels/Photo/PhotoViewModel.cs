@@ -1,5 +1,7 @@
 ﻿using System;
 using Caliburn.Micro;
+using System.Windows.Input;
+using LiteApp.MySpace.Framework;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -39,6 +41,17 @@ namespace LiteApp.MySpace.ViewModels
         public static string DefaultThumbURI
         {
             get { return _defaultThumbURI; }
+        }
+
+        public ICommand DoubleClickCommand
+        {
+            get
+            {
+                return new Command(x =>
+                    {
+                        
+                    });
+            }
         }
     }
 }

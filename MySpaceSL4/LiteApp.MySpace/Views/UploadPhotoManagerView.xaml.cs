@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using LiteApp.MySpace.ViewModels;
-using LiteApp.MySpace.Views.Extensions;
+using LiteApp.MySpace.Views.Helpers;
 
 namespace LiteApp.MySpace.Views
 {

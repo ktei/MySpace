@@ -2,7 +2,7 @@
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 
-namespace LiteApp.MySpace.Views.Extensions
+namespace LiteApp.MySpace.Views.Helpers
 {
     public static class ButtonExtensions
     {

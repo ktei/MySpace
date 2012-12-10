@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using LiteApp.MySpace.ViewModels;
+using System.Windows.Input;
 
 namespace LiteApp.MySpace.Views
 {

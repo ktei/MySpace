@@ -81,6 +81,11 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
+        public void RefreshPhotos()
+        {
+            _photos.RefreshCurrentPage();
+        }
+
         public static CoverViewModel[] GetCovers(string combinedCoverURIs)
         {
             string[] splits = combinedCoverURIs.Split(";".ToCharArray(), System.StringSplitOptions.RemoveEmptyEntries);
@@ -123,7 +128,7 @@ namespace LiteApp.MySpace.ViewModels
 
         void LoadPhotos()
         {
-            _photos = new ServerSidePagedCollectionView<PhotoViewModel>(new PhotoPagedDataSource(Id));
+            _photos = new ServerSidePagedCollectionView<PhotoViewModel>(new PhotoPagedDataSource(Id)) { PageSize = 20 };
             _photos.PageChanging += _photos_PageChanging;
             _photos.PageChanged += _photos_PageChanged;
             _photos.MoveToFirstPage();

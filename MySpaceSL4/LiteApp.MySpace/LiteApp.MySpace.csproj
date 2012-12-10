@@ -185,7 +185,8 @@
     <Compile Include="Views\CreateAlbumView.xaml.cs">
       <DependentUpon>CreateAlbumView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Extensions\ButtonExtensions.cs" />
+    <Compile Include="Views\Helpers\ButtonExtensions.cs" />
+    <Compile Include="Framework\DoubleClickBehavior.cs" />
     <Compile Include="Views\PhotosPageView.xaml.cs">
       <DependentUpon>PhotosPageView.xaml</DependentUpon>
     </Compile>

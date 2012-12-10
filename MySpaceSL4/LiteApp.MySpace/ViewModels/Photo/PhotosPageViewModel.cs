@@ -85,6 +85,14 @@ namespace LiteApp.MySpace.ViewModels
             DeactivateItem(ActiveItem, true);
         }
 
+        public void UploadPhotoToActiveAlbum()
+        {
+            var model = new UploadPhotoManagerViewModel();
+            model.Album = ActiveItem;
+            model.DisplayName = "Upload Photo";
+            IoC.Get<IWindowManager>().ShowDialog(model);
+        }
+
         public ICommand UploadPhotoCommand
         {
             get
@@ -120,7 +128,7 @@ namespace LiteApp.MySpace.ViewModels
         {
             var model = new UploadPhotoManagerViewModel();
             model.Album = _albums.Single(x => x.Id == albumId);
-            model.DisplayName = "Upload Photo ";
+            model.DisplayName = "Upload Photo";
             IoC.Get<IWindowManager>().ShowDialog(model);
         }
 

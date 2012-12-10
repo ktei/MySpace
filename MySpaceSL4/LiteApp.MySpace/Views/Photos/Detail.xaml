@@ -9,7 +9,10 @@
 
     <StackPanel>
         <TextBlock Style="{StaticResource HeaderTextStyle}" Text="{Binding ActiveItem.Name, Mode=OneWay}" />
-        <Button Content="View Albums" Width="120" Height="30" HorizontalAlignment="Left" Margin="0,15,0,0" cal:Message.Attach="ViewAlbums" />
+        <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Left">
+            <Button Content="View Albums" Width="120" Height="30" Margin="0,0,15,0" cal:Message.Attach="ViewAlbums" />
+            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhotoToActiveAlbum"/>
+        </StackPanel>
         <ContentControl x:Name="ActiveItem" Margin="0,15,0,0"/>
     </StackPanel>
 </UserControl>
