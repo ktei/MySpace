@@ -2,20 +2,15 @@
 using System.Drawing;
 using System.Web;
 using AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
+using LiteApp.MySpace.Web.Entities;
 using LiteApp.MySpace.Web.Helpers;
 using LiteApp.MySpace.Web.Services;
 using MongoDB.Bson;
-using LiteApp.MySpace.Web.Entities;
 
 namespace LiteApp.MySpace.Web.Handlers
 {
     public class PhotoReceiver : IHttpHandler
     {
-        /// <summary>
-        /// You will need to configure this handler in the web.config file of your 
-        /// web and register it with IIS before being able to use it. For more information
-        /// see the following link: http://go.microsoft.com/?linkid=8101007
-        /// </summary>PhotoReceiver
         #region IHttpHandler Members
 
         public bool IsReusable
@@ -27,6 +22,7 @@ namespace LiteApp.MySpace.Web.Handlers
 
         public void ProcessRequest(HttpContext context)
         {
+            // Prepare parameters
             var extension = context.Request.QueryString["extension"];
             var albumId = context.Request.QueryString["albumId"];
             if (string.IsNullOrEmpty(extension))
@@ -41,11 +37,20 @@ namespace LiteApp.MySpace.Web.Handlers
             var storage = SharpBoxSupport.OpenDropBoxStorage();
             var photoFolder = storage.EnsurePhotoFolder(albumId);
             var thumbFolder = storage.EnsureThumbFolder(albumId);
-
             var newFileName = ObjectId.GenerateNewId() + extension.ToLower();
-            storage.UploadFile(context.Request.InputStream, newFileName, photoFolder);
-            context.Request.InputStream.Position = 0;
+
+            // Compress photo and upload
+            using (var img = Image.FromStream(context.Request.InputStream))
+            {
+                using (var photoStream = img.ResampleAsStream(720, 445))
+                {
+                    photoStream.Position = 0;
+                    storage.UploadFile(photoStream, newFileName, photoFolder);
+                }
+            }
             
+            context.Request.InputStream.Position = 0; // Set stream starting position back for next read
+            // Generate thumbnail and upload
             using (var img = Image.FromStream(context.Request.InputStream))
             {
                 using (var thumStream = img.ResampleAsStream(192, 119))
@@ -55,17 +60,19 @@ namespace LiteApp.MySpace.Web.Handlers
                 }
             }
 
-            string thumbUri = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
+            // Retrieve photo and thumbnail URIs
+            string thumbURI = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
                 storage.GetFileSystemObject(newFileName, thumbFolder)).AbsoluteUri;
-            string photoUri = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
+            string photoURI = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
                 storage.GetFileSystemObject(newFileName, photoFolder)).AbsoluteUri;
             storage.Close();
 
+            // Store data to database
             PhotoService svc = new PhotoService();
-            string[] coverURIs = svc.UpdateAlbumCover(albumId, thumbUri);
+            string[] coverURIs = svc.UpdateAlbumCover(albumId, thumbURI);
             Photo photo = new Photo();
-            photo.PhotoUri = photoUri;
-            photo.ThumbUri = thumbUri;
+            photo.PhotoURI = photoURI;
+            photo.ThumbURI = thumbURI;
             photo.AlbumId = albumId;
             svc.SavePhoto(photo);
             //using (var stream = context.Request.InputStream)

@@ -10,7 +10,7 @@ namespace LiteApp.MySpace.ViewModels
 {
     [Export(typeof(IPage))]
     [PageMetadata("Photos")]
-    public class PhotosViewModel : Conductor<AlbumViewModel>, IPage
+    public class PhotosPageViewModel : Conductor<AlbumViewModel>, IPage
     {
         ServerSidePagedCollectionView<AlbumViewModel> _albums;
         bool _isBusy;
@@ -82,6 +82,7 @@ namespace LiteApp.MySpace.ViewModels
         public void ViewAlbums()
         {
             State = ViewState.Master;
+            DeactivateItem(ActiveItem, true);
         }
 
         public ICommand UploadPhotoCommand

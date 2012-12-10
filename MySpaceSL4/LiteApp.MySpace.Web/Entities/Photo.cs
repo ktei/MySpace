@@ -19,9 +19,9 @@ namespace LiteApp.MySpace.Web.Entities
 
         public string Description { get; set; }
 
-        public string PhotoUri { get; set; }
+        public string PhotoURI { get; set; }
 
-        public string ThumbUri { get; set; }
+        public string ThumbURI { get; set; }
 
         public int CommentCount { get; set; }
     }

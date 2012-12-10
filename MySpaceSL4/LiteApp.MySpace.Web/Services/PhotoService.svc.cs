@@ -60,16 +60,17 @@ namespace LiteApp.MySpace.Web.Services
         #region Photo API
 
         [OperationContract]
-        public PagedResult<Photo> GetPagedPhotos(int pageIndex, int pageSize)
+        public PagedResult<Photo> GetPagedPhotos(int pageIndex, int pageSize, string albumId)
         {
             PagedResult<Photo> result = new PagedResult<Photo>();
-            result.Entities = PhotoRepository.GetPagedPhotos(pageIndex, pageSize).ToList();
+            result.Entities = PhotoRepository.GetPagedPhotos(pageIndex, pageSize, albumId).ToList();
             result.TotalItemCount = PhotoRepository.GetTotalPhotoCount();
             return result;
         }
 
         public void SavePhoto(Photo photo)
         {
+            PhotoRepository.SavePhoto(photo);
         }
 
         #endregion // Photo API

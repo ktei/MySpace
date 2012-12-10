@@ -41,4 +41,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPagedPhotos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="pageSize" type="xs:int" />
+        <xs:element minOccurs="0" name="albumId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPagedPhotosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" minOccurs="0" name="GetPagedPhotosResult" nillable="true" type="q3:PagedResultOfPhotoYX32z0hB" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

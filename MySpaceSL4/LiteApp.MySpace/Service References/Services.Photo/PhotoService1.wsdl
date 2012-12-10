@@ -40,6 +40,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPagedPhotos">
+      <soap12:operation soapAction="urn:PhotoService/GetPagedPhotos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="PhotoService">
     <wsdl:port name="CustomBinding_PhotoService" binding="tns:CustomBinding_PhotoService">

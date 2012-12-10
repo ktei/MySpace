@@ -4,9 +4,9 @@ using LiteApp.MySpace.ViewModels;
 
 namespace LiteApp.MySpace.Views
 {
-    public partial class PhotosView : Page
+    public partial class PhotosPageView : Page
     {
-        public PhotosView()
+        public PhotosPageView()
         {
             InitializeComponent();
         }

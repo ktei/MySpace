@@ -180,6 +180,186 @@ namespace LiteApp.MySpace.Services.Photo {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PagedResultOfPhotoYX32z0hB", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
+    public partial class PagedResultOfPhotoYX32z0hB : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.Photo> EntitiesField;
+        
+        private int TotalItemCountField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.Photo> Entities {
+            get {
+                return this.EntitiesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntitiesField, value) != true)) {
+                    this.EntitiesField = value;
+                    this.RaisePropertyChanged("Entities");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TotalItemCount {
+            get {
+                return this.TotalItemCountField;
+            }
+            set {
+                if ((this.TotalItemCountField.Equals(value) != true)) {
+                    this.TotalItemCountField = value;
+                    this.RaisePropertyChanged("TotalItemCount");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Photo", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities")]
+    public partial class Photo : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string AlbumIdField;
+        
+        private int CommentCountField;
+        
+        private string CreatedByField;
+        
+        private System.DateTime CreatedOnField;
+        
+        private string DescriptionField;
+        
+        private string IdField;
+        
+        private string PhotoURIField;
+        
+        private string ThumbURIField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AlbumId {
+            get {
+                return this.AlbumIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AlbumIdField, value) != true)) {
+                    this.AlbumIdField = value;
+                    this.RaisePropertyChanged("AlbumId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CommentCount {
+            get {
+                return this.CommentCountField;
+            }
+            set {
+                if ((this.CommentCountField.Equals(value) != true)) {
+                    this.CommentCountField = value;
+                    this.RaisePropertyChanged("CommentCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy {
+            get {
+                return this.CreatedByField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CreatedByField, value) != true)) {
+                    this.CreatedByField = value;
+                    this.RaisePropertyChanged("CreatedBy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreatedOn {
+            get {
+                return this.CreatedOnField;
+            }
+            set {
+                if ((this.CreatedOnField.Equals(value) != true)) {
+                    this.CreatedOnField = value;
+                    this.RaisePropertyChanged("CreatedOn");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhotoURI {
+            get {
+                return this.PhotoURIField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhotoURIField, value) != true)) {
+                    this.PhotoURIField = value;
+                    this.RaisePropertyChanged("PhotoURI");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ThumbURI {
+            get {
+                return this.ThumbURIField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ThumbURIField, value) != true)) {
+                    this.ThumbURIField = value;
+                    this.RaisePropertyChanged("ThumbURI");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="", ConfigurationName="Services.Photo.PhotoService")]
     public interface PhotoService {
@@ -198,6 +378,11 @@ namespace LiteApp.MySpace.Services.Photo {
         System.IAsyncResult BeginDeleteAlbum(string albumId, System.AsyncCallback callback, object asyncState);
         
         void EndDeleteAlbum(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/GetPagedPhotos", ReplyAction="urn:PhotoService/GetPagedPhotosResponse")]
+        System.IAsyncResult BeginGetPagedPhotos(int pageIndex, int pageSize, string albumId, System.AsyncCallback callback, object asyncState);
+        
+        LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB EndGetPagedPhotos(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -225,6 +410,25 @@ namespace LiteApp.MySpace.Services.Photo {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetPagedPhotosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetPagedPhotosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class PhotoServiceClient : System.ServiceModel.ClientBase<LiteApp.MySpace.Services.Photo.PhotoService>, LiteApp.MySpace.Services.Photo.PhotoService {
         
         private BeginOperationDelegate onBeginGetPagedAlbumsDelegate;
@@ -244,6 +448,12 @@ namespace LiteApp.MySpace.Services.Photo {
         private EndOperationDelegate onEndDeleteAlbumDelegate;
         
         private System.Threading.SendOrPostCallback onDeleteAlbumCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetPagedPhotosDelegate;
+        
+        private EndOperationDelegate onEndGetPagedPhotosDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetPagedPhotosCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -303,6 +513,8 @@ namespace LiteApp.MySpace.Services.Photo {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveAlbumCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeleteAlbumCompleted;
+        
+        public event System.EventHandler<GetPagedPhotosCompletedEventArgs> GetPagedPhotosCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -446,6 +658,56 @@ namespace LiteApp.MySpace.Services.Photo {
                         albumId}, this.onEndDeleteAlbumDelegate, this.onDeleteAlbumCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginGetPagedPhotos(int pageIndex, int pageSize, string albumId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetPagedPhotos(pageIndex, pageSize, albumId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB LiteApp.MySpace.Services.Photo.PhotoService.EndGetPagedPhotos(System.IAsyncResult result) {
+            return base.Channel.EndGetPagedPhotos(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetPagedPhotos(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int pageIndex = ((int)(inValues[0]));
+            int pageSize = ((int)(inValues[1]));
+            string albumId = ((string)(inValues[2]));
+            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginGetPagedPhotos(pageIndex, pageSize, albumId, callback, asyncState);
+        }
+        
+        private object[] OnEndGetPagedPhotos(System.IAsyncResult result) {
+            LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndGetPagedPhotos(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetPagedPhotosCompleted(object state) {
+            if ((this.GetPagedPhotosCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetPagedPhotosCompleted(this, new GetPagedPhotosCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetPagedPhotosAsync(int pageIndex, int pageSize, string albumId) {
+            this.GetPagedPhotosAsync(pageIndex, pageSize, albumId, null);
+        }
+        
+        public void GetPagedPhotosAsync(int pageIndex, int pageSize, string albumId, object userState) {
+            if ((this.onBeginGetPagedPhotosDelegate == null)) {
+                this.onBeginGetPagedPhotosDelegate = new BeginOperationDelegate(this.OnBeginGetPagedPhotos);
+            }
+            if ((this.onEndGetPagedPhotosDelegate == null)) {
+                this.onEndGetPagedPhotosDelegate = new EndOperationDelegate(this.OnEndGetPagedPhotos);
+            }
+            if ((this.onGetPagedPhotosCompletedDelegate == null)) {
+                this.onGetPagedPhotosCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetPagedPhotosCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetPagedPhotosDelegate, new object[] {
+                        pageIndex,
+                        pageSize,
+                        albumId}, this.onEndGetPagedPhotosDelegate, this.onGetPagedPhotosCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -558,6 +820,21 @@ namespace LiteApp.MySpace.Services.Photo {
             public void EndDeleteAlbum(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 base.EndInvoke("DeleteAlbum", _args, result);
+            }
+            
+            public System.IAsyncResult BeginGetPagedPhotos(int pageIndex, int pageSize, string albumId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[3];
+                _args[0] = pageIndex;
+                _args[1] = pageSize;
+                _args[2] = albumId;
+                System.IAsyncResult _result = base.BeginInvoke("GetPagedPhotos", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB EndGetPagedPhotos(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB _result = ((LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB)(base.EndInvoke("GetPagedPhotos", _args, result)));
+                return _result;
             }
         }
     }

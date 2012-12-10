@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using LiteApp.MySpace.Web.Entities;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
+using System.Linq;
 
 namespace LiteApp.MySpace.Web.DataAccess.Mongo
 {
     public class PhotoRepository : BaseRepository, IPhotoRepository
     {
-        public IEnumerable<Photo> GetPagedPhotos(int pageIndex, int pageSize)
+        public IEnumerable<Photo> GetPagedPhotos(int pageIndex, int pageSize, string albumId)
         {
-            Database.GetCollection<Photo>(Collections.Albums).EnsureIndex("CreatedOn");
-            var cursor = Database.GetCollection<Album>(Collections.Albums).FindAllAs<Photo>();
-            cursor.SetSortOrder(SortBy.Descending("CreatedOn")).SetSkip(pageIndex * pageSize).SetLimit(pageSize);
-            return cursor;
+            ObjectId albumObjectId;
+            if (ObjectId.TryParse(albumId, out albumObjectId))
+            {
+                Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("CreatedOn");
+                var cursor = Database.GetCollection<Photo>(Collections.Photos).FindAs<Photo>(Query.EQ("AlbumId", albumObjectId));
+                cursor.SetSortOrder(SortBy.Descending("CreatedOn")).SetSkip(pageIndex * pageSize).SetLimit(pageSize);
+                return cursor;
+            }
+            return Enumerable.Empty<Photo>();
         }
 
         public void SavePhoto(Photo photo)

@@ -37,7 +37,7 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-        public string DefaultSourceURI
+        public static string DefaultSourceURI
         {
             get { return _defaultSourceURI; }
         }

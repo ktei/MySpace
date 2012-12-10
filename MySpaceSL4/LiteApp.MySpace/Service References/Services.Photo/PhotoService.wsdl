@@ -27,6 +27,12 @@
   <wsdl:message name="PhotoService_DeleteAlbum_OutputMessage">
     <wsdl:part name="parameters" element="DeleteAlbumResponse" />
   </wsdl:message>
+  <wsdl:message name="PhotoService_GetPagedPhotos_InputMessage">
+    <wsdl:part name="parameters" element="GetPagedPhotos" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_GetPagedPhotos_OutputMessage">
+    <wsdl:part name="parameters" element="GetPagedPhotosResponse" />
+  </wsdl:message>
   <wsdl:portType name="PhotoService">
     <wsdl:operation name="GetPagedAlbums">
       <wsdl:input wsaw:Action="urn:PhotoService/GetPagedAlbums" message="PhotoService_GetPagedAlbums_InputMessage" />
@@ -39,6 +45,10 @@
     <wsdl:operation name="DeleteAlbum">
       <wsdl:input wsaw:Action="urn:PhotoService/DeleteAlbum" message="PhotoService_DeleteAlbum_InputMessage" />
       <wsdl:output wsaw:Action="urn:PhotoService/DeleteAlbumResponse" message="PhotoService_DeleteAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPagedPhotos">
+      <wsdl:input wsaw:Action="urn:PhotoService/GetPagedPhotos" message="PhotoService_GetPagedPhotos_InputMessage" />
+      <wsdl:output wsaw:Action="urn:PhotoService/GetPagedPhotosResponse" message="PhotoService_GetPagedPhotos_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

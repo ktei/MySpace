@@ -3,12 +3,55 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:LiteApp.MySpace.Converters"
+    xmlns:controls="clr-namespace:LiteApp.MySpace.Controls"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
 
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVis"/>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVisReverse" Reverse="True"/>
+    </UserControl.Resources>
+
     <StackPanel>
-        <ItemsControl>
-            
+        <ItemsControl x:Name="Photos" ItemsSource="{Binding Photos, Mode=OneWay}" 
+                      Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" MinHeight="200">
+            <ItemsControl.Template>
+                <ControlTemplate TargetType="ItemsControl">
+                    <Grid>
+                        <TextBlock Text="No photo is found" Style="{StaticResource BlackLabelTextStyle}" VerticalAlignment="Center" FontSize="22" 
+                                           FontFamily="{StaticResource HeaderFontFamily}"
+                                           Foreground="{StaticResource DisabledForegroundBrush}"
+                                           Visibility="{Binding HasPhoto, Mode=OneWay, Converter={StaticResource boolToVisReverse}}"/>
+                        <ItemsPresenter Visibility="{Binding HasPhoto, Mode=OneWay, Converter={StaticResource boolToVis}}"/>
+                    </Grid>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <toolkit:WrapPanel Margin="0,15,30,0" HorizontalAlignment="Left" Width="1024"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5,10,10,10">
+                        <Grid MaxWidth="192" Height="119">
+                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                                <Image Source="{Binding ThumbURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
+                            </Border>
+                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVis}}">
+                                <Image Source="{Binding DefaultThumbURI, Mode=OneWay}"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <controls:LoadingIndicator Style="{StaticResource CircleIndicator}" Margin="0,100,0,0"
+                                           Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVis}}" />
+        <sdk:DataPager Source="{Binding Photos}" HorizontalAlignment="Left" DisplayMode="FirstLastPreviousNextNumeric" Margin="0,20,0,0"/>
     </StackPanel>
 </UserControl>

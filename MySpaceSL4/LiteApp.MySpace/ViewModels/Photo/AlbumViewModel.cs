@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using LiteApp.MySpace.Framework;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -9,6 +10,8 @@ namespace LiteApp.MySpace.ViewModels
         string _name;
         string _description;
         CoverViewModel[] _covers;
+        ServerSidePagedCollectionView<PhotoViewModel> _photos;
+        bool _isBusy;
 
         public string Id
         {
@@ -55,9 +58,27 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-        public bool IsLoadingCover
+        public IEnumerable<PhotoViewModel> Photos
         {
-            get { return false; }
+            get { return _photos; }
+        }
+
+        public bool HasPhoto
+        {
+            get { return _photos != null && _photos.Count > 0; }
+        }
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                if (_isBusy != value)
+                {
+                    _isBusy = value;
+                    NotifyOfPropertyChange(() => IsBusy);
+                }
+            }
         }
 
         public static CoverViewModel[] GetCovers(string combinedCoverURIs)
@@ -81,6 +102,42 @@ namespace LiteApp.MySpace.ViewModels
                 covers[i] = new CoverViewModel() { SourceURI = uris[i] };
             }
             return covers;
+        }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            LoadPhotos();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            base.OnDeactivate(close);
+            if (_photos != null)
+            {
+                _photos.PageChanging -= _photos_PageChanging;
+                _photos.PageChanged -= _photos_PageChanged;
+                _photos = null;
+            }
+        }
+
+        void LoadPhotos()
+        {
+            _photos = new ServerSidePagedCollectionView<PhotoViewModel>(new PhotoPagedDataSource(Id));
+            _photos.PageChanging += _photos_PageChanging;
+            _photos.PageChanged += _photos_PageChanged;
+            _photos.MoveToFirstPage();
+        }
+
+        void _photos_PageChanged(object sender, EventArgs e)
+        {
+            IsBusy = false;
+            NotifyOfPropertyChange(() => HasPhoto);
+        }
+
+        void _photos_PageChanging(object sender, System.ComponentModel.PageChangingEventArgs e)
+        {
+            IsBusy = true;
         }
     }
 }

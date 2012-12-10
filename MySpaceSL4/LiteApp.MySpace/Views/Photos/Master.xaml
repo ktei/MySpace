@@ -39,7 +39,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Grid Margin="60,0" Visibility="{Binding IsLoadingCover, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                            <Grid Margin="60,0">
                                 <Grid MaxWidth="192" Height="119" DataContext="{Binding Covers[2], Mode=OneWay}">
                                     <Grid.RenderTransform>
                                         <CompositeTransform Rotation="-3.9" TranslateX="-57"/>

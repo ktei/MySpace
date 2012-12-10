@@ -161,6 +161,8 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ActivePageMessage.cs" />
+    <Compile Include="ViewModels\Photo\PhotoPagedDataSource.cs" />
+    <Compile Include="ViewModels\Photo\PhotoViewModel.cs" />
     <Compile Include="ViewModels\Photo\AlbumPagedDataSource.cs" />
     <Compile Include="ViewModels\Photo\AlbumViewModel.cs" />
     <Compile Include="ViewModels\Photo\CreateAlbumViewModel.cs" />
@@ -168,7 +170,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PageActivatedEventArgs.cs" />
     <Compile Include="ViewModels\Photo\CoverViewModel.cs" />
-    <Compile Include="ViewModels\Photo\PhotosViewModel.cs" />
+    <Compile Include="ViewModels\Photo\PhotosPageViewModel.cs" />
     <Compile Include="Framework\Pagination\RefreshPagedDataFailedEventArgs.cs" />
     <Compile Include="ViewModels\Photo\PhotoUploadCompletedEventArgs.cs" />
     <Compile Include="ViewModels\Photo\UploadPhotoManagerViewModel.cs" />
@@ -184,8 +186,8 @@
       <DependentUpon>CreateAlbumView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Extensions\ButtonExtensions.cs" />
-    <Compile Include="Views\PhotosView.xaml.cs">
-      <DependentUpon>PhotosView.xaml</DependentUpon>
+    <Compile Include="Views\PhotosPageView.xaml.cs">
+      <DependentUpon>PhotosPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Photos\Detail.xaml.cs">
       <DependentUpon>Detail.xaml</DependentUpon>
@@ -269,7 +271,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PhotosView.xaml">
+    <Page Include="Views\PhotosPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -320,6 +322,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\Services.Photo\PhotoService.wsdl" />

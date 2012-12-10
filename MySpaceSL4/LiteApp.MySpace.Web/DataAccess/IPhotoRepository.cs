@@ -8,7 +8,7 @@ namespace LiteApp.MySpace.Web.DataAccess
 {
     public interface IPhotoRepository
     {
-        IEnumerable<Photo> GetPagedPhotos(int pageIndex, int pageSize);
+        IEnumerable<Photo> GetPagedPhotos(int pageIndex, int pageSize, string albumId);
         void SavePhoto(Photo photo);
         void DeletePhoto(string photoId);
         int GetTotalPhotoCount();
