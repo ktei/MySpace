@@ -1,17 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
-using System.Web.Security;
-using System.Collections.Generic;
-using LiteApp.MySpace.Web.Entities;
 using LiteApp.MySpace.Web.DataAccess;
+using LiteApp.MySpace.Web.Entities;
+using LiteApp.MySpace.Web.Helpers;
 using Ninject;
 using Ninject.Web;
-using System.Threading;
-using MongoDB.Bson;
-using LiteApp.MySpace.Web.Helpers;
 
 namespace LiteApp.MySpace.Web.Services
 {
