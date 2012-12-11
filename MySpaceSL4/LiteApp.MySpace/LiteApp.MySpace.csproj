@@ -161,6 +161,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ActivePageMessage.cs" />
+    <Compile Include="ViewModels\PhotoCommentViewModel.cs" />
     <Compile Include="ViewModels\Photo\PhotoPagedDataSource.cs" />
     <Compile Include="ViewModels\Photo\PhotoViewModel.cs" />
     <Compile Include="ViewModels\Photo\AlbumPagedDataSource.cs" />
@@ -195,6 +196,9 @@
     </Compile>
     <Compile Include="Views\Photos\Master.xaml.cs">
       <DependentUpon>Master.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PhotoView.xaml.cs">
+      <DependentUpon>PhotoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
@@ -281,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Photos\Master.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PhotoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

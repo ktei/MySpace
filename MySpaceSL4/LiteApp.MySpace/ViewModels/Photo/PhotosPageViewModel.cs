@@ -81,8 +81,24 @@ namespace LiteApp.MySpace.ViewModels
 
         public void ViewAlbums()
         {
-            State = ViewState.Master;
             DeactivateItem(ActiveItem, true);
+            State = ViewState.Master;
+            // This is a bit cheating: what we trying to
+            // do is force to refresh covers because users
+            // may changed to album view before all covers were
+            // loaded and if we don't do this, the covers will
+            // always stay as IsLoading
+            foreach (var a in _albums)
+            {
+                foreach (var cover in a.Covers)
+                {
+                    var sourceURI = cover.SourceURI;
+                    cover.IsLoading = true;
+                    cover.SourceURI = string.Empty;
+                    cover.SourceURI = sourceURI;
+                }
+            }
+
         }
 
         public void UploadPhotoToActiveAlbum()

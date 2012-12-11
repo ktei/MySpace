@@ -14,7 +14,7 @@ namespace LiteApp.MySpace.Views
 
         private void Image_ImageOpened(object sender, RoutedEventArgs e)
         {
-            ((PhotoViewModel)(sender as Image).DataContext).IsLoading = false;
+            ((PhotoViewModel)(sender as Image).DataContext).IsLoadingThumb = false;
         }
     }
 }

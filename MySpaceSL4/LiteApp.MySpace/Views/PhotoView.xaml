@@ -1,0 +1,65 @@
+﻿<wincontrols:ChildWindow x:Class="LiteApp.MySpace.Views.PhotoView"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:wincontrols="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           xmlns:controls="clr-namespace:LiteApp.MySpace.Controls"
+           xmlns:converters="clr-namespace:LiteApp.MySpace.Converters" KeyDown="PhotoView_KeyDown"
+           Width="1100" Style="{StaticResource ChildWindowStyle}">
+
+    <wincontrols:ChildWindow.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVis"/>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVisReverse" Reverse="True"/>
+    </wincontrols:ChildWindow.Resources>
+
+    <Grid Margin="20,5">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Width="720" Height="445" Margin="0,0,10,0">
+                <Border Style="{StaticResource PictureStyle}" HorizontalAlignment="Center" Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                    <Image Source="{Binding PhotoURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
+                </Border>
+                <controls:LoadingIndicator Style="{StaticResource CircleIndicator}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVis}}" />
+            </Grid>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Comments" Style="{StaticResource HeaderTextStyle}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0" Height="500">
+                    <ItemsControl ItemsSource="{Binding Comments, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayBrush8}" Margin="0,0,0,10">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal">
+                                            <HyperlinkButton Content="ktei"/>
+                                            <TextBlock Text="on July 14th 2013" VerticalAlignment="Center" Foreground="Gray"/>
+                                        </StackPanel>
+                                        <HyperlinkButton Content="Delete" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding Comment, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" TextWrapping="Wrap" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Margin="0,5,0,0">
+            <Button x:Name="CloseButton" Content="Close" Click="CloseButton_Click" Width="75" Height="30" />
+        </StackPanel>
+    </Grid>
+</wincontrols:ChildWindow>

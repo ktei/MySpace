@@ -152,7 +152,8 @@
     <SolidColorBrush x:Key="NavigationBorderBrush" Color="#FF9D9492" />
     <SolidColorBrush x:Key="NavigationForegroundBrush" Color="{StaticResource BlackColor}"/>
     <SolidColorBrush x:Key="PageBorderBrush" Color="#FFB2B2B2" />
-    <SolidColorBrush x:Key="BodyTextColorBrush" Color="#FF313131"/>
+    <!--<SolidColorBrush x:Key="BodyTextColorBrush" Color="#FF313131"/>-->
+    <SolidColorBrush x:Key="BodyTextColorBrush" Color="{StaticResource BlackColor}"/>
     <SolidColorBrush x:Key="ControlsDisabledBrush" Color="{StaticResource TransparentLightLightColor}"/>
     <SolidColorBrush x:Key="ReadOnlyBrush" Color="{StaticResource TransparentLightestColor}"/>
     <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#FFAAAAAA"/>

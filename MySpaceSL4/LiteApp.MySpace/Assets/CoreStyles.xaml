@@ -1269,7 +1269,7 @@
                 <ControlTemplate TargetType="ListBoxItem">
                     <Grid Background="{TemplateBinding Background}">
                         <i:Interaction.Behaviors>
-                            <framework:DoubleClickBehavior ClickInterval="0.2" CommandToExecute="{Binding DoubleClickCommand, Mode=OneWay}"/>
+                            <framework:DoubleClickBehavior ClickInterval="0.3" CommandToExecute="{Binding DoubleClickCommand, Mode=OneWay}"/>
                         </i:Interaction.Behaviors>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">

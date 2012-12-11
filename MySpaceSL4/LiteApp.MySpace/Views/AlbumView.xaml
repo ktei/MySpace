@@ -41,15 +41,13 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid MaxWidth="192" Height="119">
-                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
-                                <Image Source="{Binding ThumbURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
-                            </Border>
-                            <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVis}}">
-                                <Image Source="{Binding DefaultThumbURI, Mode=OneWay}"/>
-                            </Border>
-                        </Grid>
+                    <Grid MaxWidth="192" Height="119">
+                        <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoadingThumb, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                            <Image Source="{Binding ThumbURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
+                        </Border>
+                        <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoadingThumb, Mode=OneWay, Converter={StaticResource boolToVis}}">
+                            <Image Source="{Binding DefaultThumbURI, Mode=OneWay}"/>
+                        </Border>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
