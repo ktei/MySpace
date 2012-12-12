@@ -324,7 +324,7 @@
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
-                            <VisualStateGroup x:Name="FocusStates">
+                            <!--<VisualStateGroup x:Name="FocusStates">
                                 <VisualState x:Name="Focused">
                                     <Storyboard>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualElement">
@@ -333,7 +333,7 @@
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Unfocused"/>
-                            </VisualStateGroup>
+                            </VisualStateGroup>-->
                         </VisualStateManager.VisualStateGroups>
                         <TextBlock x:Name="UnderlineTextBlock" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Text="{TemplateBinding Content}" TextDecorations="Underline" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 							<TextBlock.Foreground>
@@ -347,11 +347,11 @@
                             </ContentControl.Foreground>
                             <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </ContentControl>
-                        <Rectangle x:Name="FocusVisualElement" IsHitTestVisible="false" Opacity="0" StrokeThickness="1">
+                        <!--<Rectangle x:Name="FocusVisualElement" IsHitTestVisible="false" Opacity="0" StrokeThickness="1">
                             <Rectangle.Stroke>
                                 <SolidColorBrush Color="{StaticResource HighlightLightColor}"/>
                             </Rectangle.Stroke>
-                        </Rectangle>
+                        </Rectangle>-->
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LiteApp.MySpace.Controls.LoginStatusPanel"
+﻿<UserControl x:Class="LiteApp.MySpace.Views.LoginStatusPanel"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,9 +12,9 @@
         <conv:BooleanToVisibilityConverter x:Key="boolToVisReverse" Reverse="True"/>
     </UserControl.Resources>
     <Grid>
-        <HyperlinkButton Content="Sign In" cal:Message.Attach="SignIn"
+        <HyperlinkButton Content="Sign In" cal:Message.Attach="SignIn" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
             Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVisReverse}}"/>
-        <HyperlinkButton Content="Sign Out"
+        <HyperlinkButton Content="Sign Out" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
             Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}" />
     </Grid>
 </UserControl>

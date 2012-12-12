@@ -133,7 +133,7 @@
       <DependentUpon>ErrorStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Controls\LoadingIndicator.cs" />
-    <Compile Include="Controls\LoginStatusPanel.xaml.cs">
+    <Compile Include="Views\LoginStatusPanel.xaml.cs">
       <DependentUpon>LoginStatusPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TiledBackground.cs" />
@@ -260,7 +260,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LoginStatusPanel.xaml">
+    <Page Include="Views\LoginStatusPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

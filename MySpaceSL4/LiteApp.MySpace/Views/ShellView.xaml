@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
     xmlns:controls="clr-namespace:LiteApp.MySpace.Controls"
+    xmlns:local="clr-namespace:LiteApp.MySpace.Views"
     xmlns:cal="http://www.caliburnproject.org"
     d:DesignWidth="640" d:DesignHeight="300">
 
@@ -20,7 +21,9 @@
 
         <Border x:Name="BrandingBorder" Style="{StaticResource NavBrandingBorderStyle}">
             <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource BrandingStackPanelStyle}" >
-                <ContentControl Style="{StaticResource LogoIcon}" />
+                <ContentControl Style="{StaticResource LogoIcon}">
+                    <local:LoginStatusPanel VerticalAlignment="Center" Margin="10,0,0,0" />
+                </ContentControl>
                 <TextBlock Style="{StaticResource ApplicationNameStyle}" Text="Space of Rui" />
             </StackPanel>
         </Border>

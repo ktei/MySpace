@@ -45,6 +45,7 @@
                 <ControlTemplate TargetType="ContentControl">
                     <Grid>
                         <Rectangle Fill="{StaticResource HighlightBrush}"/>
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

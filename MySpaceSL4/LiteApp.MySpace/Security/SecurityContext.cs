@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Windows;
 using LiteApp.MySpace.Services.Security;
+using System.ComponentModel;
 
 namespace LiteApp.MySpace.Security
 {
-    public class SecurityContext : IApplicationService
+    public class SecurityContext : INotifyPropertyChanged, IApplicationService
     {
+        bool _isAuthenticated;
+
         public SecurityContext()
         {
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public static SecurityContext Current { get; private set; }
 
@@ -56,8 +61,15 @@ namespace LiteApp.MySpace.Security
 
         public bool IsAuthenticated
         {
-            get;
-            private set;
+            get { return _isAuthenticated; }
+            private set
+            {
+                if (_isAuthenticated != value)
+                {
+                    _isAuthenticated = value;
+                    RaisePropertyChanged("IsAuthenticated");
+                }
+            }
         }
 
         public void StartService(ApplicationServiceContext context)
@@ -82,6 +94,12 @@ namespace LiteApp.MySpace.Security
                 get;
                 private set;
             }
+        }
+
+        void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

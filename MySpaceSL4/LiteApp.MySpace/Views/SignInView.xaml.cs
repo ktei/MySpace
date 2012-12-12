@@ -23,15 +23,15 @@ namespace LiteApp.MySpace.Views
         {
             _model = (SignInViewModel)this.DataContext;
             _model.PasswordAccessor = () => Password.Password;
-            _model.SignInCompleted += _model_SignInCompleted;
+            _model.SignInSucceeded += _model_SignInSucceeded;
         }
 
         void SignInView_Unloaded(object sender, RoutedEventArgs e)
         {
-            _model.SignInCompleted -= _model_SignInCompleted;
+            _model.SignInSucceeded -= _model_SignInSucceeded;
         }
 
-        void _model_SignInCompleted(object sender, EventArgs e)
+        void _model_SignInSucceeded(object sender, EventArgs e)
         {
             this.DialogResult = true;
         }

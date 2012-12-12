@@ -27,7 +27,7 @@ namespace LiteApp.MySpace.ViewModels
             RefreshBindingScope = new RefreshBindingScope();
         }
 
-        public event EventHandler SignInCompleted;
+        public event EventHandler SignInSucceeded;
 
         public RefreshBindingScope RefreshBindingScope { get; set; }
 
@@ -89,7 +89,12 @@ namespace LiteApp.MySpace.ViewModels
                 {
                     MessageBox.Show(result.Error);
                 }
-                IsBusy = false;
+                else
+                {
+                    IsBusy = false;
+                    if (SignInSucceeded != null)
+                        SignInSucceeded(this, EventArgs.Empty);
+                }
             });
         }
     }
