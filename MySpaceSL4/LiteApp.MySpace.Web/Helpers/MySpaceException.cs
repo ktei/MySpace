@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LiteApp.MySpace.Web.ErrorHandling
+namespace LiteApp.MySpace.Web.Helpers
 {
     public class MySpaceException : Exception
     {

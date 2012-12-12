@@ -1,7 +1,7 @@
 ﻿using System;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace LiteApp.MySpace.Web.ErrorHandling.Logging.Mongo
+namespace LiteApp.MySpace.Web.Logging.Mongo
 {
     public class LogEntry
     {

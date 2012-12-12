@@ -1,7 +1,7 @@
 ﻿using System;
 using LiteApp.MySpace.Web.DataAccess.Mongo;
 
-namespace LiteApp.MySpace.Web.ErrorHandling.Logging.Mongo
+namespace LiteApp.MySpace.Web.Logging.Mongo
 {
     public class MongoLogger : BaseRepository, ILogger
     {

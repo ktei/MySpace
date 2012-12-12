@@ -21,16 +21,25 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Width="720" Height="445" Margin="0,0,10,0">
+            <Grid Width="720" Height="445" Margin="0,0,10,0" VerticalAlignment="Top">
                 <Border Style="{StaticResource PictureStyle}" HorizontalAlignment="Center" Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
                     <Image Source="{Binding PhotoURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
                 </Border>
                 <controls:LoadingIndicator Style="{StaticResource CircleIndicator}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVis}}" />
             </Grid>
-            <StackPanel Grid.Column="1">
+            <Grid Grid.Column="1" Height="550">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
                 <TextBlock Text="Comments" Style="{StaticResource HeaderTextStyle}"/>
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0" Height="500">
+                <StackPanel Grid.Row="1" >
+                    <TextBox AcceptsReturn="True" Margin="0,0,0,5" Height="60" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
+                    <Button Height="30" Content="Post" Width="75" HorizontalAlignment="Right"/>
+                </StackPanel>
+                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">
                     <ItemsControl ItemsSource="{Binding Comments, Mode=OneWay}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -56,7 +65,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
-            </StackPanel>
+            </Grid>
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Margin="0,5,0,0">
             <Button x:Name="CloseButton" Content="Close" Click="CloseButton_Click" Width="75" Height="30" />

@@ -10,9 +10,13 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
 {
     public class AlbumRepository : BaseRepository, IAlbumRepository
     {
-        public IEnumerable<Album> GetPagedAlbums(int pageIndex, int pageSize)
+        public AlbumRepository()
         {
             Database.GetCollection<Album>(Collections.Albums).EnsureIndex("CreatedOn");
+        }
+
+        public IEnumerable<Album> GetPagedAlbums(int pageIndex, int pageSize)
+        {   
             var cursor = Database.GetCollection<Album>(Collections.Albums).FindAllAs<Album>();
             cursor.SetSortOrder(SortBy.Descending("CreatedOn")).SetSkip(pageIndex * pageSize).SetLimit(pageSize);
             return cursor;

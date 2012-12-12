@@ -12,5 +12,10 @@ namespace LiteApp.MySpace.Web.DataAccess
         void SavePhoto(Photo photo);
         void DeletePhoto(string photoId);
         int GetTotalPhotoCount();
+
+        IEnumerable<PhotoComment> GetComments(string photoId);
+        void SaveComment(PhotoComment comment);
+        void DeleteComment(string commentId);
+        int GetCommentCount(string photoId);
     }
 }

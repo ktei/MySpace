@@ -67,7 +67,7 @@
         <Setter Property="FontSize" Value="{StaticResource HeaderFontSize}"/>
         <Setter Property="TextOptions.TextHintingMode" Value="Animated" />
         <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="Margin" Value="0,15,0,4"/>
+        <!--<Setter Property="Margin" Value="0,15,0,4"/>-->
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
 

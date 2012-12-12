@@ -40,6 +40,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             public static readonly string Users = "Users";
             public static readonly string Albums = "Albums";
             public static readonly string Photos = "Photos";
+            public static readonly string PhotoComments = "PhotoComments";
             public static readonly string LogEntries = "LogEntries";
         }
     }
