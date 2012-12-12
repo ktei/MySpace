@@ -1,5 +1,5 @@
 ﻿
-namespace LiteApp.MySpace.Web.Logging
+namespace LiteApp.MySpace.Web.ErrorHandling.Logging
 {
     public enum LogLevel
     {

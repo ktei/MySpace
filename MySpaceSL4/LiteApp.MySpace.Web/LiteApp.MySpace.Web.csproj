@@ -118,16 +118,17 @@
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\PhotoComment.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="ErrorHandling\MySpaceException.cs" />
     <Compile Include="Handlers\PhotoReceiver.ashx.cs">
       <DependentUpon>PhotoReceiver.ashx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DI.cs" />
     <Compile Include="Helpers\ImageProcessor.cs" />
     <Compile Include="Helpers\SharpBoxSupport.cs" />
-    <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\Mongo\LogEntry.cs" />
-    <Compile Include="Logging\LogLevel.cs" />
-    <Compile Include="Logging\Mongo\MongoLogger.cs" />
+    <Compile Include="ErrorHandling\Logging\ILogger.cs" />
+    <Compile Include="ErrorHandling\Logging\Mongo\LogEntry.cs" />
+    <Compile Include="ErrorHandling\Logging\LogLevel.cs" />
+    <Compile Include="ErrorHandling\Logging\Mongo\MongoLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\SupportFiles.Designer.cs">
       <AutoGen>True</AutoGen>

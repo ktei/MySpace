@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace LiteApp.MySpace.Web.Logging
+﻿
+namespace LiteApp.MySpace.Web.ErrorHandling.Logging
 {
     public interface ILogger
     {

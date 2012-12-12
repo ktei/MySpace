@@ -40,11 +40,11 @@ namespace LiteApp.MySpace.Web.Handlers
             var albumId = context.Request.QueryString["albumId"];
             if (string.IsNullOrEmpty(extension))
             {
-                throw new ApplicationException("No file extension specified.");
+                throw new Exception("No file extension specified.");
             }
             if (string.IsNullOrEmpty(albumId))
             {
-                throw new ApplicationException("No album ID specified.");
+                throw new Exception("No album ID specified.");
             }
 
             var storage = SharpBoxSupport.OpenDropBoxStorage();
