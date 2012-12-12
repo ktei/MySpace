@@ -6,11 +6,24 @@ using LiteApp.MySpace.Web.Entities;
 using LiteApp.MySpace.Web.Helpers;
 using LiteApp.MySpace.Web.Services;
 using MongoDB.Bson;
+using LiteApp.MySpace.Web.DataAccess;
+using Ninject;
 
 namespace LiteApp.MySpace.Web.Handlers
 {
     public class PhotoReceiver : IHttpHandler
     {
+        public PhotoReceiver()
+        {
+            DI.Inject(this);
+        }
+
+        [Inject]
+        public IAlbumRepository AlbumRepository { get; set; }
+
+        [Inject]
+        public IPhotoRepository PhotoRepository { get; set; }
+
         #region IHttpHandler Members
 
         public bool IsReusable
@@ -68,13 +81,12 @@ namespace LiteApp.MySpace.Web.Handlers
             storage.Close();
 
             // Store data to database
-            PhotoService svc = new PhotoService();
-            string[] coverURIs = svc.UpdateAlbumCover(albumId, thumbURI);
+            string[] coverURIs = AlbumRepository.UpdateCover(albumId, thumbURI);
             Photo photo = new Photo();
             photo.PhotoURI = photoURI;
             photo.ThumbURI = thumbURI;
             photo.AlbumId = albumId;
-            svc.SavePhoto(photo);
+            PhotoRepository.SavePhoto(photo);
             //using (var stream = context.Request.InputStream)
             //{
             //    byte[] buffer = new Byte[stream.Length];

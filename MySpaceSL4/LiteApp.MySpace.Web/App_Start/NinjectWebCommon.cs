@@ -12,6 +12,7 @@ namespace LiteApp.MySpace.Web.App_Start
     using Ninject.Web.Common;
     using LiteApp.MySpace.Web.DataAccess;
     using LiteApp.MySpace.Web.DataAccess.Mongo;
+    using LiteApp.MySpace.Web.Helpers;
 
     public static class NinjectWebCommon 
     {
@@ -46,6 +47,7 @@ namespace LiteApp.MySpace.Web.App_Start
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
             
             RegisterServices(kernel);
+            DI.Initialize(kernel);
             return kernel;
         }
 

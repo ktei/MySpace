@@ -44,11 +44,6 @@ namespace LiteApp.MySpace.Web.Services
             AlbumRepository.DeleteAlbum(albumId);
         }
 
-        public string[] UpdateAlbumCover(string albumId, string coverUri)
-        {
-            return AlbumRepository.UpdateCover(albumId, coverUri);
-        }
-
         #endregion // Album API
 
         #region Photo API
@@ -60,11 +55,6 @@ namespace LiteApp.MySpace.Web.Services
             result.Entities = PhotoRepository.GetPagedPhotos(pageIndex, pageSize, albumId).ToList();
             result.TotalItemCount = PhotoRepository.GetTotalPhotoCount();
             return result;
-        }
-
-        public void SavePhoto(Photo photo)
-        {
-            PhotoRepository.SavePhoto(photo);
         }
 
         #endregion // Photo API

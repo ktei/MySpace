@@ -107,7 +107,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppModule.cs" />
     <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="DataAccess\IAlbumRepository.cs" />
@@ -122,6 +121,7 @@
     <Compile Include="Handlers\PhotoReceiver.ashx.cs">
       <DependentUpon>PhotoReceiver.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DI.cs" />
     <Compile Include="Helpers\ImageProcessor.cs" />
     <Compile Include="Helpers\SharpBoxSupport.cs" />
     <Compile Include="Logging\ILogger.cs" />
