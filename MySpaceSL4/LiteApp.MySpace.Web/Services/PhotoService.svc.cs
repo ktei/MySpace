@@ -6,6 +6,9 @@ using LiteApp.MySpace.Web.Entities;
 using LiteApp.MySpace.Web.Helpers;
 using Ninject;
 using Ninject.Web;
+using System.Security.Permissions;
+using System.Threading;
+using System.Web;
 
 namespace LiteApp.MySpace.Web.Services
 {
@@ -14,6 +17,11 @@ namespace LiteApp.MySpace.Web.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class PhotoService : WebServiceBase
     {
+        public PhotoService()
+        {
+            Thread.CurrentPrincipal = HttpContext.Current.User;
+        }
+
         [Inject]
         public IAlbumRepository AlbumRepository { get; set; }
 
@@ -32,6 +40,7 @@ namespace LiteApp.MySpace.Web.Services
         }
 
         [OperationContract]
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
         public void SaveAlbum(Album album)
         {
             AlbumRepository.SaveAlbum(album);

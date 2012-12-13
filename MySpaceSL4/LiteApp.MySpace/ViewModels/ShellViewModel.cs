@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
+using LiteApp.MySpace.Security;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -34,6 +35,11 @@ namespace LiteApp.MySpace.ViewModels
         public void SignIn()
         {
             IoC.Get<IWindowManager>().ShowDialog(new SignInViewModel());
+        }
+
+        public void SignOut()
+        {
+            SecurityContext.Current.SignOut();
         }
         
         protected override void OnInitialize()

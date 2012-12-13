@@ -8,10 +8,8 @@ namespace LiteApp.MySpace.Security
     public class SecurityContext : INotifyPropertyChanged, IApplicationService
     {
         bool _isAuthenticated;
-
-        public SecurityContext()
-        {
-        }
+        bool _isBusy;
+        string _status;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -23,9 +21,11 @@ namespace LiteApp.MySpace.Security
                 throw new ArgumentNullException("completeAction");
             try
             {
-                var client = new SecurityServiceClient();
+                IsBusy = true;
+                Status = "Signing you in...";
+                var svc = new SecurityServiceClient();
 
-                client.SignInCompleted += (sender, e) =>
+                svc.SignInCompleted += (sender, e) =>
                 {
                     var status = e.Result;
                     SignInResult result = null;
@@ -44,12 +44,38 @@ namespace LiteApp.MySpace.Security
                         result = new SignInResult(null, false, "Server had an error while processing the request. Please try again later.");
                     }
                     completeAction(result);
+                    IsBusy = false;
                 };
-                client.SignInAsync(userName, password);
+                svc.SignInAsync(userName, password);
             }
             catch
             {
                 completeAction(new SignInResult(null, false, "An error occurred while processing the request. Please try again later."));
+                IsBusy = false;
+            }
+        }
+
+        public void SignOut(Action completeAction = null)
+        {
+            try
+            {
+                IsBusy = true;
+                Status = "Signing you out...";
+                var svc = new SecurityServiceClient();
+                svc.SignOutCompleted += (sender, e) =>
+                    {
+                        IsAuthenticated = false;
+                        if (completeAction != null)
+                            completeAction();
+                        IsBusy = false;
+                    };
+                svc.SignOutAsync();
+            }
+            catch
+            {
+                if (completeAction != null)
+                    completeAction();
+                IsBusy = false;
             }
         }
 
@@ -68,6 +94,32 @@ namespace LiteApp.MySpace.Security
                 {
                     _isAuthenticated = value;
                     RaisePropertyChanged("IsAuthenticated");
+                }
+            }
+        }
+
+        public string Status
+        {
+            get { return _status; }
+            private set
+            {
+                if (_status != value)
+                {
+                    _status = value;
+                    RaisePropertyChanged("Status");
+                }
+            }
+        }
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            private set
+            {
+                if (_isBusy != value)
+                {
+                    _isBusy = value;
+                    RaisePropertyChanged("IsBusy");
                 }
             }
         }

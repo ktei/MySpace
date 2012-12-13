@@ -16,6 +16,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SignOut">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SignOutResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SignUp">
     <xs:complexType>
       <xs:sequence>
@@ -29,6 +39,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" minOccurs="0" name="SignUpResult" type="q2:SignUpStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsAuthenticated">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsAuthenticatedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsAuthenticatedResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

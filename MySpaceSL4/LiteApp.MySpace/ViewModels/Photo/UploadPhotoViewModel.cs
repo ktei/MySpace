@@ -5,6 +5,7 @@ using System.Windows;
 using Caliburn.Micro;
 using System.Threading;
 using System.Net.Browser;
+using LiteApp.MySpace.Services.Security;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -87,24 +88,40 @@ namespace LiteApp.MySpace.ViewModels
 
         public void StartUpload(FileInfo file, string albumId)
         {
-            _fileStream = file.OpenRead();
-            _dataLength = _fileStream.Length;
-            UriBuilder httpHandlerUrlBuilder = new UriBuilder(string.Format("{0}/Handlers/PhotoReceiver.ashx", _baseUri));
-            httpHandlerUrlBuilder.Query = string.Format("{2}extension={0}&albumId={1}",
-                Path.GetExtension(file.Name),
-                albumId,
-                string.IsNullOrEmpty(httpHandlerUrlBuilder.Query) ? "" : httpHandlerUrlBuilder.Query.Remove(0, 1) + "&");
+            // TODO: maybe we need a better way to autheticate this
+            SecurityServiceClient svc = new SecurityServiceClient();
+            svc.IsAuthenticatedCompleted += (sender, e) =>
+                {
+                    if (e.Error != null)
+                    {
+                    }
+                    else if (e.Result)
+                    {
+                        _fileStream = file.OpenRead();
+                        _dataLength = _fileStream.Length;
+                        UriBuilder httpHandlerUrlBuilder = new UriBuilder(string.Format("{0}/Handlers/PhotoReceiver.ashx", _baseUri));
+                        httpHandlerUrlBuilder.Query = string.Format("{2}extension={0}&albumId={1}",
+                            Path.GetExtension(file.Name),
+                            albumId,
+                            string.IsNullOrEmpty(httpHandlerUrlBuilder.Query) ? "" : httpHandlerUrlBuilder.Query.Remove(0, 1) + "&");
 
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequestCreator.ClientHttp.Create(httpHandlerUrlBuilder.Uri);
-            webRequest.AllowWriteStreamBuffering = false; // Enable ongoing progress reporting
-            webRequest.ContentType = "multipart/form-data";
-            webRequest.ContentLength = _dataLength;
-            webRequest.Method = "POST";
-            webRequest.BeginGetRequestStream(new AsyncCallback(WriteToStreamCallback), webRequest);
-            FileName = file.Name;
-            CanCancel = true;
-            if (UploadStarted != null)
-                UploadStarted(this, EventArgs.Empty);
+                        HttpWebRequest webRequest = (HttpWebRequest)WebRequestCreator.ClientHttp.Create(httpHandlerUrlBuilder.Uri);
+                        webRequest.AllowWriteStreamBuffering = false; // Enable ongoing progress reporting
+                        webRequest.ContentType = "multipart/form-data";
+                        webRequest.ContentLength = _dataLength;
+                        webRequest.Method = "POST";
+                        webRequest.BeginGetRequestStream(new AsyncCallback(WriteToStreamCallback), webRequest);
+                        FileName = file.Name;
+                        CanCancel = true;
+                        if (UploadStarted != null)
+                            UploadStarted(this, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        // TODO: Inform users they don't are not authenticated to do this
+                    }
+                };
+            svc.IsAuthenticatedAsync();
         }
 
         public void CancelUpload()

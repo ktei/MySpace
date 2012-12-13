@@ -12,9 +12,14 @@
         <conv:BooleanToVisibilityConverter x:Key="boolToVisReverse" Reverse="True"/>
     </UserControl.Resources>
     <Grid>
-        <HyperlinkButton Content="Sign In" cal:Message.Attach="SignIn" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
+        <Grid Visibility="{Binding IsBusy, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVisReverse}}">
+            <HyperlinkButton Content="Sign In" cal:Message.Attach="SignIn" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
             Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVisReverse}}"/>
-        <HyperlinkButton Content="Sign Out" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
+            <HyperlinkButton Content="Sign Out" cal:Message.Attach="SignOut" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
             Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}" />
+        </Grid>
+        <TextBlock Style="{StaticResource ContentTextStyle}" Foreground="White"
+                   Visibility="{Binding IsBusy, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"
+                   Text="{Binding Status, Source={StaticResource SecurityContext}, Mode=OneWay}" />
     </Grid>
 </UserControl>

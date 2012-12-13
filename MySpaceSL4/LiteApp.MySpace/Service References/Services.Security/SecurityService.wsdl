@@ -13,20 +13,40 @@
   <wsdl:message name="SecurityService_SignIn_OutputMessage">
     <wsdl:part name="parameters" element="SignInResponse" />
   </wsdl:message>
+  <wsdl:message name="SecurityService_SignOut_InputMessage">
+    <wsdl:part name="parameters" element="SignOut" />
+  </wsdl:message>
+  <wsdl:message name="SecurityService_SignOut_OutputMessage">
+    <wsdl:part name="parameters" element="SignOutResponse" />
+  </wsdl:message>
   <wsdl:message name="SecurityService_SignUp_InputMessage">
     <wsdl:part name="parameters" element="SignUp" />
   </wsdl:message>
   <wsdl:message name="SecurityService_SignUp_OutputMessage">
     <wsdl:part name="parameters" element="SignUpResponse" />
   </wsdl:message>
+  <wsdl:message name="SecurityService_IsAuthenticated_InputMessage">
+    <wsdl:part name="parameters" element="IsAuthenticated" />
+  </wsdl:message>
+  <wsdl:message name="SecurityService_IsAuthenticated_OutputMessage">
+    <wsdl:part name="parameters" element="IsAuthenticatedResponse" />
+  </wsdl:message>
   <wsdl:portType name="SecurityService">
     <wsdl:operation name="SignIn">
       <wsdl:input wsaw:Action="urn:SecurityService/SignIn" message="SecurityService_SignIn_InputMessage" />
       <wsdl:output wsaw:Action="urn:SecurityService/SignInResponse" message="SecurityService_SignIn_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SignOut">
+      <wsdl:input wsaw:Action="urn:SecurityService/SignOut" message="SecurityService_SignOut_InputMessage" />
+      <wsdl:output wsaw:Action="urn:SecurityService/SignOutResponse" message="SecurityService_SignOut_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SignUp">
       <wsdl:input wsaw:Action="urn:SecurityService/SignUp" message="SecurityService_SignUp_InputMessage" />
       <wsdl:output wsaw:Action="urn:SecurityService/SignUpResponse" message="SecurityService_SignUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsAuthenticated">
+      <wsdl:input wsaw:Action="urn:SecurityService/IsAuthenticated" message="SecurityService_IsAuthenticated_InputMessage" />
+      <wsdl:output wsaw:Action="urn:SecurityService/IsAuthenticatedResponse" message="SecurityService_IsAuthenticated_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

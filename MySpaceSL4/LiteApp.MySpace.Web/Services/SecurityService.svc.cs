@@ -12,18 +12,17 @@ namespace LiteApp.MySpace.Web.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class SecurityService : WebServiceBase
     {
-        public SecurityService()
-        {
-            Thread.CurrentPrincipal = HttpContext.Current.User;
-        }
-
         [OperationContract]
         public SignInStaus SignIn(string userName, string password)
         {
             SignInStaus result = SignInStaus.Success;
             try
             {
-                if (!Membership.ValidateUser(userName, password))
+                if (Membership.ValidateUser(userName, password))
+                {
+                    FormsAuthentication.SetAuthCookie(userName, false); 
+                }
+                else
                 {
                     result = SignInStaus.WrongCredentials;
                 }
@@ -34,6 +33,12 @@ namespace LiteApp.MySpace.Web.Services
                 result = SignInStaus.ServerError;
             }
             return result;
+        }
+
+        [OperationContract]
+        public void SignOut()
+        {
+            FormsAuthentication.SignOut();
         }
 
         [OperationContract]
@@ -50,6 +55,12 @@ namespace LiteApp.MySpace.Web.Services
                 result = MapToSignUpStatus(ex.StatusCode);
             }
             return result;
+        }
+
+        [OperationContract]
+        public bool IsAuthenticated()
+        {
+            return HttpContext.Current.User.Identity.IsAuthenticated;
         }
 
         static SignUpStatus MapToSignUpStatus(MembershipCreateStatus status)

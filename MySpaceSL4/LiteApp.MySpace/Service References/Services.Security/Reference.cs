@@ -61,10 +61,20 @@ namespace LiteApp.MySpace.Services.Security {
         
         LiteApp.MySpace.Services.Security.SignInStaus EndSignIn(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/SignOut", ReplyAction="urn:SecurityService/SignOutResponse")]
+        System.IAsyncResult BeginSignOut(System.AsyncCallback callback, object asyncState);
+        
+        void EndSignOut(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/SignUp", ReplyAction="urn:SecurityService/SignUpResponse")]
         System.IAsyncResult BeginSignUp(string userName, string password, string email, System.AsyncCallback callback, object asyncState);
         
         LiteApp.MySpace.Services.Security.SignUpStatus EndSignUp(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/IsAuthenticated", ReplyAction="urn:SecurityService/IsAuthenticatedResponse")]
+        System.IAsyncResult BeginIsAuthenticated(System.AsyncCallback callback, object asyncState);
+        
+        bool EndIsAuthenticated(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +121,25 @@ namespace LiteApp.MySpace.Services.Security {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class IsAuthenticatedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public IsAuthenticatedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class SecurityServiceClient : System.ServiceModel.ClientBase<LiteApp.MySpace.Services.Security.SecurityService>, LiteApp.MySpace.Services.Security.SecurityService {
         
         private BeginOperationDelegate onBeginSignInDelegate;
@@ -119,11 +148,23 @@ namespace LiteApp.MySpace.Services.Security {
         
         private System.Threading.SendOrPostCallback onSignInCompletedDelegate;
         
+        private BeginOperationDelegate onBeginSignOutDelegate;
+        
+        private EndOperationDelegate onEndSignOutDelegate;
+        
+        private System.Threading.SendOrPostCallback onSignOutCompletedDelegate;
+        
         private BeginOperationDelegate onBeginSignUpDelegate;
         
         private EndOperationDelegate onEndSignUpDelegate;
         
         private System.Threading.SendOrPostCallback onSignUpCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginIsAuthenticatedDelegate;
+        
+        private EndOperationDelegate onEndIsAuthenticatedDelegate;
+        
+        private System.Threading.SendOrPostCallback onIsAuthenticatedCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -180,7 +221,11 @@ namespace LiteApp.MySpace.Services.Security {
         
         public event System.EventHandler<SignInCompletedEventArgs> SignInCompleted;
         
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SignOutCompleted;
+        
         public event System.EventHandler<SignUpCompletedEventArgs> SignUpCompleted;
+        
+        public event System.EventHandler<IsAuthenticatedCompletedEventArgs> IsAuthenticatedCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -235,6 +280,49 @@ namespace LiteApp.MySpace.Services.Security {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginSignOut(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSignOut(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void LiteApp.MySpace.Services.Security.SecurityService.EndSignOut(System.IAsyncResult result) {
+            base.Channel.EndSignOut(result);
+        }
+        
+        private System.IAsyncResult OnBeginSignOut(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((LiteApp.MySpace.Services.Security.SecurityService)(this)).BeginSignOut(callback, asyncState);
+        }
+        
+        private object[] OnEndSignOut(System.IAsyncResult result) {
+            ((LiteApp.MySpace.Services.Security.SecurityService)(this)).EndSignOut(result);
+            return null;
+        }
+        
+        private void OnSignOutCompleted(object state) {
+            if ((this.SignOutCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SignOutCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SignOutAsync() {
+            this.SignOutAsync(null);
+        }
+        
+        public void SignOutAsync(object userState) {
+            if ((this.onBeginSignOutDelegate == null)) {
+                this.onBeginSignOutDelegate = new BeginOperationDelegate(this.OnBeginSignOut);
+            }
+            if ((this.onEndSignOutDelegate == null)) {
+                this.onEndSignOutDelegate = new EndOperationDelegate(this.OnEndSignOut);
+            }
+            if ((this.onSignOutCompletedDelegate == null)) {
+                this.onSignOutCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSignOutCompleted);
+            }
+            base.InvokeAsync(this.onBeginSignOutDelegate, null, this.onEndSignOutDelegate, this.onSignOutCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginSignUp(string userName, string password, string email, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginSignUp(userName, password, email, callback, asyncState);
         }
@@ -282,6 +370,50 @@ namespace LiteApp.MySpace.Services.Security {
                         userName,
                         password,
                         email}, this.onEndSignUpDelegate, this.onSignUpCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginIsAuthenticated(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginIsAuthenticated(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool LiteApp.MySpace.Services.Security.SecurityService.EndIsAuthenticated(System.IAsyncResult result) {
+            return base.Channel.EndIsAuthenticated(result);
+        }
+        
+        private System.IAsyncResult OnBeginIsAuthenticated(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((LiteApp.MySpace.Services.Security.SecurityService)(this)).BeginIsAuthenticated(callback, asyncState);
+        }
+        
+        private object[] OnEndIsAuthenticated(System.IAsyncResult result) {
+            bool retVal = ((LiteApp.MySpace.Services.Security.SecurityService)(this)).EndIsAuthenticated(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnIsAuthenticatedCompleted(object state) {
+            if ((this.IsAuthenticatedCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.IsAuthenticatedCompleted(this, new IsAuthenticatedCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void IsAuthenticatedAsync() {
+            this.IsAuthenticatedAsync(null);
+        }
+        
+        public void IsAuthenticatedAsync(object userState) {
+            if ((this.onBeginIsAuthenticatedDelegate == null)) {
+                this.onBeginIsAuthenticatedDelegate = new BeginOperationDelegate(this.OnBeginIsAuthenticated);
+            }
+            if ((this.onEndIsAuthenticatedDelegate == null)) {
+                this.onEndIsAuthenticatedDelegate = new EndOperationDelegate(this.OnEndIsAuthenticated);
+            }
+            if ((this.onIsAuthenticatedCompletedDelegate == null)) {
+                this.onIsAuthenticatedCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnIsAuthenticatedCompleted);
+            }
+            base.InvokeAsync(this.onBeginIsAuthenticatedDelegate, null, this.onEndIsAuthenticatedDelegate, this.onIsAuthenticatedCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -374,6 +506,17 @@ namespace LiteApp.MySpace.Services.Security {
                 return _result;
             }
             
+            public System.IAsyncResult BeginSignOut(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("SignOut", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndSignOut(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("SignOut", _args, result);
+            }
+            
             public System.IAsyncResult BeginSignUp(string userName, string password, string email, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[3];
                 _args[0] = userName;
@@ -386,6 +529,18 @@ namespace LiteApp.MySpace.Services.Security {
             public LiteApp.MySpace.Services.Security.SignUpStatus EndSignUp(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 LiteApp.MySpace.Services.Security.SignUpStatus _result = ((LiteApp.MySpace.Services.Security.SignUpStatus)(base.EndInvoke("SignUp", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginIsAuthenticated(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("IsAuthenticated", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndIsAuthenticated(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("IsAuthenticated", _args, result)));
                 return _result;
             }
         }
