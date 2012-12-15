@@ -13,6 +13,12 @@ namespace LiteApp.MySpace.ViewModels
 {
     public class PhotoCommentViewModel
     {
-        public string Comment { get; set; }
+        public string Id { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public string Contents { get; set; }
     }
 }

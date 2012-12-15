@@ -1,14 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Permissions;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
+using System.Threading;
+using System.Web;
 using LiteApp.MySpace.Web.DataAccess;
 using LiteApp.MySpace.Web.Entities;
 using LiteApp.MySpace.Web.Helpers;
 using Ninject;
 using Ninject.Web;
-using System.Security.Permissions;
-using System.Threading;
-using System.Web;
 
 namespace LiteApp.MySpace.Web.Services
 {
@@ -64,6 +65,25 @@ namespace LiteApp.MySpace.Web.Services
             result.Entities = PhotoRepository.GetPagedPhotos(pageIndex, pageSize, albumId).ToList();
             result.TotalItemCount = PhotoRepository.GetTotalPhotoCount();
             return result;
+        }
+
+        [OperationContract]
+        public IEnumerable<PhotoComment> GetComments(string photoId)
+        {
+            return PhotoRepository.GetComments(photoId);
+        }
+
+        [OperationContract]
+        public PhotoComment SaveComment(PhotoComment comment)
+        {
+            PhotoRepository.SaveComment(comment);
+            return comment;
+        }
+
+        [OperationContract]
+        public void DeleteComment(string commentId)
+        {
+            PhotoRepository.DeleteComment(commentId);
         }
 
         #endregion // Photo API

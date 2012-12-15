@@ -33,6 +33,24 @@
   <wsdl:message name="PhotoService_GetPagedPhotos_OutputMessage">
     <wsdl:part name="parameters" element="GetPagedPhotosResponse" />
   </wsdl:message>
+  <wsdl:message name="PhotoService_GetComments_InputMessage">
+    <wsdl:part name="parameters" element="GetComments" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_GetComments_OutputMessage">
+    <wsdl:part name="parameters" element="GetCommentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_SaveComment_InputMessage">
+    <wsdl:part name="parameters" element="SaveComment" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_SaveComment_OutputMessage">
+    <wsdl:part name="parameters" element="SaveCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_DeleteComment_InputMessage">
+    <wsdl:part name="parameters" element="DeleteComment" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_DeleteComment_OutputMessage">
+    <wsdl:part name="parameters" element="DeleteCommentResponse" />
+  </wsdl:message>
   <wsdl:portType name="PhotoService">
     <wsdl:operation name="GetPagedAlbums">
       <wsdl:input wsaw:Action="urn:PhotoService/GetPagedAlbums" message="PhotoService_GetPagedAlbums_InputMessage" />
@@ -49,6 +67,18 @@
     <wsdl:operation name="GetPagedPhotos">
       <wsdl:input wsaw:Action="urn:PhotoService/GetPagedPhotos" message="PhotoService_GetPagedPhotos_InputMessage" />
       <wsdl:output wsaw:Action="urn:PhotoService/GetPagedPhotosResponse" message="PhotoService_GetPagedPhotos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComments">
+      <wsdl:input wsaw:Action="urn:PhotoService/GetComments" message="PhotoService_GetComments_InputMessage" />
+      <wsdl:output wsaw:Action="urn:PhotoService/GetCommentsResponse" message="PhotoService_GetComments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveComment">
+      <wsdl:input wsaw:Action="urn:PhotoService/SaveComment" message="PhotoService_SaveComment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:PhotoService/SaveCommentResponse" message="PhotoService_SaveComment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteComment">
+      <wsdl:input wsaw:Action="urn:PhotoService/DeleteComment" message="PhotoService_DeleteComment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:PhotoService/DeleteCommentResponse" message="PhotoService_DeleteComment_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

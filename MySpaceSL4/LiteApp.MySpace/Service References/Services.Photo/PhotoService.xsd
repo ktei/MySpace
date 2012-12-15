@@ -38,4 +38,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Photo" nillable="true" type="tns:Photo" />
+  <xs:complexType name="ArrayOfPhotoComment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhotoComment" nillable="true" type="tns:PhotoComment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPhotoComment" nillable="true" type="tns:ArrayOfPhotoComment" />
+  <xs:complexType name="PhotoComment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contents" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhotoId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PhotoComment" nillable="true" type="tns:PhotoComment" />
 </xs:schema>

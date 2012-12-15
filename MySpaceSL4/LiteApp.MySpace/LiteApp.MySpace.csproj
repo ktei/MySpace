@@ -336,6 +336,9 @@
     <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.PhotoComment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\Services.Photo\PhotoService.wsdl" />
     <None Include="Service References\Services.Photo\PhotoService.xsd">
       <SubType>Designer</SubType>

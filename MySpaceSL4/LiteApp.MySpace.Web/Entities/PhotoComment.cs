@@ -12,6 +12,7 @@ namespace LiteApp.MySpace.Web.Entities
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string PhotoId { get; set; }
 
         public string Contents { get; set; }

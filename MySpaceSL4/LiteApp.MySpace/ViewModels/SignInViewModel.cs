@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Caliburn.Micro;
-using LiteApp.MySpace.Services.Security;
-using LiteApp.MySpace.Security;
 using LiteApp.MySpace.Framework;
+using LiteApp.MySpace.Security;
 using LiteApp.Portable.Mvvm.Validation;
 
 namespace LiteApp.MySpace.ViewModels
@@ -20,6 +11,7 @@ namespace LiteApp.MySpace.ViewModels
     {
         string _userName;
         bool _isBusy;
+        string _message;
 
         public SignInViewModel()
         {
@@ -54,6 +46,19 @@ namespace LiteApp.MySpace.ViewModels
             {
                 IsDirty = true;
                 NotifyOfPropertyChange(() => Password);
+            }
+        }
+
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                if (_message != value)
+                {
+                    _message = value;
+                    NotifyOfPropertyChange(() => Message);
+                }
             }
         }
 

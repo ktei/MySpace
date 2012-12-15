@@ -360,6 +360,96 @@ namespace LiteApp.MySpace.Services.Photo {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PhotoComment", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities")]
+    public partial class PhotoComment : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string ContentsField;
+        
+        private string CreatedByField;
+        
+        private System.DateTime CreatedOnField;
+        
+        private string IdField;
+        
+        private string PhotoIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Contents {
+            get {
+                return this.ContentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContentsField, value) != true)) {
+                    this.ContentsField = value;
+                    this.RaisePropertyChanged("Contents");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy {
+            get {
+                return this.CreatedByField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CreatedByField, value) != true)) {
+                    this.CreatedByField = value;
+                    this.RaisePropertyChanged("CreatedBy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreatedOn {
+            get {
+                return this.CreatedOnField;
+            }
+            set {
+                if ((this.CreatedOnField.Equals(value) != true)) {
+                    this.CreatedOnField = value;
+                    this.RaisePropertyChanged("CreatedOn");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhotoId {
+            get {
+                return this.PhotoIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhotoIdField, value) != true)) {
+                    this.PhotoIdField = value;
+                    this.RaisePropertyChanged("PhotoId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="", ConfigurationName="Services.Photo.PhotoService")]
     public interface PhotoService {
@@ -383,6 +473,21 @@ namespace LiteApp.MySpace.Services.Photo {
         System.IAsyncResult BeginGetPagedPhotos(int pageIndex, int pageSize, string albumId, System.AsyncCallback callback, object asyncState);
         
         LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB EndGetPagedPhotos(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/GetComments", ReplyAction="urn:PhotoService/GetCommentsResponse")]
+        System.IAsyncResult BeginGetComments(string photoId, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> EndGetComments(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/SaveComment", ReplyAction="urn:PhotoService/SaveCommentResponse")]
+        System.IAsyncResult BeginSaveComment(LiteApp.MySpace.Services.Photo.PhotoComment comment, System.AsyncCallback callback, object asyncState);
+        
+        LiteApp.MySpace.Services.Photo.PhotoComment EndSaveComment(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeleteComment", ReplyAction="urn:PhotoService/DeleteCommentResponse")]
+        System.IAsyncResult BeginDeleteComment(string commentId, System.AsyncCallback callback, object asyncState);
+        
+        void EndDeleteComment(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -429,6 +534,44 @@ namespace LiteApp.MySpace.Services.Photo {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetCommentsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetCommentsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SaveCommentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public SaveCommentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public LiteApp.MySpace.Services.Photo.PhotoComment Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((LiteApp.MySpace.Services.Photo.PhotoComment)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class PhotoServiceClient : System.ServiceModel.ClientBase<LiteApp.MySpace.Services.Photo.PhotoService>, LiteApp.MySpace.Services.Photo.PhotoService {
         
         private BeginOperationDelegate onBeginGetPagedAlbumsDelegate;
@@ -454,6 +597,24 @@ namespace LiteApp.MySpace.Services.Photo {
         private EndOperationDelegate onEndGetPagedPhotosDelegate;
         
         private System.Threading.SendOrPostCallback onGetPagedPhotosCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetCommentsDelegate;
+        
+        private EndOperationDelegate onEndGetCommentsDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetCommentsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSaveCommentDelegate;
+        
+        private EndOperationDelegate onEndSaveCommentDelegate;
+        
+        private System.Threading.SendOrPostCallback onSaveCommentCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDeleteCommentDelegate;
+        
+        private EndOperationDelegate onEndDeleteCommentDelegate;
+        
+        private System.Threading.SendOrPostCallback onDeleteCommentCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -515,6 +676,12 @@ namespace LiteApp.MySpace.Services.Photo {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeleteAlbumCompleted;
         
         public event System.EventHandler<GetPagedPhotosCompletedEventArgs> GetPagedPhotosCompleted;
+        
+        public event System.EventHandler<GetCommentsCompletedEventArgs> GetCommentsCompleted;
+        
+        public event System.EventHandler<SaveCommentCompletedEventArgs> SaveCommentCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeleteCommentCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -708,6 +875,143 @@ namespace LiteApp.MySpace.Services.Photo {
                         albumId}, this.onEndGetPagedPhotosDelegate, this.onGetPagedPhotosCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginGetComments(string photoId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetComments(photoId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> LiteApp.MySpace.Services.Photo.PhotoService.EndGetComments(System.IAsyncResult result) {
+            return base.Channel.EndGetComments(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetComments(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string photoId = ((string)(inValues[0]));
+            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginGetComments(photoId, callback, asyncState);
+        }
+        
+        private object[] OnEndGetComments(System.IAsyncResult result) {
+            System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndGetComments(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetCommentsCompleted(object state) {
+            if ((this.GetCommentsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetCommentsCompleted(this, new GetCommentsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetCommentsAsync(string photoId) {
+            this.GetCommentsAsync(photoId, null);
+        }
+        
+        public void GetCommentsAsync(string photoId, object userState) {
+            if ((this.onBeginGetCommentsDelegate == null)) {
+                this.onBeginGetCommentsDelegate = new BeginOperationDelegate(this.OnBeginGetComments);
+            }
+            if ((this.onEndGetCommentsDelegate == null)) {
+                this.onEndGetCommentsDelegate = new EndOperationDelegate(this.OnEndGetComments);
+            }
+            if ((this.onGetCommentsCompletedDelegate == null)) {
+                this.onGetCommentsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetCommentsCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetCommentsDelegate, new object[] {
+                        photoId}, this.onEndGetCommentsDelegate, this.onGetCommentsCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginSaveComment(LiteApp.MySpace.Services.Photo.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSaveComment(comment, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        LiteApp.MySpace.Services.Photo.PhotoComment LiteApp.MySpace.Services.Photo.PhotoService.EndSaveComment(System.IAsyncResult result) {
+            return base.Channel.EndSaveComment(result);
+        }
+        
+        private System.IAsyncResult OnBeginSaveComment(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            LiteApp.MySpace.Services.Photo.PhotoComment comment = ((LiteApp.MySpace.Services.Photo.PhotoComment)(inValues[0]));
+            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginSaveComment(comment, callback, asyncState);
+        }
+        
+        private object[] OnEndSaveComment(System.IAsyncResult result) {
+            LiteApp.MySpace.Services.Photo.PhotoComment retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndSaveComment(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnSaveCommentCompleted(object state) {
+            if ((this.SaveCommentCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SaveCommentCompleted(this, new SaveCommentCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SaveCommentAsync(LiteApp.MySpace.Services.Photo.PhotoComment comment) {
+            this.SaveCommentAsync(comment, null);
+        }
+        
+        public void SaveCommentAsync(LiteApp.MySpace.Services.Photo.PhotoComment comment, object userState) {
+            if ((this.onBeginSaveCommentDelegate == null)) {
+                this.onBeginSaveCommentDelegate = new BeginOperationDelegate(this.OnBeginSaveComment);
+            }
+            if ((this.onEndSaveCommentDelegate == null)) {
+                this.onEndSaveCommentDelegate = new EndOperationDelegate(this.OnEndSaveComment);
+            }
+            if ((this.onSaveCommentCompletedDelegate == null)) {
+                this.onSaveCommentCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSaveCommentCompleted);
+            }
+            base.InvokeAsync(this.onBeginSaveCommentDelegate, new object[] {
+                        comment}, this.onEndSaveCommentDelegate, this.onSaveCommentCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginDeleteComment(string commentId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDeleteComment(commentId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void LiteApp.MySpace.Services.Photo.PhotoService.EndDeleteComment(System.IAsyncResult result) {
+            base.Channel.EndDeleteComment(result);
+        }
+        
+        private System.IAsyncResult OnBeginDeleteComment(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string commentId = ((string)(inValues[0]));
+            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginDeleteComment(commentId, callback, asyncState);
+        }
+        
+        private object[] OnEndDeleteComment(System.IAsyncResult result) {
+            ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndDeleteComment(result);
+            return null;
+        }
+        
+        private void OnDeleteCommentCompleted(object state) {
+            if ((this.DeleteCommentCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DeleteCommentCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DeleteCommentAsync(string commentId) {
+            this.DeleteCommentAsync(commentId, null);
+        }
+        
+        public void DeleteCommentAsync(string commentId, object userState) {
+            if ((this.onBeginDeleteCommentDelegate == null)) {
+                this.onBeginDeleteCommentDelegate = new BeginOperationDelegate(this.OnBeginDeleteComment);
+            }
+            if ((this.onEndDeleteCommentDelegate == null)) {
+                this.onEndDeleteCommentDelegate = new EndOperationDelegate(this.OnEndDeleteComment);
+            }
+            if ((this.onDeleteCommentCompletedDelegate == null)) {
+                this.onDeleteCommentCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDeleteCommentCompleted);
+            }
+            base.InvokeAsync(this.onBeginDeleteCommentDelegate, new object[] {
+                        commentId}, this.onEndDeleteCommentDelegate, this.onDeleteCommentCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -835,6 +1139,44 @@ namespace LiteApp.MySpace.Services.Photo {
                 object[] _args = new object[0];
                 LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB _result = ((LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB)(base.EndInvoke("GetPagedPhotos", _args, result)));
                 return _result;
+            }
+            
+            public System.IAsyncResult BeginGetComments(string photoId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = photoId;
+                System.IAsyncResult _result = base.BeginInvoke("GetComments", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> EndGetComments(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> _result = ((System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment>)(base.EndInvoke("GetComments", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginSaveComment(LiteApp.MySpace.Services.Photo.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = comment;
+                System.IAsyncResult _result = base.BeginInvoke("SaveComment", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public LiteApp.MySpace.Services.Photo.PhotoComment EndSaveComment(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                LiteApp.MySpace.Services.Photo.PhotoComment _result = ((LiteApp.MySpace.Services.Photo.PhotoComment)(base.EndInvoke("SaveComment", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginDeleteComment(string commentId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = commentId;
+                System.IAsyncResult _result = base.BeginInvoke("DeleteComment", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndDeleteComment(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("DeleteComment", _args, result);
             }
         }
     }

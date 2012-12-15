@@ -57,4 +57,44 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetComments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="photoId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="GetCommentsResult" nillable="true" type="q4:ArrayOfPhotoComment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveComment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="comment" nillable="true" type="q5:PhotoComment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveCommentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="SaveCommentResult" nillable="true" type="q6:PhotoComment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteComment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="commentId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteCommentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

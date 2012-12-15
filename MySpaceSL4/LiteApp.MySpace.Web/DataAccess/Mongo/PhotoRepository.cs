@@ -56,7 +56,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             if (ObjectId.TryParse(photoId, out photoObjectId))
             {
                 return Database.GetCollection<PhotoComment>(Collections.PhotoComments).
-                    FindAs<PhotoComment>(Query.EQ("PhotoId", photoObjectId));
+                    FindAs<PhotoComment>(Query.EQ("PhotoId", photoObjectId)).SetSortOrder(SortBy.Descending("CreatedOn"));
             }
             return Enumerable.Empty<PhotoComment>();
         }
