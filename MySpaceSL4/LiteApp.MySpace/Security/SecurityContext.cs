@@ -10,6 +10,12 @@ namespace LiteApp.MySpace.Security
         bool _isAuthenticated;
         bool _isBusy;
         string _status;
+        Identity _user;
+
+        public SecurityContext()
+        {
+            User = new IdentityImpl(string.Empty);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -81,8 +87,15 @@ namespace LiteApp.MySpace.Security
 
         public Identity User
         {
-            get;
-            private set;
+            get { return _user; }
+            private set
+            {
+                if (_user != value)
+                {
+                    _user = value;
+                    RaisePropertyChanged("User");
+                }
+            }
         }
 
         public bool IsAuthenticated

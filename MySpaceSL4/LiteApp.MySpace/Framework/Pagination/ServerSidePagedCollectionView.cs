@@ -176,10 +176,7 @@ namespace LiteApp.MySpace.Framework
                     RefreshDataFailed(this, new RefreshPagedDataFailedEventArgs(response.Error));
                 return;
             }
-            Execute.OnUIThread(() =>
-                {
-                    TotalItemCount = ItemCount = response.TotalItemCount;
-                });
+            Execute.OnUIThread(() => TotalItemCount = ItemCount = response.TotalItemCount);
             this.ClearItems();
 
             foreach (var item in response.Items)

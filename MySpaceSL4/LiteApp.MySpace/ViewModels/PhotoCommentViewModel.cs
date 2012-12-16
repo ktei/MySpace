@@ -8,11 +8,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Caliburn.Micro;
+using LiteApp.MySpace.Security;
+using System.ComponentModel;
 
 namespace LiteApp.MySpace.ViewModels
 {
-    public class PhotoCommentViewModel
+    public class PhotoCommentViewModel : PropertyChangedBase
     {
+        bool _isDeleting;
+
         public string Id { get; set; }
 
         public string CreatedBy { get; set; }
@@ -20,5 +25,18 @@ namespace LiteApp.MySpace.ViewModels
         public DateTime CreatedOn { get; set; }
 
         public string Contents { get; set; }
+
+        public bool IsDeleting
+        {
+            get { return _isDeleting; }
+            set
+            {
+                if (_isDeleting != value)
+                {
+                    _isDeleting = value;
+                    NotifyOfPropertyChange(() => IsDeleting);
+                }
+            }
+        }
     }
 }

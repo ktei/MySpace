@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Browser;
+using System.Threading;
 using System.Windows;
 using Caliburn.Micro;
-using System.Threading;
-using System.Net.Browser;
 using LiteApp.MySpace.Services.Security;
 using LiteApp.MySpace.Views.Helpers;
 

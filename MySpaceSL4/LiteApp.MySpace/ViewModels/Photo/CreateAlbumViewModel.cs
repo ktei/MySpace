@@ -1,9 +1,8 @@
 ﻿using System;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
-using LiteApp.Portable.Mvvm.Validation;
-using Caliburn.Micro;
 using LiteApp.MySpace.Views.Helpers;
+using LiteApp.Portable.Mvvm.Validation;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -69,38 +68,36 @@ namespace LiteApp.MySpace.ViewModels
 
         public void Create()
         {
-            // Form validation
-            RefreshBindingScope.Scope();
-            if (this.Validator.HasErrors)
-                return;
+            ViewModelSupport.AuthorizeAndExecute(() =>
+                {
+                    RefreshBindingScope.Scope();
+                    if (this.Validator.HasErrors)
+                        return;
 
-            // Security check
-            if (!ViewModelSupport.VerifyAuthentication())
-                return;
-
-            IsBusy = true;
-            try
-            {
-                PhotoServiceClient svc = new PhotoServiceClient();
-                Album album = new Album();
-                album.Name = Name;
-                album.Description = Description;
-                svc.SaveAlbumCompleted += (sender, e) =>
+                    IsBusy = true;
+                    try
+                    {
+                        PhotoServiceClient svc = new PhotoServiceClient();
+                        Album album = new Album();
+                        album.Name = Name;
+                        album.Description = Description;
+                        svc.SaveAlbumCompleted += (sender, e) =>
+                            {
+                                IsBusy = false;
+                                if (e.Error != null)
+                                {
+                                    e.Error.Handle();
+                                }
+                                if (CreateCompleted != null)
+                                    CreateCompleted(this, EventArgs.Empty);
+                            };
+                        svc.SaveAlbumAsync(album);
+                    }
+                    catch
                     {
                         IsBusy = false;
-                        if (e.Error != null)
-                        {
-                            e.Error.Handle();
-                        }
-                        if (CreateCompleted != null)
-                            CreateCompleted(this, EventArgs.Empty);
-                    };
-                svc.SaveAlbumAsync(album);
-            }
-            catch
-            {
-                IsBusy = false;
-            }
+                    }
+                });
         }
     }
 }

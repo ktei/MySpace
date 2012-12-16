@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Windows.Input;
 using Caliburn.Micro;
-using System.Linq;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.MySpace.Views.Helpers;
@@ -66,15 +66,15 @@ namespace LiteApp.MySpace.ViewModels
 
         public void CreateAlbum()
         {
-            if (!ViewModelSupport.VerifyAuthentication())
-                return;
-
-            var model = new CreateAlbumViewModel();
-            model.CreateCompleted += (sender, e) =>
+            ViewModelSupport.AuthorizeAndExecute(() =>
                 {
-                    _albums.RefreshCurrentPage();
-                };
-            IoC.Get<IWindowManager>().ShowDialog(model);
+                    var model = new CreateAlbumViewModel();
+                    model.CreateCompleted += (sender, e) =>
+                        {
+                            _albums.RefreshCurrentPage();
+                        };
+                    IoC.Get<IWindowManager>().ShowDialog(model);
+                });
         }
 
         public void ViewAlbum(AlbumViewModel album)

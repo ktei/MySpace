@@ -48,10 +48,14 @@ namespace LiteApp.MySpace.Web.Services
         }
 
         [OperationContract]
+        [FaultContract(typeof(ServerFault))]
         public void DeleteAlbum(string albumId)
         {
-            SharpBoxSupport.DeleteAlbum(albumId);
-            AlbumRepository.DeleteAlbum(albumId);
+            ServiceSupport.AuthorizeAndExecute(() =>
+                {
+                    SharpBoxSupport.DeleteAlbum(albumId);
+                    AlbumRepository.DeleteAlbum(albumId);
+                });
         }
 
         #endregion // Album API
@@ -74,16 +78,40 @@ namespace LiteApp.MySpace.Web.Services
         }
 
         [OperationContract]
+        [FaultContract(typeof(ServerFault))]
         public PhotoComment SaveComment(PhotoComment comment)
         {
-            PhotoRepository.SaveComment(comment);
+            ServiceSupport.AuthorizeAndExecute(() =>
+                {
+                    PhotoRepository.SaveComment(comment);
+                });
             return comment;
         }
 
         [OperationContract]
+        [FaultContract(typeof(ServerFault))]
         public void DeleteComment(string commentId)
         {
-            PhotoRepository.DeleteComment(commentId);
+            ServiceSupport.AuthorizeAndExecute(() => 
+                {
+                    if (HttpContext.Current.User.Identity.Name == "ktei")
+                    {
+                        PhotoRepository.DeleteComment(commentId);
+                    }
+                    else
+                    {
+                        var comment = PhotoRepository.GetCommentById(commentId);
+                        if (comment != null)
+                        {
+                            if (comment.CreatedBy != HttpContext.Current.User.Identity.Name)
+                            {
+                                throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.NotAuthroized },
+                                    new FaultReason("Comment must only be deleted by its author"));
+                            }
+                            PhotoRepository.DeleteComment(commentId);
+                        }
+                    }
+                });
         }
 
         #endregion // Photo API

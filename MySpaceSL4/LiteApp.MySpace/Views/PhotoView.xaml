@@ -10,6 +10,7 @@
     <wincontrols:ChildWindow.Resources>
         <converters:BooleanToVisibilityConverter x:Key="boolToVis"/>
         <converters:BooleanToVisibilityConverter x:Key="boolToVisReverse" Reverse="True"/>
+        <converters:PhotoCommentDeleteVisibilityConverter x:Key="photoCommentDeleteVis"/>
     </wincontrols:ChildWindow.Resources>
 
     <Grid Margin="20,5">
@@ -40,21 +41,20 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="Comments" Style="{StaticResource HeaderTextStyle}"/>
                     <StackPanel Grid.Row="1" >
-                        <TextBox x:Name="CommentContents" AcceptsReturn="True" Margin="0,0,0,5" Height="60" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
-                        <Button Height="30" Content="Post" Width="75" HorizontalAlignment="Right" Command="{Binding PostCommentCommand, Mode=OneWay}" IsEnabled="{Binding CanPostComment, Mode=OneWay}" 
-                            CommandParameter="{Binding Text, ElementName=CommentContents, Mode=OneWay}"/>
+                        <TextBox AcceptsReturn="True" Margin="0,0,0,5" Height="60" IsEnabled="{Binding CanPostComment, Mode=OneWay}" Text="{Binding CommentContents, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
+                        <Button Height="30" Content="Post" Width="75" HorizontalAlignment="Right" Command="{Binding PostCommentCommand, Mode=OneWay}" IsEnabled="{Binding CanPostComment, Mode=OneWay}" />
                     </StackPanel>
                     <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">
                         <Grid>
-
-                            <ItemsControl ItemsSource="{Binding Comments, Mode=OneWay}" Visibility="{Binding IsLoadingComments, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                            <ItemsControl x:Name="Comments" ItemsSource="{Binding Comments, Mode=OneWay}" Visibility="{Binding IsLoadingComments, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
                                 <ItemsControl.Template>
                                     <ControlTemplate TargetType="ItemsControl">
                                         <Grid>
                                             <TextBlock Text="No comment is found" Style="{StaticResource BlackLabelTextStyle}" VerticalAlignment="Top" FontSize="22" 
-                                           FontFamily="{StaticResource HeaderFontFamily}"
-                                           Foreground="{StaticResource DisabledForegroundBrush}"
-                                           Visibility="{Binding HasComment, Mode=OneWay, Converter={StaticResource boolToVisReverse}}"/>
+                                                       FontFamily="{StaticResource HeaderFontFamily}"
+                                                       Foreground="{StaticResource DisabledForegroundBrush}"
+                                                       Visibility="{Binding HasComment, Mode=OneWay, Converter={StaticResource boolToVisReverse}}"/>
                                             <ItemsPresenter Visibility="{Binding HasComment, Mode=OneWay, Converter={StaticResource boolToVis}}"/>
                                         </Grid>
                                     </ControlTemplate>
@@ -63,23 +63,28 @@
                                     <DataTemplate>
                                         <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayBrush8}" Margin="0,0,0,10">
                                             <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <HyperlinkButton Content="{Binding CreatedBy, Mode=OneWay}"/>
-                                                    <TextBlock VerticalAlignment="Center" Foreground="Gray">
-                                                    <Run Text="on"/>
-                                                    <Run Text="{Binding CreatedOn, Mode=OneWay}"/>
-                                                    </TextBlock>
-                                                </StackPanel>
-                                                <HyperlinkButton Content="Delete" Grid.Column="1"/>
-                                                <TextBlock Text="{Binding Contents, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" TextWrapping="Wrap" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                                <TextBlock Style="{StaticResource ContentTextStyle}" Text="This message is being deleted..." FontStyle="Italic"
+                                                           Visibility="{Binding IsDeleting, Mode=OneWay, Converter={StaticResource boolToVis}}" />
+                                                <Grid Visibility="{Binding IsDeleting, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <HyperlinkButton Content="{Binding CreatedBy, Mode=OneWay}"/>
+                                                        <TextBlock VerticalAlignment="Center" Foreground="Gray">
+                                                            <Run Text="on"/>
+                                                            <Run Text="{Binding CreatedOn, Mode=OneWay}"/>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                    <HyperlinkButton Content="Delete" Grid.Column="1" Visibility="{Binding CreatedBy, Mode=OneWay, Converter={StaticResource photoCommentDeleteVis}}"
+                                                                     Command="{Binding DataContext.DeleteCommentCommand, ElementName=Comments}" CommandParameter="{Binding}" />
+                                                    <TextBlock Text="{Binding Contents, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" TextWrapping="Wrap" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                                </Grid>
                                             </Grid>
                                         </Border>
                                     </DataTemplate>

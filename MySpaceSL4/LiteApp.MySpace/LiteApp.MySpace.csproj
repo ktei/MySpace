@@ -134,9 +134,10 @@
     </Compile>
     <Compile Include="Controls\LoadingIndicator.cs" />
     <Compile Include="Converters\MessageLevelToImageSourceConverter.cs" />
+    <Compile Include="Converters\PhotoCommentDeleteVisibilityConverter.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="ViewModels\ViewModelSupport.cs" />
-    <Compile Include="Views\Helpers\ExceptionHandlingSupport.cs" />
+    <Compile Include="ViewModels\ExceptionHandlingSupport.cs" />
     <Compile Include="Views\LoginStatusPanel.xaml.cs">
       <DependentUpon>LoginStatusPanel.xaml</DependentUpon>
     </Compile>

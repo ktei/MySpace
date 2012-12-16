@@ -14,6 +14,10 @@ namespace LiteApp.MySpace.Web.Services
             {
                 action();
             }
+            catch (FaultException<ServerFault>)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
                 throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.Generic },
@@ -31,8 +35,12 @@ namespace LiteApp.MySpace.Web.Services
             }
             catch (SecurityException ex)
             {
-                throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.Unauthenticated },
+                throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.NotAuthroized },
                     new FaultReason(ex.Message));
+            }
+            catch (FaultException<ServerFault>)
+            {
+                throw;
             }
             catch (Exception ex)
             {

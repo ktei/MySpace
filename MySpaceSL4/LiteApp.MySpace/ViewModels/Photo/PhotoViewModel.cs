@@ -1,12 +1,12 @@
 ﻿using System;
-using Caliburn.Micro;
-using System.Windows.Input;
-using LiteApp.MySpace.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
+using Caliburn.Micro;
+using LiteApp.MySpace.Framework;
+using LiteApp.MySpace.Security;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.MySpace.Views.Helpers;
-using LiteApp.MySpace.Security;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -18,6 +18,7 @@ namespace LiteApp.MySpace.ViewModels
         bool _isLoadingPhoto = true;
         bool _isLoadingComments;
         bool _canPostComment = true;
+        string _commentContents;
 
         public PhotoViewModel()
         {
@@ -56,6 +57,19 @@ namespace LiteApp.MySpace.ViewModels
                 {
                     _isLoadingPhoto = value;
                     NotifyOfPropertyChange(() => IsLoadingPhoto);
+                }
+            }
+        }
+
+        public string CommentContents
+        {
+            get { return _commentContents; }
+            set
+            {
+                if (_commentContents != value)
+                {
+                    _commentContents = value;
+                    NotifyOfPropertyChange(() => CommentContents);
                 }
             }
         }
@@ -122,8 +136,20 @@ namespace LiteApp.MySpace.ViewModels
             {
                 return new Command(x =>
                     {
-                        string contents = Convert.ToString(x);
+                        string contents = Convert.ToString(CommentContents);
                         PostComment(contents);
+                    });
+            }
+        }
+
+        public ICommand DeleteCommentCommand
+        {
+            get
+            {
+                return new Command(x =>
+                    {
+                        PhotoCommentViewModel model = (PhotoCommentViewModel)x;
+                        DeleteComment(model);
                     });
             }
         }
@@ -134,44 +160,79 @@ namespace LiteApp.MySpace.ViewModels
             LoadComments();
         }
 
+        void DeleteComment(PhotoCommentViewModel comment)
+        {
+            ViewModelSupport.AuthorizeAndExecute(() =>
+                {
+                    comment.IsDeleting = true;
+                    try
+                    {
+                        PhotoServiceClient svc = new PhotoServiceClient();
+                        svc.DeleteCommentCompleted += (sender, e) =>
+                            {
+                                comment.IsDeleting = false;
+                                if (e.Error != null)
+                                {
+                                    e.Error.Handle();
+                                }
+                                else
+                                {
+                                    if (_comments != null)
+                                    {
+                                        _comments.Remove(comment);
+                                    }
+                                }
+                                NotifyOfPropertyChange(() => HasComment);
+                            };
+                        svc.DeleteCommentAsync(comment.Id);
+                    }
+                    catch
+                    {
+                        comment.IsDeleting = false;
+                    }
+                });
+        }
+
         void PostComment(string contents)
         {
             if (IsLoadingComments)
                 return;
 
-            if (!ViewModelSupport.VerifyAuthentication())
-                return;
+            ViewModelSupport.AuthorizeAndExecute(() =>
+                {
 
-            CanPostComment = false;
-            PhotoComment comment = new PhotoComment();
-            comment.Contents = contents;
-            comment.CreatedBy = SecurityContext.Current.User.Name;
-            comment.PhotoId = Id;
-            PhotoServiceClient svc = new PhotoServiceClient();
-            try
-            {
-                svc.SaveCommentCompleted += (sender, e) =>
+                    CanPostComment = false;
+                    PhotoComment comment = new PhotoComment();
+                    comment.Contents = contents;
+                    comment.CreatedBy = SecurityContext.Current.User.Name;
+                    comment.PhotoId = Id;
+                    PhotoServiceClient svc = new PhotoServiceClient();
+                    try
                     {
-                        if (e.Error != null)
-                        {
-                            e.Error.Handle();
-                        }
-                        else
-                        {
-                            if (_comments != null)
+                        svc.SaveCommentCompleted += (sender, e) =>
                             {
-                                _comments.Insert(0, MapToPhotoCommentViewModel(e.Result));
-                            }
-                        }
+                                if (e.Error != null)
+                                {
+                                    e.Error.Handle();
+                                }
+                                else
+                                {
+                                    if (_comments != null)
+                                    {
+                                        _comments.Insert(0, MapToPhotoCommentViewModel(e.Result));
+                                    }
+                                }
+                                CanPostComment = true;
+                                CommentContents = string.Empty;
+                                NotifyOfPropertyChange(() => HasComment);
+                            };
+                        svc.SaveCommentAsync(comment);
+                    }
+                    catch
+                    {
                         CanPostComment = true;
-                        NotifyOfPropertyChange(() => HasComment);
-                    };
-                svc.SaveCommentAsync(comment);
-            }
-            catch
-            {
-                CanPostComment = true;
-            }
+                    }
+                });
         }
 
         void LoadComments()

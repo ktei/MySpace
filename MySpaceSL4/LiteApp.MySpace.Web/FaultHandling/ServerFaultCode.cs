@@ -8,6 +8,6 @@ namespace LiteApp.MySpace.Web.FaultHandling
     public enum ServerFaultCode
     {
         Generic,
-        Unauthenticated
+        NotAuthroized
     }
 }

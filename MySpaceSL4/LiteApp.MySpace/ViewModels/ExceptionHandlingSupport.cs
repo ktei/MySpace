@@ -18,7 +18,7 @@ namespace LiteApp.MySpace.Views.Helpers
                 {
                     model.Message = "We apologize that an error occurred on our server. Please try again later.";
                 }
-                else if (faultEx.Detail.FaultCode == ServerFaultCode.Unauthenticated)
+                else if (faultEx.Detail.FaultCode == ServerFaultCode.NotAuthroized)
                 {
                     model.Message = "Our server detected that you are not authorized to do this.";
                 }

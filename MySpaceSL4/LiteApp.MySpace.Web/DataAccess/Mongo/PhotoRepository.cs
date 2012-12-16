@@ -85,5 +85,16 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             }
             return 0;
         }
+
+
+        public PhotoComment GetCommentById(string commentId)
+        {
+            ObjectId commentObjectId;
+            if (ObjectId.TryParse(commentId, out commentObjectId))
+            {
+                return Database.GetCollection<PhotoComment>(Collections.PhotoComments).FindOneByIdAs<PhotoComment>(commentObjectId);
+            }
+            return null;
+        }
     }
 }

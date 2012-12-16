@@ -218,7 +218,7 @@ namespace LiteApp.MySpace.Services.Photo {
         Generic = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Unauthenticated = 1,
+        NotAuthroized = 1,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -507,6 +507,7 @@ namespace LiteApp.MySpace.Services.Photo {
         void EndSaveAlbum(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeleteAlbum", ReplyAction="urn:PhotoService/DeleteAlbumResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeleteAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
         System.IAsyncResult BeginDeleteAlbum(string albumId, System.AsyncCallback callback, object asyncState);
         
         void EndDeleteAlbum(System.IAsyncResult result);
@@ -522,11 +523,13 @@ namespace LiteApp.MySpace.Services.Photo {
         System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> EndGetComments(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/SaveComment", ReplyAction="urn:PhotoService/SaveCommentResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/SaveCommentServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
         System.IAsyncResult BeginSaveComment(LiteApp.MySpace.Services.Photo.PhotoComment comment, System.AsyncCallback callback, object asyncState);
         
         LiteApp.MySpace.Services.Photo.PhotoComment EndSaveComment(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeleteComment", ReplyAction="urn:PhotoService/DeleteCommentResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeleteCommentServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
         System.IAsyncResult BeginDeleteComment(string commentId, System.AsyncCallback callback, object asyncState);
         
         void EndDeleteComment(System.IAsyncResult result);
