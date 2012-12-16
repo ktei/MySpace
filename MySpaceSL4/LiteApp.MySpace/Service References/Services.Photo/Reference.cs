@@ -182,6 +182,47 @@ namespace LiteApp.MySpace.Services.Photo {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    public partial class ServerFault : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private LiteApp.MySpace.Services.Photo.ServerFaultCode FaultCodeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public LiteApp.MySpace.Services.Photo.ServerFaultCode FaultCode {
+            get {
+                return this.FaultCodeField;
+            }
+            set {
+                if ((this.FaultCodeField.Equals(value) != true)) {
+                    this.FaultCodeField = value;
+                    this.RaisePropertyChanged("FaultCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFaultCode", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    public enum ServerFaultCode : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Generic = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unauthenticated = 1,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="PagedResultOfPhotoYX32z0hB", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
     public partial class PagedResultOfPhotoYX32z0hB : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -460,6 +501,7 @@ namespace LiteApp.MySpace.Services.Photo {
         LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB EndGetPagedAlbums(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/SaveAlbum", ReplyAction="urn:PhotoService/SaveAlbumResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/SaveAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
         System.IAsyncResult BeginSaveAlbum(LiteApp.MySpace.Services.Photo.Album album, System.AsyncCallback callback, object asyncState);
         
         void EndSaveAlbum(System.IAsyncResult result);

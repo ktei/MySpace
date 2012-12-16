@@ -5,6 +5,7 @@ using Caliburn.Micro;
 using System.Linq;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
+using LiteApp.MySpace.Views.Helpers;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -65,6 +66,9 @@ namespace LiteApp.MySpace.ViewModels
 
         public void CreateAlbum()
         {
+            if (!ViewModelSupport.VerifyAuthentication())
+                return;
+
             var model = new CreateAlbumViewModel();
             model.CreateCompleted += (sender, e) =>
                 {
@@ -135,9 +139,15 @@ namespace LiteApp.MySpace.ViewModels
         void LoadAlbums()
         {
             _albums = new ServerSidePagedCollectionView<AlbumViewModel>(new AlbumPagedDataSource());
+            _albums.RefreshDataFailed += _albums_RefreshDataFailed;
             _albums.PageChanging += _albums_PageChanging;
             _albums.PageChanged += _albums_PageChanged;
             _albums.MoveToFirstPage();
+        }
+
+        void _albums_RefreshDataFailed(object sender, RefreshPagedDataFailedEventArgs e)
+        {
+            e.Error.Handle();
         }
 
         void UploadPhoto(string albumId)
@@ -169,7 +179,7 @@ namespace LiteApp.MySpace.ViewModels
                     {
                         if (e.Error != null)
                         {
-                            //TODO: show and log error
+                            e.Error.Handle();
                         }
                         else
                         {

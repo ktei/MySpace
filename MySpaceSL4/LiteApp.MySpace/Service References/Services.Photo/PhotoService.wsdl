@@ -7,6 +7,7 @@
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" />
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="PhotoService_GetPagedAlbums_InputMessage">
@@ -20,6 +21,9 @@
   </wsdl:message>
   <wsdl:message name="PhotoService_SaveAlbum_OutputMessage">
     <wsdl:part name="parameters" element="SaveAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_SaveAlbum_ServerFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q1:ServerFault" />
   </wsdl:message>
   <wsdl:message name="PhotoService_DeleteAlbum_InputMessage">
     <wsdl:part name="parameters" element="DeleteAlbum" />
@@ -59,6 +63,7 @@
     <wsdl:operation name="SaveAlbum">
       <wsdl:input wsaw:Action="urn:PhotoService/SaveAlbum" message="PhotoService_SaveAlbum_InputMessage" />
       <wsdl:output wsaw:Action="urn:PhotoService/SaveAlbumResponse" message="PhotoService_SaveAlbum_OutputMessage" />
+      <wsdl:fault wsaw:Action="urn:PhotoService/SaveAlbumServerFaultFault" name="ServerFaultFault" message="PhotoService_SaveAlbum_ServerFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteAlbum">
       <wsdl:input wsaw:Action="urn:PhotoService/DeleteAlbum" message="PhotoService_DeleteAlbum_InputMessage" />

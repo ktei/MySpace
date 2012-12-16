@@ -6,6 +6,7 @@ using Caliburn.Micro;
 using System.Threading;
 using System.Net.Browser;
 using LiteApp.MySpace.Services.Security;
+using LiteApp.MySpace.Views.Helpers;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -94,6 +95,7 @@ namespace LiteApp.MySpace.ViewModels
                 {
                     if (e.Error != null)
                     {
+                        e.Error.Handle();
                     }
                     else if (e.Result)
                     {

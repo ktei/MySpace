@@ -2,6 +2,7 @@
 using System.Linq;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
+using LiteApp.MySpace.Views.Helpers;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -13,9 +14,17 @@ namespace LiteApp.MySpace.ViewModels
             client.GetPagedAlbumsCompleted += (sender, e) =>
                 {
                     PagedDataResponse<AlbumViewModel> response = new PagedDataResponse<AlbumViewModel>();
-                    response.TotalItemCount = e.Result.TotalItemCount;
-                    response.Items = new System.Collections.Generic.List<AlbumViewModel>();
-                    response.Items.AddRange(e.Result.Entities.Select(x => MapToAlbumViewModel(x)));
+                    if (e.Error != null)
+                    {
+                        response.Error = e.Error;
+                    }
+                    else
+                    {
+                        response = new PagedDataResponse<AlbumViewModel>();
+                        response.TotalItemCount = e.Result.TotalItemCount;
+                        response.Items = new System.Collections.Generic.List<AlbumViewModel>();
+                        response.Items.AddRange(e.Result.Entities.Select(x => MapToAlbumViewModel(x)));
+                    }
                     responseCallback(response);
                 };
             client.GetPagedAlbumsAsync(pageIndex, pageSize);

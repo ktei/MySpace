@@ -5,6 +5,7 @@ using LiteApp.MySpace.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using LiteApp.MySpace.Services.Photo;
+using LiteApp.MySpace.Views.Helpers;
 using LiteApp.MySpace.Security;
 
 namespace LiteApp.MySpace.ViewModels
@@ -137,12 +138,10 @@ namespace LiteApp.MySpace.ViewModels
         {
             if (IsLoadingComments)
                 return;
-            if (!SecurityContext.Current.IsAuthenticated)
-            {
-                SignInViewModel signInModel = new SignInViewModel() { Message = "This operation needs you to sign in first." };
-                IoC.Get<IWindowManager>().ShowDialog(signInModel);
+
+            if (!ViewModelSupport.VerifyAuthentication())
                 return;
-            }
+
             CanPostComment = false;
             PhotoComment comment = new PhotoComment();
             comment.Contents = contents;
@@ -155,7 +154,7 @@ namespace LiteApp.MySpace.ViewModels
                     {
                         if (e.Error != null)
                         {
-                            // TODO: log error
+                            e.Error.Handle();
                         }
                         else
                         {
@@ -185,7 +184,7 @@ namespace LiteApp.MySpace.ViewModels
                     {
                         if (e.Error != null)
                         {
-                            //TODO: show and log error
+                            e.Error.Handle();
                         }
                         else
                         {

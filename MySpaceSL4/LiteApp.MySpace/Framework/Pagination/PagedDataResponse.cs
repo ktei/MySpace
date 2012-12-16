@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace LiteApp.MySpace.Framework
 {
@@ -16,5 +17,7 @@ namespace LiteApp.MySpace.Framework
         /// The total count of all available items
         /// </summary>
         public int TotalItemCount { get; set; }
+
+        public Exception Error { get; set; }
     }
 }

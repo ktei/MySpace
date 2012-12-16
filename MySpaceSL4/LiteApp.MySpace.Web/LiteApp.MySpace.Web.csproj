@@ -68,6 +68,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -118,6 +119,8 @@
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\PhotoComment.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="FaultHandling\ServerError.cs" />
+    <Compile Include="FaultHandling\ServerFaultCode.cs" />
     <Compile Include="Helpers\MySpaceException.cs" />
     <Compile Include="Handlers\PhotoReceiver.ashx.cs">
       <DependentUpon>PhotoReceiver.ashx</DependentUpon>
@@ -144,9 +147,11 @@
       <DependentUpon>SecurityService.svc</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Services\ServiceSupport.cs" />
     <Compile Include="Services\SignInStatus.cs" />
     <Compile Include="Services\SignUpStatus.cs" />
     <Compile Include="Services\SilverlightFaultBehavior.cs" />
+    <Compile Include="Services\SilverlightFaultBehaviorAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

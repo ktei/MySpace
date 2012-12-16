@@ -2,6 +2,8 @@
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.Portable.Mvvm.Validation;
+using Caliburn.Micro;
+using LiteApp.MySpace.Views.Helpers;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -67,9 +69,15 @@ namespace LiteApp.MySpace.ViewModels
 
         public void Create()
         {
+            // Form validation
             RefreshBindingScope.Scope();
             if (this.Validator.HasErrors)
                 return;
+
+            // Security check
+            if (!ViewModelSupport.VerifyAuthentication())
+                return;
+
             IsBusy = true;
             try
             {
@@ -82,7 +90,7 @@ namespace LiteApp.MySpace.ViewModels
                         IsBusy = false;
                         if (e.Error != null)
                         {
-                            //TODO: show and log error
+                            e.Error.Handle();
                         }
                         if (CreateCompleted != null)
                             CreateCompleted(this, EventArgs.Empty);

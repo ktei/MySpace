@@ -6,6 +6,8 @@ using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
+using System.Net;
+using System.Net.Browser;
 
 namespace LiteApp.MySpace
 {

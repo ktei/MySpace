@@ -30,6 +30,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServerFaultFault">
+        <soap12:fault use="literal" name="ServerFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="DeleteAlbum">
       <soap12:operation soapAction="urn:PhotoService/DeleteAlbum" style="document" />

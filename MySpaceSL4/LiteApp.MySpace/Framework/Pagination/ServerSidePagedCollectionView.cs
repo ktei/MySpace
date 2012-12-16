@@ -170,6 +170,12 @@ namespace LiteApp.MySpace.Framework
         /// </summary>
         private void DataReceived(PagedDataResponse<T> response)
         {
+            if (response.Error != null)
+            {
+                if (RefreshDataFailed != null)
+                    RefreshDataFailed(this, new RefreshPagedDataFailedEventArgs(response.Error));
+                return;
+            }
             Execute.OnUIThread(() =>
                 {
                     TotalItemCount = ItemCount = response.TotalItemCount;

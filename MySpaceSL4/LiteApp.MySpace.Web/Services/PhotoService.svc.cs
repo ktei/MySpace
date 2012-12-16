@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Permissions;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Threading;
 using System.Web;
 using LiteApp.MySpace.Web.DataAccess;
 using LiteApp.MySpace.Web.Entities;
+using LiteApp.MySpace.Web.FaultHandling;
 using LiteApp.MySpace.Web.Helpers;
 using Ninject;
 using Ninject.Web;
@@ -41,10 +41,10 @@ namespace LiteApp.MySpace.Web.Services
         }
 
         [OperationContract]
-        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        [FaultContract(typeof(ServerFault))]
         public void SaveAlbum(Album album)
         {
-            AlbumRepository.SaveAlbum(album);
+            ServiceSupport.AuthorizeAndExecute(() => AlbumRepository.SaveAlbum(album));
         }
 
         [OperationContract]

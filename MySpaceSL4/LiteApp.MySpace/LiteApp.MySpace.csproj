@@ -133,6 +133,10 @@
       <DependentUpon>ErrorStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Controls\LoadingIndicator.cs" />
+    <Compile Include="Converters\MessageLevelToImageSourceConverter.cs" />
+    <Compile Include="ViewModels\MessageBoxViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelSupport.cs" />
+    <Compile Include="Views\Helpers\ExceptionHandlingSupport.cs" />
     <Compile Include="Views\LoginStatusPanel.xaml.cs">
       <DependentUpon>LoginStatusPanel.xaml</DependentUpon>
     </Compile>
@@ -188,6 +192,9 @@
     </Compile>
     <Compile Include="Views\Helpers\ButtonExtensions.cs" />
     <Compile Include="Framework\DoubleClickBehavior.cs" />
+    <Compile Include="Views\MessageBoxView.xaml.cs">
+      <DependentUpon>MessageBoxView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PhotosPageView.xaml.cs">
       <DependentUpon>PhotosPageView.xaml</DependentUpon>
     </Compile>
@@ -276,6 +283,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MessageBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PhotosPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -356,6 +367,9 @@
     <None Include="Service References\Services.Photo\PhotoService4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\Services.Photo\PhotoService51.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Services.Security\LiteApp.MySpace.Services.Security.SignInStaus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -375,6 +389,9 @@
     </None>
     <Resource Include="Assets\Images\photo.png" />
     <Resource Include="Assets\Images\add.png" />
+    <Resource Include="Assets\Images\exclamation.png" />
+    <Resource Include="Assets\Images\error.png" />
+    <Resource Include="Assets\Images\information.png" />
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <None Include="Service References\Services.Photo\PhotoService.disco" />
     <None Include="Service References\Services.Photo\configuration91.svcinfo" />

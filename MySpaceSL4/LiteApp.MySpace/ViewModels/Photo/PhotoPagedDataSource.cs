@@ -21,9 +21,16 @@ namespace LiteApp.MySpace.ViewModels
             client.GetPagedPhotosCompleted += (sender, e) =>
             {
                 PagedDataResponse<PhotoViewModel> response = new PagedDataResponse<PhotoViewModel>();
-                response.TotalItemCount = e.Result.TotalItemCount;
-                response.Items = new System.Collections.Generic.List<PhotoViewModel>();
-                response.Items.AddRange(e.Result.Entities.Select(x => MapToPhotoViewModel(x)));
+                if (e.Error != null)
+                {
+                    response.Error = e.Error;
+                }
+                else
+                {
+                    response.TotalItemCount = e.Result.TotalItemCount;
+                    response.Items = new System.Collections.Generic.List<PhotoViewModel>();
+                    response.Items.AddRange(e.Result.Entities.Select(x => MapToPhotoViewModel(x)));
+                }
                 responseCallback(response);
             };
             client.GetPagedPhotosAsync(pageIndex, pageSize, AlbumId);

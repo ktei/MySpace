@@ -1,72 +1,54 @@
-﻿// This is an auto-generated file to enable WCF faults to reach Silverlight clients.
-
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Net;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 
 namespace LiteApp.MySpace.Web.Services
 {
-    public class SilverlightFaultBehavior : Attribute, IServiceBehavior
+    public class SilverlightFaultBehavior : BehaviorExtensionElement, IEndpointBehavior
     {
-        private class SilverlightFaultEndpointBehavior : IEndpointBehavior
+        public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
         {
-            public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+            SilverlightFaultMessageInspector inspector = new SilverlightFaultMessageInspector();
+            endpointDispatcher.DispatchRuntime.MessageInspectors.Add(inspector);
+        }
+        public class SilverlightFaultMessageInspector : IDispatchMessageInspector
+        {
+            public void BeforeSendReply(ref Message reply, object correlationState)
             {
-            }
-
-            public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-            {
-            }
-
-            public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
-            {
-                endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new SilverlightFaultMessageInspector());
-            }
-
-            public void Validate(ServiceEndpoint endpoint)
-            {
-            }
-
-            private class SilverlightFaultMessageInspector : IDispatchMessageInspector
-            {
-                public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
+                if (reply.IsFault)
                 {
-                    return null;
-                }
+                    HttpResponseMessageProperty property = new HttpResponseMessageProperty();
 
-                public void BeforeSendReply(ref Message reply, object correlationState)
-                {
-                    if ((reply != null) && reply.IsFault)
-                    {
-                        HttpResponseMessageProperty property = new HttpResponseMessageProperty();
-                        property.StatusCode = HttpStatusCode.OK;
-                        reply.Properties[HttpResponseMessageProperty.Name] = property;
-                    }
+                    // Here the response code is changed to 200.
+                    property.StatusCode = System.Net.HttpStatusCode.OK;
+                    reply.Properties[HttpResponseMessageProperty.Name] = property;
                 }
             }
-        }
-
-        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-        {
-        }
-
-        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
-        {
-            foreach (ServiceEndpoint endpoint in serviceDescription.Endpoints)
+            public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
             {
-                endpoint.Behaviors.Add(new SilverlightFaultEndpointBehavior());
+                // Do nothing to the incoming message.
+                return null;
             }
         }
-
-        public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        // The following methods are stubs and not relevant. 
+        public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
         {
+        }
+        public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+        {
+        }
+        public void Validate(ServiceEndpoint endpoint)
+        {
+        }
+        public override System.Type BehaviorType
+        {
+            get { return typeof(SilverlightFaultBehavior); }
+        }
+        protected override object CreateBehavior()
+        {
+            return new SilverlightFaultBehavior();
         }
     }
 }
