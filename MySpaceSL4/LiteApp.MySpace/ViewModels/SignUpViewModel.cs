@@ -16,7 +16,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public SignUpViewModel()
         {
-            DisplayName = "Sign Up";
+            DisplayName = AppStrings.SignUpWindowTitle;
             RefreshBindingScope = new RefreshBindingScope();
         }
 
@@ -106,7 +106,7 @@ namespace LiteApp.MySpace.ViewModels
                 {
                     if (this.PasswordConfirmation != Password)
                     {
-                        return "Passwords do not match.";
+                        return ErrorStrings.PasswordsDoNotMatch;
                     }
                     return null;
                 }
@@ -132,7 +132,14 @@ namespace LiteApp.MySpace.ViewModels
                 client.SignUpCompleted += (sender, e) =>
                     {
                         IsBusy = false;
-                        
+                        if (e.Error != null)
+                        {
+                            e.Error.Handle();
+                        }
+                        else
+                        {
+                            HandleSignUpResult(e.Result);
+                        }
                         if (SignUpCompleted != null)
                             SignUpCompleted(this, EventArgs.Empty);
                     };
@@ -141,6 +148,27 @@ namespace LiteApp.MySpace.ViewModels
             catch
             {
                 IsBusy = false;
+            }
+        }
+
+        static void HandleSignUpResult(SignUpStatus status)
+        {
+            switch (status)
+            {
+                case SignUpStatus.Success:
+                    break;
+                case SignUpStatus.InvalidPassword:
+                    break;
+                case SignUpStatus.InvalidEmail:
+                    break;
+                case SignUpStatus.DuplicateUserName:
+                    break;
+                case SignUpStatus.DuplicateEmail:
+                    break;
+                case SignUpStatus.ServerError:
+                    break;
+                default:
+                    break;
             }
         }
     }

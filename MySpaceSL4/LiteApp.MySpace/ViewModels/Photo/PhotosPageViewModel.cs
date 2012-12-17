@@ -6,6 +6,7 @@ using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.MySpace.Views.Helpers;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -109,7 +110,6 @@ namespace LiteApp.MySpace.ViewModels
         {
             var model = new UploadPhotoManagerViewModel();
             model.Album = ActiveItem;
-            model.DisplayName = "Upload Photo";
             IoC.Get<IWindowManager>().ShowDialog(model);
         }
 
@@ -154,7 +154,6 @@ namespace LiteApp.MySpace.ViewModels
         {
             var model = new UploadPhotoManagerViewModel();
             model.Album = _albums.Single(x => x.Id == albumId);
-            model.DisplayName = "Upload Photo";
             IoC.Get<IWindowManager>().ShowDialog(model);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -14,9 +15,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public MessageBoxViewModel()
         {
-            DisplayName = "Space of Rui";
-            Header = "A message header";
-            Message = "A mesage";
+            DisplayName = AppStrings.ApplicationName;
         }
 
         public string Header

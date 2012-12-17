@@ -129,6 +129,7 @@
     <Compile Include="Helpers\ImageProcessor.cs" />
     <Compile Include="Helpers\SharpBoxSupport.cs" />
     <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\LoggingFailedEventArgs.cs" />
     <Compile Include="Logging\Mongo\LogEntry.cs" />
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Logging\Mongo\MongoLogger.cs" />

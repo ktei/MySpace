@@ -13,9 +13,9 @@
     </UserControl.Resources>
     <Grid>
         <Grid Visibility="{Binding IsBusy, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVisReverse}}">
-            <HyperlinkButton Content="Sign In" cal:Message.Attach="SignIn" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
+            <HyperlinkButton Content="{Binding Strings.SignInButtonText, Source={StaticResource AppResx}}" cal:Message.Attach="SignIn" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
             Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVisReverse}}"/>
-            <HyperlinkButton Content="Sign Out" cal:Message.Attach="SignOut" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
+            <HyperlinkButton Content="{Binding Strings.SignOutButtonText, Source={StaticResource AppResx}}" cal:Message.Attach="SignOut" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
             Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}" />
         </Grid>
         <TextBlock Style="{StaticResource ContentTextStyle}" Foreground="White"

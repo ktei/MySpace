@@ -3,6 +3,7 @@ using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.MySpace.Views.Helpers;
 using LiteApp.Portable.Mvvm.Validation;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -14,7 +15,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public CreateAlbumViewModel()
         {
-            DisplayName = "Create Album";
+            DisplayName = AppStrings.CreateAlbumWindowTitle;
             RefreshBindingScope = new RefreshBindingScope();
         }
 

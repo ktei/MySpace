@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using LiteApp.MySpace.ViewModels;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.Views
 {
@@ -68,21 +69,21 @@ namespace LiteApp.MySpace.Views
             if (buttons == MessageBoxButtons.OK)
             {
                 PositiveButton.Visibility = System.Windows.Visibility.Visible;
-                PositiveButton.Content = "OK";
+                PositiveButton.Content = AppStrings.OKButtonText;
             }
             else if (buttons == MessageBoxButtons.OKCancel)
             {
                 PositiveButton.Visibility = System.Windows.Visibility.Visible;
                 NegativeButton.Visibility = System.Windows.Visibility.Visible;
-                PositiveButton.Content = "OK";
-                NegativeButton.Content = "Cancel";
+                PositiveButton.Content = AppStrings.OKButtonText;
+                NegativeButton.Content = AppStrings.CancelButtonText;
             }
             else if (buttons == MessageBoxButtons.YesNo)
             {
                 PositiveButton.Visibility = System.Windows.Visibility.Visible;
                 NegativeButton.Visibility = System.Windows.Visibility.Visible;
-                PositiveButton.Content = "Yes";
-                NegativeButton.Content = "No";
+                PositiveButton.Content = AppStrings.YesButtonText;
+                NegativeButton.Content = AppStrings.NoButtonText;
             }
             else if (buttons == MessageBoxButtons.Custom)
             {

@@ -1,4 +1,5 @@
 ﻿
+using System;
 namespace LiteApp.MySpace.Web.Logging
 {
     public interface ILogger
@@ -8,5 +9,6 @@ namespace LiteApp.MySpace.Web.Logging
         void Warning(string user, string detail, params object[] parameters);
         void Error(string user, string detail, params object[] parameters);
         void Fatal(string user, string detail, params object[] parameters);
+        event EventHandler<LoggingFailedEventArgs> LoggingFailed;
     }
 }

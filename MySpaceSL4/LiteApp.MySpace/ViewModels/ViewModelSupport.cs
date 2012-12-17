@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using LiteApp.MySpace.Security;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -9,7 +10,7 @@ namespace LiteApp.MySpace.ViewModels
         {
             if (!SecurityContext.Current.IsAuthenticated)
             {
-                SignInViewModel signInModel = new SignInViewModel() { DisplayName = "Sign-in Required", Message = "This operation needs you to sign in first." };
+                SignInViewModel signInModel = new SignInViewModel() { DisplayName = AppStrings.SignInRequiredMessageHeader, Message = AppStrings.OperationNeedsSignInMessage };
                 IoC.Get<IWindowManager>().ShowDialog(signInModel);
             }
             else

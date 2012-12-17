@@ -43,7 +43,7 @@ namespace LiteApp.MySpace.Security
                     }
                     else if (status == SignInStaus.WrongCredentials)
                     {
-                        result = new SignInResult(null, false, "Provided credentials are invalid.");
+                        result = new SignInResult(null, false, "Provided credentials are invalid. Please check your user name and password.");
                     }
                     else
                     {

@@ -126,7 +126,67 @@ At first I borrowed a code, cloning objects, from a nice article Professional Dr
 
 So, now we have an animation element and we know how to make its copies. Let's see how it works.</value>
   </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Space of Rui</value>
+  </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CloseButtonText" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CreateAlbumWindowTitle" xml:space="preserve">
+    <value>Create Album</value>
+  </data>
+  <data name="CreateButtonText" xml:space="preserve">
+    <value>Create</value>
+  </data>
   <data name="Intro" xml:space="preserve">
     <value />
+  </data>
+  <data name="NoButtonText" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoPhotoFoundMessage" xml:space="preserve">
+    <value>No photo is found</value>
+  </data>
+  <data name="OKButtonText" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OperationFailedMessageHeader" xml:space="preserve">
+    <value>Operation failed</value>
+  </data>
+  <data name="OperationNeedsSignInMessage" xml:space="preserve">
+    <value>This operation needs you to sign in first.</value>
+  </data>
+  <data name="PostButtonText" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="ProcessingMessage" xml:space="preserve">
+    <value>Processing... Please wait</value>
+  </data>
+  <data name="SignInButtonText" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="SignInFailedMessageHeader" xml:space="preserve">
+    <value>Sign-in failed</value>
+  </data>
+  <data name="SignInRequiredMessageHeader" xml:space="preserve">
+    <value>Sign-in is required</value>
+  </data>
+  <data name="SignInWindowTitle" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="SignOutButtonText" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="SignUpWindowTitle" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="UploadPhotoWindowTitle" xml:space="preserve">
+    <value>Upload Photo</value>
+  </data>
+  <data name="YesButtonText" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

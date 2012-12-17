@@ -61,11 +61,47 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We apologize that an error occurred on our server. Please try again later..
+        /// </summary>
+        public static string GenericServerErrorMessage {
+            get {
+                return ResourceManager.GetString("GenericServerErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The e-mail address provided is invalid. Please check the value and try again..
         /// </summary>
         public static string InvalidEmail {
             get {
                 return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Our server detected that you are not authorized to do this..
+        /// </summary>
+        public static string NotAuthorizedServerErrorMessage {
+            get {
+                return ResourceManager.GetString("NotAuthorizedServerErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords do not match..
+        /// </summary>
+        public static string PasswordsDoNotMatch {
+            get {
+                return ResourceManager.GetString("PasswordsDoNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We apologize for the inconvenience. An unknown error occurred. Please try again later..
+        /// </summary>
+        public static string UnknownServerErrorMessage {
+            get {
+                return ResourceManager.GetString("UnknownServerErrorMessage", resourceCulture);
             }
         }
     }

@@ -4,6 +4,7 @@ using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Security;
 using LiteApp.Portable.Mvvm.Validation;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -15,7 +16,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public SignInViewModel()
         {
-            DisplayName = "Sign In";
+            DisplayName = AppStrings.SignInWindowTitle;
             RefreshBindingScope = new RefreshBindingScope();
         }
 
@@ -92,14 +93,22 @@ namespace LiteApp.MySpace.ViewModels
             {
                 if (!result.Success)
                 {
-                    MessageBox.Show(result.Error);
+                    var messageBox = new MessageBoxViewModel()
+                    {
+                        MessageLevel = ViewModels.MessageLevel.Exclamation,
+                        Buttons = MessageBoxButtons.OK,
+                        Header = AppStrings.SignInFailedMessageHeader,
+                        Message = result.Error
+                    };
+                    IoC.Get<IWindowManager>().ShowDialog(messageBox);
                 }
                 else
                 {
-                    IsBusy = false;
                     if (SignInSucceeded != null)
                         SignInSucceeded(this, EventArgs.Empty);
                 }
+
+                IsBusy = false;
             });
         }
     }

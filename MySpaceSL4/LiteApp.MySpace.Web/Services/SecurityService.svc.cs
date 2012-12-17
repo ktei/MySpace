@@ -54,6 +54,7 @@ namespace LiteApp.MySpace.Web.Services
                 // TODO: log error
                 result = MapToSignUpStatus(ex.StatusCode);
             }
+            
             return result;
         }
 

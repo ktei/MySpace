@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Caliburn.Micro;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -10,7 +11,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public UploadPhotoManagerViewModel()
         {
-            DisplayName = "Upload Photo";
+            DisplayName = AppStrings.UploadPhotoWindowTitle;
         }
 
         public AlbumViewModel Album { get; set; }

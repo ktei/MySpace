@@ -81,6 +81,7 @@ namespace LiteApp.MySpace.Web.Services
         [FaultContract(typeof(ServerFault))]
         public PhotoComment SaveComment(PhotoComment comment)
         {
+            Thread.Sleep(2000);
             ServiceSupport.AuthorizeAndExecute(() =>
                 {
                     PhotoRepository.SaveComment(comment);
