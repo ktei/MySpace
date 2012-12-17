@@ -52,6 +52,47 @@ namespace LiteApp.MySpace.Services.Security {
         ServerError = 5,
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    public partial class ServerFault : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private LiteApp.MySpace.Services.Security.ServerFaultCode FaultCodeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public LiteApp.MySpace.Services.Security.ServerFaultCode FaultCode {
+            get {
+                return this.FaultCodeField;
+            }
+            set {
+                if ((this.FaultCodeField.Equals(value) != true)) {
+                    this.FaultCodeField = value;
+                    this.RaisePropertyChanged("FaultCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFaultCode", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    public enum ServerFaultCode : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Generic = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotAuthroized = 1,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="", ConfigurationName="Services.Security.SecurityService")]
     public interface SecurityService {
@@ -70,6 +111,12 @@ namespace LiteApp.MySpace.Services.Security {
         System.IAsyncResult BeginSignUp(string userName, string password, string email, System.AsyncCallback callback, object asyncState);
         
         LiteApp.MySpace.Services.Security.SignUpStatus EndSignUp(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/RequestPhotoUploadTicket", ReplyAction="urn:SecurityService/RequestPhotoUploadTicketResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Security.ServerFault), Action="urn:SecurityService/RequestPhotoUploadTicketServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        System.IAsyncResult BeginRequestPhotoUploadTicket(string requestToken, System.AsyncCallback callback, object asyncState);
+        
+        string EndRequestPhotoUploadTicket(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/IsAuthenticated", ReplyAction="urn:SecurityService/IsAuthenticatedResponse")]
         System.IAsyncResult BeginIsAuthenticated(System.AsyncCallback callback, object asyncState);
@@ -121,6 +168,25 @@ namespace LiteApp.MySpace.Services.Security {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class RequestPhotoUploadTicketCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public RequestPhotoUploadTicketCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class IsAuthenticatedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -159,6 +225,12 @@ namespace LiteApp.MySpace.Services.Security {
         private EndOperationDelegate onEndSignUpDelegate;
         
         private System.Threading.SendOrPostCallback onSignUpCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginRequestPhotoUploadTicketDelegate;
+        
+        private EndOperationDelegate onEndRequestPhotoUploadTicketDelegate;
+        
+        private System.Threading.SendOrPostCallback onRequestPhotoUploadTicketCompletedDelegate;
         
         private BeginOperationDelegate onBeginIsAuthenticatedDelegate;
         
@@ -224,6 +296,8 @@ namespace LiteApp.MySpace.Services.Security {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SignOutCompleted;
         
         public event System.EventHandler<SignUpCompletedEventArgs> SignUpCompleted;
+        
+        public event System.EventHandler<RequestPhotoUploadTicketCompletedEventArgs> RequestPhotoUploadTicketCompleted;
         
         public event System.EventHandler<IsAuthenticatedCompletedEventArgs> IsAuthenticatedCompleted;
         
@@ -370,6 +444,52 @@ namespace LiteApp.MySpace.Services.Security {
                         userName,
                         password,
                         email}, this.onEndSignUpDelegate, this.onSignUpCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginRequestPhotoUploadTicket(string requestToken, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginRequestPhotoUploadTicket(requestToken, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        string LiteApp.MySpace.Services.Security.SecurityService.EndRequestPhotoUploadTicket(System.IAsyncResult result) {
+            return base.Channel.EndRequestPhotoUploadTicket(result);
+        }
+        
+        private System.IAsyncResult OnBeginRequestPhotoUploadTicket(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string requestToken = ((string)(inValues[0]));
+            return ((LiteApp.MySpace.Services.Security.SecurityService)(this)).BeginRequestPhotoUploadTicket(requestToken, callback, asyncState);
+        }
+        
+        private object[] OnEndRequestPhotoUploadTicket(System.IAsyncResult result) {
+            string retVal = ((LiteApp.MySpace.Services.Security.SecurityService)(this)).EndRequestPhotoUploadTicket(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnRequestPhotoUploadTicketCompleted(object state) {
+            if ((this.RequestPhotoUploadTicketCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.RequestPhotoUploadTicketCompleted(this, new RequestPhotoUploadTicketCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void RequestPhotoUploadTicketAsync(string requestToken) {
+            this.RequestPhotoUploadTicketAsync(requestToken, null);
+        }
+        
+        public void RequestPhotoUploadTicketAsync(string requestToken, object userState) {
+            if ((this.onBeginRequestPhotoUploadTicketDelegate == null)) {
+                this.onBeginRequestPhotoUploadTicketDelegate = new BeginOperationDelegate(this.OnBeginRequestPhotoUploadTicket);
+            }
+            if ((this.onEndRequestPhotoUploadTicketDelegate == null)) {
+                this.onEndRequestPhotoUploadTicketDelegate = new EndOperationDelegate(this.OnEndRequestPhotoUploadTicket);
+            }
+            if ((this.onRequestPhotoUploadTicketCompletedDelegate == null)) {
+                this.onRequestPhotoUploadTicketCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRequestPhotoUploadTicketCompleted);
+            }
+            base.InvokeAsync(this.onBeginRequestPhotoUploadTicketDelegate, new object[] {
+                        requestToken}, this.onEndRequestPhotoUploadTicketDelegate, this.onRequestPhotoUploadTicketCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -529,6 +649,19 @@ namespace LiteApp.MySpace.Services.Security {
             public LiteApp.MySpace.Services.Security.SignUpStatus EndSignUp(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 LiteApp.MySpace.Services.Security.SignUpStatus _result = ((LiteApp.MySpace.Services.Security.SignUpStatus)(base.EndInvoke("SignUp", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginRequestPhotoUploadTicket(string requestToken, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = requestToken;
+                System.IAsyncResult _result = base.BeginInvoke("RequestPhotoUploadTicket", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public string EndRequestPhotoUploadTicket(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                string _result = ((string)(base.EndInvoke("RequestPhotoUploadTicket", _args, result)));
                 return _result;
             }
             

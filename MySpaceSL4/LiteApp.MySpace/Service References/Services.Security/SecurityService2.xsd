@@ -42,6 +42,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RequestPhotoUploadTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestToken" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestPhotoUploadTicketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RequestPhotoUploadTicketResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="IsAuthenticated">
     <xs:complexType>
       <xs:sequence />

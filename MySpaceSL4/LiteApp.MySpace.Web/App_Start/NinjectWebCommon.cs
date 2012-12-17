@@ -13,6 +13,7 @@ namespace LiteApp.MySpace.Web.App_Start
     using LiteApp.MySpace.Web.DataAccess;
     using LiteApp.MySpace.Web.DataAccess.Mongo;
     using LiteApp.MySpace.Web.Helpers;
+    using LiteApp.MySpace.Web.Shared;
 
     public static class NinjectWebCommon 
     {
@@ -59,6 +60,7 @@ namespace LiteApp.MySpace.Web.App_Start
         {
             kernel.Bind<IAlbumRepository>().To<AlbumRepository>();
             kernel.Bind<IPhotoRepository>().To<PhotoRepository>();
+            kernel.Bind<IPhotoUploadTicketPool>().To<DefaultPhotoUploadTicketPool>();
         }        
     }
 }

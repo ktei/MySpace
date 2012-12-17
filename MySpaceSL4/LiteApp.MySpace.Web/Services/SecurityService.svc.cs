@@ -4,6 +4,9 @@ using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Ninject.Web;
+using LiteApp.MySpace.Web.Shared;
+using Ninject;
+using LiteApp.MySpace.Web.FaultHandling;
 
 namespace LiteApp.MySpace.Web.Services
 {
@@ -12,6 +15,9 @@ namespace LiteApp.MySpace.Web.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class SecurityService : WebServiceBase
     {
+        [Inject]
+        public IPhotoUploadTicketPool PhotoUploadTicketPool { get; set; }
+
         [OperationContract]
         public SignInStaus SignIn(string userName, string password)
         {
@@ -20,7 +26,7 @@ namespace LiteApp.MySpace.Web.Services
             {
                 if (Membership.ValidateUser(userName, password))
                 {
-                    FormsAuthentication.SetAuthCookie(userName, false); 
+                    FormsAuthentication.SetAuthCookie(userName, false);
                 }
                 else
                 {
@@ -55,6 +61,19 @@ namespace LiteApp.MySpace.Web.Services
                 result = MapToSignUpStatus(ex.StatusCode);
             }
             
+            return result;
+        }
+
+        [OperationContract]
+        [FaultContract(typeof(ServerFault))]
+        public string RequestPhotoUploadTicket(string requestToken)
+        {
+            string result = null;
+            // Only logged-in user can get the ticket
+            ServiceSupport.AuthorizeAndExecute(() =>
+                {
+                    result = PhotoUploadTicketPool.GenerateTicket(requestToken);
+                });
             return result;
         }
 

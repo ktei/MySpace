@@ -7,7 +7,7 @@
     <controls:ChildWindow.Resources>
         <converters:MessageLevelToImageSourceConverter x:Key="messageLevelToImgSrc"/>
     </controls:ChildWindow.Resources>
-    <Grid Margin="5">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />

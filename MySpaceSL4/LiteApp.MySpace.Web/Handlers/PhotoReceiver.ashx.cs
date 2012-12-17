@@ -8,10 +8,12 @@ using LiteApp.MySpace.Web.Helpers;
 using MongoDB.Bson;
 using Ninject;
 using LiteApp.MySpace.Web.Services;
+using System.Web.SessionState;
+using System.Web.Security;
 
 namespace LiteApp.MySpace.Web.Handlers
 {
-    public class PhotoReceiver : IHttpHandler
+    public class PhotoReceiver : IHttpHandler, IRequiresSessionState
     {
         public PhotoReceiver()
         {

@@ -14,7 +14,7 @@ namespace LiteApp.MySpace.Security
 
         public SecurityContext()
         {
-            User = new IdentityImpl(string.Empty);
+            User = IdentityImpl.Empty;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -70,6 +70,7 @@ namespace LiteApp.MySpace.Security
                 var svc = new SecurityServiceClient();
                 svc.SignOutCompleted += (sender, e) =>
                     {
+                        User = IdentityImpl.Empty;
                         IsAuthenticated = false;
                         if (completeAction != null)
                             completeAction();
@@ -149,6 +150,8 @@ namespace LiteApp.MySpace.Security
 
         public class IdentityImpl : Identity
         {
+            static readonly IdentityImpl _empty = new IdentityImpl(string.Empty);
+
             public IdentityImpl(string name)
             {
                 Name = name;
@@ -158,6 +161,11 @@ namespace LiteApp.MySpace.Security
             {
                 get;
                 private set;
+            }
+
+            public static IdentityImpl Empty
+            {
+                get { return _empty; }
             }
         }
 

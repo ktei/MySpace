@@ -7,6 +7,7 @@ using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.MySpace.Views.Helpers;
 using LiteApp.MySpace.Assets.Strings;
+using System.Windows;
 
 namespace LiteApp.MySpace.ViewModels
 {

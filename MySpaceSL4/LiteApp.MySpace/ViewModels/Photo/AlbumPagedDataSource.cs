@@ -37,7 +37,8 @@ namespace LiteApp.MySpace.ViewModels
                 Id = album.Id,
                 Name = album.Name,
                 Description = album.Description,
-                Covers = AlbumViewModel.GetCovers(album.CoverURIs)
+                Covers = AlbumViewModel.GetCovers(album.CoverURIs),
+                CreatedBy = album.CreatedBy
             };
         }
     }

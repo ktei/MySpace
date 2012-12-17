@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using LiteApp.MySpace.Framework;
+using System.Windows;
+using LiteApp.MySpace.Security;
+using System.ComponentModel;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -12,6 +15,11 @@ namespace LiteApp.MySpace.ViewModels
         CoverViewModel[] _covers;
         ServerSidePagedCollectionView<PhotoViewModel> _photos;
         bool _isBusy;
+
+        public AlbumViewModel()
+        {
+            SecurityContext.Current.PropertyChanged += SecurityContext_PropertyChanged;
+        }
 
         public string Id
         {
@@ -43,6 +51,12 @@ namespace LiteApp.MySpace.ViewModels
                     NotifyOfPropertyChange(() => Description);
                 }
             }
+        }
+
+        public string CreatedBy
+        {
+            get;
+            set;
         }
 
         public CoverViewModel[] Covers
@@ -78,6 +92,16 @@ namespace LiteApp.MySpace.ViewModels
                     _isBusy = value;
                     NotifyOfPropertyChange(() => IsBusy);
                 }
+            }
+        }
+
+        public Visibility DeleteButtonVisibility
+        {
+            get
+            {
+                if (!SecurityContext.Current.IsAuthenticated)
+                    return Visibility.Collapsed;
+                return SecurityContext.Current.User.Name == CreatedBy || SecurityContext.Current.User.Name == "ktei" ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -144,5 +168,12 @@ namespace LiteApp.MySpace.ViewModels
         {
             IsBusy = true;
         }
+
+        void SecurityContext_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsAuthenticated")
+                NotifyOfPropertyChange(() => DeleteButtonVisibility);
+        }
+
     }
 }

@@ -121,7 +121,6 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="FaultHandling\ServerError.cs" />
     <Compile Include="FaultHandling\ServerFaultCode.cs" />
-    <Compile Include="Helpers\MySpaceException.cs" />
     <Compile Include="Handlers\PhotoReceiver.ashx.cs">
       <DependentUpon>PhotoReceiver.ashx</DependentUpon>
     </Compile>
@@ -153,6 +152,8 @@
     <Compile Include="Services\SignUpStatus.cs" />
     <Compile Include="Services\SilverlightFaultBehavior.cs" />
     <Compile Include="Services\SilverlightFaultBehaviorAttribute.cs" />
+    <Compile Include="Shared\DefaultPhotoUploadTicketPool.cs" />
+    <Compile Include="Shared\IPhotoUploadTicketPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -402,6 +402,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="ServiceReferences.ClientConfig" />
+    <None Include="Service References\Services.Security\SecurityService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Unique Features of this Theme.txt" />
     <None Include="readme.txt" />
   </ItemGroup>

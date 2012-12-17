@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd0" />
       <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="SecurityService_SignIn_InputMessage">
@@ -25,6 +26,15 @@
   <wsdl:message name="SecurityService_SignUp_OutputMessage">
     <wsdl:part name="parameters" element="SignUpResponse" />
   </wsdl:message>
+  <wsdl:message name="SecurityService_RequestPhotoUploadTicket_InputMessage">
+    <wsdl:part name="parameters" element="RequestPhotoUploadTicket" />
+  </wsdl:message>
+  <wsdl:message name="SecurityService_RequestPhotoUploadTicket_OutputMessage">
+    <wsdl:part name="parameters" element="RequestPhotoUploadTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="SecurityService_RequestPhotoUploadTicket_ServerFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q1:ServerFault" />
+  </wsdl:message>
   <wsdl:message name="SecurityService_IsAuthenticated_InputMessage">
     <wsdl:part name="parameters" element="IsAuthenticated" />
   </wsdl:message>
@@ -43,6 +53,11 @@
     <wsdl:operation name="SignUp">
       <wsdl:input wsaw:Action="urn:SecurityService/SignUp" message="SecurityService_SignUp_InputMessage" />
       <wsdl:output wsaw:Action="urn:SecurityService/SignUpResponse" message="SecurityService_SignUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestPhotoUploadTicket">
+      <wsdl:input wsaw:Action="urn:SecurityService/RequestPhotoUploadTicket" message="SecurityService_RequestPhotoUploadTicket_InputMessage" />
+      <wsdl:output wsaw:Action="urn:SecurityService/RequestPhotoUploadTicketResponse" message="SecurityService_RequestPhotoUploadTicket_OutputMessage" />
+      <wsdl:fault wsaw:Action="urn:SecurityService/RequestPhotoUploadTicketServerFaultFault" name="ServerFaultFault" message="SecurityService_RequestPhotoUploadTicket_ServerFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="IsAuthenticated">
       <wsdl:input wsaw:Action="urn:SecurityService/IsAuthenticated" message="SecurityService_IsAuthenticated_InputMessage" />

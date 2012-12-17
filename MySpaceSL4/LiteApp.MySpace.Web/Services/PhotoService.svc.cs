@@ -72,6 +72,15 @@ namespace LiteApp.MySpace.Web.Services
         }
 
         [OperationContract]
+        public void DeletePhoto(string[] photoIds, string albumId)
+        {
+            ServiceSupport.AuthorizeAndExecute(() =>
+                {
+                    
+                });
+        }
+
+        [OperationContract]
         public IEnumerable<PhotoComment> GetComments(string photoId)
         {
             return PhotoRepository.GetComments(photoId);
@@ -81,7 +90,6 @@ namespace LiteApp.MySpace.Web.Services
         [FaultContract(typeof(ServerFault))]
         public PhotoComment SaveComment(PhotoComment comment)
         {
-            Thread.Sleep(2000);
             ServiceSupport.AuthorizeAndExecute(() =>
                 {
                     PhotoRepository.SaveComment(comment);

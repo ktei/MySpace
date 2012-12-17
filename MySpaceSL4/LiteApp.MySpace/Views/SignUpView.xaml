@@ -7,7 +7,7 @@
            xmlns:framework="clr-namespace:LiteApp.MySpace.Framework" KeyDown="SignUpView_KeyDown"
            Width="450">
     <toolkit:BusyIndicator IsBusy="{Binding IsBusy, Mode=OneWay}" BusyContent="{Binding Strings.ProcessingMessage, Source={StaticResource AppResx}}">
-        <Grid Margin="5">
+        <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="Auto" />

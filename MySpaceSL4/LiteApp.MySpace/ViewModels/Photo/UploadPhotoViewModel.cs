@@ -188,6 +188,7 @@ namespace LiteApp.MySpace.ViewModels
             {
                 HttpWebRequest webRequest = (HttpWebRequest)asynchronousResult.AsyncState;
                 HttpWebResponse webResponse = (HttpWebResponse)webRequest.EndGetResponse(asynchronousResult);
+                
                 using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
                 {
                     newCoverURIs = reader.ReadToEnd();
