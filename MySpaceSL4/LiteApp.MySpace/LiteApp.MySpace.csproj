@@ -412,6 +412,7 @@
     <EmbeddedResource Include="Assets\Strings\AppStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Assets\Strings\ErrorStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

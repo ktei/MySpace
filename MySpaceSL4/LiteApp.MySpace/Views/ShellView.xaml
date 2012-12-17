@@ -24,14 +24,14 @@
                 <ContentControl Style="{StaticResource LogoIcon}">
                     <local:LoginStatusPanel VerticalAlignment="Center" Margin="10,0,0,0" />
                 </ContentControl>
-                <TextBlock Style="{StaticResource ApplicationNameStyle}" Text="Space of Rui" />
+                <TextBlock Style="{StaticResource ApplicationNameStyle}" Text="{Binding Strings.ApplicationName, Source={StaticResource AppResx}}" />
             </StackPanel>
         </Border>
 
         <Border x:Name="LinksBorder" Style="{StaticResource NavLinksBorderStyle}" Grid.Row="1">
             <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
-                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="Home" Tag="Home" cal:Message.Attach="ActivatePage('Home')" Margin="0,0,20,0" />
-                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="Photos" Tag="Photos" cal:Message.Attach="ActivatePage('Photos')" />
+                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="{Binding Strings.HomePageTitle, Source={StaticResource AppResx}}" Tag="Home" cal:Message.Attach="ActivatePage('Home')" Margin="0,0,20,0" />
+                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="{Binding Strings.PhotosPageTitle, Source={StaticResource AppResx}}" Tag="Photos" cal:Message.Attach="ActivatePage('Photos')" />
             </StackPanel>
         </Border>
 

@@ -99,6 +99,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string ConfirmPasswordLabel {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Album.
         /// </summary>
         public static string CreateAlbumWindowTitle {
@@ -113,6 +122,33 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string CreateButtonText {
             get {
                 return ResourceManager.GetString("CreateButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This comment is being deleted....
+        /// </summary>
+        public static string DeletingCommentMessage {
+            get {
+                return ResourceManager.GetString("DeletingCommentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string EmailLabel {
+            get {
+                return ResourceManager.GetString("EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string HomePageTitle {
+            get {
+                return ResourceManager.GetString("HomePageTitle", resourceCulture);
             }
         }
         
@@ -135,11 +171,29 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No comment is found.
+        /// </summary>
+        public static string NoCommentFoundMessage {
+            get {
+                return ResourceManager.GetString("NoCommentFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No photo is found.
         /// </summary>
         public static string NoPhotoFoundMessage {
             get {
                 return ResourceManager.GetString("NoPhotoFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not registered yet?.
+        /// </summary>
+        public static string NotRegisteredYetMessage {
+            get {
+                return ResourceManager.GetString("NotRegisteredYetMessage", resourceCulture);
             }
         }
         
@@ -167,6 +221,24 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string OperationNeedsSignInMessage {
             get {
                 return ResourceManager.GetString("OperationNeedsSignInMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string PasswordLabel {
+            get {
+                return ResourceManager.GetString("PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photos.
+        /// </summary>
+        public static string PhotosPageTitle {
+            get {
+                return ResourceManager.GetString("PhotosPageTitle", resourceCulture);
             }
         }
         
@@ -207,6 +279,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Signing you int....
+        /// </summary>
+        public static string SigningInMessage {
+            get {
+                return ResourceManager.GetString("SigningInMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign-in is required.
         /// </summary>
         public static string SignInRequiredMessageHeader {
@@ -234,6 +315,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sign up now.
+        /// </summary>
+        public static string SignUpNowButtonText {
+            get {
+                return ResourceManager.GetString("SignUpNowButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign Up.
         /// </summary>
         public static string SignUpWindowTitle {
@@ -243,11 +333,29 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Take me back to.
+        /// </summary>
+        public static string TakeMeBackToMessage {
+            get {
+                return ResourceManager.GetString("TakeMeBackToMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload Photo.
         /// </summary>
         public static string UploadPhotoWindowTitle {
             get {
                 return ResourceManager.GetString("UploadPhotoWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name.
+        /// </summary>
+        public static string UserNameLabel {
+            get {
+                return ResourceManager.GetString("UserNameLabel", resourceCulture);
             }
         }
         

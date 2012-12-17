@@ -152,9 +152,12 @@ namespace LiteApp.MySpace.ViewModels
 
         void UploadPhoto(string albumId)
         {
-            var model = new UploadPhotoManagerViewModel();
-            model.Album = _albums.Single(x => x.Id == albumId);
-            IoC.Get<IWindowManager>().ShowDialog(model);
+            ViewModelSupport.AuthorizeAndExecute(() =>
+                {
+                    var model = new UploadPhotoManagerViewModel();
+                    model.Album = _albums.Single(x => x.Id == albumId);
+                    IoC.Get<IWindowManager>().ShowDialog(model);
+                });
         }
 
         void _albums_PageChanged(object sender, System.EventArgs e)

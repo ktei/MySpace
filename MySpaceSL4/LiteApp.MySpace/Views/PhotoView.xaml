@@ -25,7 +25,7 @@
             </Grid.ColumnDefinitions>
             <Grid Width="720" Height="445" Margin="0,0,10,0" VerticalAlignment="Top">
                 <Border Style="{StaticResource PictureStyle}" HorizontalAlignment="Center" Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
-                    <Image Source="{Binding PhotoURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
+                    <Image Source="{Binding PhotoURI, Mode=OneWay}" ImageOpened="Image_ImageOpened" />
                 </Border>
                 <controls:LoadingIndicator Style="{StaticResource CircleIndicator}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVis}}" />
@@ -51,7 +51,7 @@
                                 <ItemsControl.Template>
                                     <ControlTemplate TargetType="ItemsControl">
                                         <Grid>
-                                            <TextBlock Text="No comment is found" Style="{StaticResource BlackLabelTextStyle}" VerticalAlignment="Top" FontSize="22" 
+                                            <TextBlock Text="{Binding Strings.NoCommentFoundMessage, Source={StaticResource AppResx}}" Style="{StaticResource BlackLabelTextStyle}" VerticalAlignment="Top" FontSize="22" 
                                                        FontFamily="{StaticResource HeaderFontFamily}"
                                                        Foreground="{StaticResource DisabledForegroundBrush}"
                                                        Visibility="{Binding HasComment, Mode=OneWay, Converter={StaticResource boolToVisReverse}}"/>
@@ -63,7 +63,7 @@
                                     <DataTemplate>
                                         <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayBrush8}" Margin="0,0,0,10">
                                             <Grid>
-                                                <TextBlock Style="{StaticResource ContentTextStyle}" Text="This message is being deleted..." FontStyle="Italic"
+                                                <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Strings.DeletingCommentMessage, Source={StaticResource AppResx}}" FontStyle="Italic"
                                                            Visibility="{Binding IsDeleting, Mode=OneWay, Converter={StaticResource boolToVis}}" />
                                                 <Grid Visibility="{Binding IsDeleting, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
                                                     <Grid.RowDefinitions>

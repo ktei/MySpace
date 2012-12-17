@@ -141,14 +141,26 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="CreateButtonText" xml:space="preserve">
     <value>Create</value>
   </data>
+  <data name="DeletingCommentMessage" xml:space="preserve">
+    <value>This comment is being deleted...</value>
+  </data>
+  <data name="HomePageTitle" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="Intro" xml:space="preserve">
     <value />
   </data>
   <data name="NoButtonText" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="NoCommentFoundMessage" xml:space="preserve">
+    <value>No comment is found</value>
+  </data>
   <data name="NoPhotoFoundMessage" xml:space="preserve">
     <value>No photo is found</value>
+  </data>
+  <data name="NotRegisteredYetMessage" xml:space="preserve">
+    <value>Not registered yet?</value>
   </data>
   <data name="OKButtonText" xml:space="preserve">
     <value>OK</value>
@@ -158,6 +170,12 @@ So, now we have an animation element and we know how to make its copies. Let's s
   </data>
   <data name="OperationNeedsSignInMessage" xml:space="preserve">
     <value>This operation needs you to sign in first.</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PhotosPageTitle" xml:space="preserve">
+    <value>Photos</value>
   </data>
   <data name="PostButtonText" xml:space="preserve">
     <value>Post</value>
@@ -171,6 +189,9 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="SignInFailedMessageHeader" xml:space="preserve">
     <value>Sign-in failed</value>
   </data>
+  <data name="SigningInMessage" xml:space="preserve">
+    <value>Signing you int...</value>
+  </data>
   <data name="SignInRequiredMessageHeader" xml:space="preserve">
     <value>Sign-in is required</value>
   </data>
@@ -180,13 +201,28 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="SignOutButtonText" xml:space="preserve">
     <value>Sign Out</value>
   </data>
+  <data name="SignUpNowButtonText" xml:space="preserve">
+    <value>Sign up now</value>
+  </data>
   <data name="SignUpWindowTitle" xml:space="preserve">
     <value>Sign Up</value>
   </data>
   <data name="UploadPhotoWindowTitle" xml:space="preserve">
     <value>Upload Photo</value>
   </data>
+  <data name="UserNameLabel" xml:space="preserve">
+    <value>User name</value>
+  </data>
   <data name="YesButtonText" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="TakeMeBackToMessage" xml:space="preserve">
+    <value>Take me back to</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Email</value>
   </data>
 </root>

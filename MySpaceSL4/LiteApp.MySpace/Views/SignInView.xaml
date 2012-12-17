@@ -6,7 +6,7 @@
            xmlns:cal="http://www.caliburnproject.org" Style="{StaticResource ChildWindowStyle}"
            xmlns:framework="clr-namespace:LiteApp.MySpace.Framework" KeyDown="SignInView_KeyDown"
            Width="450">
-    <toolkit:BusyIndicator IsBusy="{Binding IsBusy, Mode=OneWay}" BusyContent="Signing you in...">
+    <toolkit:BusyIndicator IsBusy="{Binding IsBusy, Mode=OneWay}" BusyContent="{Binding Strings.SigningInMessage, Source={StaticResource AppResx}}">
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -16,18 +16,18 @@
             </Grid.RowDefinitions>
             <TextBlock Text="{Binding Message, Mode=OneWay}" Style="{StaticResource ContentTextStyle}"/>
             <StackPanel framework:RefreshBindingScope.Scope="{Binding RefreshBindingScope}" Grid.Row="1">
-                <TextBlock Text="User name" Style="{StaticResource BlackLabelTextStyle}"/>
+                <TextBlock Text="{Binding Strings.UserNameLabel, Source={StaticResource AppResx}}" Style="{StaticResource BlackLabelTextStyle}"/>
                 <TextBox Text="{Binding UserName, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                <TextBlock Text="Password" Style="{StaticResource BlackLabelTextStyle}" Margin="0,10,0,0"/>
+                <TextBlock Text="{Binding Strings.PasswordLabel, Source={StaticResource AppResx}}" Style="{StaticResource BlackLabelTextStyle}" Margin="0,10,0,0"/>
                 <PasswordBox x:Name="Password" Password="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0">
-                <TextBlock Text="Not registered yet?" Style="{StaticResource ContentTextStyle}" Foreground="Black"/>
-                <HyperlinkButton x:Name="SignUpLinkButton" cal:Message.Attach="SignUp" Content="Sign up now" Click="SignUpLinkButton_Click" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Strings.NotRegisteredYetMessage, Source={StaticResource AppResx}}" Style="{StaticResource ContentTextStyle}" Foreground="Black"/>
+                <HyperlinkButton x:Name="SignUpLinkButton" cal:Message.Attach="SignUp" Content="{Binding Strings.SignUpNowButtonText, Source={StaticResource AppResx}}" Click="SignUpLinkButton_Click" VerticalAlignment="Center" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3">
-                <Button x:Name="OKButton" Content="OK" Width="75" Height="30" Margin="0,0,10,0" cal:Message.Attach="SignIn" />
-                <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click" Width="75" Height="30" />
+                <Button x:Name="OKButton" Content="{Binding Strings.OKButtonText, Source={StaticResource AppResx}}" Width="75" Height="30" Margin="0,0,10,0" cal:Message.Attach="SignIn" />
+                <Button x:Name="CancelButton" Content="{Binding Strings.CancelButtonText, Source={StaticResource AppResx}}" Click="CancelButton_Click" Width="75" Height="30" />
             </StackPanel>
         </Grid>
     </toolkit:BusyIndicator>
