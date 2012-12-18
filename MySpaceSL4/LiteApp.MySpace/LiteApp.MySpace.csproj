@@ -135,6 +135,7 @@
     <Compile Include="Controls\LoadingIndicator.cs" />
     <Compile Include="Converters\MessageLevelToImageSourceConverter.cs" />
     <Compile Include="Converters\PhotoCommentDeleteVisibilityConverter.cs" />
+    <Compile Include="Converters\PhotoUploadStatusToImageSourceConverter.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="ViewModels\Photo\PhotoUploadStatus.cs" />
     <Compile Include="ViewModels\ViewModelSupport.cs" />
@@ -395,6 +396,9 @@
     <Resource Include="Assets\Images\error.png" />
     <Resource Include="Assets\Images\information.png" />
     <Resource Include="Assets\Images\upload-16.png" />
+    <Resource Include="Assets\Images\success-16.png" />
+    <Resource Include="Assets\Images\canceled-16.png" />
+    <Content Include="Assets\Images\icon-scales.txt" />
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <None Include="Service References\Services.Photo\PhotoService.disco" />
     <None Include="Service References\Services.Photo\configuration91.svcinfo" />

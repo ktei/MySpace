@@ -200,7 +200,6 @@ namespace LiteApp.MySpace.ViewModels
 
             ViewModelSupport.AuthorizeAndExecute(() =>
                 {
-
                     CanPostComment = false;
                     PhotoComment comment = new PhotoComment();
                     comment.Contents = contents;
