@@ -395,9 +395,10 @@
     <Resource Include="Assets\Images\exclamation.png" />
     <Resource Include="Assets\Images\error.png" />
     <Resource Include="Assets\Images\information.png" />
-    <Resource Include="Assets\Images\upload-16.png" />
     <Resource Include="Assets\Images\success-16.png" />
-    <Resource Include="Assets\Images\canceled-16.png" />
+    <Resource Include="Assets\Images\cancel-16.png" />
+    <Resource Include="Assets\Images\error-16.png" />
+    <Resource Include="Assets\Images\completing-16.png" />
     <Content Include="Assets\Images\icon-scales.txt" />
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <None Include="Service References\Services.Photo\PhotoService.disco" />

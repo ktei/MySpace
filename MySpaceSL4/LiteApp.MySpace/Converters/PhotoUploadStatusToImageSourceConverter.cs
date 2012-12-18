@@ -13,14 +13,14 @@ namespace LiteApp.MySpace.Converters
             PhotoUploadStatus status = (PhotoUploadStatus)value;
             switch (status)
             {
-                case PhotoUploadStatus.Uploading:
                 case PhotoUploadStatus.Completing:
-                    return "../Assets/Images/upload-16.png";
+                    return "../Assets/Images/completing-16.png";
                 case PhotoUploadStatus.Completed:
                     return "../Assets/Images/success-16.png";
                 case PhotoUploadStatus.Canceled:
+                    return "../Assets/Images/cancel-16.png";
                 case PhotoUploadStatus.Error:
-                    return "../Assets/Images/canceled-16.png";
+                    return "../Assets/Images/error-16.png";
                 default:
                     return DependencyProperty.UnsetValue;
             }
