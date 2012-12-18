@@ -225,4 +225,19 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="EmailLabel" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="CreateAlbumButtonText" xml:space="preserve">
+    <value>Create Album</value>
+  </data>
+  <data name="NoAlbumFoundMessage" xml:space="preserve">
+    <value>No album is found</value>
+  </data>
+  <data name="DeleteButtonText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="UploadButtonText" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="ViewButtonText" xml:space="preserve">
+    <value>View</value>
+  </data>
 </root>

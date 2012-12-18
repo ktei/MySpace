@@ -15,6 +15,11 @@ namespace LiteApp.MySpace.Web.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class SecurityService : WebServiceBase
     {
+        public SecurityService()
+        {
+            Thread.CurrentPrincipal = HttpContext.Current.User;
+        }
+
         [Inject]
         public IPhotoUploadTicketPool PhotoUploadTicketPool { get; set; }
 

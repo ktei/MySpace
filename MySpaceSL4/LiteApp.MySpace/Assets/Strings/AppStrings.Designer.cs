@@ -110,6 +110,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Create Album.
         /// </summary>
+        public static string CreateAlbumButtonText {
+            get {
+                return ResourceManager.GetString("CreateAlbumButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Album.
+        /// </summary>
         public static string CreateAlbumWindowTitle {
             get {
                 return ResourceManager.GetString("CreateAlbumWindowTitle", resourceCulture);
@@ -122,6 +131,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string CreateButtonText {
             get {
                 return ResourceManager.GetString("CreateButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DeleteButtonText {
+            get {
+                return ResourceManager.GetString("DeleteButtonText", resourceCulture);
             }
         }
         
@@ -158,6 +176,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string Intro {
             get {
                 return ResourceManager.GetString("Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No album is found.
+        /// </summary>
+        public static string NoAlbumFoundMessage {
+            get {
+                return ResourceManager.GetString("NoAlbumFoundMessage", resourceCulture);
             }
         }
         
@@ -342,6 +369,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string UploadButtonText {
+            get {
+                return ResourceManager.GetString("UploadButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload Photo.
         /// </summary>
         public static string UploadPhotoWindowTitle {
@@ -356,6 +392,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string UserNameLabel {
             get {
                 return ResourceManager.GetString("UserNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string ViewButtonText {
+            get {
+                return ResourceManager.GetString("ViewButtonText", resourceCulture);
             }
         }
         

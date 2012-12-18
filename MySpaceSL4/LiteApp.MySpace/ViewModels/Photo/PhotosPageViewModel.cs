@@ -19,10 +19,9 @@ namespace LiteApp.MySpace.ViewModels
         bool _isBusy;
         ViewState _state;
 
-        protected override void OnInitialize()
+        public PhotosPageViewModel()
         {
-            LoadAlbums();
-            base.OnInitialize();
+
         }
 
         public string Name
@@ -114,17 +113,6 @@ namespace LiteApp.MySpace.ViewModels
             IoC.Get<IWindowManager>().ShowDialog(model);
         }
 
-        public ICommand UploadPhotoCommand
-        {
-            get
-            {
-                return new Command(x =>
-                    {
-                        UploadPhoto((string)x);
-                    });
-            }
-        }
-
         public ICommand DeleteAlbumCommand
         {
             get
@@ -136,6 +124,14 @@ namespace LiteApp.MySpace.ViewModels
                     });
             }
         }
+
+
+        protected override void OnInitialize()
+        {
+            LoadAlbums();
+            base.OnInitialize();
+        }
+
 
         void LoadAlbums()
         {
@@ -149,16 +145,6 @@ namespace LiteApp.MySpace.ViewModels
         void _albums_RefreshDataFailed(object sender, RefreshPagedDataFailedEventArgs e)
         {
             e.Error.Handle();
-        }
-
-        void UploadPhoto(string albumId)
-        {
-            ViewModelSupport.AuthorizeAndExecute(() =>
-                {
-                    var model = new UploadPhotoManagerViewModel();
-                    model.Album = _albums.Single(x => x.Id == albumId);
-                    IoC.Get<IWindowManager>().ShowDialog(model);
-                });
         }
 
         void _albums_PageChanged(object sender, System.EventArgs e)

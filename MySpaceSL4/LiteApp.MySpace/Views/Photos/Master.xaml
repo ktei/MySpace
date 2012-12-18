@@ -17,13 +17,15 @@
 
     <StackPanel>
         <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Albums" />
-        <Button Height="30" Content="Create Album" Margin="0,15,0,0" Width="120" HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum"/>
+        <Button Height="30" Content="{Binding Strings.CreateAlbumButtonText, Source={StaticResource AppResx}}" Margin="0,15,0,0" Width="120" 
+                Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"
+                HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum"/>
 
         <ItemsControl x:Name="Albums" ItemsSource="{Binding Albums, Mode=OneWay}" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" MinHeight="200">
             <ItemsControl.Template>
                 <ControlTemplate TargetType="ItemsControl">
                     <Grid>
-                        <TextBlock Text="No album is found" Style="{StaticResource BlackLabelTextStyle}" VerticalAlignment="Center" FontSize="22" 
+                        <TextBlock Text="{Binding Strings.NoAlbumFoundMessage, Source={StaticResource AppResx}}" Style="{StaticResource BlackLabelTextStyle}" VerticalAlignment="Center" FontSize="22" 
                                            FontFamily="{StaticResource HeaderFontFamily}"
                                            Foreground="{StaticResource DisabledForegroundBrush}"
                                            Visibility="{Binding HasAlbum, Mode=OneWay, Converter={StaticResource boolToVisReverse}}"/>
@@ -85,10 +87,11 @@
                                                        FontStyle="Italic" TextWrapping="Wrap" />
                                 </ScrollViewer>
                                 <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,5,0,0">
-                                    <Button Height="30" Content="View" Width="100" cal:Message.Attach="ViewAlbum('$dataContext')"/>
-                                    <Button Height="30" Content="Upload" Width="100" Margin="10,0,0,0"
-                                                    Command="{Binding DataContext.UploadPhotoCommand, Mode=OneWay, ElementName=Albums}" CommandParameter="{Binding Id, Mode=OneWay}"/>
-                                    <Button Height="30" Content="Delete" Width="100" CommandParameter="{Binding Id, Mode=OneWay}" Visibility="{Binding DeleteButtonVisibility, Mode=OneWay}"
+                                    <Button Height="30" Content="{Binding Strings.ViewButtonText, Source={StaticResource AppResx}}" Width="100" cal:Message.Attach="ViewAlbum('$dataContext')"/>
+                                    <Button Height="30" Content="{Binding Strings.UploadButtonText, Source={StaticResource AppResx}}" Width="100" Margin="10,0,0,0" 
+                                            Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"
+                                            cal:Message.Attach="UploadPhoto"/>
+                                    <Button Height="30" Content="{Binding Strings.DeleteButtonText, Source={StaticResource AppResx}}" Width="100" CommandParameter="{Binding Id, Mode=OneWay}" Visibility="{Binding DeleteButtonVisibility, Mode=OneWay}"
                                                     Command="{Binding DataContext.DeleteAlbumCommand, Mode=OneWay, ElementName=Albums}" Margin="10,0,0,0"/>
                                 </StackPanel>
                             </Grid>

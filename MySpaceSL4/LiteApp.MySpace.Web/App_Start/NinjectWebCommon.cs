@@ -60,7 +60,7 @@ namespace LiteApp.MySpace.Web.App_Start
         {
             kernel.Bind<IAlbumRepository>().To<AlbumRepository>();
             kernel.Bind<IPhotoRepository>().To<PhotoRepository>();
-            kernel.Bind<IPhotoUploadTicketPool>().To<DefaultPhotoUploadTicketPool>();
+            kernel.Bind<IPhotoUploadTicketPool>().To<DefaultPhotoUploadTicketPool>().InSingletonScope();
         }        
     }
 }

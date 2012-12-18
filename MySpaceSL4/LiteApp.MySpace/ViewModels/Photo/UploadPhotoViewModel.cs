@@ -17,9 +17,9 @@ namespace LiteApp.MySpace.ViewModels
         private long _dataLength;
         private long _dataSent;
         string _fileName;
-        bool _canceled;
+        bool _cancelRequested;
         bool _canCancel;
-        string _status;
+        PhotoUploadStatus _status;
         double _progress;
 
         public event EventHandler UploadStarted;
@@ -55,7 +55,7 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-        public string Status
+        public PhotoUploadStatus Status
         {
             get { return _status; }
             set
@@ -89,23 +89,30 @@ namespace LiteApp.MySpace.ViewModels
 
         public void StartUpload(FileInfo file, string albumId)
         {
-            // TODO: maybe we need a better way to autheticate this
+            Status = PhotoUploadStatus.Uploading;
+            // Generate a request token locally and use it
+            // to ask server for a photo upload ticket
+            // Once ticket received, send both request token and ticket
+            // to server for upload authentication
+            string requestToken = Guid.NewGuid().ToString();
             SecurityServiceClient svc = new SecurityServiceClient();
-            svc.IsAuthenticatedCompleted += (sender, e) =>
+            svc.RequestPhotoUploadTicketCompleted += (sender, e) =>
                 {
                     if (e.Error != null)
                     {
-                        e.Error.Handle();
+                        Status = PhotoUploadStatus.Error;
                     }
-                    else if (e.Result)
+                    else if (!string.IsNullOrEmpty(e.Result))
                     {
                         _fileStream = file.OpenRead();
                         _dataLength = _fileStream.Length;
                         UriBuilder httpHandlerUrlBuilder = new UriBuilder(string.Format("{0}/Handlers/PhotoReceiver.ashx", _baseUri));
-                        httpHandlerUrlBuilder.Query = string.Format("{2}extension={0}&albumId={1}",
+                        httpHandlerUrlBuilder.Query = string.Format("{0}extension={1}&albumId={2}&requestToken={3}&ticket={4}",
+                            string.IsNullOrEmpty(httpHandlerUrlBuilder.Query) ? "" : httpHandlerUrlBuilder.Query.Remove(0, 1) + "&",
                             Path.GetExtension(file.Name),
                             albumId,
-                            string.IsNullOrEmpty(httpHandlerUrlBuilder.Query) ? "" : httpHandlerUrlBuilder.Query.Remove(0, 1) + "&");
+                            requestToken,
+                            e.Result);
 
                         HttpWebRequest webRequest = (HttpWebRequest)WebRequestCreator.ClientHttp.Create(httpHandlerUrlBuilder.Uri);
                         webRequest.AllowWriteStreamBuffering = false; // Enable ongoing progress reporting
@@ -123,60 +130,66 @@ namespace LiteApp.MySpace.ViewModels
                         // TODO: Inform users they don't are not authenticated to do this
                     }
                 };
-            svc.IsAuthenticatedAsync();
+            svc.RequestPhotoUploadTicketAsync(requestToken);
         }
 
         public void CancelUpload()
         {
             CanCancel = false;
-            Status = "Canceling...";
-            _canceled = true;
+            Status = PhotoUploadStatus.Canceled;
+            _cancelRequested = true;
         }
 
         private void WriteToStreamCallback(IAsyncResult asynchronousResult)
         {
             HttpWebRequest webRequest = (HttpWebRequest)asynchronousResult.AsyncState;
-            using (Stream requestStream = webRequest.EndGetRequestStream(asynchronousResult))
+            try
             {
-
-                byte[] buffer = new Byte[4096];
-                int bytesRead = 0;
-
-                //Set the start position
-                _fileStream.Position = 0;
-
-                //Keep reading and flush to server
-                using (_fileStream)
+                using (Stream requestStream = webRequest.EndGetRequestStream(asynchronousResult))
                 {
-                    while ((bytesRead = _fileStream.Read(buffer, 0, buffer.Length)) != 0)
-                    {
-                        if (_canceled)
-                        {
-                            Status = "Canceled";
-                            break;
-                        }
 
-                        requestStream.Write(buffer, 0, bytesRead);
-                        requestStream.Flush();
-                        _dataSent += bytesRead;
-                        Progress = (double)_dataSent / (double)_dataLength;
+                    byte[] buffer = new Byte[4096];
+                    int bytesRead = 0;
+
+                    //Set the start position
+                    _fileStream.Position = 0;
+
+                    //Keep reading and flush to server
+                    using (_fileStream)
+                    {
+                        while ((bytesRead = _fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                        {
+                            if (_cancelRequested)
+                            {
+                                break;
+                            }
+
+                            requestStream.Write(buffer, 0, bytesRead);
+                            requestStream.Flush();
+                            _dataSent += bytesRead;
+                            Progress = (double)_dataSent / (double)_dataLength;
+                        }
+                    }
+
+                    if (_cancelRequested)
+                    {
+                        if (UploadCanceled != null)
+                            UploadCanceled(this, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        CanCancel = false;
+                        Status = PhotoUploadStatus.Completing;
+                        //Get the response from the HttpHandler
+                        requestStream.Close();
+                        webRequest.BeginGetResponse(new AsyncCallback(ReadHttpResponseCallback), webRequest);
                     }
                 }
-
-                if (_canceled)
-                {
-                    Thread.Sleep(1000); // Pause 1 sec for user to read 'Canceled' message
-                    if (UploadCanceled != null)
-                        UploadCanceled(this, EventArgs.Empty);
-                }
-                else
-                {
-                    CanCancel = false;
-                    Status = "Completing...";
-                    //Get the response from the HttpHandler
-                    requestStream.Close();
-                    webRequest.BeginGetResponse(new AsyncCallback(ReadHttpResponseCallback), webRequest);
-                }
+            }
+            catch
+            {
+                CanCancel = false;
+                Status = PhotoUploadStatus.Error;
             }
         }
 
@@ -194,12 +207,11 @@ namespace LiteApp.MySpace.ViewModels
                     newCoverURIs = reader.ReadToEnd();
                     reader.Close();
                 }
-                Status = "Completed";
-                Thread.Sleep(1000); // Pause 1 sec for user to read message
+                Status = PhotoUploadStatus.Completed;
             }
             catch (Exception ex)
             {
-                Status = "Error";
+                Status = PhotoUploadStatus.Error;
                 error = ex;
             }
             finally

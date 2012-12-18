@@ -29,5 +29,10 @@ namespace LiteApp.MySpace.Web.Shared
             _ticketCache[requestToken] = new WeakReference(newTicket, false);
             return newTicket;
         }
+
+        public void DestroyTicket(string requestToken)
+        {
+            _ticketCache.Remove(requestToken);
+        }
     }
 }

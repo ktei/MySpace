@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Web;
+using System.Web.SessionState;
 using AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
 using LiteApp.MySpace.Web.DataAccess;
 using LiteApp.MySpace.Web.Entities;
 using LiteApp.MySpace.Web.Helpers;
+using LiteApp.MySpace.Web.Shared;
 using MongoDB.Bson;
 using Ninject;
-using LiteApp.MySpace.Web.Services;
-using System.Web.SessionState;
-using System.Web.Security;
 
 namespace LiteApp.MySpace.Web.Handlers
 {
@@ -25,6 +24,9 @@ namespace LiteApp.MySpace.Web.Handlers
 
         [Inject]
         public IPhotoRepository PhotoRepository { get; set; }
+
+        [Inject]
+        public IPhotoUploadTicketPool PhotoUploadTickets { get; set; }
 
         #region IHttpHandler Members
 
@@ -48,6 +50,8 @@ namespace LiteApp.MySpace.Web.Handlers
             {
                 throw new Exception("No album ID specified.");
             }
+            if (!VerifyTicket(context))
+                throw new Exception("No valid ticket for this request was found.");
 
             var storage = SharpBoxSupport.OpenDropBoxStorage();
             var photoFolder = storage.EnsurePhotoFolder(albumId);
@@ -94,10 +98,26 @@ namespace LiteApp.MySpace.Web.Handlers
             //    byte[] buffer = new Byte[stream.Length];
             //    stream.Read(buffer, 0, buffer.Length);
             //}
-
+            
             context.Response.Write(string.Join(";", coverURIs));
         }
 
         #endregion
+
+        bool VerifyTicket(HttpContext context)
+        {
+            var requestToken = context.Request.QueryString["requestToken"];
+            var ticket = context.Request.QueryString["ticket"];
+            if (!string.IsNullOrEmpty(requestToken) && !string.IsNullOrEmpty(ticket))
+            {
+                bool result = false;
+                result = PhotoUploadTickets.VerifyTicket(requestToken, ticket);
+                // Dump this ticket immediately as it's been verified
+                PhotoUploadTickets.DestroyTicket(requestToken);
+                return result;
+            }
+
+            return false;
+        }
     }
 }

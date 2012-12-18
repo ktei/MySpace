@@ -4,14 +4,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cal="http://www.caliburnproject.org"
+    xmlns:converters="clr-namespace:LiteApp.MySpace.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVis"/>
+    </UserControl.Resources>
 
     <StackPanel>
         <TextBlock Style="{StaticResource HeaderTextStyle}" Text="{Binding ActiveItem.Name, Mode=OneWay}" />
         <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Left">
             <Button Content="View Albums" Width="120" Height="30" Margin="0,0,15,0" cal:Message.Attach="ViewAlbums" />
-            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhotoToActiveAlbum"/>
+            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhotoToActiveAlbum"
+                    Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"/>
         </StackPanel>
         <ContentControl x:Name="ActiveItem" Margin="0,15,0,0"/>
     </StackPanel>

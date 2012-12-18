@@ -9,5 +9,6 @@ namespace LiteApp.MySpace.Web.Shared
     {
         bool VerifyTicket(string requestToken, string ticket);
         string GenerateTicket(string requestToken);
+        void DestroyTicket(string requestToken);
     }
 }

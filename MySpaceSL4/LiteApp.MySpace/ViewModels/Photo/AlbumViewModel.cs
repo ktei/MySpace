@@ -105,6 +105,13 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
+        public void UploadPhoto()
+        {
+            var model = new UploadPhotoManagerViewModel();
+            model.Album = this;
+            IoC.Get<IWindowManager>().ShowDialog(model);
+        }
+
         public void RefreshPhotos()
         {
             _photos.RefreshCurrentPage();
@@ -172,7 +179,9 @@ namespace LiteApp.MySpace.ViewModels
         void SecurityContext_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsAuthenticated")
+            {
                 NotifyOfPropertyChange(() => DeleteButtonVisibility);
+            }
         }
 
     }
