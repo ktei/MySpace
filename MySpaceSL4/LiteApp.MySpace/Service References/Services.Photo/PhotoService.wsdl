@@ -40,6 +40,15 @@
   <wsdl:message name="PhotoService_GetPagedPhotos_OutputMessage">
     <wsdl:part name="parameters" element="GetPagedPhotosResponse" />
   </wsdl:message>
+  <wsdl:message name="PhotoService_DeletePhotos_InputMessage">
+    <wsdl:part name="parameters" element="DeletePhotos" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_DeletePhotos_OutputMessage">
+    <wsdl:part name="parameters" element="DeletePhotosResponse" />
+  </wsdl:message>
+  <wsdl:message name="PhotoService_DeletePhotos_ServerFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q3:ServerFault" />
+  </wsdl:message>
   <wsdl:message name="PhotoService_GetComments_InputMessage">
     <wsdl:part name="parameters" element="GetComments" />
   </wsdl:message>
@@ -53,7 +62,7 @@
     <wsdl:part name="parameters" element="SaveCommentResponse" />
   </wsdl:message>
   <wsdl:message name="PhotoService_SaveComment_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q3:ServerFault" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q4:ServerFault" />
   </wsdl:message>
   <wsdl:message name="PhotoService_DeleteComment_InputMessage">
     <wsdl:part name="parameters" element="DeleteComment" />
@@ -62,7 +71,7 @@
     <wsdl:part name="parameters" element="DeleteCommentResponse" />
   </wsdl:message>
   <wsdl:message name="PhotoService_DeleteComment_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q4:ServerFault" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q5:ServerFault" />
   </wsdl:message>
   <wsdl:portType name="PhotoService">
     <wsdl:operation name="GetPagedAlbums">
@@ -82,6 +91,11 @@
     <wsdl:operation name="GetPagedPhotos">
       <wsdl:input wsaw:Action="urn:PhotoService/GetPagedPhotos" message="PhotoService_GetPagedPhotos_InputMessage" />
       <wsdl:output wsaw:Action="urn:PhotoService/GetPagedPhotosResponse" message="PhotoService_GetPagedPhotos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePhotos">
+      <wsdl:input wsaw:Action="urn:PhotoService/DeletePhotos" message="PhotoService_DeletePhotos_InputMessage" />
+      <wsdl:output wsaw:Action="urn:PhotoService/DeletePhotosResponse" message="PhotoService_DeletePhotos_OutputMessage" />
+      <wsdl:fault wsaw:Action="urn:PhotoService/DeletePhotosServerFaultFault" name="ServerFaultFault" message="PhotoService_DeletePhotos_ServerFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetComments">
       <wsdl:input wsaw:Action="urn:PhotoService/GetComments" message="PhotoService_GetComments_InputMessage" />

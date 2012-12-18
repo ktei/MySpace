@@ -5,20 +5,21 @@ namespace LiteApp.MySpace.Web.Shared
 {
     public class DefaultPhotoUploadTicketPool : IPhotoUploadTicketPool
     {
-        Dictionary<string, WeakReference> _ticketCache;
+        Dictionary<string, string> _ticketCache;
 
         public DefaultPhotoUploadTicketPool()
         {
-            _ticketCache = new Dictionary<string, WeakReference>();
+            _ticketCache = new Dictionary<string, string>();
         }
 
+        // TODO: dictionary thread safety?
         public bool VerifyTicket(string requestToken, string ticket)
         {
-            WeakReference wr = null;
-            _ticketCache.TryGetValue(requestToken, out wr);
-            if (wr != null && wr.IsAlive)
+            string target = null;
+            _ticketCache.TryGetValue(requestToken, out target);
+            if (target != null)
             {
-                return Convert.ToString(wr.Target) == ticket;
+                return target == ticket;
             }
             return false;
         }
@@ -26,7 +27,7 @@ namespace LiteApp.MySpace.Web.Shared
         public string GenerateTicket(string requestToken)
         {
             string newTicket = Guid.NewGuid().ToString();
-            _ticketCache[requestToken] = new WeakReference(newTicket, false);
+            _ticketCache[requestToken] = newTicket;
             return newTicket;
         }
 

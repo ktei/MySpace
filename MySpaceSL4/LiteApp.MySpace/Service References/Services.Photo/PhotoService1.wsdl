@@ -55,6 +55,18 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DeletePhotos">
+      <soap12:operation soapAction="urn:PhotoService/DeletePhotos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServerFaultFault">
+        <soap12:fault use="literal" name="ServerFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="GetComments">
       <soap12:operation soapAction="urn:PhotoService/GetComments" style="document" />
       <wsdl:input>

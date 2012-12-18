@@ -22,6 +22,17 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             return cursor;
         }
 
+
+        public Album FindAlbumById(string albumId)
+        {
+            ObjectId albumObjectId;
+            if (ObjectId.TryParse(albumId, out albumObjectId))
+            {
+                return Database.GetCollection<Album>(Collections.Albums).FindOneByIdAs<Album>(albumObjectId);
+            }
+            return null;
+        }
+
         public void SaveAlbum(Album album)
         {
             if (album.CoverURIs == null)
@@ -32,27 +43,35 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
 
         public void DeleteAlbum(string albumId)
         {
-            ObjectId id;
-            if (ObjectId.TryParse(albumId, out id))
+            ObjectId albumObjectId;
+            if (ObjectId.TryParse(albumId, out albumObjectId))
             {
-                Database.GetCollection<Album>(Collections.Albums).Remove(Query.EQ("_id", id));
+                Database.GetCollection<Album>(Collections.Albums).Remove(Query.EQ("_id", albumObjectId));
             }
         }
 
         public string[] UpdateCover(string albumId, string coverUri)
         {
-            ObjectId id;
-            if (ObjectId.TryParse(albumId, out id))
+            ObjectId albumObjectId;
+            if (ObjectId.TryParse(albumId, out albumObjectId))
             {
-                Database.GetCollection<Album>(Collections.Albums).Update(Query.And(Query.EQ("_id", id), Query.Size("CoverURIs", 3)), Update.PopFirst("CoverURIs"));
-                Database.GetCollection<Album>(Collections.Albums).Update(Query.EQ("_id", id), Update.AddToSet("CoverURIs", coverUri));
+                Database.GetCollection<Album>(Collections.Albums).Update(Query.And(Query.EQ("_id", albumObjectId), Query.Size("CoverURIs", 3)), Update.PopFirst("CoverURIs"));
+                Database.GetCollection<Album>(Collections.Albums).Update(Query.EQ("_id", albumObjectId), Update.AddToSet("CoverURIs", coverUri));
             }
-            return Database.GetCollection<Album>(Collections.Albums).FindOneAs<Album>(Query.EQ("_id", id)).CoverURIs;
+            return Database.GetCollection<Album>(Collections.Albums).FindOneAs<Album>(Query.EQ("_id", albumObjectId)).CoverURIs;
         }
 
         public int GetTotalAlbumCount()
         {
             return Convert.ToInt32(Database.GetCollection<Album>(Collections.Albums).Count());
+        }
+
+        public void UpdateCovers(Album album)
+        {
+            var cursor = Database.GetCollection<Photo>(Collections.Photos).FindAllAs<Photo>().SetLimit(3);
+            var covers = cursor.Select(x => x.ThumbURI).ToArray();
+            album.CoverURIs = covers;
+            Database.GetCollection<Album>(Collections.Albums).Save(album);
         }
     }
 }

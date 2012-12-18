@@ -40,23 +40,14 @@ namespace LiteApp.MySpace.Web.Handlers
         public void ProcessRequest(HttpContext context)
         {
             // Prepare parameters
-            var extension = context.Request.QueryString["extension"];
-            var albumId = context.Request.QueryString["albumId"];
-            if (string.IsNullOrEmpty(extension))
-            {
-                throw new Exception("No file extension specified.");
-            }
-            if (string.IsNullOrEmpty(albumId))
-            {
-                throw new Exception("No album ID specified.");
-            }
-            if (!VerifyTicket(context))
+            UploadParameters parameters = GetParametersFromRequest(context);
+            if (!VerifyTicket(parameters.RequestToken, parameters.Ticket))
                 throw new Exception("No valid ticket for this request was found.");
 
             var storage = SharpBoxSupport.OpenDropBoxStorage();
-            var photoFolder = storage.EnsurePhotoFolder(albumId);
-            var thumbFolder = storage.EnsureThumbFolder(albumId);
-            var newFileName = ObjectId.GenerateNewId() + extension.ToLower();
+            var photoFolder = storage.EnsurePhotoFolder(parameters.AlbumId);
+            var thumbFolder = storage.EnsureThumbFolder(parameters.AlbumId);
+            var newFileName = ObjectId.GenerateNewId() + parameters.FileExtension;
 
             // Check request content length and actual stream length
             // If they're not equal, it means the client canceled the uploading
@@ -95,37 +86,67 @@ namespace LiteApp.MySpace.Web.Handlers
             storage.Close();
 
             // Store data to database
-            string[] coverURIs = AlbumRepository.UpdateCover(albumId, thumbURI);
+            string[] coverURIs = AlbumRepository.UpdateCover(parameters.AlbumId, thumbURI);
             Photo photo = new Photo();
             photo.PhotoURI = photoURI;
             photo.ThumbURI = thumbURI;
-            photo.AlbumId = albumId;
+            photo.AlbumId = parameters.AlbumId;
+            photo.CreatedOn = DateTime.Now;
+            photo.CreatedBy = parameters.User;
             PhotoRepository.SavePhoto(photo);
-            //using (var stream = context.Request.InputStream)
-            //{
-            //    byte[] buffer = new Byte[stream.Length];
-            //    stream.Read(buffer, 0, buffer.Length);
-            //}
             
             context.Response.Write(string.Join(";", coverURIs));
         }
 
         #endregion
 
-        bool VerifyTicket(HttpContext context)
+        UploadParameters GetParametersFromRequest(HttpContext context)
         {
+            var extension = context.Request.QueryString["extension"];
+            var albumId = context.Request.QueryString["albumId"];
+            var user = context.Request.QueryString["user"];
             var requestToken = context.Request.QueryString["requestToken"];
             var ticket = context.Request.QueryString["ticket"];
-            if (!string.IsNullOrEmpty(requestToken) && !string.IsNullOrEmpty(ticket))
-            {
-                bool result = false;
-                result = PhotoUploadTickets.VerifyTicket(requestToken, ticket);
-                // Dump this ticket immediately as it's been verified
-                PhotoUploadTickets.DestroyTicket(requestToken);
-                return result;
-            }
 
-            return false;
+            if (string.IsNullOrEmpty(extension))
+            {
+                throw new Exception("No file extension specified.");
+            }
+            if (string.IsNullOrEmpty(albumId))
+            {
+                throw new Exception("No album ID specified.");
+            }
+            if (string.IsNullOrEmpty(user))
+            {
+                throw new Exception("No upload user specified.");
+            }
+            if (string.IsNullOrEmpty(requestToken))
+            {
+                throw new Exception("No request token specified.");
+            }
+            if (string.IsNullOrEmpty(ticket))
+            {
+                throw new Exception("No ticket specified.");
+            }
+            return new UploadParameters() { AlbumId = albumId, FileExtension = extension.ToLower(), RequestToken = requestToken, Ticket = ticket, User = user };
+        }
+
+        bool VerifyTicket(string requestToken, string ticket)
+        {
+            bool result = false;
+            result = PhotoUploadTickets.VerifyTicket(requestToken, ticket);
+            // Dump this ticket immediately as it's been verified
+            PhotoUploadTickets.DestroyTicket(requestToken);
+            return result;
+        }
+
+        private class UploadParameters
+        {
+            public string FileExtension { get; set; }
+            public string AlbumId { get; set; }
+            public string User { get; set; }
+            public string RequestToken { get; set; }
+            public string Ticket { get; set; }
         }
     }
 }

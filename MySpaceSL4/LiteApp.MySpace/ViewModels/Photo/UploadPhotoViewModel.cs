@@ -7,6 +7,7 @@ using System.Windows;
 using Caliburn.Micro;
 using LiteApp.MySpace.Services.Security;
 using LiteApp.MySpace.Views.Helpers;
+using LiteApp.MySpace.Security;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -90,47 +91,43 @@ namespace LiteApp.MySpace.ViewModels
         public void StartUpload(FileInfo file, string albumId)
         {
             Status = PhotoUploadStatus.Uploading;
-            // Generate a request token locally and use it
-            // to ask server for a photo upload ticket
-            // Once ticket received, send both request token and ticket
-            // to server for upload authentication
-            string requestToken = Guid.NewGuid().ToString();
-            SecurityServiceClient svc = new SecurityServiceClient();
-            svc.RequestPhotoUploadTicketCompleted += (sender, e) =>
-                {
-                    if (e.Error != null)
+            try
+            {
+                // Generate a request token locally and use it
+                // to ask server for a photo upload ticket
+                // Once ticket received, send both request token and ticket
+                // to server for upload authentication
+                string requestToken = Guid.NewGuid().ToString();
+                SecurityServiceClient svc = new SecurityServiceClient();
+                svc.RequestPhotoUploadTicketCompleted += (sender, e) =>
                     {
-                        Status = PhotoUploadStatus.Error;
-                    }
-                    else if (!string.IsNullOrEmpty(e.Result))
-                    {
-                        _fileStream = file.OpenRead();
-                        _dataLength = _fileStream.Length;
-                        UriBuilder httpHandlerUrlBuilder = new UriBuilder(string.Format("{0}/Handlers/PhotoReceiver.ashx", _baseUri));
-                        httpHandlerUrlBuilder.Query = string.Format("{0}extension={1}&albumId={2}&requestToken={3}&ticket={4}",
-                            string.IsNullOrEmpty(httpHandlerUrlBuilder.Query) ? "" : httpHandlerUrlBuilder.Query.Remove(0, 1) + "&",
-                            Path.GetExtension(file.Name),
-                            albumId,
-                            requestToken,
-                            e.Result);
-
-                        HttpWebRequest webRequest = (HttpWebRequest)WebRequestCreator.ClientHttp.Create(httpHandlerUrlBuilder.Uri);
-                        webRequest.AllowWriteStreamBuffering = false; // Enable ongoing progress reporting
-                        webRequest.ContentType = "multipart/form-data";
-                        webRequest.ContentLength = _dataLength;
-                        webRequest.Method = "POST";
-                        webRequest.BeginGetRequestStream(new AsyncCallback(WriteToStreamCallback), webRequest);
-                        FileName = file.Name;
-                        CanCancel = true;
-                        if (UploadStarted != null)
-                            UploadStarted(this, EventArgs.Empty);
-                    }
-                    else
-                    {
-                        // TODO: Inform users they don't are not authenticated to do this
-                    }
-                };
-            svc.RequestPhotoUploadTicketAsync(requestToken);
+                        if (e.Error != null)
+                        {
+                            Status = PhotoUploadStatus.Error;
+                        }
+                        else if (!string.IsNullOrEmpty(e.Result))
+                        {
+                            _fileStream = file.OpenRead();
+                            _dataLength = _fileStream.Length;
+                            var webRequest = CreateUploadRequest(file, albumId, requestToken, e.Result);
+                            webRequest.BeginGetRequestStream(new AsyncCallback(WriteToStreamCallback), webRequest);
+                            FileName = file.Name;
+                            CanCancel = true;
+                            if (UploadStarted != null)
+                                UploadStarted(this, EventArgs.Empty);
+                        }
+                        else
+                        {
+                            // TODO: Inform users they don't are not authenticated to do this
+                            Status = PhotoUploadStatus.Error;
+                        }
+                    };
+                svc.RequestPhotoUploadTicketAsync(requestToken);
+            }
+            catch
+            {
+                Status = PhotoUploadStatus.Error;
+            }
         }
 
         public void CancelUpload()
@@ -138,6 +135,25 @@ namespace LiteApp.MySpace.ViewModels
             CanCancel = false;
             Status = PhotoUploadStatus.Canceled;
             _cancelRequested = true;
+        }
+
+        HttpWebRequest CreateUploadRequest(FileInfo file, string albumId, string requestToken, string ticket)
+        {
+            UriBuilder httpHandlerUrlBuilder = new UriBuilder(string.Format("{0}/Handlers/PhotoReceiver.ashx", _baseUri));
+            httpHandlerUrlBuilder.Query = string.Format("{0}extension={1}&albumId={2}&user={3}&requestToken={4}&ticket={5}",
+                string.IsNullOrEmpty(httpHandlerUrlBuilder.Query) ? "" : httpHandlerUrlBuilder.Query.Remove(0, 1) + "&",
+                Path.GetExtension(file.Name),
+                albumId,
+                SecurityContext.Current.User.Name,
+                requestToken,
+                ticket);
+
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequestCreator.ClientHttp.Create(httpHandlerUrlBuilder.Uri);
+            webRequest.AllowWriteStreamBuffering = false; // Enable ongoing progress reporting
+            webRequest.ContentType = "multipart/form-data";
+            webRequest.ContentLength = _dataLength;
+            webRequest.Method = "POST";
+            return webRequest;
         }
 
         private void WriteToStreamCallback(IAsyncResult asynchronousResult)

@@ -138,6 +138,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SupportFiles.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\DeletePhotoParameters.cs" />
     <Compile Include="Services\PagedResult.cs" />
     <Compile Include="Services\PhotoService.svc.cs">
       <DependentUpon>PhotoService.svc</DependentUpon>

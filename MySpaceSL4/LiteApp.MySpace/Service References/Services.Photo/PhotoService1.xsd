@@ -29,4 +29,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PagedResultOfPhotoYX32z0hB" nillable="true" type="tns:PagedResultOfPhotoYX32z0hB" />
+  <xs:complexType name="ArrayOfDeletePhotoParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeletePhotoParameters" nillable="true" type="tns:DeletePhotoParameters" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeletePhotoParameters" nillable="true" type="tns:ArrayOfDeletePhotoParameters" />
+  <xs:complexType name="DeletePhotoParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhotoId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeletePhotoParameters" nillable="true" type="tns:DeletePhotoParameters" />
 </xs:schema>

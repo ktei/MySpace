@@ -1,10 +1,12 @@
-﻿using Caliburn.Micro;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using LiteApp.MySpace.Framework;
-using System.Windows;
-using LiteApp.MySpace.Security;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows;
+using Caliburn.Micro;
+using LiteApp.MySpace.Framework;
+using LiteApp.MySpace.Security;
+using LiteApp.MySpace.Services.Photo;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -110,6 +112,39 @@ namespace LiteApp.MySpace.ViewModels
             var model = new UploadPhotoManagerViewModel();
             model.Album = this;
             IoC.Get<IWindowManager>().ShowDialog(model);
+        }
+
+        public void DeleteSelectedPhotos()
+        {
+            if (IsBusy)
+                return;
+            if (_photos != null && _photos.Count > 0)
+            {
+                IsBusy = true;
+                try
+                {
+                    var photoIds = _photos.Where(x => x.IsSelected).Select(x => x.Id).ToList();
+                    PhotoServiceClient svc = new PhotoServiceClient();
+                    svc.DeletePhotosCompleted += (sender, e) =>
+                        {
+                            IsBusy = false;
+                            if (e.Error != null)
+                            {
+                                e.Error.Handle();
+                            }
+                            else
+                            {
+                                _photos.RefreshCurrentPage();
+                            }
+                        };
+                    svc.DeletePhotosAsync(photoIds, Id);
+                }
+                catch
+                {
+                    IsBusy = false;
+                }
+
+            }
         }
 
         public void RefreshPhotos()

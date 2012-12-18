@@ -113,6 +113,11 @@ namespace LiteApp.MySpace.ViewModels
             IoC.Get<IWindowManager>().ShowDialog(model);
         }
 
+        public void DeleteSelectedPhotos()
+        {
+            ActiveItem.DeleteSelectedPhotos();
+        }
+
         public ICommand DeleteAlbumCommand
         {
             get

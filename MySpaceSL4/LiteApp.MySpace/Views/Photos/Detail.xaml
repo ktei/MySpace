@@ -15,8 +15,10 @@
     <StackPanel>
         <TextBlock Style="{StaticResource HeaderTextStyle}" Text="{Binding ActiveItem.Name, Mode=OneWay}" />
         <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Left">
-            <Button Content="View Albums" Width="120" Height="30" Margin="0,0,15,0" cal:Message.Attach="ViewAlbums" />
-            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhotoToActiveAlbum"
+            <Button Content="View Albums" Width="120" Height="30" cal:Message.Attach="ViewAlbums" />
+            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhotoToActiveAlbum" Margin="10,0,0,0" 
+                    Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"/>
+            <Button Content="Delete Photos" Width="120" Height="30" cal:Message.Attach="DeleteSelectedPhotos" Margin="10,0,0,0" 
                     Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"/>
         </StackPanel>
         <ContentControl x:Name="ActiveItem" Margin="0,15,0,0"/>

@@ -67,15 +67,48 @@ namespace LiteApp.MySpace.Web.Services
         {
             PagedResult<Photo> result = new PagedResult<Photo>();
             result.Entities = PhotoRepository.GetPagedPhotos(pageIndex, pageSize, albumId).ToList();
-            result.TotalItemCount = PhotoRepository.GetTotalPhotoCount();
+            result.TotalItemCount = PhotoRepository.GetTotalPhotoCount(albumId);
             return result;
         }
 
+        // TODO: this method should return the new covers for requested album so that
+        // client side can update its UI
         [OperationContract]
-        public void DeletePhoto(string[] photoIds, string albumId)
+        [FaultContract(typeof(ServerFault))]
+        public string DeletePhotos(DeletePhotoParameters[] photos, string albumId)
         {
             ServiceSupport.AuthorizeAndExecute(() =>
                 {
+                    var album = AlbumRepository.FindAlbumById(albumId);
+                    if (album == null)
+                    {
+                        throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.Generic },
+                                new FaultReason("No album with Id " + albumId + " was found."));
+                    }
+
+                    var photoIds = photos.Select(x => x.PhotoId).ToArray();
+                    // TODO: use photos' file names to delete the files on cloud (dropbox)
+                    
+                    if (HttpContext.Current.IsSuperAdminLoggedIn())
+                    {
+                        PhotoRepository.DeletePhotos(photoIds, albumId);
+                        AlbumRepository.UpdateCovers(album);
+                    }
+                    else
+                    {
+                        // Only album author can delete photos
+                        if (!HttpContext.Current.IsUserLoggedIn(album.CreatedBy))
+                        {
+                            throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.NotAuthroized },
+                                new FaultReason("Photos must only be deleted by the author of the album they belong to."));
+                        }
+                        else
+                        {
+                            // Delete photos by selected IDs and album ID
+                            PhotoRepository.DeletePhotos(photoIds, albumId);
+                            AlbumRepository.UpdateCovers(album);
+                        }
+                    }
                     
                 });
         }
@@ -103,7 +136,7 @@ namespace LiteApp.MySpace.Web.Services
         {
             ServiceSupport.AuthorizeAndExecute(() => 
                 {
-                    if (HttpContext.Current.User.Identity.Name == "ktei")
+                    if (HttpContext.Current.IsSuperAdminLoggedIn())
                     {
                         PhotoRepository.DeleteComment(commentId);
                     }
@@ -112,7 +145,7 @@ namespace LiteApp.MySpace.Web.Services
                         var comment = PhotoRepository.GetCommentById(commentId);
                         if (comment != null)
                         {
-                            if (comment.CreatedBy != HttpContext.Current.User.Identity.Name)
+                            if (HttpContext.Current.IsUserLoggedIn(comment.CreatedBy))
                             {
                                 throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.NotAuthroized },
                                     new FaultReason("Comment must only be deleted by its author"));

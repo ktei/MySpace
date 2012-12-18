@@ -34,21 +34,34 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             Database.GetCollection<Photo>(Collections.Photos).Save(photo);
         }
 
-        public void DeletePhoto(string photoId)
+        public void DeletePhotos(string[] photoIds, string albumId)
         {
-            ObjectId id;
-            if (ObjectId.TryParse(photoId, out id))
+            ObjectId albumObjectId;
+            if (!ObjectId.TryParse(albumId, out albumObjectId))
+                return;
+            foreach (var photoId in photoIds)
             {
-                Database.GetCollection<Photo>(Collections.Photos).Remove(Query.EQ("_id", id));
+                ObjectId photoObjectId;
+                
+                if (ObjectId.TryParse(photoId, out photoObjectId))
+                {
+                    Database.GetCollection<Photo>(Collections.Photos).Remove(
+                        Query.And(
+                        Query.EQ("_id", photoObjectId), 
+                        Query.EQ("AlbumId", albumObjectId)));
+                }
             }
         }
 
-
-        public int GetTotalPhotoCount()
+        public int GetTotalPhotoCount(string albumId)
         {
-            return Convert.ToInt32(Database.GetCollection<Photo>(Collections.Photos).Count());
+            ObjectId albumObjectId;
+            if (ObjectId.TryParse(albumId, out albumObjectId))
+            {
+                return Convert.ToInt32(Database.GetCollection<Photo>(Collections.Photos).Count(Query.EQ("AlbumId", albumObjectId)));
+            }
+            return 0;
         }
-
 
         public IEnumerable<PhotoComment> GetComments(string photoId)
         {
@@ -69,10 +82,10 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
 
         public void DeleteComment(string commentId)
         {
-            ObjectId id;
-            if (ObjectId.TryParse(commentId, out id))
+            ObjectId commentObjectId;
+            if (ObjectId.TryParse(commentId, out commentObjectId))
             {
-                Database.GetCollection<PhotoComment>(Collections.PhotoComments).Remove(Query.EQ("_id", id));
+                Database.GetCollection<PhotoComment>(Collections.PhotoComments).Remove(Query.EQ("_id", commentObjectId));
             }
         }
 
@@ -85,7 +98,6 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             }
             return 0;
         }
-
 
         public PhotoComment GetCommentById(string commentId)
         {

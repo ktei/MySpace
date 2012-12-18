@@ -403,6 +403,51 @@ namespace LiteApp.MySpace.Services.Photo {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeletePhotoParameters", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
+    public partial class DeletePhotoParameters : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string FileNameField;
+        
+        private string PhotoIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FileName {
+            get {
+                return this.FileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhotoId {
+            get {
+                return this.PhotoIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhotoIdField, value) != true)) {
+                    this.PhotoIdField = value;
+                    this.RaisePropertyChanged("PhotoId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="PhotoComment", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities")]
     public partial class PhotoComment : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -516,6 +561,12 @@ namespace LiteApp.MySpace.Services.Photo {
         System.IAsyncResult BeginGetPagedPhotos(int pageIndex, int pageSize, string albumId, System.AsyncCallback callback, object asyncState);
         
         LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB EndGetPagedPhotos(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeletePhotos", ReplyAction="urn:PhotoService/DeletePhotosResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeletePhotosServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        System.IAsyncResult BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState);
+        
+        void EndDeletePhotos(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/GetComments", ReplyAction="urn:PhotoService/GetCommentsResponse")]
         System.IAsyncResult BeginGetComments(string photoId, System.AsyncCallback callback, object asyncState);
@@ -643,6 +694,12 @@ namespace LiteApp.MySpace.Services.Photo {
         
         private System.Threading.SendOrPostCallback onGetPagedPhotosCompletedDelegate;
         
+        private BeginOperationDelegate onBeginDeletePhotosDelegate;
+        
+        private EndOperationDelegate onEndDeletePhotosDelegate;
+        
+        private System.Threading.SendOrPostCallback onDeletePhotosCompletedDelegate;
+        
         private BeginOperationDelegate onBeginGetCommentsDelegate;
         
         private EndOperationDelegate onEndGetCommentsDelegate;
@@ -721,6 +778,8 @@ namespace LiteApp.MySpace.Services.Photo {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeleteAlbumCompleted;
         
         public event System.EventHandler<GetPagedPhotosCompletedEventArgs> GetPagedPhotosCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeletePhotosCompleted;
         
         public event System.EventHandler<GetCommentsCompletedEventArgs> GetCommentsCompleted;
         
@@ -918,6 +977,53 @@ namespace LiteApp.MySpace.Services.Photo {
                         pageIndex,
                         pageSize,
                         albumId}, this.onEndGetPagedPhotosDelegate, this.onGetPagedPhotosCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDeletePhotos(photos, albumId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void LiteApp.MySpace.Services.Photo.PhotoService.EndDeletePhotos(System.IAsyncResult result) {
+            base.Channel.EndDeletePhotos(result);
+        }
+        
+        private System.IAsyncResult OnBeginDeletePhotos(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos = ((System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters>)(inValues[0]));
+            string albumId = ((string)(inValues[1]));
+            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginDeletePhotos(photos, albumId, callback, asyncState);
+        }
+        
+        private object[] OnEndDeletePhotos(System.IAsyncResult result) {
+            ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndDeletePhotos(result);
+            return null;
+        }
+        
+        private void OnDeletePhotosCompleted(object state) {
+            if ((this.DeletePhotosCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DeletePhotosCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DeletePhotosAsync(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId) {
+            this.DeletePhotosAsync(photos, albumId, null);
+        }
+        
+        public void DeletePhotosAsync(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId, object userState) {
+            if ((this.onBeginDeletePhotosDelegate == null)) {
+                this.onBeginDeletePhotosDelegate = new BeginOperationDelegate(this.OnBeginDeletePhotos);
+            }
+            if ((this.onEndDeletePhotosDelegate == null)) {
+                this.onEndDeletePhotosDelegate = new EndOperationDelegate(this.OnEndDeletePhotos);
+            }
+            if ((this.onDeletePhotosCompletedDelegate == null)) {
+                this.onDeletePhotosCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDeletePhotosCompleted);
+            }
+            base.InvokeAsync(this.onBeginDeletePhotosDelegate, new object[] {
+                        photos,
+                        albumId}, this.onEndDeletePhotosDelegate, this.onDeletePhotosCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1184,6 +1290,19 @@ namespace LiteApp.MySpace.Services.Photo {
                 object[] _args = new object[0];
                 LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB _result = ((LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB)(base.EndInvoke("GetPagedPhotos", _args, result)));
                 return _result;
+            }
+            
+            public System.IAsyncResult BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = photos;
+                _args[1] = albumId;
+                System.IAsyncResult _result = base.BeginInvoke("DeletePhotos", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndDeletePhotos(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("DeletePhotos", _args, result);
             }
             
             public System.IAsyncResult BeginGetComments(string photoId, System.AsyncCallback callback, object asyncState) {

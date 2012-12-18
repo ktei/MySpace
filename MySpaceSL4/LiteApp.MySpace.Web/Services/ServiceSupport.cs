@@ -3,6 +3,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.ServiceModel;
 using LiteApp.MySpace.Web.FaultHandling;
+using System.Web;
 
 namespace LiteApp.MySpace.Web.Services
 {
@@ -47,6 +48,16 @@ namespace LiteApp.MySpace.Web.Services
                 throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.Generic },
                     new FaultReason(ex.Message));
             }
+        }
+
+        public static bool IsSuperAdminLoggedIn(this HttpContext context)
+        {
+            return context.IsUserLoggedIn("ktei");
+        }
+
+        public static bool IsUserLoggedIn(this HttpContext context, string userName)
+        {
+            return context.User.Identity.IsAuthenticated && context.User.Identity.Name == userName;
         }
     }
 }

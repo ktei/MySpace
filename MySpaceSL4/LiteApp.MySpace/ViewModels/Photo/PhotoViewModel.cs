@@ -100,6 +100,8 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
+        public bool IsSelected { get; set; }
+
         public bool HasComment
         {
             get { return _comments != null && _comments.Count > 0; }
