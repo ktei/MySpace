@@ -133,6 +133,7 @@
       <DependentUpon>ErrorStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Controls\LoadingIndicator.cs" />
+    <Compile Include="Controls\ProgressRing.cs" />
     <Compile Include="Converters\MessageLevelToImageSourceConverter.cs" />
     <Compile Include="Converters\PhotoCommentDeleteVisibilityConverter.cs" />
     <Compile Include="Converters\PhotoUploadStatusToImageSourceConverter.cs" />
