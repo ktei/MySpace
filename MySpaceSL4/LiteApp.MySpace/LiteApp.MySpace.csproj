@@ -394,6 +394,7 @@
     <Resource Include="Assets\Images\exclamation.png" />
     <Resource Include="Assets\Images\error.png" />
     <Resource Include="Assets\Images\information.png" />
+    <Resource Include="Assets\Images\upload-16.png" />
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <None Include="Service References\Services.Photo\PhotoService.disco" />
     <None Include="Service References\Services.Photo\configuration91.svcinfo" />

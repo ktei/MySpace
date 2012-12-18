@@ -37,6 +37,7 @@
                                                  Visibility="{Binding CanCancel, Converter={StaticResource boolToVis}, Mode=OneWay}" cal:Message.Attach="CancelUpload"/>
                                 <TextBlock Style="{StaticResource BlackLabelTextStyle}" Text="{Binding Status, Mode=OneWay}" Grid.Column="1" VerticalAlignment="Center"
                                                Visibility="{Binding CanCancel, Converter={StaticResource boolToVisReverse}, Mode=OneWay}"/>
+                                <!--<Image Source="../Assets/Images/upload-16.png" Grid.Column="1" VerticalAlignment="Center"/>-->
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay}" Height="10" Maximum="1" Minimum="0" Grid.Row="1" Grid.ColumnSpan="2"/>
                             </Grid>
                         </DataTemplate>

@@ -58,6 +58,14 @@ namespace LiteApp.MySpace.Web.Handlers
             var thumbFolder = storage.EnsureThumbFolder(albumId);
             var newFileName = ObjectId.GenerateNewId() + extension.ToLower();
 
+            // Check request content length and actual stream length
+            // If they're not equal, it means the client canceled the uploading
+            bool lengthsMatched = context.Request.ContentLength == context.Request.InputStream.Length;
+            if (!lengthsMatched)
+            {
+                return;
+            }
+
             // Compress photo and upload
             using (var img = Image.FromStream(context.Request.InputStream))
             {
