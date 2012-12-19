@@ -47,12 +47,14 @@
                                 </HyperlinkButton>
                             </Grid>
                         </StackPanel>
-                        <Grid Height="30">
-                            <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Description, Mode=OneWay}" VerticalAlignment="Center"
+                        <Grid Height="60">
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">
+                                <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Description, Mode=OneWay}" VerticalAlignment="Top"
                                        Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" 
                                        HorizontalAlignment="Stretch" TextWrapping="Wrap" />
-                            <TextBox Text="{Binding DescriptionBackup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"
-                                     Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" />
+                            </ScrollViewer>
+                            <TextBox Text="{Binding DescriptionBackup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                     Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" AcceptsReturn="True" TextWrapping="Wrap" />
                         </Grid>
                     </StackPanel>
                 </Grid>

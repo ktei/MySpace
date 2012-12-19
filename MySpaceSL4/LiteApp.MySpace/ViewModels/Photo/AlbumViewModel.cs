@@ -117,7 +117,7 @@ namespace LiteApp.MySpace.ViewModels
         {
             if (IsBusy)
                 return;
-            if (_photos != null && _photos.Count > 0)
+            if (_photos != null && _photos.Any(x => x.IsSelected))
             {
                 IsBusy = true;
                 try

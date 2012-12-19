@@ -96,8 +96,6 @@ namespace LiteApp.MySpace.Web.Services
             return result;
         }
 
-        // TODO: this method should return the new covers for requested album so that
-        // client side can update its UI
         [OperationContract]
         [FaultContract(typeof(ServerFault))]
         public string[] DeletePhotos(DeletePhotoParameters[] photos, string albumId)
@@ -144,6 +142,38 @@ namespace LiteApp.MySpace.Web.Services
                     albumCovers = album.CoverURIs;
                 });
             return albumCovers;
+        }
+
+        [OperationContract]
+        [FaultContract(typeof(ServerFault))]
+        public void UpdateDescription(string description, string photoId)
+        {
+            ServiceSupport.AuthorizeAndExecute(() =>
+            {
+                var photo = PhotoRepository.FindPhotoById(photoId);
+                if (photo == null)
+                {
+                    throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.Generic },
+                            new FaultReason("No photo with Id " + photoId + " was found."));
+                }
+
+                if (HttpContext.Current.IsSuperAdminLoggedIn())
+                {
+                    PhotoRepository.UpdateDescription(description, photoId);
+                }
+                else
+                {
+                    if (!HttpContext.Current.IsUserLoggedIn(photo.CreatedBy))
+                    {
+                        throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.NotAuthroized },
+                            new FaultReason("Photo description must only be modified by person who uploaded it."));
+                    }
+                    else
+                    {
+                        PhotoRepository.UpdateDescription(description, photoId);
+                    }
+                }
+            });
         }
 
         [OperationContract]

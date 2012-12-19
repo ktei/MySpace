@@ -40,11 +40,7 @@ namespace LiteApp.MySpace.Views
 
         private void CreateAlbumView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                CreateButton.AutomationPeerInvoke();
-            }
-            else if (e.Key == Key.Escape)
+            if (e.Key == Key.Escape)
             {
                 CancelButton.AutomationPeerInvoke();
             }

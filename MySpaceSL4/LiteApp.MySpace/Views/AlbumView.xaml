@@ -18,7 +18,7 @@
 
     <StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhoto" Margin="10,0,0,0" 
+            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhoto"
                     Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"/>
             <Button Content="Delete Photos" Width="120" Height="30" cal:Message.Attach="DeleteSelectedPhotos" Margin="10,0,0,0" 
                     Visibility="{Binding DeleteButtonVisibility, Mode=OneWay}"/>

@@ -583,6 +583,12 @@ namespace LiteApp.MySpace.Services.Photo {
         
         System.Collections.Generic.List<string> EndDeletePhotos(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/UpdateDescription", ReplyAction="urn:PhotoService/UpdateDescriptionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/UpdateDescriptionServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        System.IAsyncResult BeginUpdateDescription(string description, string photoId, System.AsyncCallback callback, object asyncState);
+        
+        void EndUpdateDescription(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/GetComments", ReplyAction="urn:PhotoService/GetCommentsResponse")]
         System.IAsyncResult BeginGetComments(string photoId, System.AsyncCallback callback, object asyncState);
         
@@ -734,6 +740,12 @@ namespace LiteApp.MySpace.Services.Photo {
         
         private System.Threading.SendOrPostCallback onDeletePhotosCompletedDelegate;
         
+        private BeginOperationDelegate onBeginUpdateDescriptionDelegate;
+        
+        private EndOperationDelegate onEndUpdateDescriptionDelegate;
+        
+        private System.Threading.SendOrPostCallback onUpdateDescriptionCompletedDelegate;
+        
         private BeginOperationDelegate onBeginGetCommentsDelegate;
         
         private EndOperationDelegate onEndGetCommentsDelegate;
@@ -814,6 +826,8 @@ namespace LiteApp.MySpace.Services.Photo {
         public event System.EventHandler<GetPagedPhotosCompletedEventArgs> GetPagedPhotosCompleted;
         
         public event System.EventHandler<DeletePhotosCompletedEventArgs> DeletePhotosCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> UpdateDescriptionCompleted;
         
         public event System.EventHandler<GetCommentsCompletedEventArgs> GetCommentsCompleted;
         
@@ -1059,6 +1073,53 @@ namespace LiteApp.MySpace.Services.Photo {
             base.InvokeAsync(this.onBeginDeletePhotosDelegate, new object[] {
                         photos,
                         albumId}, this.onEndDeletePhotosDelegate, this.onDeletePhotosCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginUpdateDescription(string description, string photoId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginUpdateDescription(description, photoId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void LiteApp.MySpace.Services.Photo.PhotoService.EndUpdateDescription(System.IAsyncResult result) {
+            base.Channel.EndUpdateDescription(result);
+        }
+        
+        private System.IAsyncResult OnBeginUpdateDescription(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string description = ((string)(inValues[0]));
+            string photoId = ((string)(inValues[1]));
+            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginUpdateDescription(description, photoId, callback, asyncState);
+        }
+        
+        private object[] OnEndUpdateDescription(System.IAsyncResult result) {
+            ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndUpdateDescription(result);
+            return null;
+        }
+        
+        private void OnUpdateDescriptionCompleted(object state) {
+            if ((this.UpdateDescriptionCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.UpdateDescriptionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void UpdateDescriptionAsync(string description, string photoId) {
+            this.UpdateDescriptionAsync(description, photoId, null);
+        }
+        
+        public void UpdateDescriptionAsync(string description, string photoId, object userState) {
+            if ((this.onBeginUpdateDescriptionDelegate == null)) {
+                this.onBeginUpdateDescriptionDelegate = new BeginOperationDelegate(this.OnBeginUpdateDescription);
+            }
+            if ((this.onEndUpdateDescriptionDelegate == null)) {
+                this.onEndUpdateDescriptionDelegate = new EndOperationDelegate(this.OnEndUpdateDescription);
+            }
+            if ((this.onUpdateDescriptionCompletedDelegate == null)) {
+                this.onUpdateDescriptionCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUpdateDescriptionCompleted);
+            }
+            base.InvokeAsync(this.onBeginUpdateDescriptionDelegate, new object[] {
+                        description,
+                        photoId}, this.onEndUpdateDescriptionDelegate, this.onUpdateDescriptionCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1339,6 +1400,19 @@ namespace LiteApp.MySpace.Services.Photo {
                 object[] _args = new object[0];
                 System.Collections.Generic.List<string> _result = ((System.Collections.Generic.List<string>)(base.EndInvoke("DeletePhotos", _args, result)));
                 return _result;
+            }
+            
+            public System.IAsyncResult BeginUpdateDescription(string description, string photoId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = description;
+                _args[1] = photoId;
+                System.IAsyncResult _result = base.BeginInvoke("UpdateDescription", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndUpdateDescription(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("UpdateDescription", _args, result);
             }
             
             public System.IAsyncResult BeginGetComments(string photoId, System.AsyncCallback callback, object asyncState) {

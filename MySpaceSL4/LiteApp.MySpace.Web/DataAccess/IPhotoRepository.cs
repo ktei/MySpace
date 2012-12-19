@@ -9,6 +9,7 @@ namespace LiteApp.MySpace.Web.DataAccess
     public interface IPhotoRepository
     {
         IEnumerable<Photo> GetPagedPhotos(int pageIndex, int pageSize, string albumId);
+        Photo FindPhotoById(string photoId);
         void SavePhoto(Photo photo);
         void DeletePhotos(IEnumerable<string> photoIds, string albumId);
         int GetTotalPhotoCount(string albumId);
@@ -17,7 +18,7 @@ namespace LiteApp.MySpace.Web.DataAccess
         PhotoComment GetCommentById(string commentId);
         void SaveComment(PhotoComment comment);
         void DeleteComment(string commentId);
-        void UpdateComment(string newContents, string commentId);
+        void UpdateDescription(string description, string photoId);
         int GetCommentCount(string photoId);
     }
 }

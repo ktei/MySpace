@@ -220,7 +220,26 @@ namespace LiteApp.MySpace.ViewModels
         public void SaveDescription()
         {
             IsEditingDescription = false;
-            Description = DescriptionBackup;
+            if (Description != DescriptionBackup)
+            {
+                Description = DescriptionBackup;
+                try
+                {
+                    PhotoServiceClient svc = new PhotoServiceClient();
+                    svc.UpdateDescriptionCompleted += (sender, e) =>
+                        {
+                            if (e.Error != null)
+                            {
+                                e.Error.Handle();
+                            }
+                        };
+                    svc.UpdateDescriptionAsync(Description, Id);
+                }
+                catch (Exception ex)
+                {
+                    ex.Handle();
+                }
+            }
         }
 
         protected override void OnViewLoaded(object view)
