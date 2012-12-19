@@ -17,6 +17,12 @@ namespace LiteApp.MySpace.Views
             this.Unloaded += CreateAlbumView_Unloaded;
         }
 
+        protected override void OnOpened()
+        {
+            base.OnOpened();
+            Name.Focus();
+        }
+
         void CreateAlbumView_Loaded(object sender, RoutedEventArgs e)
         {
             _model = (CreateAlbumViewModel)this.DataContext;
@@ -40,7 +46,11 @@ namespace LiteApp.MySpace.Views
 
         private void CreateAlbumView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
+            if (e.Key == Key.Enter)
+            {
+                CreateButton.AutomationPeerInvoke();
+            }
+            else if (e.Key == Key.Escape)
             {
                 CancelButton.AutomationPeerInvoke();
             }

@@ -98,7 +98,7 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-        public Visibility DeleteButtonVisibility
+        public Visibility SensitiveButtonsVisibility
         {
             get
             {
@@ -215,7 +215,7 @@ namespace LiteApp.MySpace.ViewModels
         {
             if (e.PropertyName == "IsAuthenticated")
             {
-                NotifyOfPropertyChange(() => DeleteButtonVisibility);
+                NotifyOfPropertyChange(() => SensitiveButtonsVisibility);
             }
         }
     }

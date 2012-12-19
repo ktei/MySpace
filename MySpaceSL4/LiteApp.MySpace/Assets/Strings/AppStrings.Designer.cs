@@ -171,6 +171,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Give your album a name.
+        /// </summary>
+        public static string GiveAlbumName {
+            get {
+                return ResourceManager.GetString("GiveAlbumName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string HomePageTitle {

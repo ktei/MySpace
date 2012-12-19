@@ -15,7 +15,7 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
             <HyperlinkButton cal:Message.Attach="ViewAlbums">
-                <Image Source="../../Assets/Images/Previous.png"/>
+                <Image Source="../../Assets/Images/previous-circle-32.png"/>
             </HyperlinkButton>
             <TextBlock Text="{Binding ActiveItem.Name, Mode=OneWay}" Style="{StaticResource HeaderTextStyle}"/>
         </StackPanel>

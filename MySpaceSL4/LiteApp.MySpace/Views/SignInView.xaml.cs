@@ -18,6 +18,11 @@ namespace LiteApp.MySpace.Views
             this.Unloaded += SignInView_Unloaded;
         }
 
+        protected override void OnOpened()
+        {
+            base.OnOpened();
+            UserName.Focus();
+        }
 
         void SignInView_Loaded(object sender, RoutedEventArgs e)
         {
