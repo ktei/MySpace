@@ -400,7 +400,9 @@
     <Resource Include="Assets\Images\cancel-16.png" />
     <Resource Include="Assets\Images\error-16.png" />
     <Resource Include="Assets\Images\completing-16.png" />
+    <Resource Include="Assets\Images\edit-circle-32.png" />
     <Content Include="Assets\Images\icon-scales.txt" />
+    <Resource Include="Assets\Images\save-circle-32.png" />
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <None Include="Service References\Services.Photo\PhotoService.disco" />
     <None Include="Service References\Services.Photo\configuration91.svcinfo" />

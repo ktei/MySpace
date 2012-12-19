@@ -18,6 +18,19 @@ namespace LiteApp.MySpace.ViewModels
     {
         bool _isDeleting;
 
+        public PhotoCommentViewModel()
+        {
+            SecurityContext.Current.PropertyChanged += SecurityContext_PropertyChanged;
+        }
+
+        void SecurityContext_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsAuthenticated")
+            {
+                NotifyOfPropertyChange(() => CreatedBy);
+            }
+        }
+
         public string Id { get; set; }
 
         public string CreatedBy { get; set; }

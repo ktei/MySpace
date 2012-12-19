@@ -7,6 +7,7 @@ using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Security;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.MySpace.Views.Helpers;
+using System.ComponentModel;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -19,6 +20,9 @@ namespace LiteApp.MySpace.ViewModels
         bool _isLoadingComments;
         bool _canPostComment = true;
         string _commentContents;
+        bool _isEditingDescription;
+        string _description;
+        string _descriptionBackup;
 
         public PhotoViewModel()
         {
@@ -31,7 +35,31 @@ namespace LiteApp.MySpace.ViewModels
 
         public DateTime CreatedOn { get; set; }
 
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    NotifyOfPropertyChange(() => Description);
+                }
+            }
+        }
+
+        public string DescriptionBackup
+        {
+            get { return _descriptionBackup; }
+            set
+            {
+                if (_descriptionBackup != value)
+                {
+                    _descriptionBackup = value;
+                    NotifyOfPropertyChange(() => DescriptionBackup);
+                }
+            }
+        }
 
         public string PhotoURI { get; set; }
 
@@ -104,6 +132,19 @@ namespace LiteApp.MySpace.ViewModels
 
         public bool IsSelected { get; set; }
 
+        public bool IsEditingDescription
+        {
+            get { return _isEditingDescription; }
+            private set
+            {
+                if (_isEditingDescription != value)
+                {
+                    _isEditingDescription = value;
+                    NotifyOfPropertyChange(() => IsEditingDescription);
+                }
+            }
+        }
+
         public bool HasComment
         {
             get { return _comments != null && _comments.Count > 0; }
@@ -116,7 +157,6 @@ namespace LiteApp.MySpace.ViewModels
                 return _comments;
             }
         }
-
 
         public ICommand DoubleClickCommand
         {
@@ -156,6 +196,18 @@ namespace LiteApp.MySpace.ViewModels
                         DeleteComment(model);
                     });
             }
+        }
+
+        public void EditDescription()
+        {
+            IsEditingDescription = true;
+            DescriptionBackup = Description;
+        }
+
+        public void SaveDescription()
+        {
+            IsEditingDescription = false;
+            Description = DescriptionBackup;
         }
 
         protected override void OnViewLoaded(object view)

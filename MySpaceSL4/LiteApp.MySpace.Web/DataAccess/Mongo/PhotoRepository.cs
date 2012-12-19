@@ -110,5 +110,15 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             }
             return null;
         }
+
+
+        public void UpdateComment(string newContents, string commentId)
+        {
+            ObjectId commentObjectId;
+            if (ObjectId.TryParse(commentId, out commentObjectId))
+            {
+                Database.GetCollection<PhotoComment>(Collections.PhotoComments).Update(Query.EQ("_id", commentObjectId), Update.Set("Contents", newContents));
+            }
+        }
     }
 }

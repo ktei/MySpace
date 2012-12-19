@@ -21,6 +21,16 @@ namespace LiteApp.MySpace.Security
 
         public static SecurityContext Current { get; private set; }
 
+        public bool IsSuperAdminSignedIn()
+        {
+            return this.IsUserSignedIn("ktei");
+        }
+
+        public bool IsUserSignedIn(string userName)
+        {
+            return IsAuthenticated && User.Name == userName;
+        }
+
         public void SignIn(string userName, string password, Action<SignInResult> completeAction)
         {
             if (completeAction == null)

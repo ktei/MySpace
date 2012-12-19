@@ -246,4 +246,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="ToPostCommentPlease" xml:space="preserve">
     <value>To post any comment, please</value>
   </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
 </root>
