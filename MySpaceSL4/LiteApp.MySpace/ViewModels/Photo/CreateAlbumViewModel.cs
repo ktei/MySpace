@@ -69,36 +69,33 @@ namespace LiteApp.MySpace.ViewModels
 
         public void Create()
         {
-            ViewModelSupport.AuthorizeAndExecute(() =>
-                {
-                    RefreshBindingScope.Scope();
-                    if (this.Validator.HasErrors)
-                        return;
+            RefreshBindingScope.Scope();
+            if (this.Validator.HasErrors)
+                return;
 
-                    IsBusy = true;
-                    try
+            IsBusy = true;
+            try
+            {
+                PhotoServiceClient svc = new PhotoServiceClient();
+                Album album = new Album();
+                album.Name = Name;
+                album.Description = Description;
+                svc.SaveAlbumCompleted += (sender, e) =>
+                {
+                    IsBusy = false;
+                    if (e.Error != null)
                     {
-                        PhotoServiceClient svc = new PhotoServiceClient();
-                        Album album = new Album();
-                        album.Name = Name;
-                        album.Description = Description;
-                        svc.SaveAlbumCompleted += (sender, e) =>
-                            {
-                                IsBusy = false;
-                                if (e.Error != null)
-                                {
-                                    e.Error.Handle();
-                                }
-                                if (CreateCompleted != null)
-                                    CreateCompleted(this, EventArgs.Empty);
-                            };
-                        svc.SaveAlbumAsync(album);
+                        e.Error.Handle();
                     }
-                    catch
-                    {
-                        IsBusy = false;
-                    }
-                });
+                    if (CreateCompleted != null)
+                        CreateCompleted(this, EventArgs.Empty);
+                };
+                svc.SaveAlbumAsync(album);
+            }
+            catch
+            {
+                IsBusy = false;
+            }
         }
     }
 }

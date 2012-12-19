@@ -27,11 +27,11 @@
                 <Border Style="{StaticResource PictureStyle}" HorizontalAlignment="Center" Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
                     <Image Source="{Binding PhotoURI, Mode=OneWay}" ImageOpened="Image_ImageOpened" />
                 </Border>
-                <controls:LoadingIndicator Style="{StaticResource CircleIndicator}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <controls:ProgressRing IsActive="True" HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVis}}" />
             </Grid>
             <Grid Grid.Column="1">
-                <controls:LoadingIndicator Style="{StaticResource CircleIndicator}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <controls:ProgressRing IsActive="True" HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Visibility="{Binding IsLoadingComments, Mode=OneWay, Converter={StaticResource boolToVis}}" />
                 <Grid Height="550" Visibility="{Binding IsLoadingComments, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
                     <Grid.RowDefinitions>
@@ -40,10 +40,18 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <TextBlock Text="Comments" Style="{StaticResource HeaderTextStyle}"/>
-                    <StackPanel Grid.Row="1" >
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1"
+                                Visibility="{Binding IsAuthenticated, Mode=OneWay, Converter={StaticResource boolToVisReverse}, Source={StaticResource SecurityContext}}">
+                        <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Strings.ToPostCommentPlease, Source={StaticResource AppResx}}"/>
+                        <HyperlinkButton x:Name="SignInLink" Click="SignInLink_Click" Content="{Binding Strings.SignInLinkText, Source={StaticResource AppResx}}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Visibility="{Binding IsAuthenticated, Mode=OneWay, Converter={StaticResource boolToVis}, Source={StaticResource SecurityContext}}">
+
                         <TextBox AcceptsReturn="True" Margin="0,0,0,5" Height="60" IsEnabled="{Binding CanPostComment, Mode=OneWay}" Text="{Binding CommentContents, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
-                        <Button Height="30" Content="{Binding Strings.PostButtonText, Source={StaticResource AppResx}}" Width="75" HorizontalAlignment="Right" Command="{Binding PostCommentCommand, Mode=OneWay}" IsEnabled="{Binding CanPostComment, Mode=OneWay}" />
+                        <Button Height="30" Content="{Binding Strings.PostButtonText, Source={StaticResource AppResx}}" Width="75" HorizontalAlignment="Right" 
+                                Command="{Binding PostCommentCommand, Mode=OneWay}" IsEnabled="{Binding CanPostComment, Mode=OneWay}" />
                     </StackPanel>
                     <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">
                         <Grid>

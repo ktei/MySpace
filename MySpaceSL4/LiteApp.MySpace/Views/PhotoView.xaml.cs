@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using LiteApp.MySpace.ViewModels;
 using System.Windows.Input;
 using LiteApp.MySpace.Views.Helpers;
+using Caliburn.Micro;
 
 namespace LiteApp.MySpace.Views
 {
@@ -35,6 +36,12 @@ namespace LiteApp.MySpace.Views
             {
                 CloseButton.AutomationPeerInvoke();
             }
+        }
+
+        private void SignInLink_Click(object sender, RoutedEventArgs e)
+        {
+            SignInViewModel model = new SignInViewModel();
+            IoC.Get<IWindowManager>().ShowDialog(model);
         }
     }
 }

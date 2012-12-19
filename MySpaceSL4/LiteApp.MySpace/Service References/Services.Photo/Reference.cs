@@ -451,6 +451,8 @@ namespace LiteApp.MySpace.Services.Photo {
     [System.Runtime.Serialization.DataContractAttribute(Name="PhotoComment", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities")]
     public partial class PhotoComment : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private string AlbumIdField;
+        
         private string ContentsField;
         
         private string CreatedByField;
@@ -460,6 +462,19 @@ namespace LiteApp.MySpace.Services.Photo {
         private string IdField;
         
         private string PhotoIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AlbumId {
+            get {
+                return this.AlbumIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AlbumIdField, value) != true)) {
+                    this.AlbumIdField = value;
+                    this.RaisePropertyChanged("AlbumId");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Contents {

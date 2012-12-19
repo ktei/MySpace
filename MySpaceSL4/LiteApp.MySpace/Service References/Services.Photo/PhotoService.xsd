@@ -46,6 +46,7 @@
   <xs:element name="ArrayOfPhotoComment" nillable="true" type="tns:ArrayOfPhotoComment" />
   <xs:complexType name="PhotoComment">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AlbumId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Contents" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />

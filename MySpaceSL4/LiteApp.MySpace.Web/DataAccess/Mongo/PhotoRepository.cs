@@ -14,6 +14,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("AlbumId");
             Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("CreatedOn");
             Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("PhotoId");
+            Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("AlbumId");
             Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("CreatedOn");
         }
 

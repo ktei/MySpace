@@ -6,17 +6,10 @@ namespace LiteApp.MySpace.ViewModels
 {
     public static class ViewModelSupport
     {
-        public static void AuthorizeAndExecute(System.Action action)
+        public static void ShowSignInDialog()
         {
-            if (!SecurityContext.Current.IsAuthenticated)
-            {
-                SignInViewModel signInModel = new SignInViewModel() { DisplayName = AppStrings.SignInRequiredMessageHeader, Message = AppStrings.OperationNeedsSignInMessage };
-                IoC.Get<IWindowManager>().ShowDialog(signInModel);
-            }
-            else
-            {
-                action();
-            }
+            SignInViewModel model = new SignInViewModel();
+            IoC.Get<IWindowManager>().ShowDialog(model);
         }
     }
 }

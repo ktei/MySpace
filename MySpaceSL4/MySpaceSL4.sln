@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDB.Web", "MongoDB.Web\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteApp.Portable.Mvvm", "LiteApp.Portable.Mvvm\LiteApp.Portable.Mvvm.csproj", "{395BBE17-6ECA-4B5D-BF1A-9141171F6236}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteApp.MySpace.Entities", "LiteApp.MySpace.Entities\LiteApp.MySpace.Entities.csproj", "{AF5BEC99-53ED-4D28-8CD9-E4928CDA552B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{395BBE17-6ECA-4B5D-BF1A-9141171F6236}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{395BBE17-6ECA-4B5D-BF1A-9141171F6236}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{395BBE17-6ECA-4B5D-BF1A-9141171F6236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF5BEC99-53ED-4D28-8CD9-E4928CDA552B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF5BEC99-53ED-4D28-8CD9-E4928CDA552B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF5BEC99-53ED-4D28-8CD9-E4928CDA552B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF5BEC99-53ED-4D28-8CD9-E4928CDA552B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -67,15 +67,12 @@ namespace LiteApp.MySpace.ViewModels
 
         public void CreateAlbum()
         {
-            ViewModelSupport.AuthorizeAndExecute(() =>
-                {
-                    var model = new CreateAlbumViewModel();
-                    model.CreateCompleted += (sender, e) =>
-                        {
-                            _albums.RefreshCurrentPage();
-                        };
-                    IoC.Get<IWindowManager>().ShowDialog(model);
-                });
+            var model = new CreateAlbumViewModel();
+            model.CreateCompleted += (sender, e) =>
+            {
+                _albums.RefreshCurrentPage();
+            };
+            IoC.Get<IWindowManager>().ShowDialog(model);
         }
 
         public void ViewAlbum(AlbumViewModel album)

@@ -315,6 +315,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to sign in.
+        /// </summary>
+        public static string SignInLinkText {
+            get {
+                return ResourceManager.GetString("SignInLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign-in is required.
         /// </summary>
         public static string SignInRequiredMessageHeader {
@@ -365,6 +374,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string TakeMeBackToMessage {
             get {
                 return ResourceManager.GetString("TakeMeBackToMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To post any comment, please.
+        /// </summary>
+        public static string ToPostCommentPlease {
+            get {
+                return ResourceManager.GetString("ToPostCommentPlease", resourceCulture);
             }
         }
         

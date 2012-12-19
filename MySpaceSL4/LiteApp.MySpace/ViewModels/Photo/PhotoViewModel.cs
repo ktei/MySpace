@@ -27,6 +27,8 @@ namespace LiteApp.MySpace.ViewModels
 
         public string Id { get; set; }
 
+        public string AlbumId { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string Description { get; set; }
@@ -164,35 +166,32 @@ namespace LiteApp.MySpace.ViewModels
 
         void DeleteComment(PhotoCommentViewModel comment)
         {
-            ViewModelSupport.AuthorizeAndExecute(() =>
+            comment.IsDeleting = true;
+            try
+            {
+                PhotoServiceClient svc = new PhotoServiceClient();
+                svc.DeleteCommentCompleted += (sender, e) =>
                 {
-                    comment.IsDeleting = true;
-                    try
+                    comment.IsDeleting = false;
+                    if (e.Error != null)
                     {
-                        PhotoServiceClient svc = new PhotoServiceClient();
-                        svc.DeleteCommentCompleted += (sender, e) =>
-                            {
-                                comment.IsDeleting = false;
-                                if (e.Error != null)
-                                {
-                                    e.Error.Handle();
-                                }
-                                else
-                                {
-                                    if (_comments != null)
-                                    {
-                                        _comments.Remove(comment);
-                                    }
-                                }
-                                NotifyOfPropertyChange(() => HasComment);
-                            };
-                        svc.DeleteCommentAsync(comment.Id);
+                        e.Error.Handle();
                     }
-                    catch
+                    else
                     {
-                        comment.IsDeleting = false;
+                        if (_comments != null)
+                        {
+                            _comments.Remove(comment);
+                        }
                     }
-                });
+                    NotifyOfPropertyChange(() => HasComment);
+                };
+                svc.DeleteCommentAsync(comment.Id);
+            }
+            catch
+            {
+                comment.IsDeleting = false;
+            }
         }
 
         void PostComment(string contents)
@@ -200,40 +199,38 @@ namespace LiteApp.MySpace.ViewModels
             if (IsLoadingComments)
                 return;
 
-            ViewModelSupport.AuthorizeAndExecute(() =>
+            CanPostComment = false;
+            PhotoComment comment = new PhotoComment();
+            comment.Contents = contents;
+            comment.CreatedBy = SecurityContext.Current.User.Name;
+            comment.PhotoId = Id;
+            comment.AlbumId = AlbumId;
+            PhotoServiceClient svc = new PhotoServiceClient();
+            try
+            {
+                svc.SaveCommentCompleted += (sender, e) =>
                 {
-                    CanPostComment = false;
-                    PhotoComment comment = new PhotoComment();
-                    comment.Contents = contents;
-                    comment.CreatedBy = SecurityContext.Current.User.Name;
-                    comment.PhotoId = Id;
-                    PhotoServiceClient svc = new PhotoServiceClient();
-                    try
+                    if (e.Error != null)
                     {
-                        svc.SaveCommentCompleted += (sender, e) =>
-                            {
-                                if (e.Error != null)
-                                {
-                                    e.Error.Handle();
-                                }
-                                else
-                                {
-                                    if (_comments != null)
-                                    {
-                                        _comments.Insert(0, MapToPhotoCommentViewModel(e.Result));
-                                    }
-                                }
-                                CanPostComment = true;
-                                CommentContents = string.Empty;
-                                NotifyOfPropertyChange(() => HasComment);
-                            };
-                        svc.SaveCommentAsync(comment);
+                        e.Error.Handle();
                     }
-                    catch
+                    else
                     {
-                        CanPostComment = true;
+                        if (_comments != null)
+                        {
+                            _comments.Insert(0, MapToPhotoCommentViewModel(e.Result));
+                        }
                     }
-                });
+                    CanPostComment = true;
+                    CommentContents = string.Empty;
+                    NotifyOfPropertyChange(() => HasComment);
+                };
+                svc.SaveCommentAsync(comment);
+            }
+            catch
+            {
+                CanPostComment = true;
+            }
         }
 
         void LoadComments()

@@ -41,6 +41,7 @@ namespace LiteApp.MySpace.ViewModels
             return new PhotoViewModel()
             {
                 Id = photo.Id,
+                AlbumId = photo.AlbumId,
                 CreatedOn = photo.CreatedOn,
                 Description = photo.Description,
                 ThumbURI = photo.ThumbURI,

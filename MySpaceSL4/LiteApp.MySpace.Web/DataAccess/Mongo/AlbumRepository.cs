@@ -46,6 +46,11 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             ObjectId albumObjectId;
             if (ObjectId.TryParse(albumId, out albumObjectId))
             {
+                // Delete related photo comments
+                Database.GetCollection<PhotoComment>(Collections.PhotoComments).Remove(Query.EQ("AlbumId", albumObjectId));
+                // Delete related photos
+                Database.GetCollection<Photo>(Collections.Photos).Remove(Query.EQ("AlbumId", albumObjectId));
+                // Delete album itself
                 Database.GetCollection<Album>(Collections.Albums).Remove(Query.EQ("_id", albumObjectId));
             }
         }

@@ -53,8 +53,33 @@ namespace LiteApp.MySpace.Web.Services
         {
             ServiceSupport.AuthorizeAndExecute(() =>
                 {
-                    SharpBoxSupport.DeleteAlbum(albumId);
-                    AlbumRepository.DeleteAlbum(albumId);
+                    if (HttpContext.Current.IsSuperAdminLoggedIn())
+                    {
+                        // TODO: should we consider doing this cloud operation in another thread? How about a background worker?
+                        SharpBoxSupport.DeleteAlbum(albumId);
+                        AlbumRepository.DeleteAlbum(albumId);
+                    }
+                    else
+                    {
+                        var album = AlbumRepository.FindAlbumById(albumId);
+                        if (album == null)
+                        {
+                            throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.Generic },
+                                    new FaultReason("No album with Id " + albumId + " was found."));
+                        }
+                        // Only album author can delete photos
+                        if (!HttpContext.Current.IsUserLoggedIn(album.CreatedBy))
+                        {
+                            throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.NotAuthroized },
+                                new FaultReason("Album must only be deleted by the author."));
+                        }
+                        else
+                        {
+                            // Delete photos by selected IDs and album ID
+                            SharpBoxSupport.DeleteAlbum(albumId);
+                            AlbumRepository.DeleteAlbum(albumId);
+                        }
+                    }
                 });
         }
 
