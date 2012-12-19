@@ -41,10 +41,10 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Grid Margin="60,0">
+                            <Grid Margin="100,0">
                                 <Grid MaxWidth="192" Height="119" DataContext="{Binding Covers[2], Mode=OneWay}">
                                     <Grid.RenderTransform>
-                                        <CompositeTransform Rotation="-3.9" TranslateX="-57"/>
+                                        <CompositeTransform Rotation="-3.9" TranslateX="-90"/>
                                     </Grid.RenderTransform>
                                     <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
                                         <Image Source="{Binding SourceURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
@@ -55,7 +55,7 @@
                                 </Grid>
                                 <Grid MaxWidth="192" Height="119" DataContext="{Binding Covers[1], Mode=OneWay}">
                                     <Grid.RenderTransform>
-                                        <CompositeTransform TranslateX="34" Rotation="5.3"/>
+                                        <CompositeTransform TranslateX="90" Rotation="5.3"/>
                                     </Grid.RenderTransform>
                                     <Border Style="{StaticResource PictureStyle}" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
                                         <Image Source="{Binding SourceURI, Mode=OneWay}" ImageOpened="Image_ImageOpened"/>
