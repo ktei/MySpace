@@ -13,13 +13,11 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <TextBlock Style="{StaticResource HeaderTextStyle}" Text="{Binding ActiveItem.Name, Mode=OneWay}" />
-        <StackPanel Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Left">
-            <Button Content="View Albums" Width="120" Height="30" cal:Message.Attach="ViewAlbums" />
-            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhotoToActiveAlbum" Margin="10,0,0,0" 
-                    Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"/>
-            <Button Content="Delete Photos" Width="120" Height="30" cal:Message.Attach="DeleteSelectedPhotos" Margin="10,0,0,0" 
-                    Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <HyperlinkButton cal:Message.Attach="ViewAlbums">
+                <Image Source="../../Assets/Images/Previous.png"/>
+            </HyperlinkButton>
+            <TextBlock Text="{Binding ActiveItem.Name, Mode=OneWay}" Style="{StaticResource HeaderTextStyle}"/>
         </StackPanel>
         <ContentControl x:Name="ActiveItem" Margin="0,15,0,0"/>
     </StackPanel>

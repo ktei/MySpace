@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="clr-namespace:LiteApp.MySpace.Converters"
     xmlns:controls="clr-namespace:LiteApp.MySpace.Controls"
+    xmlns:cal="http://www.caliburnproject.org"
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
     xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
     mc:Ignorable="d"
@@ -16,6 +17,12 @@
     </UserControl.Resources>
 
     <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhoto" Margin="10,0,0,0" 
+                    Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"/>
+            <Button Content="Delete Photos" Width="120" Height="30" cal:Message.Attach="DeleteSelectedPhotos" Margin="10,0,0,0" 
+                    Visibility="{Binding DeleteButtonVisibility, Mode=OneWay}"/>
+        </StackPanel>
         <ListBox x:Name="Photos" ItemsSource="{Binding Photos, Mode=OneWay}" SelectionMode="Extended"
                       Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" MinHeight="200">
             <ListBox.ItemContainerStyle>

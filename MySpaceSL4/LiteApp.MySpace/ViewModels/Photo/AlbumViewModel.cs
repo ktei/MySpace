@@ -102,9 +102,7 @@ namespace LiteApp.MySpace.ViewModels
         {
             get
             {
-                if (!SecurityContext.Current.IsAuthenticated)
-                    return Visibility.Collapsed;
-                return SecurityContext.Current.User.Name == CreatedBy || SecurityContext.Current.User.Name == "ktei" ? Visibility.Visible : Visibility.Collapsed;
+                return (SecurityContext.Current.IsSuperAdminSignedIn() || SecurityContext.Current.IsUserSignedIn(CreatedBy)) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -220,6 +218,5 @@ namespace LiteApp.MySpace.ViewModels
                 NotifyOfPropertyChange(() => DeleteButtonVisibility);
             }
         }
-
     }
 }

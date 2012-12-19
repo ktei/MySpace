@@ -36,18 +36,20 @@
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                             <TextBlock Text="{Binding Strings.DescriptionLabel, Source={StaticResource AppResx}}" 
                                        Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" />
-                            <HyperlinkButton Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" cal:Message.Attach="EditDescription">
-                                <Image Source="../Assets/Images/edit-circle-32.png" Margin="10,0,0,0"/>
+                            <HyperlinkButton 
+                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" cal:Message.Attach="EditDescription">
+                                <Image Source="../Assets/Images/edit-circle-32.png" Margin="5,0,0,0"/>
                             </HyperlinkButton>
-                            <HyperlinkButton Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" cal:Message.Attach="SaveDescription">
-                                <Image Source="../Assets/Images/save-circle-32.png" Margin="10,0,0,0"/>
+                            <HyperlinkButton 
+                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" cal:Message.Attach="SaveDescription">
+                                <Image Source="../Assets/Images/save-circle-32.png" Margin="5,0,0,0"/>
                             </HyperlinkButton>
                         </StackPanel>
-                        <Grid>
-                            <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Description, Mode=OneWay}"
+                        <Grid Height="30">
+                            <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Description, Mode=OneWay}" VerticalAlignment="Center"
                                        Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" 
                                        HorizontalAlignment="Stretch" TextWrapping="Wrap" />
-                            <TextBox Text="{Binding DescriptionBackup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            <TextBox Text="{Binding DescriptionBackup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"
                                      Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" />
                         </Grid>
                     </StackPanel>
