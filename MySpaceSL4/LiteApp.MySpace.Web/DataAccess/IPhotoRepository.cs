@@ -10,7 +10,7 @@ namespace LiteApp.MySpace.Web.DataAccess
     {
         IEnumerable<Photo> GetPagedPhotos(int pageIndex, int pageSize, string albumId);
         void SavePhoto(Photo photo);
-        void DeletePhotos(string[] photoIds, string albumId);
+        void DeletePhotos(IEnumerable<string> photoIds, string albumId);
         int GetTotalPhotoCount(string albumId);
 
         IEnumerable<PhotoComment> GetComments(string photoId);

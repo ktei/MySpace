@@ -38,6 +38,14 @@ namespace LiteApp.MySpace.Web.Helpers
             return storage.GetFolderEx(SharpBoxSupport.GetPhotoVirtualPath(albumId));
         }
 
+        public static void DeletePhoto(this CloudStorage storage, string fileName, string albumId)
+        {
+            var thumbPath = GetThumbVirtualPath(albumId) + "/" + fileName;
+            var photoPath = GetPhotoVirtualPath(albumId) + "/" + fileName;
+            storage.DeleteFileSystemEntry(thumbPath);
+            storage.DeleteFileSystemEntry(photoPath);
+        }
+
         public static CloudStorage OpenDropBoxStorage()
         {
             // Creating the cloudstorage object 

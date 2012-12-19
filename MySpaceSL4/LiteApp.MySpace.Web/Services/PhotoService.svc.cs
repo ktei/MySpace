@@ -75,8 +75,9 @@ namespace LiteApp.MySpace.Web.Services
         // client side can update its UI
         [OperationContract]
         [FaultContract(typeof(ServerFault))]
-        public string DeletePhotos(DeletePhotoParameters[] photos, string albumId)
+        public string[] DeletePhotos(DeletePhotoParameters[] photos, string albumId)
         {
+            string[] albumCovers = new string[] { };
             ServiceSupport.AuthorizeAndExecute(() =>
                 {
                     var album = AlbumRepository.FindAlbumById(albumId);
@@ -86,8 +87,14 @@ namespace LiteApp.MySpace.Web.Services
                                 new FaultReason("No album with Id " + albumId + " was found."));
                     }
 
-                    var photoIds = photos.Select(x => x.PhotoId).ToArray();
-                    // TODO: use photos' file names to delete the files on cloud (dropbox)
+                    var photoIds = photos.Select(x => x.PhotoId);
+                    
+                    // TODO: should we consider doing this cloud operation in another thread? How about a background worker?
+                    var storage = SharpBoxSupport.OpenDropBoxStorage();
+                    foreach (var photoFile in photos.Select(x => x.FileName))
+                    {
+                        storage.DeletePhoto(photoFile, albumId);
+                    }
                     
                     if (HttpContext.Current.IsSuperAdminLoggedIn())
                     {
@@ -109,8 +116,9 @@ namespace LiteApp.MySpace.Web.Services
                             AlbumRepository.UpdateCovers(album);
                         }
                     }
-                    
+                    albumCovers = album.CoverURIs;
                 });
+            return albumCovers;
         }
 
         [OperationContract]

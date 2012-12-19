@@ -68,7 +68,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
 
         public void UpdateCovers(Album album)
         {
-            var cursor = Database.GetCollection<Photo>(Collections.Photos).FindAllAs<Photo>().SetLimit(3);
+            var cursor = Database.GetCollection<Photo>(Collections.Photos).FindAs<Photo>(Query.EQ("AlbumId", ObjectId.Parse(album.Id))).SetLimit(3);
             var covers = cursor.Select(x => x.ThumbURI).ToArray();
             album.CoverURIs = covers;
             Database.GetCollection<Album>(Collections.Albums).Save(album);

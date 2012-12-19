@@ -11,9 +11,10 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
     {
         public PhotoRepository()
         {
+            Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("AlbumId");
             Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("CreatedOn");
-            Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("CreatedOn");
             Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("PhotoId");
+            Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("CreatedOn");
         }
 
         public IEnumerable<Photo> GetPagedPhotos(int pageIndex, int pageSize, string albumId)
@@ -34,7 +35,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             Database.GetCollection<Photo>(Collections.Photos).Save(photo);
         }
 
-        public void DeletePhotos(string[] photoIds, string albumId)
+        public void DeletePhotos(IEnumerable<string> photoIds, string albumId)
         {
             ObjectId albumObjectId;
             if (!ObjectId.TryParse(albumId, out albumObjectId))

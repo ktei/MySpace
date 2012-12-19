@@ -2,6 +2,7 @@
 <xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" />
   <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
+  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="GetPagedAlbums">
     <xs:complexType>
       <xs:sequence>
@@ -67,7 +68,9 @@
   </xs:element>
   <xs:element name="DeletePhotosResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DeletePhotosResult" nillable="true" type="q5:ArrayOfstring" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetComments">
@@ -80,21 +83,21 @@
   <xs:element name="GetCommentsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="GetCommentsResult" nillable="true" type="q5:ArrayOfPhotoComment" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="GetCommentsResult" nillable="true" type="q6:ArrayOfPhotoComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveComment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="comment" nillable="true" type="q6:PhotoComment" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="comment" nillable="true" type="q7:PhotoComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveCommentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="SaveCommentResult" nillable="true" type="q7:PhotoComment" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="SaveCommentResult" nillable="true" type="q8:PhotoComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

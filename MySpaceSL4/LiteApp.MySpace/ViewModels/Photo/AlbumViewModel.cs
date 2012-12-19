@@ -7,6 +7,7 @@ using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Security;
 using LiteApp.MySpace.Services.Photo;
+using System.IO;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -123,7 +124,8 @@ namespace LiteApp.MySpace.ViewModels
                 IsBusy = true;
                 try
                 {
-                    var photoIds = _photos.Where(x => x.IsSelected).Select(x => x.Id).ToList();
+                    var parameters = _photos.Where(x => x.IsSelected).Select(x =>
+                        new DeletePhotoParameters() { PhotoId = x.Id, FileName = Path.GetFileName(x.PhotoURI) }).ToList();
                     PhotoServiceClient svc = new PhotoServiceClient();
                     svc.DeletePhotosCompleted += (sender, e) =>
                         {
@@ -135,15 +137,15 @@ namespace LiteApp.MySpace.ViewModels
                             else
                             {
                                 _photos.RefreshCurrentPage();
+                                Covers = GetCovers(e.Result);
                             }
                         };
-                    svc.DeletePhotosAsync(photoIds, Id);
+                    svc.DeletePhotosAsync(parameters, Id);
                 }
                 catch
                 {
                     IsBusy = false;
                 }
-
             }
         }
 

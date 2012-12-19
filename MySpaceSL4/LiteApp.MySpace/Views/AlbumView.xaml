@@ -54,7 +54,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <controls:ProgressRing Margin="0,100,0,0" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVis}}" />
+        <controls:ProgressRing Margin="0,100,0,0" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVis}}" IsActive="True" />
         <sdk:DataPager Source="{Binding Photos}" HorizontalAlignment="Left" DisplayMode="FirstLastPreviousNextNumeric" Margin="0,20,0,0"/>
     </StackPanel>
 </UserControl>
