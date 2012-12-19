@@ -43,6 +43,7 @@ namespace LiteApp.MySpace.ViewModels
                 Id = photo.Id,
                 AlbumId = photo.AlbumId,
                 CreatedOn = photo.CreatedOn,
+                CreatedBy = photo.CreatedBy,
                 Description = photo.Description,
                 ThumbURI = photo.ThumbURI,
                 PhotoURI = photo.PhotoURI

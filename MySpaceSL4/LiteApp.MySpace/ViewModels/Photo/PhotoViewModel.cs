@@ -8,6 +8,7 @@ using LiteApp.MySpace.Security;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.MySpace.Views.Helpers;
 using System.ComponentModel;
+using System.Windows;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -27,6 +28,7 @@ namespace LiteApp.MySpace.ViewModels
         public PhotoViewModel()
         {
             DisplayName = "View Photo";
+            SecurityContext.Current.PropertyChanged += SecurityContext_PropertyChanged;
         }
 
         public string Id { get; set; }
@@ -34,6 +36,8 @@ namespace LiteApp.MySpace.ViewModels
         public string AlbumId { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string CreatedBy { get; set; }
 
         public string Description
         {
@@ -155,6 +159,15 @@ namespace LiteApp.MySpace.ViewModels
             get
             {
                 return _comments;
+            }
+        }
+
+
+        public Visibility EditDescriptionButtonVisibility
+        {
+            get
+            {
+                return (SecurityContext.Current.IsSuperAdminSignedIn() || SecurityContext.Current.IsUserSignedIn(CreatedBy)) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -310,6 +323,15 @@ namespace LiteApp.MySpace.ViewModels
             catch
             {
                 IsLoadingComments = false;
+            }
+        }
+
+        void SecurityContext_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsAuthenticated")
+            {
+                IsEditingDescription = false;
+                NotifyOfPropertyChange(() => EditDescriptionButtonVisibility);
             }
         }
 

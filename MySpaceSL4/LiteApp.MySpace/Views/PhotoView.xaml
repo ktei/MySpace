@@ -36,14 +36,16 @@
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                             <TextBlock Text="{Binding Strings.DescriptionLabel, Source={StaticResource AppResx}}" 
                                        Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" />
-                            <HyperlinkButton 
+                            <Grid Visibility="{Binding EditDescriptionButtonVisibility, Mode=OneWay}">
+                                <HyperlinkButton 
                                 Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" cal:Message.Attach="EditDescription">
-                                <Image Source="../Assets/Images/edit-circle-32.png" Margin="5,0,0,0"/>
-                            </HyperlinkButton>
-                            <HyperlinkButton 
+                                    <Image Source="../Assets/Images/edit-circle-32.png" Margin="5,0,0,0"/>
+                                </HyperlinkButton>
+                                <HyperlinkButton 
                                 Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" cal:Message.Attach="SaveDescription">
-                                <Image Source="../Assets/Images/save-circle-32.png" Margin="5,0,0,0"/>
-                            </HyperlinkButton>
+                                    <Image Source="../Assets/Images/save-circle-32.png" Margin="5,0,0,0"/>
+                                </HyperlinkButton>
+                            </Grid>
                         </StackPanel>
                         <Grid Height="30">
                             <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Description, Mode=OneWay}" VerticalAlignment="Center"
