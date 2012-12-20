@@ -252,4 +252,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="GiveAlbumName" xml:space="preserve">
     <value>Give your album a name</value>
   </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

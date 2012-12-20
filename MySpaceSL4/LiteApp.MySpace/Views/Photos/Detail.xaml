@@ -17,7 +17,7 @@
             <HyperlinkButton cal:Message.Attach="ViewAlbums">
                 <Image Source="../../Assets/Images/previous-circle-32.png"/>
             </HyperlinkButton>
-            <TextBlock Text="{Binding ActiveItem.Name, Mode=OneWay}" Style="{StaticResource HeaderTextStyle}"/>
+            <TextBlock Text="{Binding ActiveItem.Name, Mode=OneWay}" Width="700" TextWrapping="Wrap" Style="{StaticResource HeaderTextStyle}"/>
         </StackPanel>
         <ContentControl x:Name="ActiveItem" Margin="0,15,0,0"/>
     </StackPanel>

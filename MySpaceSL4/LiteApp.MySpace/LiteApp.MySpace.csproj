@@ -141,6 +141,9 @@
     <Compile Include="ViewModels\Photo\PhotoUploadStatus.cs" />
     <Compile Include="ViewModels\ViewModelSupport.cs" />
     <Compile Include="ViewModels\ExceptionHandlingSupport.cs" />
+    <Compile Include="Views\EditAlbumView.xaml.cs">
+      <DependentUpon>EditAlbumView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginStatusPanel.xaml.cs">
       <DependentUpon>LoginStatusPanel.xaml</DependentUpon>
     </Compile>
@@ -268,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <Page Include="Assets\ToolkitStyles_Trimmed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditAlbumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

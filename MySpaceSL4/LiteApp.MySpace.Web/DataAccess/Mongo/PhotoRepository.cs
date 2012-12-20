@@ -12,9 +12,11 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
         public PhotoRepository()
         {
             Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("AlbumId");
+            Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("CreatedBy");
             Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("CreatedOn");
             Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("PhotoId");
             Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("AlbumId");
+            Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("CreatedBy");
             Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("CreatedOn");
         }
 
@@ -82,12 +84,21 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             Database.GetCollection<PhotoComment>(Collections.PhotoComments).Save(comment);
         }
 
-        public void DeleteComment(string commentId)
+        public void DeleteComment(string commentId, string createdBy = null)
         {
             ObjectId commentObjectId;
             if (ObjectId.TryParse(commentId, out commentObjectId))
             {
-                Database.GetCollection<PhotoComment>(Collections.PhotoComments).Remove(Query.EQ("_id", commentObjectId));
+                if (createdBy == null)
+                {
+                    Database.GetCollection<PhotoComment>(Collections.PhotoComments).Remove(Query.EQ("_id", commentObjectId));
+                }
+                else
+                {
+                    Database.GetCollection<PhotoComment>(Collections.PhotoComments).Remove(Query.And(
+                        Query.EQ("_id", commentObjectId), 
+                        Query.EQ("CreatedBy", createdBy)));
+                }
             }
         }
 
@@ -112,12 +123,22 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
         }
 
 
-        public void UpdateDescription(string description, string photoId)
+        public void UpdateDescription(string description, string photoId, string createdBy = null)
         {
             ObjectId photoObjectId;
             if (ObjectId.TryParse(photoId, out photoObjectId))
             {
-                Database.GetCollection<PhotoComment>(Collections.Photos).Update(Query.EQ("_id", photoObjectId), Update.Set("Description", description));
+                if (createdBy == null)
+                {
+                    Database.GetCollection<PhotoComment>(Collections.Photos).Update(Query.EQ("_id", photoObjectId), Update.Set("Description", description));
+                }
+                else
+                {
+                    Database.GetCollection<PhotoComment>(Collections.Photos).Update(Query.And(
+                        Query.EQ("_id", photoObjectId), 
+                        Query.EQ("CreatedBy", createdBy)),
+                        Update.Set("Description", description));
+                }
             }
         }
 

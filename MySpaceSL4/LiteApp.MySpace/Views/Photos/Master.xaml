@@ -115,8 +115,6 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <!--<controls:LoadingIndicator Style="{StaticResource CircleIndicator}" Margin="0,100,0,0"
-                                           Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVis}}" />-->
         <controls:ProgressRing Margin="0,100,0,0" IsActive="True"
                                            Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVis}}" />
         <sdk:DataPager Source="{Binding Albums}" HorizontalAlignment="Left" DisplayMode="FirstLastPreviousNextNumeric" Margin="0,20,0,0"/>

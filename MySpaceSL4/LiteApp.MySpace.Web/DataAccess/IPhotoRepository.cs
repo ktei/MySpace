@@ -17,8 +17,8 @@ namespace LiteApp.MySpace.Web.DataAccess
         IEnumerable<PhotoComment> GetComments(string photoId);
         PhotoComment GetCommentById(string commentId);
         void SaveComment(PhotoComment comment);
-        void DeleteComment(string commentId);
-        void UpdateDescription(string description, string photoId);
+        void DeleteComment(string commentId, string createdBy = null);
+        void UpdateDescription(string description, string photoId, string createdBy = null);
         int GetCommentCount(string photoId);
     }
 }

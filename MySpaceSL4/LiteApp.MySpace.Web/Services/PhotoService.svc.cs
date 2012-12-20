@@ -150,28 +150,13 @@ namespace LiteApp.MySpace.Web.Services
         {
             ServiceSupport.AuthorizeAndExecute(() =>
             {
-                var photo = PhotoRepository.FindPhotoById(photoId);
-                if (photo == null)
-                {
-                    throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.Generic },
-                            new FaultReason("No photo with Id " + photoId + " was found."));
-                }
-
                 if (HttpContext.Current.IsSuperAdminLoggedIn())
                 {
                     PhotoRepository.UpdateDescription(description, photoId);
                 }
                 else
                 {
-                    if (!HttpContext.Current.IsUserLoggedIn(photo.CreatedBy))
-                    {
-                        throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.NotAuthroized },
-                            new FaultReason("Photo description must only be modified by person who uploaded it."));
-                    }
-                    else
-                    {
-                        PhotoRepository.UpdateDescription(description, photoId);
-                    }
+                    PhotoRepository.UpdateDescription(description, photoId, HttpContext.Current.User.Identity.Name);
                 }
             });
         }
@@ -205,16 +190,7 @@ namespace LiteApp.MySpace.Web.Services
                     }
                     else
                     {
-                        var comment = PhotoRepository.GetCommentById(commentId);
-                        if (comment != null)
-                        {
-                            if (HttpContext.Current.IsUserLoggedIn(comment.CreatedBy))
-                            {
-                                throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.NotAuthroized },
-                                    new FaultReason("Comment must only be deleted by its author"));
-                            }
-                            PhotoRepository.DeleteComment(commentId);
-                        }
+                        PhotoRepository.DeleteComment(commentId, HttpContext.Current.User.Identity.Name);
                     }
                 });
         }

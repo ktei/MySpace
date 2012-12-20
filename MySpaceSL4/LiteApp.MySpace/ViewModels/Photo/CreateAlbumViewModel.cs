@@ -39,21 +39,6 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-        [LengthConstraint(2000)]
-        public string Description
-        {
-            get { return _description; }
-            set
-            {
-                if (_description != value)
-                {
-                    _description = value;
-                    IsDirty = true;
-                    NotifyOfPropertyChange(() => Description);
-                }
-            }
-        }
-
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -79,7 +64,6 @@ namespace LiteApp.MySpace.ViewModels
                 PhotoServiceClient svc = new PhotoServiceClient();
                 Album album = new Album();
                 album.Name = Name;
-                album.Description = Description;
                 svc.SaveAlbumCompleted += (sender, e) =>
                 {
                     IsBusy = false;
