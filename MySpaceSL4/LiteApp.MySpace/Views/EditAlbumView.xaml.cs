@@ -19,6 +19,13 @@ namespace LiteApp.MySpace.Views
             InitializeComponent();
         }
 
+        protected override void OnOpened()
+        {
+            base.OnOpened();
+            Name.Focus();
+            Name.SelectAll();
+        }
+
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;

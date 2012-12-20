@@ -21,7 +21,14 @@ namespace LiteApp.Portable.Mvvm.Validation
 
         public override string DefaultErrorMessage
         {
-            get { return string.Format("Must contain {0} to {1} characters.", MinimumLength, MaximumLength); }
+            get
+            {
+                if (MinimumLength > 1)
+                {
+                    return string.Format("Must contain {0} to {1} characters.", MinimumLength, MaximumLength);
+                }
+                return string.Format("Must contain at most {0} characters.", MaximumLength);
+            }
         }
 
         public int MinimumLength

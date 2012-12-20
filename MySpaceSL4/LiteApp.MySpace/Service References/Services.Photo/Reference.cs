@@ -566,6 +566,12 @@ namespace LiteApp.MySpace.Services.Photo {
         
         void EndSaveAlbum(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/UpdateAlbum", ReplyAction="urn:PhotoService/UpdateAlbumResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/UpdateAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        System.IAsyncResult BeginUpdateAlbum(string name, string description, string albumId, System.AsyncCallback callback, object asyncState);
+        
+        void EndUpdateAlbum(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeleteAlbum", ReplyAction="urn:PhotoService/DeleteAlbumResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeleteAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
         System.IAsyncResult BeginDeleteAlbum(string albumId, System.AsyncCallback callback, object asyncState);
@@ -722,6 +728,12 @@ namespace LiteApp.MySpace.Services.Photo {
         
         private System.Threading.SendOrPostCallback onSaveAlbumCompletedDelegate;
         
+        private BeginOperationDelegate onBeginUpdateAlbumDelegate;
+        
+        private EndOperationDelegate onEndUpdateAlbumDelegate;
+        
+        private System.Threading.SendOrPostCallback onUpdateAlbumCompletedDelegate;
+        
         private BeginOperationDelegate onBeginDeleteAlbumDelegate;
         
         private EndOperationDelegate onEndDeleteAlbumDelegate;
@@ -820,6 +832,8 @@ namespace LiteApp.MySpace.Services.Photo {
         public event System.EventHandler<GetPagedAlbumsCompletedEventArgs> GetPagedAlbumsCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveAlbumCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> UpdateAlbumCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeleteAlbumCompleted;
         
@@ -930,6 +944,55 @@ namespace LiteApp.MySpace.Services.Photo {
             }
             base.InvokeAsync(this.onBeginSaveAlbumDelegate, new object[] {
                         album}, this.onEndSaveAlbumDelegate, this.onSaveAlbumCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginUpdateAlbum(string name, string description, string albumId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginUpdateAlbum(name, description, albumId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void LiteApp.MySpace.Services.Photo.PhotoService.EndUpdateAlbum(System.IAsyncResult result) {
+            base.Channel.EndUpdateAlbum(result);
+        }
+        
+        private System.IAsyncResult OnBeginUpdateAlbum(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string name = ((string)(inValues[0]));
+            string description = ((string)(inValues[1]));
+            string albumId = ((string)(inValues[2]));
+            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginUpdateAlbum(name, description, albumId, callback, asyncState);
+        }
+        
+        private object[] OnEndUpdateAlbum(System.IAsyncResult result) {
+            ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndUpdateAlbum(result);
+            return null;
+        }
+        
+        private void OnUpdateAlbumCompleted(object state) {
+            if ((this.UpdateAlbumCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.UpdateAlbumCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void UpdateAlbumAsync(string name, string description, string albumId) {
+            this.UpdateAlbumAsync(name, description, albumId, null);
+        }
+        
+        public void UpdateAlbumAsync(string name, string description, string albumId, object userState) {
+            if ((this.onBeginUpdateAlbumDelegate == null)) {
+                this.onBeginUpdateAlbumDelegate = new BeginOperationDelegate(this.OnBeginUpdateAlbum);
+            }
+            if ((this.onEndUpdateAlbumDelegate == null)) {
+                this.onEndUpdateAlbumDelegate = new EndOperationDelegate(this.OnEndUpdateAlbum);
+            }
+            if ((this.onUpdateAlbumCompletedDelegate == null)) {
+                this.onUpdateAlbumCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUpdateAlbumCompleted);
+            }
+            base.InvokeAsync(this.onBeginUpdateAlbumDelegate, new object[] {
+                        name,
+                        description,
+                        albumId}, this.onEndUpdateAlbumDelegate, this.onUpdateAlbumCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1359,6 +1422,20 @@ namespace LiteApp.MySpace.Services.Photo {
             public void EndSaveAlbum(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 base.EndInvoke("SaveAlbum", _args, result);
+            }
+            
+            public System.IAsyncResult BeginUpdateAlbum(string name, string description, string albumId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[3];
+                _args[0] = name;
+                _args[1] = description;
+                _args[2] = albumId;
+                System.IAsyncResult _result = base.BeginInvoke("UpdateAlbum", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndUpdateAlbum(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("UpdateAlbum", _args, result);
             }
             
             public System.IAsyncResult BeginDeleteAlbum(string albumId, System.AsyncCallback callback, object asyncState) {

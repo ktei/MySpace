@@ -255,4 +255,10 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="SaveButtonText" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="NameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="EditAlbumWindowTitle" xml:space="preserve">
+    <value>Edit Album</value>
+  </data>
 </root>

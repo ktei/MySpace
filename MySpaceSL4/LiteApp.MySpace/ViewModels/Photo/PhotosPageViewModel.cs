@@ -81,6 +81,12 @@ namespace LiteApp.MySpace.ViewModels
             ActivateItem(album);
         }
 
+        public void EditAlbum(AlbumViewModel album)
+        {
+            EditAlbumViewModel model = new EditAlbumViewModel(album);
+            IoC.Get<IWindowManager>().ShowDialog(model);
+        }
+
         public void ViewAlbums()
         {
             DeactivateItem(ActiveItem, true);
@@ -101,18 +107,6 @@ namespace LiteApp.MySpace.ViewModels
                 }
             }
 
-        }
-
-        public void UploadPhotoToActiveAlbum()
-        {
-            var model = new UploadPhotoManagerViewModel();
-            model.Album = ActiveItem;
-            IoC.Get<IWindowManager>().ShowDialog(model);
-        }
-
-        public void DeleteSelectedPhotos()
-        {
-            ActiveItem.DeleteSelectedPhotos();
         }
 
         public ICommand DeleteAlbumCommand

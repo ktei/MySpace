@@ -49,6 +49,41 @@ namespace LiteApp.MySpace.Web.Services
 
         [OperationContract]
         [FaultContract(typeof(ServerFault))]
+        public void UpdateAlbum(string name, string description, string albumId)
+        {
+            ServiceSupport.AuthorizeAndExecute(() =>
+                {
+                    var album = AlbumRepository.FindAlbumById(albumId);
+                    if (album == null)
+                    {
+                        throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.Generic },
+                                new FaultReason("No album with Id " + albumId + " was found."));
+                    }
+
+                    album.Name = name;
+                    album.Description = description;
+
+                    if (HttpContext.Current.IsSuperAdminLoggedIn())
+                    {
+                        AlbumRepository.SaveAlbum(album);
+                    }
+                    else
+                    {
+                        if (!HttpContext.Current.IsUserLoggedIn(album.CreatedBy))
+                        {
+                            throw new FaultException<ServerFault>(new ServerFault() { FaultCode = ServerFaultCode.NotAuthroized },
+                                new FaultReason("Album must only be edited by the author."));
+                        }
+                        else
+                        {
+                            AlbumRepository.SaveAlbum(album);
+                        }
+                    }
+                });
+        }
+
+        [OperationContract]
+        [FaultContract(typeof(ServerFault))]
         public void DeleteAlbum(string albumId)
         {
             ServiceSupport.AuthorizeAndExecute(() =>

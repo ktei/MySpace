@@ -138,6 +138,7 @@
     <Compile Include="Converters\PhotoCommentDeleteVisibilityConverter.cs" />
     <Compile Include="Converters\PhotoUploadStatusToImageSourceConverter.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
+    <Compile Include="ViewModels\Photo\EditAlbumViewModel.cs" />
     <Compile Include="ViewModels\Photo\PhotoUploadStatus.cs" />
     <Compile Include="ViewModels\ViewModelSupport.cs" />
     <Compile Include="ViewModels\ExceptionHandlingSupport.cs" />

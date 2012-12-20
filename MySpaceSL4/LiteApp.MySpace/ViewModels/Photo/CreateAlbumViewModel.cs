@@ -10,7 +10,6 @@ namespace LiteApp.MySpace.ViewModels
     public class CreateAlbumViewModel : EditableViewModel
     {
         string _name;
-        string _description;
         bool _isBusy;
 
         public CreateAlbumViewModel()

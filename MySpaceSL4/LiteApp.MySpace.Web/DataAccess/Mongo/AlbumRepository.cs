@@ -22,7 +22,6 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             return cursor;
         }
 
-
         public Album FindAlbumById(string albumId)
         {
             ObjectId albumObjectId;
