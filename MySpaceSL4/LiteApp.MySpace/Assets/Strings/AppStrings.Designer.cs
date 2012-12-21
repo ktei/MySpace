@@ -126,11 +126,29 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string ConfirmationWindowTitle {
+            get {
+                return ResourceManager.GetString("ConfirmationWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some photos are being uploaded. This will stop all the uploads. Are you sure you want to continue?.
         /// </summary>
         public static string ConfirmCancelUploadPhotoMessage {
             get {
                 return ResourceManager.GetString("ConfirmCancelUploadPhotoMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected items will be deleted permanently. Are you sure you want to continue?.
+        /// </summary>
+        public static string ConfirmDeleteItemsMessage {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteItemsMessage", resourceCulture);
             }
         }
         
@@ -176,6 +194,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string DeleteButtonText {
             get {
                 return ResourceManager.GetString("DeleteButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete photos.
+        /// </summary>
+        public static string DeletePhotosMessageHeader {
+            get {
+                return ResourceManager.GetString("DeletePhotosMessageHeader", resourceCulture);
             }
         }
         

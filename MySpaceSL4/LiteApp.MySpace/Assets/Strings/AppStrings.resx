@@ -282,4 +282,13 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="UploadToPhrase" xml:space="preserve">
     <value>Upload to</value>
   </data>
+  <data name="ConfirmationWindowTitle" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ConfirmDeleteItemsMessage" xml:space="preserve">
+    <value>Selected items will be deleted permanently. Are you sure you want to continue?</value>
+  </data>
+  <data name="DeletePhotosMessageHeader" xml:space="preserve">
+    <value>Delete photos</value>
+  </data>
 </root>

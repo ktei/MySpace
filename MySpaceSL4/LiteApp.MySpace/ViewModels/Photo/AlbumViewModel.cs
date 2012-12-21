@@ -8,6 +8,7 @@ using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Security;
 using LiteApp.MySpace.Services.Photo;
 using System.IO;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -119,31 +120,45 @@ namespace LiteApp.MySpace.ViewModels
                 return;
             if (_photos != null && _photos.Any(x => x.IsSelected))
             {
-                IsBusy = true;
-                try
+                MessageBoxViewModel message = new MessageBoxViewModel()
                 {
-                    var parameters = _photos.Where(x => x.IsSelected).Select(x =>
-                        new DeletePhotoParameters() { PhotoId = x.Id, FileName = Path.GetFileName(x.PhotoURI) }).ToList();
-                    PhotoServiceClient svc = new PhotoServiceClient();
-                    svc.DeletePhotosCompleted += (sender, e) =>
+                    Buttons = MessageBoxButtons.YesNo,
+                    MessageLevel = MessageLevel.Exclamation,
+                    Header = AppStrings.DeletePhotosMessageHeader,
+                    Message = AppStrings.ConfirmDeleteItemsMessage,
+                    DisplayName = AppStrings.ConfirmationWindowTitle
+                };
+                message.Closed += (messageSender, messageEventArgs) =>
+                    {
+                        if (message.Result != MessageBoxResult.Positive)
+                            return;
+                        IsBusy = true;
+                        try
+                        {
+                            var parameters = _photos.Where(x => x.IsSelected).Select(x =>
+                                new DeletePhotoParameters() { PhotoId = x.Id, FileName = Path.GetFileName(x.PhotoURI) }).ToList();
+                            PhotoServiceClient svc = new PhotoServiceClient();
+                            svc.DeletePhotosCompleted += (sender, e) =>
+                                {
+                                    IsBusy = false;
+                                    if (e.Error != null)
+                                    {
+                                        e.Error.Handle();
+                                    }
+                                    else
+                                    {
+                                        _photos.RefreshCurrentPage();
+                                        Covers = GetCovers(e.Result);
+                                    }
+                                };
+                            svc.DeletePhotosAsync(parameters, Id);
+                        }
+                        catch
                         {
                             IsBusy = false;
-                            if (e.Error != null)
-                            {
-                                e.Error.Handle();
-                            }
-                            else
-                            {
-                                _photos.RefreshCurrentPage();
-                                Covers = GetCovers(e.Result);
-                            }
-                        };
-                    svc.DeletePhotosAsync(parameters, Id);
-                }
-                catch
-                {
-                    IsBusy = false;
-                }
+                        }
+                    };
+                IoC.Get<IWindowManager>().ShowDialog(message);
             }
         }
 
