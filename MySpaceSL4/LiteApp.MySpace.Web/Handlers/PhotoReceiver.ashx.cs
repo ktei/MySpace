@@ -39,63 +39,71 @@ namespace LiteApp.MySpace.Web.Handlers
 
         public void ProcessRequest(HttpContext context)
         {
-            // Prepare parameters
-            UploadParameters parameters = GetParametersFromRequest(context);
-            if (!VerifyTicket(parameters.RequestToken, parameters.Ticket))
-                throw new Exception("No valid ticket for this request was found.");
-
-            var storage = SharpBoxSupport.OpenDropBoxStorage();
-            var photoFolder = storage.EnsurePhotoFolder(parameters.AlbumId);
-            var thumbFolder = storage.EnsureThumbFolder(parameters.AlbumId);
-            var newFileName = ObjectId.GenerateNewId() + parameters.FileExtension;
-
-            // Check request content length and actual stream length
-            // If they're not equal, it means the client canceled the uploading
-            bool lengthsMatched = context.Request.ContentLength == context.Request.InputStream.Length;
-            if (!lengthsMatched)
+            try
             {
-                return;
-            }
+                // Prepare parameters
+                UploadParameters parameters = GetParametersFromRequest(context);
+                if (!VerifyTicket(parameters.RequestToken, parameters.Ticket))
+                    throw new Exception("No valid ticket for this request was found.");
 
-            // Compress photo and upload
-            using (var img = Image.FromStream(context.Request.InputStream))
-            {
-                using (var photoStream = img.ResampleAsStream(720, 445))
+                var storage = SharpBoxSupport.OpenDropBoxStorage();
+                var photoFolder = storage.EnsurePhotoFolder(parameters.AlbumId);
+                var thumbFolder = storage.EnsureThumbFolder(parameters.AlbumId);
+                var newFileName = ObjectId.GenerateNewId() + parameters.FileExtension;
+
+                // Check request content length and actual stream length
+                // If they're not equal, it means the client canceled the uploading
+                bool lengthsMatched = context.Request.ContentLength == context.Request.InputStream.Length;
+                if (!lengthsMatched)
                 {
-                    photoStream.Position = 0;
-                    storage.UploadFile(photoStream, newFileName, photoFolder);
+                    return;
                 }
-            }
-            
-            context.Request.InputStream.Position = 0; // Set stream starting position back for next read
-            // Generate thumbnail and upload
-            using (var img = Image.FromStream(context.Request.InputStream))
-            {
-                using (var thumStream = img.ResampleAsStream(192, 119))
+
+                // Compress photo and upload
+                using (var img = Image.FromStream(context.Request.InputStream))
                 {
-                    thumStream.Position = 0;
-                    storage.UploadFile(thumStream, newFileName, thumbFolder);
+                    using (var photoStream = img.ResampleAsStream(720, 445))
+                    {
+                        photoStream.Position = 0;
+                        storage.UploadFile(photoStream, newFileName, photoFolder);
+                    }
                 }
+
+                context.Request.InputStream.Position = 0; // Set stream starting position back for next read
+                // Generate thumbnail and upload
+                using (var img = Image.FromStream(context.Request.InputStream))
+                {
+                    using (var thumStream = img.ResampleAsStream(192, 119))
+                    {
+                        thumStream.Position = 0;
+                        storage.UploadFile(thumStream, newFileName, thumbFolder);
+                    }
+                }
+
+                // Retrieve photo and thumbnail URIs
+                string thumbURI = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
+                    storage.GetFileSystemObject(newFileName, thumbFolder)).AbsoluteUri;
+                string photoURI = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
+                    storage.GetFileSystemObject(newFileName, photoFolder)).AbsoluteUri;
+                storage.Close();
+
+                // Store data to database
+                string[] coverURIs = AlbumRepository.UpdateCover(parameters.AlbumId, thumbURI);
+                Photo photo = new Photo();
+                photo.PhotoURI = photoURI;
+                photo.ThumbURI = thumbURI;
+                photo.AlbumId = parameters.AlbumId;
+                photo.CreatedOn = DateTime.Now;
+                photo.CreatedBy = parameters.User;
+                PhotoRepository.SavePhoto(photo);
+
+                context.Response.Write(string.Join(";", coverURIs));
             }
-
-            // Retrieve photo and thumbnail URIs
-            string thumbURI = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
-                storage.GetFileSystemObject(newFileName, thumbFolder)).AbsoluteUri;
-            string photoURI = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
-                storage.GetFileSystemObject(newFileName, photoFolder)).AbsoluteUri;
-            storage.Close();
-
-            // Store data to database
-            string[] coverURIs = AlbumRepository.UpdateCover(parameters.AlbumId, thumbURI);
-            Photo photo = new Photo();
-            photo.PhotoURI = photoURI;
-            photo.ThumbURI = thumbURI;
-            photo.AlbumId = parameters.AlbumId;
-            photo.CreatedOn = DateTime.Now;
-            photo.CreatedBy = parameters.User;
-            PhotoRepository.SavePhoto(photo);
-            
-            context.Response.Write(string.Join(";", coverURIs));
+            catch
+            {
+                context.Request.InputStream.Close();
+                context.Response.Write("error");
+            }
         }
 
         #endregion

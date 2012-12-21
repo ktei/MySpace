@@ -15,7 +15,7 @@ namespace LiteApp.MySpace.Converters
             {
                 case PhotoUploadStatus.Completing:
                     return "../Assets/Images/completing-16.png";
-                case PhotoUploadStatus.Completed:
+                case PhotoUploadStatus.Succeeded:
                     return "../Assets/Images/success-16.png";
                 case PhotoUploadStatus.Canceled:
                     return "../Assets/Images/cancel-16.png";

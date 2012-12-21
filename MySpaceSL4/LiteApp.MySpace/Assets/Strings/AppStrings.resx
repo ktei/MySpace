@@ -136,7 +136,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Close</value>
   </data>
   <data name="CreateAlbumWindowTitle" xml:space="preserve">
-    <value>Create Album</value>
+    <value>Create album</value>
   </data>
   <data name="CreateButtonText" xml:space="preserve">
     <value>Create</value>
@@ -184,7 +184,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Processing... Please wait</value>
   </data>
   <data name="SignInButtonText" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Sign in</value>
   </data>
   <data name="SignInFailedMessageHeader" xml:space="preserve">
     <value>Sign-in failed</value>
@@ -196,19 +196,19 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Sign-in is required</value>
   </data>
   <data name="SignInWindowTitle" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Sign in</value>
   </data>
   <data name="SignOutButtonText" xml:space="preserve">
-    <value>Sign Out</value>
+    <value>Sign out</value>
   </data>
   <data name="SignUpNowButtonText" xml:space="preserve">
     <value>Sign up now</value>
   </data>
   <data name="SignUpWindowTitle" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Sign up</value>
   </data>
   <data name="UploadPhotoWindowTitle" xml:space="preserve">
-    <value>Upload Photo</value>
+    <value>Upload photo</value>
   </data>
   <data name="UserNameLabel" xml:space="preserve">
     <value>User name</value>
@@ -216,7 +216,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="YesButtonText" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="TakeMeBackToMessage" xml:space="preserve">
+  <data name="TakeMeBackToPhrase" xml:space="preserve">
     <value>Take me back to</value>
   </data>
   <data name="ConfirmPasswordLabel" xml:space="preserve">
@@ -226,7 +226,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Email</value>
   </data>
   <data name="CreateAlbumButtonText" xml:space="preserve">
-    <value>Create Album</value>
+    <value>Create album</value>
   </data>
   <data name="NoAlbumFoundMessage" xml:space="preserve">
     <value>No album is found</value>
@@ -243,7 +243,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="SignInLinkText" xml:space="preserve">
     <value>sign in</value>
   </data>
-  <data name="ToPostCommentPlease" xml:space="preserve">
+  <data name="ToPostCommentPleasePhrase" xml:space="preserve">
     <value>To post any comment, please</value>
   </data>
   <data name="DescriptionLabel" xml:space="preserve">
@@ -259,6 +259,27 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Name</value>
   </data>
   <data name="EditAlbumWindowTitle" xml:space="preserve">
-    <value>Edit Album</value>
+    <value>Edit album</value>
+  </data>
+  <data name="AddMoreFilesButtonText" xml:space="preserve">
+    <value>Add more files</value>
+  </data>
+  <data name="CancelUploadMessageHeader" xml:space="preserve">
+    <value>Cancel upload</value>
+  </data>
+  <data name="ChooseFilesButtonText" xml:space="preserve">
+    <value>Choose files</value>
+  </data>
+  <data name="ConfirmCancelUploadPhotoMessage" xml:space="preserve">
+    <value>Some photos are being uploaded. This will stop all the uploads. Are you sure you want to continue?</value>
+  </data>
+  <data name="DoneButtonText" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="UploadPhotoInstruction" xml:space="preserve">
+    <value>You can choose more than one file at a time. Upload will start immediately after choosing files.</value>
+  </data>
+  <data name="UploadToPhrase" xml:space="preserve">
+    <value>Upload to</value>
   </data>
 </root>

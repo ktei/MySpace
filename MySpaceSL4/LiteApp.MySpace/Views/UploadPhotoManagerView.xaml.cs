@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using LiteApp.MySpace.ViewModels;
 using LiteApp.MySpace.Views.Helpers;
+using LiteApp.MySpace.Assets.Strings;
+using Caliburn.Micro;
 
 namespace LiteApp.MySpace.Views
 {
@@ -23,16 +25,45 @@ namespace LiteApp.MySpace.Views
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            if (_model.HasMoreTasks())
+            {
+                MessageBoxViewModel message = new MessageBoxViewModel()
+                {
+                    Buttons = MessageBoxButtons.YesNo,
+                    MessageLevel = MessageLevel.Exclamation,
+                    Header = AppStrings.CancelUploadMessageHeader,
+                    Message = AppStrings.ConfirmCancelUploadPhotoMessage,
+                    DisplayName = AppStrings.UploadPhotoWindowTitle
+                };
+
+                message.Closed += message_Closed;
+                IoC.Get<IWindowManager>().ShowDialog(message);
+            }
+            else
+            {
+                this.DialogResult = false;
+            }
         }
 
-        private void ChooseFileButton_Click(object sender, RoutedEventArgs e)
+        void message_Closed(object sender, EventArgs e)
+        {
+            MessageBoxViewModel message = (MessageBoxViewModel)sender;
+            if (message.Result == ViewModels.MessageBoxResult.Positive)
+            {
+                message.Closed -= message_Closed;
+                _model.Clear();
+                this.DialogResult = false;
+            }
+        }
+
+        private void ChooseFilesButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Multiselect = false;
+            dlg.Multiselect = true;
             if (dlg.ShowDialog() == true)
             {
-                _model.StartUpload(dlg.File);
+                _model.StartUpload(dlg.Files);
+                ChooseFilesButton.Content = AppStrings.AddMoreFilesButtonText;
             }
         }
 

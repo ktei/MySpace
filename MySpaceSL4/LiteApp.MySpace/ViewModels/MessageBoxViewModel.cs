@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using LiteApp.MySpace.Assets.Strings;
+using System;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -17,6 +18,8 @@ namespace LiteApp.MySpace.ViewModels
         {
             DisplayName = AppStrings.ApplicationName;
         }
+
+        public event EventHandler Closed;
 
         public string Header
         {
@@ -108,6 +111,18 @@ namespace LiteApp.MySpace.ViewModels
                 }
             }
         }
+
+        public MessageBoxResult Result
+        {
+            get;
+            set;
+        }
+
+        public void RaiseClosed()
+        {
+            if (Closed != null)
+                Closed(this, EventArgs.Empty);
+        }
     }
 
     public enum MessageLevel
@@ -123,5 +138,12 @@ namespace LiteApp.MySpace.ViewModels
         YesNo,
         OKCancel,
         Custom
+    }
+
+    public enum MessageBoxResult
+    {
+        Positive,
+        Negative,
+        Cancel
     }
 }

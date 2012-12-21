@@ -17,8 +17,18 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel>
-            <TextBlock Text="Upload photo to album" Style="{StaticResource BlackLabelTextStyle}"/>
-            <TextBlock Text="Click 'Choose File' to choose and start upload your photo immediately." Style="{StaticResource BlackLabelTextStyle}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Source="../Assets/Images/upload-48.png" VerticalAlignment="Top" Margin="0,0,10,0"/>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BlackLabelTextStyle}" Grid.Column="1">
+                    <Run Text="{Binding Strings.UploadToPhrase, Source={StaticResource AppResx}}"/>
+                    <Run Text="{Binding Album.Name, Mode=OneWay}" FontWeight="Bold"/>
+                </TextBlock>
+            </Grid>
+            <TextBlock Text="{Binding Strings.UploadPhotoInstruction, Source={StaticResource AppResx}}" Style="{StaticResource ContentTextStyle}"/>
             <ScrollViewer MaxHeight="150" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">
                 <ItemsControl ItemsSource="{Binding UploadItems, Mode=OneWay}">
                     <ItemsControl.ItemTemplate>
@@ -36,8 +46,6 @@
                                            Text="{Binding FileName, Mode=OneWay}" Margin="0,0,10,0" TextWrapping="NoWrap" TextTrimming="WordEllipsis"/>
                                 <HyperlinkButton Grid.Column="1" Content="Cancel" VerticalAlignment="Center"
                                                  Visibility="{Binding CanCancel, Converter={StaticResource boolToVis}, Mode=OneWay}" cal:Message.Attach="CancelUpload"/>
-                                <!--<TextBlock Style="{StaticResource BlackLabelTextStyle}" Text="{Binding Status, Mode=OneWay}" Grid.Column="1" VerticalAlignment="Center"
-                                               Visibility="{Binding CanCancel, Converter={StaticResource boolToVisReverse}, Mode=OneWay}"/>-->
                                 <Image Source="{Binding Status, Mode=OneWay, Converter={StaticResource statusToImageSource}}" Grid.Column="1" VerticalAlignment="Center"
                                        Visibility="{Binding CanCancel, Converter={StaticResource boolToVisReverse}, Mode=OneWay}"/>
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay}" Height="10" Maximum="1" Minimum="0" Grid.Row="1" Grid.ColumnSpan="2"/>
@@ -48,7 +56,7 @@
             </ScrollViewer>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button x:Name="ChooseFileButton" Content="Choose File" Width="120" Height="30" Margin="0,0,10,0" Click="ChooseFileButton_Click"/>
+            <Button x:Name="ChooseFilesButton" Content="{Binding Strings.ChooseFilesButtonText, Source={StaticResource AppResx}}" Width="120" Height="30" Margin="0,0,10,0" Click="ChooseFilesButton_Click"/>
             <Button x:Name="CancelButton" Content="{Binding Strings.CancelButtonText, Source={StaticResource AppResx}}" Click="CancelButton_Click" Width="75" Height="30" />
         </StackPanel>
     </Grid>

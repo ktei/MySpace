@@ -3,9 +3,10 @@ namespace LiteApp.MySpace.ViewModels
 {
     public enum PhotoUploadStatus
     {
-        Uploading = 0,
+        Waiting = 0,
+        Uploading,
         Completing,
-        Completed,
+        Succeeded,
         Canceled,
         Error
     }

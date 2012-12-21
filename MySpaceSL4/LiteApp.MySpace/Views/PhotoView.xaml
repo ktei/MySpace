@@ -19,6 +19,10 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -32,36 +36,37 @@
                     <Border Style="{StaticResource PictureStyle}" HorizontalAlignment="Center">
                         <Image Source="{Binding PhotoURI, Mode=OneWay}" ImageOpened="Image_ImageOpened" />
                     </Border>
-                    <StackPanel Margin="0,15,15,0" Grid.Row="1">
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="{Binding Strings.DescriptionLabel, Source={StaticResource AppResx}}" 
-                                       Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" />
-                            <Grid Visibility="{Binding EditDescriptionButtonVisibility, Mode=OneWay}">
-                                <HyperlinkButton 
-                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" cal:Message.Attach="EditDescription">
-                                    <Image Source="../Assets/Images/edit-circle-32.png" Margin="5,0,0,0"/>
-                                </HyperlinkButton>
-                                <HyperlinkButton 
-                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" cal:Message.Attach="SaveDescription">
-                                    <Image Source="../Assets/Images/save-circle-32.png" Margin="5,0,0,0"/>
-                                </HyperlinkButton>
-                            </Grid>
-                        </StackPanel>
-                        <Grid Height="60">
-                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">
-                                <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Description, Mode=OneWay}" VerticalAlignment="Top"
-                                       Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" 
-                                       HorizontalAlignment="Stretch" TextWrapping="Wrap" />
-                            </ScrollViewer>
-                            <TextBox Text="{Binding DescriptionBackup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                                     Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" AcceptsReturn="True" TextWrapping="Wrap" />
-                        </Grid>
-                    </StackPanel>
+
                 </Grid>
                 <controls:ProgressRing IsActive="True" HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVis}}" />
             </Grid>
-            <Grid Grid.Column="1">
+            <StackPanel Margin="0,15,15,0" Grid.Row="1">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="{Binding Strings.DescriptionLabel, Source={StaticResource AppResx}}" 
+                                       Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" />
+                    <Grid Visibility="{Binding EditDescriptionButtonVisibility, Mode=OneWay}">
+                        <HyperlinkButton 
+                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" cal:Message.Attach="EditDescription">
+                            <Image Source="../Assets/Images/edit-circle-32.png" Margin="5,0,0,0"/>
+                        </HyperlinkButton>
+                        <HyperlinkButton 
+                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" cal:Message.Attach="SaveDescription">
+                            <Image Source="../Assets/Images/save-circle-32.png" Margin="5,0,0,0"/>
+                        </HyperlinkButton>
+                    </Grid>
+                </StackPanel>
+                <Grid Height="60">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">
+                        <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Description, Mode=OneWay}" VerticalAlignment="Top"
+                                       Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" 
+                                       HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+                    </ScrollViewer>
+                    <TextBox Text="{Binding DescriptionBackup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                     Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" AcceptsReturn="True" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+            <Grid Grid.Column="1" Grid.RowSpan="2">
                 <controls:ProgressRing IsActive="True" HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Visibility="{Binding IsLoadingComments, Mode=OneWay, Converter={StaticResource boolToVis}}" />
                 <Grid Height="550" Visibility="{Binding IsLoadingComments, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
@@ -74,7 +79,7 @@
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1"
                                 Visibility="{Binding IsAuthenticated, Mode=OneWay, Converter={StaticResource boolToVisReverse}, Source={StaticResource SecurityContext}}">
-                        <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Strings.ToPostCommentPlease, Source={StaticResource AppResx}}"/>
+                        <TextBlock Style="{StaticResource ContentTextStyle}" Text="{Binding Strings.ToPostCommentPleasePhrase, Source={StaticResource AppResx}}"/>
                         <HyperlinkButton x:Name="SignInLink" Click="SignInLink_Click" Content="{Binding Strings.SignInLinkText, Source={StaticResource AppResx}}" VerticalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Visibility="{Binding IsAuthenticated, Mode=OneWay, Converter={StaticResource boolToVis}, Source={StaticResource SecurityContext}}">

@@ -50,17 +50,23 @@ namespace LiteApp.MySpace.Views
 
         private void PositiveButton_Click(object sender, RoutedEventArgs e)
         {
+            _model.Result = ViewModels.MessageBoxResult.Positive;
             this.DialogResult = true;
+            _model.RaiseClosed();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            _model.Result = ViewModels.MessageBoxResult.Cancel;
             this.DialogResult = false;
+            _model.RaiseClosed();
         }
 
         private void NegativeButton_Click(object sender, RoutedEventArgs e)
         {
+            _model.Result = ViewModels.MessageBoxResult.Negative;
             this.DialogResult = false;
+            _model.RaiseClosed();
         }
 
         void ApplyButtons(MessageBoxButtons buttons)

@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Assets.Strings;
-using LiteApp.Portable.Mvvm.Validation;
+using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
+using LiteApp.Portable.Mvvm.Validation;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -28,11 +19,14 @@ namespace LiteApp.MySpace.ViewModels
                 throw new ArgumentNullException("target");
             DisplayName = AppStrings.EditAlbumWindowTitle;
             RefreshBindingScope = new RefreshBindingScope();
+            _target = target;
             _name = target.Name;
             _description = target.Description;
         }
 
         public RefreshBindingScope RefreshBindingScope { get; set; }
+
+        public event EventHandler EditCompleted;
 
         [RequiredField]
         [LengthConstraint(100)]
@@ -99,8 +93,11 @@ namespace LiteApp.MySpace.ViewModels
                         {
                             _target.Name = Name;
                             _target.Description = Description;
+                            if (EditCompleted != null)
+                                EditCompleted(this, EventArgs.Empty);
                         }
                     };
+                svc.UpdateAlbumAsync(Name, Description, _target.Id);
             }
             catch
             {

@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+using LiteApp.MySpace.ViewModels;
+using LiteApp.MySpace.Views.Helpers;
 
 namespace LiteApp.MySpace.Views
 {
     public partial class EditAlbumView : ChildWindow
     {
+        EditAlbumViewModel _model;
+
         public EditAlbumView()
         {
             InitializeComponent();
+            this.Loaded += EditAlbumView_Loaded;
+            this.Unloaded += EditAlbumView_Unloaded;
+
         }
 
         protected override void OnOpened()
@@ -26,15 +26,39 @@ namespace LiteApp.MySpace.Views
             Name.SelectAll();
         }
 
-        private void OKButton_Click(object sender, RoutedEventArgs e)
+        void EditAlbumView_Loaded(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            _model = (EditAlbumViewModel)this.DataContext;
+            _model.EditCompleted += _model_EditCompleted;
+        }
+
+        void EditAlbumView_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _model.EditCompleted -= _model_EditCompleted;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
         }
+
+        void _model_EditCompleted(object sender, EventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void EditAlbumView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SaveButton.AutomationPeerInvoke();
+            }
+            else if (e.Key == Key.Escape)
+            {
+                CancelButton.AutomationPeerInvoke();
+            }
+        }
+
     }
 }
 

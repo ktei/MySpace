@@ -4,7 +4,7 @@
            xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
            xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" Style="{StaticResource ChildWindowStyle}"
            xmlns:cal="http://www.caliburnproject.org"
-           xmlns:framework="clr-namespace:LiteApp.MySpace.Framework"
+           xmlns:framework="clr-namespace:LiteApp.MySpace.Framework" KeyDown="EditAlbumView_KeyDown"
            Width="500">
     <toolkit:BusyIndicator IsBusy="{Binding IsBusy, Mode=OneWay}" BusyContent="{Binding Strings.ProcessingMessage, Source={StaticResource AppResx}}">
         <Grid Margin="10">
@@ -19,7 +19,7 @@
                 <TextBox Text="{Binding Description, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-                <Button x:Name="SaveButton" Content="{Binding Strings.SaveButtonText, Source={StaticResource AppResx}}" Width="75" Height="30" Margin="0,0,10,0"/>
+                <Button x:Name="SaveButton" Content="{Binding Strings.SaveButtonText, Source={StaticResource AppResx}}" cal:Message.Attach="Save" Width="75" Height="30" Margin="0,0,10,0"/>
                 <Button x:Name="CancelButton" Content="{Binding Strings.CancelButtonText, Source={StaticResource AppResx}}" Click="CancelButton_Click" Width="75" Height="30" />
             </StackPanel>
         </Grid>

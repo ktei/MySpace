@@ -19,15 +19,32 @@ namespace LiteApp.MySpace.ViewModels
         private long _dataSent;
         string _fileName;
         bool _cancelRequested;
-        bool _canCancel;
-        PhotoUploadStatus _status;
+        bool _canCancel = true;
+        PhotoUploadStatus _status = PhotoUploadStatus.Waiting;
         double _progress;
+
+        FileInfo _file;
+        string _albumId;
 
         public event EventHandler UploadStarted;
 
         public event EventHandler UploadCanceled;
 
         public event EventHandler<PhotoUploadCompletedEventArgs> UploadCompleted;
+
+
+        public UploadPhotoViewModel(FileInfo file, string albumId)
+        {
+            if (file == null)
+                throw new ArgumentNullException("file");
+            if (albumId == null)
+                throw new ArgumentNullException("albumId");
+            Uri fullUri = Application.Current.Host.Source;
+            _baseUri = fullUri.AbsoluteUri.Substring(0, fullUri.AbsoluteUri.IndexOf("/ClientBin"));
+            _file = file;
+            _albumId = albumId;
+            FileName = _file.Name;
+        }
 
         public double Progress
         {
@@ -40,7 +57,6 @@ namespace LiteApp.MySpace.ViewModels
                     NotifyOfPropertyChange(() => Progress);
                 }
             }
-
         }
 
         public string FileName
@@ -82,13 +98,7 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-        public UploadPhotoViewModel()
-        {
-            Uri fullUri = Application.Current.Host.Source;
-            _baseUri = fullUri.AbsoluteUri.Substring(0, fullUri.AbsoluteUri.IndexOf("/ClientBin"));
-        }
-
-        public void StartUpload(FileInfo file, string albumId)
+        public void StartUpload()
         {
             Status = PhotoUploadStatus.Uploading;
             try
@@ -107,11 +117,11 @@ namespace LiteApp.MySpace.ViewModels
                         }
                         else if (!string.IsNullOrEmpty(e.Result))
                         {
-                            _fileStream = file.OpenRead();
+                            _fileStream = _file.OpenRead();
                             _dataLength = _fileStream.Length;
-                            var webRequest = CreateUploadRequest(file, albumId, requestToken, e.Result);
+                            var webRequest = CreateUploadRequest(_file, _albumId, requestToken, e.Result);
                             webRequest.BeginGetRequestStream(new AsyncCallback(WriteToStreamCallback), webRequest);
-                            FileName = file.Name;
+                            FileName = _file.Name;
                             CanCancel = true;
                             if (UploadStarted != null)
                                 UploadStarted(this, EventArgs.Empty);
@@ -135,6 +145,8 @@ namespace LiteApp.MySpace.ViewModels
             CanCancel = false;
             Status = PhotoUploadStatus.Canceled;
             _cancelRequested = true;
+            if (UploadCanceled != null)
+                UploadCanceled(this, EventArgs.Empty);
         }
 
         HttpWebRequest CreateUploadRequest(FileInfo file, string albumId, string requestToken, string ticket)
@@ -187,12 +199,7 @@ namespace LiteApp.MySpace.ViewModels
                         }
                     }
 
-                    if (_cancelRequested)
-                    {
-                        if (UploadCanceled != null)
-                            UploadCanceled(this, EventArgs.Empty);
-                    }
-                    else
+                    if (!_cancelRequested)
                     {
                         CanCancel = false;
                         Status = PhotoUploadStatus.Completing;
@@ -211,8 +218,7 @@ namespace LiteApp.MySpace.ViewModels
 
         private void ReadHttpResponseCallback(IAsyncResult asynchronousResult)
         {
-            Exception error = null;
-            string newCoverURIs = string.Empty;
+            string response = string.Empty;
             try
             {
                 HttpWebRequest webRequest = (HttpWebRequest)asynchronousResult.AsyncState;
@@ -220,21 +226,31 @@ namespace LiteApp.MySpace.ViewModels
                 
                 using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
                 {
-                    newCoverURIs = reader.ReadToEnd();
+                    response = reader.ReadToEnd();
                     reader.Close();
                 }
-                Status = PhotoUploadStatus.Completed;
+                
+
+                if (UploadCompleted != null)
+                {
+                    if (response != "error")
+                    {
+                        Status = PhotoUploadStatus.Succeeded;
+                        UploadCompleted(this, new PhotoUploadCompletedEventArgs(response, null));
+                    }
+                    else
+                    {
+                        Status = PhotoUploadStatus.Error;
+                        UploadCompleted(this, new PhotoUploadCompletedEventArgs(response, new Exception("server error")));
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Status = PhotoUploadStatus.Error;
-                error = ex;
-            }
-            finally
-            {
                 if (UploadCompleted != null)
                 {
-                    UploadCompleted(this, new PhotoUploadCompletedEventArgs(newCoverURIs, error));
+                    UploadCompleted(this, new PhotoUploadCompletedEventArgs(response, ex));
                 }
             }
         }

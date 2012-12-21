@@ -61,6 +61,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add more files.
+        /// </summary>
+        public static string AddMoreFilesButtonText {
+            get {
+                return ResourceManager.GetString("AddMoreFilesButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A few words about what I planned to create. First of all, it should be a simple, customizable control. The only limitation - I didn&apos;t want to hard code its geometry, a shape of animated element. This element is defined in the Generic.xaml file, but can be redefined as a part of a user&apos;s Style.
         ///
         ///If you look at the Generic.xaml, you will see only one animation element AnimationElementTemplate defined as a DataTemplate. The problem was to manifold it. I was surprised to know that deep object cloning is a cha [rest of string was truncated]&quot;;.
@@ -90,11 +99,38 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel upload.
+        /// </summary>
+        public static string CancelUploadMessageHeader {
+            get {
+                return ResourceManager.GetString("CancelUploadMessageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose files.
+        /// </summary>
+        public static string ChooseFilesButtonText {
+            get {
+                return ResourceManager.GetString("ChooseFilesButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string CloseButtonText {
             get {
                 return ResourceManager.GetString("CloseButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some photos are being uploaded. This will stop all the uploads. Are you sure you want to continue?.
+        /// </summary>
+        public static string ConfirmCancelUploadPhotoMessage {
+            get {
+                return ResourceManager.GetString("ConfirmCancelUploadPhotoMessage", resourceCulture);
             }
         }
         
@@ -108,7 +144,7 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Album.
+        ///   Looks up a localized string similar to Create album.
         /// </summary>
         public static string CreateAlbumButtonText {
             get {
@@ -117,7 +153,7 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Album.
+        ///   Looks up a localized string similar to Create album.
         /// </summary>
         public static string CreateAlbumWindowTitle {
             get {
@@ -162,7 +198,16 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Album.
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string DoneButtonText {
+            get {
+                return ResourceManager.GetString("DoneButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit album.
         /// </summary>
         public static string EditAlbumWindowTitle {
             get {
@@ -333,7 +378,7 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign In.
+        ///   Looks up a localized string similar to Sign in.
         /// </summary>
         public static string SignInButtonText {
             get {
@@ -378,7 +423,7 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign In.
+        ///   Looks up a localized string similar to Sign in.
         /// </summary>
         public static string SignInWindowTitle {
             get {
@@ -387,7 +432,7 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign Out.
+        ///   Looks up a localized string similar to Sign out.
         /// </summary>
         public static string SignOutButtonText {
             get {
@@ -405,7 +450,7 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign Up.
+        ///   Looks up a localized string similar to Sign up.
         /// </summary>
         public static string SignUpWindowTitle {
             get {
@@ -416,18 +461,18 @@ namespace LiteApp.MySpace.Assets.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Take me back to.
         /// </summary>
-        public static string TakeMeBackToMessage {
+        public static string TakeMeBackToPhrase {
             get {
-                return ResourceManager.GetString("TakeMeBackToMessage", resourceCulture);
+                return ResourceManager.GetString("TakeMeBackToPhrase", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to To post any comment, please.
         /// </summary>
-        public static string ToPostCommentPlease {
+        public static string ToPostCommentPleasePhrase {
             get {
-                return ResourceManager.GetString("ToPostCommentPlease", resourceCulture);
+                return ResourceManager.GetString("ToPostCommentPleasePhrase", resourceCulture);
             }
         }
         
@@ -441,11 +486,29 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload Photo.
+        ///   Looks up a localized string similar to You can choose more than one file at a time. Upload will start immediately after choosing files..
+        /// </summary>
+        public static string UploadPhotoInstruction {
+            get {
+                return ResourceManager.GetString("UploadPhotoInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload photo.
         /// </summary>
         public static string UploadPhotoWindowTitle {
             get {
                 return ResourceManager.GetString("UploadPhotoWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload to.
+        /// </summary>
+        public static string UploadToPhrase {
+            get {
+                return ResourceManager.GetString("UploadToPhrase", resourceCulture);
             }
         }
         

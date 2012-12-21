@@ -415,6 +415,7 @@
     <Resource Include="Assets\Images\previous-circle-32.png" />
     <Resource Include="Assets\Images\upload-circle-32.png" />
     <Resource Include="Assets\Images\open-circle-32.png" />
+    <Resource Include="Assets\Images\upload-48.png" />
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <None Include="Service References\Services.Photo\PhotoService.disco" />
     <None Include="Service References\Services.Photo\configuration91.svcinfo" />

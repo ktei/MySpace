@@ -24,7 +24,7 @@
                 <PasswordBox x:Name="PasswordConfirmation" Password="{Binding PasswordConfirmation, Mode=TwoWay, ValidatesOnDataErrors=True}" />
             </StackPanel>
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
-                <TextBlock Text="{Binding Strings.TakeMeBackToMessage, Source={StaticResource AppResx}}" Style="{StaticResource ContentTextStyle}" Foreground="Black"/>
+                <TextBlock Text="{Binding Strings.TakeMeBackToPhrase, Source={StaticResource AppResx}}" Style="{StaticResource ContentTextStyle}" Foreground="Black"/>
                 <HyperlinkButton x:Name="SignInButton" cal:Message.Attach="SignIn" Content="{Binding Strings.SignInButtonText, Source={StaticResource AppResx}}" Click="SignInButton_Click" VerticalAlignment="Center" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
