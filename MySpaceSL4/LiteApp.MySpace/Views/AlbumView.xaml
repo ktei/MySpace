@@ -44,7 +44,7 @@
             </ListBox.Template>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <toolkit:WrapPanel Margin="0,15,30,0" HorizontalAlignment="Left" Width="900"/>
+                    <toolkit:WrapPanel Margin="0,15,30,0" HorizontalAlignment="Left" Width="700"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>

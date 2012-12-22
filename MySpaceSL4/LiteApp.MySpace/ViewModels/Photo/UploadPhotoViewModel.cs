@@ -8,6 +8,7 @@ using Caliburn.Micro;
 using LiteApp.MySpace.Services.Security;
 using LiteApp.MySpace.Views.Helpers;
 using LiteApp.MySpace.Security;
+using LiteApp.MySpace.ViewModels.Message;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -23,7 +24,7 @@ namespace LiteApp.MySpace.ViewModels
         PhotoUploadStatus _status = PhotoUploadStatus.Pending;
         double _progress;
         FileInfo _file;
-        AlbumViewModel _album;
+        string _albumId;
 
         public event EventHandler UploadStarted;
 
@@ -32,16 +33,16 @@ namespace LiteApp.MySpace.ViewModels
         public event EventHandler<PhotoUploadCompletedEventArgs> UploadCompleted;
 
 
-        public UploadPhotoViewModel(FileInfo file, AlbumViewModel album)
+        public UploadPhotoViewModel(FileInfo file, string albumId)
         {
             if (file == null)
                 throw new ArgumentNullException("file");
-            if (album == null)
+            if (albumId == null)
                 throw new ArgumentNullException("albumId");
             Uri fullUri = Application.Current.Host.Source;
             _baseUri = fullUri.AbsoluteUri.Substring(0, fullUri.AbsoluteUri.IndexOf("/ClientBin"));
             _file = file;
-            _album = album;
+            _albumId = albumId;
             FileName = _file.Name;
         }
 
@@ -118,7 +119,7 @@ namespace LiteApp.MySpace.ViewModels
                         {
                             _fileStream = _file.OpenRead();
                             _dataLength = _fileStream.Length;
-                            var webRequest = CreateUploadRequest(_file, _album.Id, requestToken, e.Result);
+                            var webRequest = CreateUploadRequest(_file, _albumId, requestToken, e.Result);
                             webRequest.BeginGetRequestStream(new AsyncCallback(WriteToStreamCallback), webRequest);
                             FileName = _file.Name;
                             CanCancel = true;
@@ -257,11 +258,8 @@ namespace LiteApp.MySpace.ViewModels
 
         void UpdateAlbumCovers(string newCoverURIs)
         {
-            _album.Covers = AlbumViewModel.GetCovers(newCoverURIs);
-            if (_album.IsActive)
-            {
-                _album.RefreshPhotos();
-            }
+            UpdateAlbumCoversMessage message = new UpdateAlbumCoversMessage(_albumId, newCoverURIs);
+            IoC.Get<IEventAggregator>().Publish(message);
         }
     }
 }

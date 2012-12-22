@@ -12,6 +12,7 @@ namespace LiteApp.MySpace.ViewModels
         Queue<UploadPhotoViewModel> _pendingTasks = new Queue<UploadPhotoViewModel>();
         BindableCollection<UploadPhotoViewModel> _archivedTasks = new BindableCollection<UploadPhotoViewModel>();
         bool _clearing;
+        int _incompleteTasks; // = pending tasks + active tasks
 
         public UploadPhotoManagerViewModel()
         {
@@ -22,6 +23,33 @@ namespace LiteApp.MySpace.ViewModels
         public int MaximumActiveTasks { get; set; }
 
         public AlbumViewModel Album { get; set; }
+
+        public int IncompleteTasks
+        {
+            get { return _incompleteTasks; }
+            private set
+            {
+                if (_incompleteTasks != value)
+                {
+                    _incompleteTasks = value;
+                    NotifyOfPropertyChange(() => IncompleteTasks);
+                    NotifyOfPropertyChange(() => ShowNotification);
+                }
+            }
+        }
+
+        public UploadPhotoViewModel FirstActiveTask
+        {
+            get
+            {
+                return _archivedTasks.FirstOrDefault(x => x.Status == PhotoUploadStatus.Uploading || x.Status == PhotoUploadStatus.Completing);
+            }
+        }
+
+        public bool ShowNotification
+        {
+            get { return IncompleteTasks > 0; }
+        }
 
         public event EventHandler NoMoreTasks;
 
@@ -34,7 +62,7 @@ namespace LiteApp.MySpace.ViewModels
         {
             foreach (var file in files)
             {
-                var uploadPhotoViewModel = new UploadPhotoViewModel(file, Album);
+                var uploadPhotoViewModel = new UploadPhotoViewModel(file, Album.Id);
                 uploadPhotoViewModel.UploadCompleted += uploadPhotoViewModel_UploadCompleted;
                 uploadPhotoViewModel.UploadCanceled += uploadPhotoViewModel_UploadCanceled;
                 _pendingTasks.Enqueue(uploadPhotoViewModel);
@@ -56,12 +84,15 @@ namespace LiteApp.MySpace.ViewModels
 
         public bool HasMoreTasks()
         {
-            bool hasPendingTasks;
+            int activeTaskCount = GetActiveTaskCount();
+            int pendingTaskCount;
             lock (_pendingTasks)
             {
-                hasPendingTasks = _pendingTasks.Any(x => x.Status != PhotoUploadStatus.Canceled);
+                pendingTaskCount = _pendingTasks.Count(x => x.Status != PhotoUploadStatus.Canceled);
             }
-            return GetActiveTaskCount() > 0 || hasPendingTasks;
+            IncompleteTasks = activeTaskCount + pendingTaskCount;
+            NotifyOfPropertyChange(() => FirstActiveTask);
+            return IncompleteTasks > 0;
         }
 
         public bool HasArchivedTasks()

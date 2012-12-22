@@ -8,6 +8,7 @@
     xmlns:controls="clr-namespace:LiteApp.MySpace.Controls"
     xmlns:local="clr-namespace:LiteApp.MySpace.Views"
     xmlns:cal="http://www.caliburnproject.org"
+    xmlns:photos="clr-namespace:LiteApp.MySpace.Views.Photos"
     d:DesignWidth="640" d:DesignHeight="300">
 
 
@@ -36,7 +37,14 @@
         </Border>
 
         <Border x:Name="ContentBorder" Grid.Row="2" Margin="50,5,50,20">
-            <ContentControl x:Name="ActiveItem" Padding="30,0" HorizontalContentAlignment="Stretch" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <photos:UploadNotification/>
+                <ContentControl x:Name="ActiveItem" Padding="30,0" HorizontalContentAlignment="Stretch" Grid.Row="1"/>
+            </Grid>
         </Border>
     </Grid>
 

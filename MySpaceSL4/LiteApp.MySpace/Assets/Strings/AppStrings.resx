@@ -294,4 +294,10 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="HideButtonText" xml:space="preserve">
     <value>Hide</value>
   </data>
+  <data name="UploadingPhrase" xml:space="preserve">
+    <value>Uploading</value>
+  </data>
+  <data name="ViewDetailsLinkText" xml:space="preserve">
+    <value>View details</value>
+  </data>
 </root>

@@ -522,6 +522,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uploading.
+        /// </summary>
+        public static string UploadingPhrase {
+            get {
+                return ResourceManager.GetString("UploadingPhrase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can choose more than one file at a time. Upload will start immediately after choosing files..
         /// </summary>
         public static string UploadPhotoInstruction {
@@ -563,6 +572,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string ViewButtonText {
             get {
                 return ResourceManager.GetString("ViewButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View details.
+        /// </summary>
+        public static string ViewDetailsLinkText {
+            get {
+                return ResourceManager.GetString("ViewDetailsLinkText", resourceCulture);
             }
         }
         

@@ -9,10 +9,11 @@ using LiteApp.MySpace.Security;
 using LiteApp.MySpace.Services.Photo;
 using System.IO;
 using LiteApp.MySpace.Assets.Strings;
+using LiteApp.MySpace.ViewModels.Message;
 
 namespace LiteApp.MySpace.ViewModels
 {
-    public class AlbumViewModel : Screen
+    public class AlbumViewModel : Screen, IHandle<UpdateAlbumCoversMessage>
     {
         string _name;
         string _description;
@@ -23,6 +24,7 @@ namespace LiteApp.MySpace.ViewModels
         public AlbumViewModel()
         {
             SecurityContext.Current.PropertyChanged += SecurityContext_PropertyChanged;
+            IoC.Get<IEventAggregator>().Subscribe(this);
         }
 
         public string Id
@@ -162,20 +164,16 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-        public void RefreshPhotos()
+        public void Handle(UpdateAlbumCoversMessage message)
         {
-            _photos.RefreshCurrentPage();
-        }
-
-        public static CoverViewModel[] GetCovers(string combinedCoverURIs)
-        {
-            string[] splits = combinedCoverURIs.Split(";".ToCharArray(), System.StringSplitOptions.RemoveEmptyEntries);
-            CoverViewModel[] covers = new CoverViewModel[] { CoverViewModel.Default, CoverViewModel.Default, CoverViewModel.Default };
-            for (int i = 0; i < Math.Min(3, splits.Length); ++i)
+            if (message.AlbumId == Id)
             {
-                covers[i] = new CoverViewModel() { SourceURI = splits[i] };
+                this.Covers = GetCovers(message.NewCoverURIs);
+                if (this.IsActive)
+                {
+                    _photos.RefreshCurrentPage();
+                }
             }
-            return covers;
         }
 
         public static CoverViewModel[] GetCovers(IList<string> uris)
@@ -232,6 +230,17 @@ namespace LiteApp.MySpace.ViewModels
             {
                 NotifyOfPropertyChange(() => SensitiveButtonsVisibility);
             }
+        }
+
+        static CoverViewModel[] GetCovers(string combinedCoverURIs)
+        {
+            string[] splits = combinedCoverURIs.Split(";".ToCharArray(), System.StringSplitOptions.RemoveEmptyEntries);
+            CoverViewModel[] covers = new CoverViewModel[] { CoverViewModel.Default, CoverViewModel.Default, CoverViewModel.Default };
+            for (int i = 0; i < Math.Min(3, splits.Length); ++i)
+            {
+                covers[i] = new CoverViewModel() { SourceURI = splits[i] };
+            }
+            return covers;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace LiteApp.MySpace.Framework
     {
         IPagedDataSource<T> _pagedDataSource;
         int _pageIndex;
-        int _pageSize = 1;
+        int _pageSize = 5;
         int _itemCount;
         int _totalItemCount;
         bool _isPageChanging;

@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="LiteApp.MySpace.Views.Photos.UploadNotification"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:LiteApp.MySpace.Converters"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVis"/>
+    </UserControl.Resources>
+
+    <Border Background="{StaticResource HighlightLightBrush}" Padding="10,5" BorderThickness="0,1" BorderBrush="{StaticResource HighlightBrush}"
+            Visibility="{Binding ShowNotification, Mode=OneWay, Converter={StaticResource boolToVis}}" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="../../Assets/Images/sync-16.png"/>
+            <StackPanel Orientation="Horizontal" Margin="5,0,0,0" Grid.Column="1">
+                <TextBlock Style="{StaticResource ContentTextStyle}" VerticalAlignment="Center" TextTrimming="WordEllipsis" TextWrapping="NoWrap" MaxWidth="700"
+                           Text="{Binding Strings.UploadingPhrase, Source={StaticResource AppResx}}">
+                    <Run Text=""/> <!-- Only exists to provide a space -->
+                    <Run Text="{Binding FirstActiveTask.FileName, Mode=OneWay}"/>
+                </TextBlock>
+                <TextBlock Text="(" Margin="5,0,0,0" Style="{StaticResource ContentTextStyle}" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding FirstActiveTask.Progress, Mode=OneWay, StringFormat='\{0:P0\}'}" Style="{StaticResource ContentTextStyle}" VerticalAlignment="Center"/>
+                <TextBlock Text=")" Style="{StaticResource ContentTextStyle}" VerticalAlignment="Center"/>
+                
+                <HyperlinkButton x:Name="ViewDetailsLink" VerticalAlignment="Center" Click="ViewDetailsLink_Click"
+                                 Content="{Binding Strings.ViewDetailsLinkText, Source={StaticResource AppResx}}" Margin="5,0,0,0"/>
+            </StackPanel>
+            <TextBlock  Style="{StaticResource ContentTextStyle}" VerticalAlignment="Center" Grid.Column="2" Margin="5,0,0,0">
+                <Run Text="{Binding IncompleteTasks, Mode=OneWay}"/>
+                <Run Text="left"/>
+            </TextBlock>
+        </Grid>
+    </Border>
+</UserControl>

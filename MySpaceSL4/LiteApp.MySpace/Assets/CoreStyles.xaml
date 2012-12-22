@@ -297,7 +297,7 @@
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenterWrapperColor" Storyboard.TargetProperty="Color">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource HighlightLightColor}"/>
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource HighlightDarkColor}"/>
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>

@@ -138,6 +138,7 @@
     <Compile Include="Converters\PhotoCommentDeleteVisibilityConverter.cs" />
     <Compile Include="Converters\PhotoUploadStatusToImageSourceConverter.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
+    <Compile Include="ViewModels\Message\UpdateAlbumCoversMessage.cs" />
     <Compile Include="ViewModels\Photo\EditAlbumViewModel.cs" />
     <Compile Include="ViewModels\Photo\PhotoUploadStatus.cs" />
     <Compile Include="ViewModels\ViewModelSupport.cs" />
@@ -211,6 +212,9 @@
     </Compile>
     <Compile Include="Views\Photos\Master.xaml.cs">
       <DependentUpon>Master.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Photos\UploadNotification.xaml.cs">
+      <DependentUpon>UploadNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PhotoView.xaml.cs">
       <DependentUpon>PhotoView.xaml</DependentUpon>
@@ -308,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Photos\Master.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Photos\UploadNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -416,6 +424,7 @@
     <Resource Include="Assets\Images\upload-circle-32.png" />
     <Resource Include="Assets\Images\open-circle-32.png" />
     <Resource Include="Assets\Images\upload-48.png" />
+    <Resource Include="Assets\Images\sync-16.png" />
     <Content Include="Dependencies\System.Windows.Controls.Toolkit.dll" />
     <None Include="Service References\Services.Photo\PhotoService.disco" />
     <None Include="Service References\Services.Photo\configuration91.svcinfo" />
