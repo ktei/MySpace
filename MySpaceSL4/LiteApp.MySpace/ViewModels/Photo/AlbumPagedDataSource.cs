@@ -3,6 +3,7 @@ using System.Linq;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.MySpace.Views.Helpers;
+using LiteApp.MySpace.Entities;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -27,7 +28,7 @@ namespace LiteApp.MySpace.ViewModels
                     }
                     responseCallback(response);
                 };
-            client.GetPagedAlbumsAsync(pageIndex, pageSize);
+            client.GetPagedAlbumsAsync(pageIndex.ToString(), pageSize.ToString());
         }
 
         AlbumViewModel MapToAlbumViewModel(Album album)

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LiteApp.MySpace.Web.Entities;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
+using LiteApp.MySpace.Web.DataAccess.Mongo.PO;
+using LiteApp.MySpace.Entities;
 
 namespace LiteApp.MySpace.Web.DataAccess.Mongo
 {
@@ -11,13 +12,13 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
     {
         public PhotoRepository()
         {
-            Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("AlbumId");
-            Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("CreatedBy");
-            Database.GetCollection<Photo>(Collections.Photos).EnsureIndex("CreatedOn");
-            Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("PhotoId");
-            Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("AlbumId");
-            Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("CreatedBy");
-            Database.GetCollection<PhotoComment>(Collections.PhotoComments).EnsureIndex("CreatedOn");
+            Database.GetCollection<PhotoPO>(Collections.Photos).EnsureIndex("AlbumId");
+            Database.GetCollection<PhotoPO>(Collections.Photos).EnsureIndex("CreatedBy");
+            Database.GetCollection<PhotoPO>(Collections.Photos).EnsureIndex("CreatedOn");
+            Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).EnsureIndex("PhotoId");
+            Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).EnsureIndex("AlbumId");
+            Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).EnsureIndex("CreatedBy");
+            Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).EnsureIndex("CreatedOn");
         }
 
         public IEnumerable<Photo> GetPagedPhotos(int pageIndex, int pageSize, string albumId)
@@ -25,17 +26,20 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             ObjectId albumObjectId;
             if (ObjectId.TryParse(albumId, out albumObjectId))
             {
-                var cursor = Database.GetCollection<Photo>(Collections.Photos).FindAs<Photo>(Query.EQ("AlbumId", albumObjectId));
+                var cursor = Database.GetCollection<PhotoPO>(Collections.Photos).FindAs<PhotoPO>(Query.EQ("AlbumId", albumObjectId));
                 cursor.SetSortOrder(SortBy.Descending("CreatedOn")).SetSkip(pageIndex * pageSize).SetLimit(pageSize);
-                return cursor;
+                foreach (var photoPO in cursor)
+                {
+                    yield return photoPO.ToPhoto();
+                }
             }
-            return Enumerable.Empty<Photo>();
         }
 
         public void SavePhoto(Photo photo)
         {
-            photo.CreatedOn = DateTime.Now;
-            Database.GetCollection<Photo>(Collections.Photos).Save(photo);
+            PhotoPO photoPO = photo.ToPhotoPO();
+            photoPO.CreatedOn = DateTime.Now;
+            Database.GetCollection<PhotoPO>(Collections.Photos).Save(photoPO);
         }
 
         public void DeletePhotos(IEnumerable<string> photoIds, string albumId)
@@ -49,7 +53,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
                 
                 if (ObjectId.TryParse(photoId, out photoObjectId))
                 {
-                    Database.GetCollection<Photo>(Collections.Photos).Remove(
+                    Database.GetCollection<PhotoPO>(Collections.Photos).Remove(
                         Query.And(
                         Query.EQ("_id", photoObjectId), 
                         Query.EQ("AlbumId", albumObjectId)));
@@ -62,7 +66,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             ObjectId albumObjectId;
             if (ObjectId.TryParse(albumId, out albumObjectId))
             {
-                return Convert.ToInt32(Database.GetCollection<Photo>(Collections.Photos).Count(Query.EQ("AlbumId", albumObjectId)));
+                return Convert.ToInt32(Database.GetCollection<PhotoPO>(Collections.Photos).Count(Query.EQ("AlbumId", albumObjectId)));
             }
             return 0;
         }
@@ -72,16 +76,20 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             ObjectId photoObjectId;
             if (ObjectId.TryParse(photoId, out photoObjectId))
             {
-                return Database.GetCollection<PhotoComment>(Collections.PhotoComments).
-                    FindAs<PhotoComment>(Query.EQ("PhotoId", photoObjectId)).SetSortOrder(SortBy.Descending("CreatedOn"));
+                var query = Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).
+                    FindAs<PhotoCommentPO>(Query.EQ("PhotoId", photoObjectId)).SetSortOrder(SortBy.Descending("CreatedOn"));
+                foreach (var commentPO in query)
+                {
+                    yield return commentPO.ToPhotoComment();
+                }
             }
-            return Enumerable.Empty<PhotoComment>();
         }
 
         public void SaveComment(PhotoComment comment)
         {
-            comment.CreatedOn = DateTime.Now;
-            Database.GetCollection<PhotoComment>(Collections.PhotoComments).Save(comment);
+            PhotoCommentPO commentPO = comment.ToPhotoCommentPO();
+            commentPO.CreatedOn = DateTime.Now;
+            Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).Save(commentPO);
         }
 
         public void DeleteComment(string commentId, string createdBy = null)
@@ -91,11 +99,11 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             {
                 if (createdBy == null)
                 {
-                    Database.GetCollection<PhotoComment>(Collections.PhotoComments).Remove(Query.EQ("_id", commentObjectId));
+                    Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).Remove(Query.EQ("_id", commentObjectId));
                 }
                 else
                 {
-                    Database.GetCollection<PhotoComment>(Collections.PhotoComments).Remove(Query.And(
+                    Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).Remove(Query.And(
                         Query.EQ("_id", commentObjectId), 
                         Query.EQ("CreatedBy", createdBy)));
                 }
@@ -107,7 +115,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             ObjectId photoObjectId;
             if (ObjectId.TryParse(photoId, out photoObjectId))
             {
-                return Convert.ToInt32(Database.GetCollection<PhotoComment>(Collections.PhotoComments).Count(Query.EQ("PhotoId", photoObjectId)));
+                return Convert.ToInt32(Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).Count(Query.EQ("PhotoId", photoObjectId)));
             }
             return 0;
         }
@@ -117,7 +125,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             ObjectId commentObjectId;
             if (ObjectId.TryParse(commentId, out commentObjectId))
             {
-                return Database.GetCollection<PhotoComment>(Collections.PhotoComments).FindOneByIdAs<PhotoComment>(commentObjectId);
+                return Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).FindOneByIdAs<PhotoComment>(commentObjectId);
             }
             return null;
         }
@@ -130,11 +138,11 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             {
                 if (createdBy == null)
                 {
-                    Database.GetCollection<PhotoComment>(Collections.Photos).Update(Query.EQ("_id", photoObjectId), Update.Set("Description", description));
+                    Database.GetCollection<PhotoCommentPO>(Collections.Photos).Update(Query.EQ("_id", photoObjectId), Update.Set("Description", description));
                 }
                 else
                 {
-                    Database.GetCollection<PhotoComment>(Collections.Photos).Update(Query.And(
+                    Database.GetCollection<PhotoCommentPO>(Collections.Photos).Update(Query.And(
                         Query.EQ("_id", photoObjectId), 
                         Query.EQ("CreatedBy", createdBy)),
                         Update.Set("Description", description));

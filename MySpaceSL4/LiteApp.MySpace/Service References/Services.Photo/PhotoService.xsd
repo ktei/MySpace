@@ -1,58 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:complexType name="ArrayOfAlbum">
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfstring">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Album" nillable="true" type="tns:Album" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfAlbum" nillable="true" type="tns:ArrayOfAlbum" />
-  <xs:complexType name="Album">
-    <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CoverURIs" nillable="true" type="q1:ArrayOfstring" />
-      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PhotoCount" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Album" nillable="true" type="tns:Album" />
-  <xs:complexType name="ArrayOfPhoto">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Photo" nillable="true" type="tns:Photo" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPhoto" nillable="true" type="tns:ArrayOfPhoto" />
-  <xs:complexType name="Photo">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AlbumId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CommentCount" type="xs:int" />
-      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PhotoURI" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ThumbURI" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Photo" nillable="true" type="tns:Photo" />
-  <xs:complexType name="ArrayOfPhotoComment">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhotoComment" nillable="true" type="tns:PhotoComment" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPhotoComment" nillable="true" type="tns:ArrayOfPhotoComment" />
-  <xs:complexType name="PhotoComment">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AlbumId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Contents" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PhotoId" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="PhotoComment" nillable="true" type="tns:PhotoComment" />
+  <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
 </xs:schema>

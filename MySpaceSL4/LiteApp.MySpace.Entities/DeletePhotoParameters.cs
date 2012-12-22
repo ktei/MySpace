@@ -1,5 +1,5 @@
 ﻿
-namespace LiteApp.MySpace.Web.Services
+namespace LiteApp.MySpace.Entities
 {
     public class DeletePhotoParameters
     {

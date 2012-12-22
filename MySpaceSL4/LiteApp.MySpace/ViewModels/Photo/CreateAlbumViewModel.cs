@@ -1,9 +1,9 @@
 ﻿using System;
+using LiteApp.MySpace.Assets.Strings;
+using LiteApp.MySpace.Entities;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
-using LiteApp.MySpace.Views.Helpers;
 using LiteApp.Portable.Mvvm.Validation;
-using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {

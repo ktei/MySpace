@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using LiteApp.MySpace.Web.Entities;
+﻿using System.Collections.Generic;
+using LiteApp.MySpace.Entities;
 
 namespace LiteApp.MySpace.Web.DataAccess
 {

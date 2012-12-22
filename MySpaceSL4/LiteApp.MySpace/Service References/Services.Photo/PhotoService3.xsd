@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" />
-  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
-  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" />
+  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="GetPagedAlbums">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
-        <xs:element minOccurs="0" name="pageSize" type="xs:int" />
+        <xs:element minOccurs="0" name="pageIndex" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPagedAlbumsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" minOccurs="0" name="GetPagedAlbumsResult" nillable="true" type="q1:PagedResultOfAlbumYX32z0hB" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="GetPagedAlbumsResult" nillable="true" type="q1:PagedResultOfAlbumnt7Q0yEt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveAlbum">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="album" nillable="true" type="q2:Album" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="album" nillable="true" type="q2:Album" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -68,14 +67,14 @@
   <xs:element name="GetPagedPhotosResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" minOccurs="0" name="GetPagedPhotosResult" nillable="true" type="q3:PagedResultOfPhotoYX32z0hB" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="GetPagedPhotosResult" nillable="true" type="q3:PagedResultOfPhotont7Q0yEt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeletePhotos">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" minOccurs="0" name="photos" nillable="true" type="q4:ArrayOfDeletePhotoParameters" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="photos" nillable="true" type="q4:ArrayOfDeletePhotoParameters" />
         <xs:element minOccurs="0" name="albumId" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -110,21 +109,21 @@
   <xs:element name="GetCommentsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="GetCommentsResult" nillable="true" type="q6:ArrayOfPhotoComment" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="GetCommentsResult" nillable="true" type="q6:ArrayOfPhotoComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveComment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="comment" nillable="true" type="q7:PhotoComment" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="comment" nillable="true" type="q7:PhotoComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveCommentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="SaveCommentResult" nillable="true" type="q8:PhotoComment" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="SaveCommentResult" nillable="true" type="q8:PhotoComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

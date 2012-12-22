@@ -2,6 +2,7 @@
 using System.Linq;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
+using LiteApp.MySpace.Entities;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -36,7 +37,7 @@ namespace LiteApp.MySpace.ViewModels
             client.GetPagedPhotosAsync(pageIndex, pageSize, AlbumId);
         }
 
-        PhotoViewModel MapToPhotoViewModel(LiteApp.MySpace.Services.Photo.Photo photo)
+        PhotoViewModel MapToPhotoViewModel(Photo photo)
         {
             return new PhotoViewModel()
             {

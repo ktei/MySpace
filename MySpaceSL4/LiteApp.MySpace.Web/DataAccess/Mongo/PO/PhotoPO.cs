@@ -2,9 +2,9 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace LiteApp.MySpace.Web.Entities
+namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
 {
-    public class Photo
+    public class PhotoPO
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

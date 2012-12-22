@@ -17,171 +17,6 @@ namespace LiteApp.MySpace.Services.Photo {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PagedResultOfAlbumYX32z0hB", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
-    public partial class PagedResultOfAlbumYX32z0hB : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.Album> EntitiesField;
-        
-        private int TotalItemCountField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.Album> Entities {
-            get {
-                return this.EntitiesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EntitiesField, value) != true)) {
-                    this.EntitiesField = value;
-                    this.RaisePropertyChanged("Entities");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int TotalItemCount {
-            get {
-                return this.TotalItemCountField;
-            }
-            set {
-                if ((this.TotalItemCountField.Equals(value) != true)) {
-                    this.TotalItemCountField = value;
-                    this.RaisePropertyChanged("TotalItemCount");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Album", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities")]
-    public partial class Album : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private System.Collections.Generic.List<string> CoverURIsField;
-        
-        private string CreatedByField;
-        
-        private System.DateTime CreatedOnField;
-        
-        private string DescriptionField;
-        
-        private string IdField;
-        
-        private string NameField;
-        
-        private int PhotoCountField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<string> CoverURIs {
-            get {
-                return this.CoverURIsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CoverURIsField, value) != true)) {
-                    this.CoverURIsField = value;
-                    this.RaisePropertyChanged("CoverURIs");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy {
-            get {
-                return this.CreatedByField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CreatedByField, value) != true)) {
-                    this.CreatedByField = value;
-                    this.RaisePropertyChanged("CreatedBy");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreatedOn {
-            get {
-                return this.CreatedOnField;
-            }
-            set {
-                if ((this.CreatedOnField.Equals(value) != true)) {
-                    this.CreatedOnField = value;
-                    this.RaisePropertyChanged("CreatedOn");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description {
-            get {
-                return this.DescriptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
-                    this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.IdField, value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PhotoCount {
-            get {
-                return this.PhotoCountField;
-            }
-            set {
-                if ((this.PhotoCountField.Equals(value) != true)) {
-                    this.PhotoCountField = value;
-                    this.RaisePropertyChanged("PhotoCount");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
     public partial class ServerFault : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -221,348 +56,18 @@ namespace LiteApp.MySpace.Services.Photo {
         NotAuthroized = 1,
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PagedResultOfPhotoYX32z0hB", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
-    public partial class PagedResultOfPhotoYX32z0hB : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.Photo> EntitiesField;
-        
-        private int TotalItemCountField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.Photo> Entities {
-            get {
-                return this.EntitiesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EntitiesField, value) != true)) {
-                    this.EntitiesField = value;
-                    this.RaisePropertyChanged("Entities");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int TotalItemCount {
-            get {
-                return this.TotalItemCountField;
-            }
-            set {
-                if ((this.TotalItemCountField.Equals(value) != true)) {
-                    this.TotalItemCountField = value;
-                    this.RaisePropertyChanged("TotalItemCount");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Photo", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities")]
-    public partial class Photo : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string AlbumIdField;
-        
-        private int CommentCountField;
-        
-        private string CreatedByField;
-        
-        private System.DateTime CreatedOnField;
-        
-        private string DescriptionField;
-        
-        private string IdField;
-        
-        private string PhotoURIField;
-        
-        private string ThumbURIField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AlbumId {
-            get {
-                return this.AlbumIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AlbumIdField, value) != true)) {
-                    this.AlbumIdField = value;
-                    this.RaisePropertyChanged("AlbumId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CommentCount {
-            get {
-                return this.CommentCountField;
-            }
-            set {
-                if ((this.CommentCountField.Equals(value) != true)) {
-                    this.CommentCountField = value;
-                    this.RaisePropertyChanged("CommentCount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy {
-            get {
-                return this.CreatedByField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CreatedByField, value) != true)) {
-                    this.CreatedByField = value;
-                    this.RaisePropertyChanged("CreatedBy");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreatedOn {
-            get {
-                return this.CreatedOnField;
-            }
-            set {
-                if ((this.CreatedOnField.Equals(value) != true)) {
-                    this.CreatedOnField = value;
-                    this.RaisePropertyChanged("CreatedOn");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description {
-            get {
-                return this.DescriptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
-                    this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.IdField, value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PhotoURI {
-            get {
-                return this.PhotoURIField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhotoURIField, value) != true)) {
-                    this.PhotoURIField = value;
-                    this.RaisePropertyChanged("PhotoURI");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ThumbURI {
-            get {
-                return this.ThumbURIField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ThumbURIField, value) != true)) {
-                    this.ThumbURIField = value;
-                    this.RaisePropertyChanged("ThumbURI");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DeletePhotoParameters", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
-    public partial class DeletePhotoParameters : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string FileNameField;
-        
-        private string PhotoIdField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FileName {
-            get {
-                return this.FileNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
-                    this.FileNameField = value;
-                    this.RaisePropertyChanged("FileName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PhotoId {
-            get {
-                return this.PhotoIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhotoIdField, value) != true)) {
-                    this.PhotoIdField = value;
-                    this.RaisePropertyChanged("PhotoId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PhotoComment", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities")]
-    public partial class PhotoComment : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string AlbumIdField;
-        
-        private string ContentsField;
-        
-        private string CreatedByField;
-        
-        private System.DateTime CreatedOnField;
-        
-        private string IdField;
-        
-        private string PhotoIdField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AlbumId {
-            get {
-                return this.AlbumIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AlbumIdField, value) != true)) {
-                    this.AlbumIdField = value;
-                    this.RaisePropertyChanged("AlbumId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Contents {
-            get {
-                return this.ContentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ContentsField, value) != true)) {
-                    this.ContentsField = value;
-                    this.RaisePropertyChanged("Contents");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy {
-            get {
-                return this.CreatedByField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CreatedByField, value) != true)) {
-                    this.CreatedByField = value;
-                    this.RaisePropertyChanged("CreatedBy");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreatedOn {
-            get {
-                return this.CreatedOnField;
-            }
-            set {
-                if ((this.CreatedOnField.Equals(value) != true)) {
-                    this.CreatedOnField = value;
-                    this.RaisePropertyChanged("CreatedOn");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.IdField, value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PhotoId {
-            get {
-                return this.PhotoIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhotoIdField, value) != true)) {
-                    this.PhotoIdField = value;
-                    this.RaisePropertyChanged("PhotoId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="", ConfigurationName="Services.Photo.PhotoService")]
     public interface PhotoService {
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/GetPagedAlbums", ReplyAction="urn:PhotoService/GetPagedAlbumsResponse")]
-        System.IAsyncResult BeginGetPagedAlbums(int pageIndex, int pageSize, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginGetPagedAlbums(string pageIndex, string pageSize, System.AsyncCallback callback, object asyncState);
         
-        LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB EndGetPagedAlbums(System.IAsyncResult result);
+        LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Album> EndGetPagedAlbums(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/SaveAlbum", ReplyAction="urn:PhotoService/SaveAlbumResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/SaveAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
-        System.IAsyncResult BeginSaveAlbum(LiteApp.MySpace.Services.Photo.Album album, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginSaveAlbum(LiteApp.MySpace.Entities.Album album, System.AsyncCallback callback, object asyncState);
         
         void EndSaveAlbum(System.IAsyncResult result);
         
@@ -581,11 +86,11 @@ namespace LiteApp.MySpace.Services.Photo {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/GetPagedPhotos", ReplyAction="urn:PhotoService/GetPagedPhotosResponse")]
         System.IAsyncResult BeginGetPagedPhotos(int pageIndex, int pageSize, string albumId, System.AsyncCallback callback, object asyncState);
         
-        LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB EndGetPagedPhotos(System.IAsyncResult result);
+        LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Photo> EndGetPagedPhotos(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeletePhotos", ReplyAction="urn:PhotoService/DeletePhotosResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeletePhotosServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
-        System.IAsyncResult BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Entities.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState);
         
         System.Collections.Generic.List<string> EndDeletePhotos(System.IAsyncResult result);
         
@@ -598,13 +103,13 @@ namespace LiteApp.MySpace.Services.Photo {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/GetComments", ReplyAction="urn:PhotoService/GetCommentsResponse")]
         System.IAsyncResult BeginGetComments(string photoId, System.AsyncCallback callback, object asyncState);
         
-        System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> EndGetComments(System.IAsyncResult result);
+        System.Collections.Generic.List<LiteApp.MySpace.Entities.PhotoComment> EndGetComments(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/SaveComment", ReplyAction="urn:PhotoService/SaveCommentResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/SaveCommentServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
-        System.IAsyncResult BeginSaveComment(LiteApp.MySpace.Services.Photo.PhotoComment comment, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginSaveComment(LiteApp.MySpace.Entities.PhotoComment comment, System.AsyncCallback callback, object asyncState);
         
-        LiteApp.MySpace.Services.Photo.PhotoComment EndSaveComment(System.IAsyncResult result);
+        LiteApp.MySpace.Entities.PhotoComment EndSaveComment(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeleteComment", ReplyAction="urn:PhotoService/DeleteCommentResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeleteCommentServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
@@ -628,10 +133,10 @@ namespace LiteApp.MySpace.Services.Photo {
             this.results = results;
         }
         
-        public LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB Result {
+        public LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Album> Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB)(this.results[0]));
+                return ((LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Album>)(this.results[0]));
             }
         }
     }
@@ -647,10 +152,10 @@ namespace LiteApp.MySpace.Services.Photo {
             this.results = results;
         }
         
-        public LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB Result {
+        public LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Photo> Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB)(this.results[0]));
+                return ((LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Photo>)(this.results[0]));
             }
         }
     }
@@ -685,10 +190,10 @@ namespace LiteApp.MySpace.Services.Photo {
             this.results = results;
         }
         
-        public System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> Result {
+        public System.Collections.Generic.List<LiteApp.MySpace.Entities.PhotoComment> Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment>)(this.results[0]));
+                return ((System.Collections.Generic.List<LiteApp.MySpace.Entities.PhotoComment>)(this.results[0]));
             }
         }
     }
@@ -704,10 +209,10 @@ namespace LiteApp.MySpace.Services.Photo {
             this.results = results;
         }
         
-        public LiteApp.MySpace.Services.Photo.PhotoComment Result {
+        public LiteApp.MySpace.Entities.PhotoComment Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((LiteApp.MySpace.Services.Photo.PhotoComment)(this.results[0]));
+                return ((LiteApp.MySpace.Entities.PhotoComment)(this.results[0]));
             }
         }
     }
@@ -854,23 +359,23 @@ namespace LiteApp.MySpace.Services.Photo {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginGetPagedAlbums(int pageIndex, int pageSize, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginGetPagedAlbums(string pageIndex, string pageSize, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetPagedAlbums(pageIndex, pageSize, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB LiteApp.MySpace.Services.Photo.PhotoService.EndGetPagedAlbums(System.IAsyncResult result) {
+        LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Album> LiteApp.MySpace.Services.Photo.PhotoService.EndGetPagedAlbums(System.IAsyncResult result) {
             return base.Channel.EndGetPagedAlbums(result);
         }
         
         private System.IAsyncResult OnBeginGetPagedAlbums(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            int pageIndex = ((int)(inValues[0]));
-            int pageSize = ((int)(inValues[1]));
+            string pageIndex = ((string)(inValues[0]));
+            string pageSize = ((string)(inValues[1]));
             return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginGetPagedAlbums(pageIndex, pageSize, callback, asyncState);
         }
         
         private object[] OnEndGetPagedAlbums(System.IAsyncResult result) {
-            LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndGetPagedAlbums(result);
+            LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Album> retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndGetPagedAlbums(result);
             return new object[] {
                     retVal};
         }
@@ -882,11 +387,11 @@ namespace LiteApp.MySpace.Services.Photo {
             }
         }
         
-        public void GetPagedAlbumsAsync(int pageIndex, int pageSize) {
+        public void GetPagedAlbumsAsync(string pageIndex, string pageSize) {
             this.GetPagedAlbumsAsync(pageIndex, pageSize, null);
         }
         
-        public void GetPagedAlbumsAsync(int pageIndex, int pageSize, object userState) {
+        public void GetPagedAlbumsAsync(string pageIndex, string pageSize, object userState) {
             if ((this.onBeginGetPagedAlbumsDelegate == null)) {
                 this.onBeginGetPagedAlbumsDelegate = new BeginOperationDelegate(this.OnBeginGetPagedAlbums);
             }
@@ -902,7 +407,7 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginSaveAlbum(LiteApp.MySpace.Services.Photo.Album album, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginSaveAlbum(LiteApp.MySpace.Entities.Album album, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginSaveAlbum(album, callback, asyncState);
         }
         
@@ -912,7 +417,7 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         private System.IAsyncResult OnBeginSaveAlbum(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            LiteApp.MySpace.Services.Photo.Album album = ((LiteApp.MySpace.Services.Photo.Album)(inValues[0]));
+            LiteApp.MySpace.Entities.Album album = ((LiteApp.MySpace.Entities.Album)(inValues[0]));
             return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginSaveAlbum(album, callback, asyncState);
         }
         
@@ -928,11 +433,11 @@ namespace LiteApp.MySpace.Services.Photo {
             }
         }
         
-        public void SaveAlbumAsync(LiteApp.MySpace.Services.Photo.Album album) {
+        public void SaveAlbumAsync(LiteApp.MySpace.Entities.Album album) {
             this.SaveAlbumAsync(album, null);
         }
         
-        public void SaveAlbumAsync(LiteApp.MySpace.Services.Photo.Album album, object userState) {
+        public void SaveAlbumAsync(LiteApp.MySpace.Entities.Album album, object userState) {
             if ((this.onBeginSaveAlbumDelegate == null)) {
                 this.onBeginSaveAlbumDelegate = new BeginOperationDelegate(this.OnBeginSaveAlbum);
             }
@@ -1046,7 +551,7 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB LiteApp.MySpace.Services.Photo.PhotoService.EndGetPagedPhotos(System.IAsyncResult result) {
+        LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Photo> LiteApp.MySpace.Services.Photo.PhotoService.EndGetPagedPhotos(System.IAsyncResult result) {
             return base.Channel.EndGetPagedPhotos(result);
         }
         
@@ -1058,7 +563,7 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         private object[] OnEndGetPagedPhotos(System.IAsyncResult result) {
-            LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndGetPagedPhotos(result);
+            LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Photo> retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndGetPagedPhotos(result);
             return new object[] {
                     retVal};
         }
@@ -1091,7 +596,7 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Entities.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginDeletePhotos(photos, albumId, callback, asyncState);
         }
         
@@ -1101,7 +606,7 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         private System.IAsyncResult OnBeginDeletePhotos(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos = ((System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters>)(inValues[0]));
+            System.Collections.Generic.List<LiteApp.MySpace.Entities.DeletePhotoParameters> photos = ((System.Collections.Generic.List<LiteApp.MySpace.Entities.DeletePhotoParameters>)(inValues[0]));
             string albumId = ((string)(inValues[1]));
             return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginDeletePhotos(photos, albumId, callback, asyncState);
         }
@@ -1119,11 +624,11 @@ namespace LiteApp.MySpace.Services.Photo {
             }
         }
         
-        public void DeletePhotosAsync(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId) {
+        public void DeletePhotosAsync(System.Collections.Generic.List<LiteApp.MySpace.Entities.DeletePhotoParameters> photos, string albumId) {
             this.DeletePhotosAsync(photos, albumId, null);
         }
         
-        public void DeletePhotosAsync(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId, object userState) {
+        public void DeletePhotosAsync(System.Collections.Generic.List<LiteApp.MySpace.Entities.DeletePhotoParameters> photos, string albumId, object userState) {
             if ((this.onBeginDeletePhotosDelegate == null)) {
                 this.onBeginDeletePhotosDelegate = new BeginOperationDelegate(this.OnBeginDeletePhotos);
             }
@@ -1191,7 +696,7 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> LiteApp.MySpace.Services.Photo.PhotoService.EndGetComments(System.IAsyncResult result) {
+        System.Collections.Generic.List<LiteApp.MySpace.Entities.PhotoComment> LiteApp.MySpace.Services.Photo.PhotoService.EndGetComments(System.IAsyncResult result) {
             return base.Channel.EndGetComments(result);
         }
         
@@ -1201,7 +706,7 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         private object[] OnEndGetComments(System.IAsyncResult result) {
-            System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndGetComments(result);
+            System.Collections.Generic.List<LiteApp.MySpace.Entities.PhotoComment> retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndGetComments(result);
             return new object[] {
                     retVal};
         }
@@ -1232,22 +737,22 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginSaveComment(LiteApp.MySpace.Services.Photo.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginSaveComment(LiteApp.MySpace.Entities.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginSaveComment(comment, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        LiteApp.MySpace.Services.Photo.PhotoComment LiteApp.MySpace.Services.Photo.PhotoService.EndSaveComment(System.IAsyncResult result) {
+        LiteApp.MySpace.Entities.PhotoComment LiteApp.MySpace.Services.Photo.PhotoService.EndSaveComment(System.IAsyncResult result) {
             return base.Channel.EndSaveComment(result);
         }
         
         private System.IAsyncResult OnBeginSaveComment(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            LiteApp.MySpace.Services.Photo.PhotoComment comment = ((LiteApp.MySpace.Services.Photo.PhotoComment)(inValues[0]));
+            LiteApp.MySpace.Entities.PhotoComment comment = ((LiteApp.MySpace.Entities.PhotoComment)(inValues[0]));
             return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginSaveComment(comment, callback, asyncState);
         }
         
         private object[] OnEndSaveComment(System.IAsyncResult result) {
-            LiteApp.MySpace.Services.Photo.PhotoComment retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndSaveComment(result);
+            LiteApp.MySpace.Entities.PhotoComment retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndSaveComment(result);
             return new object[] {
                     retVal};
         }
@@ -1259,11 +764,11 @@ namespace LiteApp.MySpace.Services.Photo {
             }
         }
         
-        public void SaveCommentAsync(LiteApp.MySpace.Services.Photo.PhotoComment comment) {
+        public void SaveCommentAsync(LiteApp.MySpace.Entities.PhotoComment comment) {
             this.SaveCommentAsync(comment, null);
         }
         
-        public void SaveCommentAsync(LiteApp.MySpace.Services.Photo.PhotoComment comment, object userState) {
+        public void SaveCommentAsync(LiteApp.MySpace.Entities.PhotoComment comment, object userState) {
             if ((this.onBeginSaveCommentDelegate == null)) {
                 this.onBeginSaveCommentDelegate = new BeginOperationDelegate(this.OnBeginSaveComment);
             }
@@ -1398,7 +903,7 @@ namespace LiteApp.MySpace.Services.Photo {
                     base(client) {
             }
             
-            public System.IAsyncResult BeginGetPagedAlbums(int pageIndex, int pageSize, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginGetPagedAlbums(string pageIndex, string pageSize, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[2];
                 _args[0] = pageIndex;
                 _args[1] = pageSize;
@@ -1406,13 +911,13 @@ namespace LiteApp.MySpace.Services.Photo {
                 return _result;
             }
             
-            public LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB EndGetPagedAlbums(System.IAsyncResult result) {
+            public LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Album> EndGetPagedAlbums(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB _result = ((LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB)(base.EndInvoke("GetPagedAlbums", _args, result)));
+                LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Album> _result = ((LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Album>)(base.EndInvoke("GetPagedAlbums", _args, result)));
                 return _result;
             }
             
-            public System.IAsyncResult BeginSaveAlbum(LiteApp.MySpace.Services.Photo.Album album, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginSaveAlbum(LiteApp.MySpace.Entities.Album album, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = album;
                 System.IAsyncResult _result = base.BeginInvoke("SaveAlbum", _args, callback, asyncState);
@@ -1459,13 +964,13 @@ namespace LiteApp.MySpace.Services.Photo {
                 return _result;
             }
             
-            public LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB EndGetPagedPhotos(System.IAsyncResult result) {
+            public LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Photo> EndGetPagedPhotos(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB _result = ((LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB)(base.EndInvoke("GetPagedPhotos", _args, result)));
+                LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Photo> _result = ((LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Photo>)(base.EndInvoke("GetPagedPhotos", _args, result)));
                 return _result;
             }
             
-            public System.IAsyncResult BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Entities.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[2];
                 _args[0] = photos;
                 _args[1] = albumId;
@@ -1499,22 +1004,22 @@ namespace LiteApp.MySpace.Services.Photo {
                 return _result;
             }
             
-            public System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> EndGetComments(System.IAsyncResult result) {
+            public System.Collections.Generic.List<LiteApp.MySpace.Entities.PhotoComment> EndGetComments(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment> _result = ((System.Collections.Generic.List<LiteApp.MySpace.Services.Photo.PhotoComment>)(base.EndInvoke("GetComments", _args, result)));
+                System.Collections.Generic.List<LiteApp.MySpace.Entities.PhotoComment> _result = ((System.Collections.Generic.List<LiteApp.MySpace.Entities.PhotoComment>)(base.EndInvoke("GetComments", _args, result)));
                 return _result;
             }
             
-            public System.IAsyncResult BeginSaveComment(LiteApp.MySpace.Services.Photo.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginSaveComment(LiteApp.MySpace.Entities.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = comment;
                 System.IAsyncResult _result = base.BeginInvoke("SaveComment", _args, callback, asyncState);
                 return _result;
             }
             
-            public LiteApp.MySpace.Services.Photo.PhotoComment EndSaveComment(System.IAsyncResult result) {
+            public LiteApp.MySpace.Entities.PhotoComment EndSaveComment(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                LiteApp.MySpace.Services.Photo.PhotoComment _result = ((LiteApp.MySpace.Services.Photo.PhotoComment)(base.EndInvoke("SaveComment", _args, result)));
+                LiteApp.MySpace.Entities.PhotoComment _result = ((LiteApp.MySpace.Entities.PhotoComment)(base.EndInvoke("SaveComment", _args, result)));
                 return _result;
             }
             

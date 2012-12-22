@@ -5,11 +5,12 @@ using System.ServiceModel.Activation;
 using System.Threading;
 using System.Web;
 using LiteApp.MySpace.Web.DataAccess;
-using LiteApp.MySpace.Web.Entities;
 using LiteApp.MySpace.Web.FaultHandling;
 using LiteApp.MySpace.Web.Helpers;
 using Ninject;
 using Ninject.Web;
+using LiteApp.MySpace.Entities;
+using System.ServiceModel.Web;
 
 namespace LiteApp.MySpace.Web.Services
 {
@@ -32,10 +33,10 @@ namespace LiteApp.MySpace.Web.Services
         #region Album API
 
         [OperationContract]
-        public PagedResult<Album> GetPagedAlbums(int pageIndex, int pageSize)
+        public PagedResult<Album> GetPagedAlbums(string pageIndex, string pageSize)
         {
             PagedResult<Album> result = new PagedResult<Album>();
-            result.Entities = AlbumRepository.GetPagedAlbums(pageIndex, pageSize).ToList();
+            result.Entities = AlbumRepository.GetPagedAlbums(int.Parse(pageIndex), int.Parse(pageSize)).ToList();
             result.TotalItemCount = AlbumRepository.GetTotalAlbumCount();
             return result;
         }

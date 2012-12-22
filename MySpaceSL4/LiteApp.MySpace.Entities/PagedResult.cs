@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using LiteApp.MySpace.Web.Entities;
 using System.Runtime.Serialization;
 
-namespace LiteApp.MySpace.Web.Services
+namespace LiteApp.MySpace.Entities
 {
     [DataContract]
     public class PagedResult<T>

@@ -4,10 +4,9 @@
     <xsd:schema targetNamespace="/Imports">
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd0" />
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" />
-      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
-      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="PhotoService_GetPagedAlbums_InputMessage">

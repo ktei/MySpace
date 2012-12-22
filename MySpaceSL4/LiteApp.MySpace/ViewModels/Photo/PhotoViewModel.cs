@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
+using LiteApp.MySpace.Entities;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Security;
 using LiteApp.MySpace.Services.Photo;
-using LiteApp.MySpace.Views.Helpers;
-using System.ComponentModel;
-using System.Windows;
 
 namespace LiteApp.MySpace.ViewModels
 {

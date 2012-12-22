@@ -1,34 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
-  <xs:complexType name="PagedResultOfAlbumYX32z0hB">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="PagedResultOfAlbumnt7Q0yEt">
     <xs:annotation>
       <xs:appinfo>
-        <GenericType Name="PagedResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
-          <GenericParameter Name="Album" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
+        <GenericType Name="PagedResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Album" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" />
         </GenericType>
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="Entities" nillable="true" type="q1:ArrayOfAlbum" />
+      <xs:element minOccurs="0" name="Entities" nillable="true" type="tns:ArrayOfAlbum" />
       <xs:element minOccurs="0" name="TotalItemCount" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="PagedResultOfAlbumYX32z0hB" nillable="true" type="tns:PagedResultOfAlbumYX32z0hB" />
-  <xs:complexType name="PagedResultOfPhotoYX32z0hB">
+  <xs:element name="PagedResultOfAlbumnt7Q0yEt" nillable="true" type="tns:PagedResultOfAlbumnt7Q0yEt" />
+  <xs:complexType name="ArrayOfAlbum">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Album" nillable="true" type="tns:Album" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlbum" nillable="true" type="tns:ArrayOfAlbum" />
+  <xs:complexType name="Album">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CoverURIs" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhotoCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Album" nillable="true" type="tns:Album" />
+  <xs:complexType name="PagedResultOfPhotont7Q0yEt">
     <xs:annotation>
       <xs:appinfo>
-        <GenericType Name="PagedResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
-          <GenericParameter Name="Photo" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" />
+        <GenericType Name="PagedResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Photo" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" />
         </GenericType>
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Entities" minOccurs="0" name="Entities" nillable="true" type="q2:ArrayOfPhoto" />
+      <xs:element minOccurs="0" name="Entities" nillable="true" type="tns:ArrayOfPhoto" />
       <xs:element minOccurs="0" name="TotalItemCount" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="PagedResultOfPhotoYX32z0hB" nillable="true" type="tns:PagedResultOfPhotoYX32z0hB" />
+  <xs:element name="PagedResultOfPhotont7Q0yEt" nillable="true" type="tns:PagedResultOfPhotont7Q0yEt" />
+  <xs:complexType name="ArrayOfPhoto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Photo" nillable="true" type="tns:Photo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPhoto" nillable="true" type="tns:ArrayOfPhoto" />
+  <xs:complexType name="Photo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlbumId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommentCount" type="xs:int" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhotoURI" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ThumbURI" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Photo" nillable="true" type="tns:Photo" />
   <xs:complexType name="ArrayOfDeletePhotoParameters">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DeletePhotoParameters" nillable="true" type="tns:DeletePhotoParameters" />
@@ -42,4 +79,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DeletePhotoParameters" nillable="true" type="tns:DeletePhotoParameters" />
+  <xs:complexType name="ArrayOfPhotoComment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhotoComment" nillable="true" type="tns:PhotoComment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPhotoComment" nillable="true" type="tns:ArrayOfPhotoComment" />
+  <xs:complexType name="PhotoComment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlbumId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Contents" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhotoId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PhotoComment" nillable="true" type="tns:PhotoComment" />
 </xs:schema>

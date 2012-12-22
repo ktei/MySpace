@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace LiteApp.MySpace.Web.Entities
+namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
 {
-    public class PhotoComment
+    public class PhotoCommentPO
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]

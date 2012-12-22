@@ -115,10 +115,11 @@
     <Compile Include="DataAccess\Mongo\AlbumRepository.cs" />
     <Compile Include="DataAccess\Mongo\BaseRepository.cs" />
     <Compile Include="DataAccess\Mongo\PhotoRepository.cs" />
-    <Compile Include="Entities\Album.cs" />
-    <Compile Include="Entities\Photo.cs" />
-    <Compile Include="Entities\PhotoComment.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="DataAccess\Mongo\PO\POExtensions.cs" />
+    <Compile Include="DataAccess\Mongo\PO\AlbumPO.cs" />
+    <Compile Include="DataAccess\Mongo\PO\PhotoPO.cs" />
+    <Compile Include="DataAccess\Mongo\PO\PhotoCommentPO.cs" />
+    <Compile Include="DataAccess\Mongo\PO\UserPO.cs" />
     <Compile Include="FaultHandling\ServerError.cs" />
     <Compile Include="FaultHandling\ServerFaultCode.cs" />
     <Compile Include="Handlers\PhotoReceiver.ashx.cs">
@@ -140,8 +141,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SupportFiles.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\DeletePhotoParameters.cs" />
-    <Compile Include="Services\PagedResult.cs" />
     <Compile Include="Services\PhotoService.svc.cs">
       <DependentUpon>PhotoService.svc</DependentUpon>
       <SubType>Component</SubType>
@@ -162,6 +161,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LiteApp.MySpace.Entities\LiteApp.MySpace.Entities.csproj">
+      <Project>{AF5BEC99-53ED-4D28-8CD9-E4928CDA552B}</Project>
+      <Name>LiteApp.MySpace.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MongoDB.Web\MongoDB.Web.csproj">
       <Project>{90BB8808-E091-463D-AAFD-5134183BDCF7}</Project>
       <Name>MongoDB.Web</Name>

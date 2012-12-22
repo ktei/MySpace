@@ -358,18 +358,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.PagedResultOfAlbumYX32z0hB.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.PagedResultOfPhotoYX32z0hB.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Services.Photo\LiteApp.MySpace.Services.Photo.PhotoComment.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Properties\DataSources\LiteApp.MySpace.Entities.Album.datasource" />
+    <None Include="Properties\DataSources\LiteApp.MySpace.Entities.Photo.datasource" />
+    <None Include="Properties\DataSources\LiteApp.MySpace.Entities.PhotoComment.datasource" />
     <None Include="Service References\Services.Photo\PhotoService.wsdl" />
     <None Include="Service References\Services.Photo\PhotoService.xsd">
       <SubType>Designer</SubType>
@@ -385,9 +378,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Services.Photo\PhotoService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Services.Photo\PhotoService51.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Services.Security\LiteApp.MySpace.Services.Security.SignInStaus.datasource">
@@ -418,6 +408,7 @@
     <Resource Include="Assets\Images\completing-16.png" />
     <Resource Include="Assets\Images\edit-circle-32.png" />
     <Resource Include="Assets\Images\delete-circle-32.png" />
+    <Content Include="Properties\AppManifest.xml" />
     <Content Include="Assets\Images\icon-scales.txt" />
     <Resource Include="Assets\Images\save-circle-32.png" />
     <Resource Include="Assets\Images\previous-circle-32.png" />
@@ -477,6 +468,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LiteApp.MySpace.Entities\LiteApp.MySpace.Entities.csproj">
+      <Project>{AF5BEC99-53ED-4D28-8CD9-E4928CDA552B}</Project>
+      <Name>LiteApp.MySpace.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LiteApp.Portable.Mvvm\LiteApp.Portable.Mvvm.csproj">
       <Project>{395BBE17-6ECA-4B5D-BF1A-9141171F6236}</Project>
       <Name>LiteApp.Portable.Mvvm</Name>

@@ -1,14 +1,9 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Generic;
-using System;
+﻿using System;
 
-namespace LiteApp.MySpace.Web.Entities
+namespace LiteApp.MySpace.Entities
 {
     public class Album
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         public string Name { get; set; }
