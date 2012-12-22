@@ -11,49 +11,38 @@ namespace LiteApp.MySpace.Views
     public partial class UploadPhotoManagerView : ChildWindow
     {
         UploadPhotoManagerViewModel _model;
+        System.Action _cancelButtonAction;
 
         public UploadPhotoManagerView()
         {
             InitializeComponent();
             this.Loaded += UploadPhotoManagerView_Loaded;
+            this.Unloaded += UploadPhotoManagerView_Unloaded;
         }
 
         void UploadPhotoManagerView_Loaded(object sender, RoutedEventArgs e)
         {
             _model = this.DataContext as UploadPhotoManagerViewModel;
+            _model.NoMoreTasks += _model_NoMoreTasks;
+            UpdateButtons();
+        }
+
+
+        void UploadPhotoManagerView_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _model.NoMoreTasks -= _model_NoMoreTasks;
+        }
+
+        void _model_NoMoreTasks(object sender, EventArgs e)
+        {
+            UpdateButtons();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_model.HasMoreTasks())
-            {
-                MessageBoxViewModel message = new MessageBoxViewModel()
-                {
-                    Buttons = MessageBoxButtons.YesNo,
-                    MessageLevel = MessageLevel.Exclamation,
-                    Header = AppStrings.CancelUploadMessageHeader,
-                    Message = AppStrings.ConfirmCancelUploadPhotoMessage,
-                    DisplayName = AppStrings.UploadPhotoWindowTitle
-                };
-
-                message.Closed += message_Closed;
-                IoC.Get<IWindowManager>().ShowDialog(message);
-            }
-            else
-            {
-                this.DialogResult = false;
-            }
-        }
-
-        void message_Closed(object sender, EventArgs e)
-        {
-            MessageBoxViewModel message = (MessageBoxViewModel)sender;
-            if (message.Result == ViewModels.MessageBoxResult.Positive)
-            {
-                message.Closed -= message_Closed;
-                _model.Clear();
-                this.DialogResult = false;
-            }
+            this.DialogResult = false;
+            if (_cancelButtonAction != null)
+                _cancelButtonAction();
         }
 
         private void ChooseFilesButton_Click(object sender, RoutedEventArgs e)
@@ -63,7 +52,7 @@ namespace LiteApp.MySpace.Views
             if (dlg.ShowDialog() == true)
             {
                 _model.StartUpload(dlg.Files);
-                ChooseFilesButton.Content = AppStrings.AddMoreFilesButtonText;
+                UpdateButtons();
             }
         }
 
@@ -72,6 +61,40 @@ namespace LiteApp.MySpace.Views
             if (e.Key == System.Windows.Input.Key.Escape)
             {
                 CancelButton.AutomationPeerInvoke();
+            }
+        }
+
+        void UpdateButtons()
+        {
+            if (_model.HasArchivedTasks())
+            {
+                Execute.OnUIThread(() => this.ChooseFilesButton.Content = AppStrings.AddMoreFilesButtonText);
+                if (_model.HasMoreTasks())
+                {
+                    Execute.OnUIThread(() => this.CancelButton.Content = AppStrings.HideButtonText);
+                    _cancelButtonAction = () => this.DialogResult = false;
+                }
+                else
+                {
+                    Execute.OnUIThread(() =>
+                        {
+                            this.CancelButton.Content = AppStrings.DoneButtonText;
+                            _cancelButtonAction = () =>
+                                {
+                                    _model.Clear();
+                                    this.ChooseFilesButton.Content = AppStrings.ChooseFilesButtonText;
+                                    this.CancelButton.Content = AppStrings.CancelButtonText;
+                                };
+                        });
+                }
+            }
+            else
+            {
+                Execute.OnUIThread(() =>
+                    {
+                        this.ChooseFilesButton.Content = AppStrings.ChooseFilesButtonText;
+                        this.CancelButton.Content = AppStrings.CancelButtonText;
+                    });
             }
         }
     }

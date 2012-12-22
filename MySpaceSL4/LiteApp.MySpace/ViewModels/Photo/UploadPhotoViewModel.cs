@@ -20,11 +20,10 @@ namespace LiteApp.MySpace.ViewModels
         string _fileName;
         bool _cancelRequested;
         bool _canCancel = true;
-        PhotoUploadStatus _status = PhotoUploadStatus.Waiting;
+        PhotoUploadStatus _status = PhotoUploadStatus.Pending;
         double _progress;
-
         FileInfo _file;
-        string _albumId;
+        AlbumViewModel _album;
 
         public event EventHandler UploadStarted;
 
@@ -33,16 +32,16 @@ namespace LiteApp.MySpace.ViewModels
         public event EventHandler<PhotoUploadCompletedEventArgs> UploadCompleted;
 
 
-        public UploadPhotoViewModel(FileInfo file, string albumId)
+        public UploadPhotoViewModel(FileInfo file, AlbumViewModel album)
         {
             if (file == null)
                 throw new ArgumentNullException("file");
-            if (albumId == null)
+            if (album == null)
                 throw new ArgumentNullException("albumId");
             Uri fullUri = Application.Current.Host.Source;
             _baseUri = fullUri.AbsoluteUri.Substring(0, fullUri.AbsoluteUri.IndexOf("/ClientBin"));
             _file = file;
-            _albumId = albumId;
+            _album = album;
             FileName = _file.Name;
         }
 
@@ -119,7 +118,7 @@ namespace LiteApp.MySpace.ViewModels
                         {
                             _fileStream = _file.OpenRead();
                             _dataLength = _fileStream.Length;
-                            var webRequest = CreateUploadRequest(_file, _albumId, requestToken, e.Result);
+                            var webRequest = CreateUploadRequest(_file, _album.Id, requestToken, e.Result);
                             webRequest.BeginGetRequestStream(new AsyncCallback(WriteToStreamCallback), webRequest);
                             FileName = _file.Name;
                             CanCancel = true;
@@ -237,6 +236,7 @@ namespace LiteApp.MySpace.ViewModels
                     {
                         Status = PhotoUploadStatus.Succeeded;
                         UploadCompleted(this, new PhotoUploadCompletedEventArgs(response, null));
+                        UpdateAlbumCovers(response);
                     }
                     else
                     {
@@ -252,6 +252,15 @@ namespace LiteApp.MySpace.ViewModels
                 {
                     UploadCompleted(this, new PhotoUploadCompletedEventArgs(response, ex));
                 }
+            }
+        }
+
+        void UpdateAlbumCovers(string newCoverURIs)
+        {
+            _album.Covers = AlbumViewModel.GetCovers(newCoverURIs);
+            if (_album.IsActive)
+            {
+                _album.RefreshPhotos();
             }
         }
     }

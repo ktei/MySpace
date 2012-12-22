@@ -291,4 +291,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="DeletePhotosMessageHeader" xml:space="preserve">
     <value>Delete photos</value>
   </data>
+  <data name="HideButtonText" xml:space="preserve">
+    <value>Hide</value>
+  </data>
 </root>

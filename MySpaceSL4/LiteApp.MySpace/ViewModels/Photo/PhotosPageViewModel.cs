@@ -106,7 +106,6 @@ namespace LiteApp.MySpace.ViewModels
                     cover.SourceURI = sourceURI;
                 }
             }
-
         }
 
         public ICommand DeleteAlbumCommand

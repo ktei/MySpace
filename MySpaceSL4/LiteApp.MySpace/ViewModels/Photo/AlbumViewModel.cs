@@ -109,7 +109,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public void UploadPhoto()
         {
-            var model = new UploadPhotoManagerViewModel();
+            var model = IoC.Get<UploadPhotoManagerViewModel>();
             model.Album = this;
             IoC.Get<IWindowManager>().ShowDialog(model);
         }

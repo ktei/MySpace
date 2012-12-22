@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Caliburn.Micro;
 using LiteApp.MySpace.Assets.Strings;
-using System.ComponentModel;
-using System.Linq;
 
 namespace LiteApp.MySpace.ViewModels
 {
     public class UploadPhotoManagerViewModel : Screen
     {
         Queue<UploadPhotoViewModel> _pendingTasks = new Queue<UploadPhotoViewModel>();
-        BindableCollection<UploadPhotoViewModel> _uploadItems = new BindableCollection<UploadPhotoViewModel>();
+        BindableCollection<UploadPhotoViewModel> _archivedTasks = new BindableCollection<UploadPhotoViewModel>();
         bool _clearing;
 
         public UploadPhotoManagerViewModel()
@@ -23,20 +23,22 @@ namespace LiteApp.MySpace.ViewModels
 
         public AlbumViewModel Album { get; set; }
 
-        public IEnumerable<UploadPhotoViewModel> UploadItems
+        public event EventHandler NoMoreTasks;
+
+        public IEnumerable<UploadPhotoViewModel> ArchivedTasks
         {
-            get { return _uploadItems; }
+            get { return _archivedTasks; }
         }
 
         public void StartUpload(IEnumerable<FileInfo> files)
         {
             foreach (var file in files)
             {
-                var uploadPhotoViewModel = new UploadPhotoViewModel(file, Album.Id);
+                var uploadPhotoViewModel = new UploadPhotoViewModel(file, Album);
                 uploadPhotoViewModel.UploadCompleted += uploadPhotoViewModel_UploadCompleted;
                 uploadPhotoViewModel.UploadCanceled += uploadPhotoViewModel_UploadCanceled;
                 _pendingTasks.Enqueue(uploadPhotoViewModel);
-                _uploadItems.Add(uploadPhotoViewModel);
+                _archivedTasks.Add(uploadPhotoViewModel);
             }
             StartNextPendingTasks();
         }
@@ -44,21 +46,27 @@ namespace LiteApp.MySpace.ViewModels
         public void Clear()
         {
             _clearing = true;
-            _pendingTasks.Clear();
-            foreach (var item in _uploadItems)
+            lock (_pendingTasks)
             {
-                item.CancelUpload();
+                _pendingTasks.Clear();
             }
-            _uploadItems.Clear();
+            _archivedTasks.Clear();
             _clearing = false;
         }
 
         public bool HasMoreTasks()
         {
+            bool hasPendingTasks;
             lock (_pendingTasks)
             {
-                return GetActiveTaskCount() > 0 || _pendingTasks.Any(x => x.Status != PhotoUploadStatus.Canceled);
+                hasPendingTasks = _pendingTasks.Any(x => x.Status != PhotoUploadStatus.Canceled);
             }
+            return GetActiveTaskCount() > 0 || hasPendingTasks;
+        }
+
+        public bool HasArchivedTasks()
+        {
+            return _archivedTasks.Count > 0;
         }
 
         void uploadPhotoViewModel_UploadCanceled(object sender, System.EventArgs e)
@@ -76,14 +84,6 @@ namespace LiteApp.MySpace.ViewModels
             model.UploadCanceled -= uploadPhotoViewModel_UploadCanceled;
             model.UploadCompleted -= uploadPhotoViewModel_UploadCompleted;
 
-            if (e.Error == null)
-            {
-                Album.Covers = AlbumViewModel.GetCovers(e.NewCoverURIs);
-                if (Album.IsActive)
-                {
-                    Album.RefreshPhotos();
-                }
-            }
             StartNextPendingTasks();
         }
 
@@ -92,20 +92,30 @@ namespace LiteApp.MySpace.ViewModels
             if (_clearing)
                 return;
             int tasksToAdd = MaximumActiveTasks - GetActiveTaskCount();
-            while (_pendingTasks.Count > 0 && tasksToAdd > 0)
+            lock (_pendingTasks)
             {
-                var nextTask = _pendingTasks.Dequeue();
-                if (nextTask.Status != PhotoUploadStatus.Canceled)
+                while (_pendingTasks.Count > 0 && tasksToAdd > 0)
                 {
-                    nextTask.StartUpload();
-                    tasksToAdd--;
+                    var nextTask = _pendingTasks.Dequeue();
+                    if (nextTask.Status != PhotoUploadStatus.Canceled)
+                    {
+                        nextTask.StartUpload();
+                        tasksToAdd--;
+                    }
                 }
+            }
+
+            // Check and notify if there are more active or pending tasks
+            if (!HasMoreTasks())
+            {
+                if (NoMoreTasks != null)
+                    NoMoreTasks(this, EventArgs.Empty);
             }
         }
 
         int GetActiveTaskCount()
         {
-            return _uploadItems.Count(x => x.Status == PhotoUploadStatus.Uploading || x.Status == PhotoUploadStatus.Completing);
+            return _archivedTasks.Count(x => x.Status == PhotoUploadStatus.Uploading || x.Status == PhotoUploadStatus.Completing);
         }
     }
 }
