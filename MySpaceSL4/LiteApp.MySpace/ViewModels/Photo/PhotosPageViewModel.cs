@@ -123,11 +123,21 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-
-        protected override void OnInitialize()
+        protected override void OnActivate()
         {
+            base.OnActivate();
             LoadAlbums();
-            base.OnInitialize();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            base.OnDeactivate(close);
+            if (_albums != null)
+            {
+                _albums.PageChanging -= _albums_PageChanging;
+                _albums.PageChanged -= _albums_PageChanged;
+                _albums = null;
+            }
         }
 
         void LoadAlbums()
