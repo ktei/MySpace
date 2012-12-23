@@ -20,10 +20,10 @@
             <endpoint address="../Services/SecurityService.svc" binding="customBinding"
                 bindingConfiguration="CustomBinding_SecurityService" contract="Services.Security.SecurityService"
                 name="CustomBinding_SecurityService" />
-            <endpoint address="http://localhost:11846/Services/PhotoService.svc"
+            <endpoint address="../Services/PhotoService.svc"
                 binding="customBinding" bindingConfiguration="CustomBinding_PhotoService"
                 contract="Services.Photo.PhotoService" name="CustomBinding_PhotoService" />
-            <endpoint address="http://localhost:11846/Services/LoggingService.svc"
+            <endpoint address="../Services/LoggingService.svc"
                 binding="customBinding" bindingConfiguration="CustomBinding_LoggingService"
                 contract="Services.Logging.LoggingService" name="CustomBinding_LoggingService" />
         </client>
