@@ -22,12 +22,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Width="720" Height="445" Margin="0,0,10,0" VerticalAlignment="Top">
+            <TextBlock Text="{Binding UploadInfo, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" Width="720" TextWrapping="Wrap"/>
+            <Grid Width="720" Height="445" Margin="0,0,10,0" VerticalAlignment="Top" Grid.Row="1">
                 <Grid Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -41,7 +43,7 @@
                 <controls:ProgressRing IsActive="True" HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVis}}" />
             </Grid>
-            <StackPanel Margin="0,15,15,0" Grid.Row="1">
+            <StackPanel Margin="0,15,15,0" Grid.Row="2">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                     <TextBlock Text="{Binding Strings.DescriptionLabel, Source={StaticResource AppResx}}" 
                                        Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" />

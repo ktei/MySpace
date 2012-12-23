@@ -198,6 +198,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created by {0} on {1}.
+        /// </summary>
+        public static string CreationInfoFormat {
+            get {
+                return ResourceManager.GetString("CreationInfoFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete album.
         /// </summary>
         public static string DeleteAlbumMessageHeader {
@@ -554,6 +563,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string UploadButtonText {
             get {
                 return ResourceManager.GetString("UploadButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploaded by {0} on {1}.
+        /// </summary>
+        public static string UploadInfoFormat {
+            get {
+                return ResourceManager.GetString("UploadInfoFormat", resourceCulture);
             }
         }
         

@@ -38,7 +38,7 @@
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="0,0,0,1" Margin="0,30,30,0" Padding="0,5" BorderBrush="LightGray" HorizontalAlignment="Left" Width="600">
+                    <Border BorderThickness="0,0,0,1" Margin="0,0,0,30" Padding="0,5" BorderBrush="LightGray" HorizontalAlignment="Left" Width="600">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -80,16 +80,21 @@
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="{Binding Name, Mode=OneWay}"
                                             TextWrapping="NoWrap" Style="{StaticResource ContentTextStyle}" FontSize="20" FontWeight="ExtraLight"  TextTrimming="WordEllipsis"/>
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" BorderThickness="0" Height="60">
+                                <TextBlock Text="{Binding CreationInfo, Mode=OneWay}" TextWrapping="NoWrap" Grid.Row="1" TextTrimming="WordEllipsis" Style="{StaticResource ContentTextStyle}" FontSize="12"/>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="2" BorderThickness="0" Height="60">
                                     <TextBlock Text="{Binding Description, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" 
-                                                       FontStyle="Italic" TextWrapping="Wrap" />
+                                                       FontStyle="Italic" TextWrapping="Wrap">
+                                        <!--<Run Text="&#13;" />-->
+                                        <!--<Run Text="{Binding Description, Mode=OneWay}"/>-->
+                                    </TextBlock>
                                 </ScrollViewer>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,5,0,0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Margin="0,5,0,0">
                                     <HyperlinkButton cal:Message.Attach="ViewAlbum('$dataContext')">
                                         <Image Source="../../Assets/Images/open-circle-32.png"/>
                                     </HyperlinkButton>

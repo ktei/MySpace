@@ -54,6 +54,7 @@ namespace LiteApp.MySpace.Web.Services
         {
             ServiceSupport.AuthorizeAndExecute(() => 
                 {
+                    album.CreatedBy = HttpContext.Current.User.Identity.Name;
                     var albumId = AlbumRepository.SaveAlbum(album);
                     var storage = SharpBoxSupport.OpenDropBoxStorage();
                     storage.CreateFoldersForAlbum(albumId);

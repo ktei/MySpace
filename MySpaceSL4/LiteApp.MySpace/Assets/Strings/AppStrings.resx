@@ -312,4 +312,10 @@ So, now we have an animation element and we know how to make its copies. Let's s
   <data name="DeleteAlbumMessageHeader" xml:space="preserve">
     <value>Delete album</value>
   </data>
+  <data name="CreationInfoFormat" xml:space="preserve">
+    <value>Created by {0} on {1}</value>
+  </data>
+  <data name="UploadInfoFormat" xml:space="preserve">
+    <value>Uploaded by {0} on {1}</value>
+  </data>
 </root>

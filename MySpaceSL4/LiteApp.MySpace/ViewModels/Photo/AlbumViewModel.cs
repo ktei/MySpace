@@ -18,6 +18,7 @@ namespace LiteApp.MySpace.ViewModels
     {
         string _name;
         string _description;
+        DateTime _createdOn;
         CoverViewModel[] _covers;
         ServerSidePagedCollectionView<PhotoViewModel> _photos;
         bool _isBusy;
@@ -60,10 +61,27 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
+        public DateTime CreatedOn
+        {
+            get { return _createdOn; }
+            set
+            {
+                if (_createdOn != value)
+                {
+                    _createdOn = value.ToLocalDateTime();
+                }
+            }
+        }
+
         public string CreatedBy
         {
             get;
             set;
+        }
+
+        public string CreationInfo
+        {
+            get { return string.Format(AppStrings.CreationInfoFormat, CreatedBy, CreatedOn); }
         }
 
         public CoverViewModel[] Covers

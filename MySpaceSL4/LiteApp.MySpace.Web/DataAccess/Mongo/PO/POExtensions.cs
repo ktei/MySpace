@@ -33,7 +33,11 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
             result.CreatedBy = entity.CreatedBy;
             result.CreatedOn = entity.CreatedOn;
             result.PhotoCount = entity.PhotoCount;
-            result.CoverURIs = entity.CoverURIs;
+            if (entity.CoverURIs != null)
+            {
+                result.CoverURIs = new string[entity.CoverURIs.Length];
+                entity.CoverURIs.CopyTo(result.CoverURIs, 0);
+            }
             result.Description = entity.Description;
             return result;
         }

@@ -9,6 +9,7 @@ using LiteApp.MySpace.Entities;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Security;
 using LiteApp.MySpace.Services.Photo;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -24,6 +25,7 @@ namespace LiteApp.MySpace.ViewModels
         bool _isEditingDescription;
         string _description;
         string _descriptionBackup;
+        DateTime _createdOn;
 
         public PhotoViewModel()
         {
@@ -35,9 +37,24 @@ namespace LiteApp.MySpace.ViewModels
 
         public string AlbumId { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn
+        {
+            get { return _createdOn; }
+            set
+            {
+                if (_createdOn != value)
+                {
+                    _createdOn = value.ToLocalDateTime();
+                }
+            }
+        }
 
         public string CreatedBy { get; set; }
+
+        public string UploadInfo
+        {
+            get { return string.Format(AppStrings.UploadInfoFormat, CreatedBy, CreatedOn); }
+        }
 
         public string Description
         {
