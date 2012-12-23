@@ -20,7 +20,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public RefreshBindingScope RefreshBindingScope { get; set; }
 
-        public event EventHandler CreateCompleted;
+        public event EventHandler<AsyncOperationCompletedEventArgs> CreateCompleted;
 
         [RequiredField]
         [LengthConstraint(100)]
@@ -71,7 +71,7 @@ namespace LiteApp.MySpace.ViewModels
                         e.Error.Handle();
                     }
                     if (CreateCompleted != null)
-                        CreateCompleted(this, EventArgs.Empty);
+                        CreateCompleted(this, new AsyncOperationCompletedEventArgs(e.Error));
                 };
                 svc.CreateAlbumAsync(album);
             }

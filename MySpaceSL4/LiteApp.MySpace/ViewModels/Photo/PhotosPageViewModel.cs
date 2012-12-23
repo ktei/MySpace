@@ -82,7 +82,10 @@ namespace LiteApp.MySpace.ViewModels
             var model = new CreateAlbumViewModel();
             model.CreateCompleted += (sender, e) =>
             {
-                _albums.RefreshCurrentPage();
+                if (e.Error == null)
+                {
+                    _albums.RefreshCurrentPage();
+                }
             };
             IoC.Get<IWindowManager>().ShowDialog(model);
         }

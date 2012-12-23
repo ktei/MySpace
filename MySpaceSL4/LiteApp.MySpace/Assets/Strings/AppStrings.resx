@@ -190,7 +190,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Sign-in failed</value>
   </data>
   <data name="SigningInMessage" xml:space="preserve">
-    <value>Signing you int...</value>
+    <value>Signing you in...</value>
   </data>
   <data name="SignInRequiredMessageHeader" xml:space="preserve">
     <value>Sign-in is required</value>

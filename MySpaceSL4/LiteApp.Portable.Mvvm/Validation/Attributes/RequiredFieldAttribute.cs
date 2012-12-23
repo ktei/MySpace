@@ -15,7 +15,7 @@ namespace LiteApp.Portable.Mvvm.Validation
             {
                 if (!AllowWhiteSpace)
                     return "This field is required and cannot only contain spaces.";
-                return "This field is required";
+                return "This field is required.";
                 
             }
         }

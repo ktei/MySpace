@@ -477,7 +477,7 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Signing you int....
+        ///   Looks up a localized string similar to Signing you in....
         /// </summary>
         public static string SigningInMessage {
             get {

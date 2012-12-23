@@ -11,6 +11,7 @@ using LiteApp.MySpace.Web.Helpers;
 using LiteApp.MySpace.Web.Logging;
 using Ninject;
 using Ninject.Web;
+using System;
 
 namespace LiteApp.MySpace.Web.Services
 {
@@ -56,8 +57,20 @@ namespace LiteApp.MySpace.Web.Services
                 {
                     album.CreatedBy = HttpContext.Current.User.Identity.Name;
                     var albumId = AlbumRepository.SaveAlbum(album);
-                    var storage = SharpBoxSupport.OpenDropBoxStorage();
-                    storage.CreateFoldersForAlbum(albumId);
+
+                    // We just try to create folders. Sometimes this may fail
+                    // but we don't need to tell users anything wrong because
+                    // these folders will be created (if necessary) when users upload photos.
+                    try
+                    {
+                        var storage = SharpBoxSupport.OpenDropBoxStorage();
+                        storage.CreateFoldersForAlbum(albumId);
+                        storage.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex.ToString());
+                    }
                 });
         }
 

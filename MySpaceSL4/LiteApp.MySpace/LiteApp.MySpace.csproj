@@ -150,6 +150,7 @@
     <Compile Include="ViewModels\Message\RequestAlbumsViewMessage.cs" />
     <Compile Include="ViewModels\Message\SignedOutMessage.cs" />
     <Compile Include="ViewModels\Message\UpdateAlbumCoversMessage.cs" />
+    <Compile Include="ViewModels\AsyncOperationCompletedEventArgs.cs" />
     <Compile Include="ViewModels\Photo\EditAlbumViewModel.cs" />
     <Compile Include="ViewModels\Photo\PhotoUploadStatus.cs" />
     <Compile Include="ViewModels\ViewModelSupport.cs" />
