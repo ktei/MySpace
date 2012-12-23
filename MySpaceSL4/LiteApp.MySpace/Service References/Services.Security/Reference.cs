@@ -54,7 +54,7 @@ namespace LiteApp.MySpace.Services.Security {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
     public partial class ServerFault : object, System.ComponentModel.INotifyPropertyChanged {
         
         private LiteApp.MySpace.Services.Security.ServerFaultCode FaultCodeField;
@@ -83,7 +83,7 @@ namespace LiteApp.MySpace.Services.Security {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFaultCode", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFaultCode", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
     public enum ServerFaultCode : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -113,7 +113,7 @@ namespace LiteApp.MySpace.Services.Security {
         LiteApp.MySpace.Services.Security.SignUpStatus EndSignUp(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/RequestPhotoUploadTicket", ReplyAction="urn:SecurityService/RequestPhotoUploadTicketResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Security.ServerFault), Action="urn:SecurityService/RequestPhotoUploadTicketServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Security.ServerFault), Action="urn:SecurityService/RequestPhotoUploadTicketServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
         System.IAsyncResult BeginRequestPhotoUploadTicket(string requestToken, System.AsyncCallback callback, object asyncState);
         
         string EndRequestPhotoUploadTicket(System.IAsyncResult result);

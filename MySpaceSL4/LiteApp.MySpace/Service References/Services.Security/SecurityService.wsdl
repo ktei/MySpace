@@ -5,7 +5,7 @@
       <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd0" />
       <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" />
-      <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/SecurityService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="SecurityService_SignIn_InputMessage">
@@ -33,7 +33,7 @@
     <wsdl:part name="parameters" element="RequestPhotoUploadTicketResponse" />
   </wsdl:message>
   <wsdl:message name="SecurityService_RequestPhotoUploadTicket_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q1:ServerFault" />
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" name="detail" element="q1:ServerFault" />
   </wsdl:message>
   <wsdl:message name="SecurityService_IsAuthenticated_InputMessage">
     <wsdl:part name="parameters" element="IsAuthenticated" />
