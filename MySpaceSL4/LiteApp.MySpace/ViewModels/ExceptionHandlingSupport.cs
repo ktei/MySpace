@@ -26,7 +26,7 @@ namespace LiteApp.MySpace.ViewModels
             }
             else
             {
-                model.Message = ErrorStrings.UnknownServerErrorMessage;
+                model.Message = ex.ToString(); //ErrorStrings.UnknownServerErrorMessage;
             }
 
             Execute.OnUIThread(() => IoC.Get<IWindowManager>().ShowDialog(model));
