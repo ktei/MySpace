@@ -1,19 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Windows.Input;
 using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
-using LiteApp.MySpace.Views.Helpers;
+using LiteApp.MySpace.ViewModels.Message;
 using LiteApp.MySpace.Assets.Strings;
-using System.Windows;
 
 namespace LiteApp.MySpace.ViewModels
 {
     [Export(typeof(IPage))]
     [PageMetadata("Photos")]
-    public class PhotosPageViewModel : Conductor<AlbumViewModel>, IPage
+    public class PhotosPageViewModel : Conductor<AlbumViewModel>, IPage, IHandle<RequestAlbumsViewMessage>
     {
         ServerSidePagedCollectionView<AlbumViewModel> _albums;
         bool _isBusy;
@@ -21,7 +19,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public PhotosPageViewModel()
         {
-
+            IoC.Get<IEventAggregator>().Subscribe(this);
         }
 
         public string Name
@@ -65,6 +63,20 @@ namespace LiteApp.MySpace.ViewModels
             get { return _albums; }
         }
 
+
+        public ICommand DeleteAlbumCommand
+        {
+            get
+            {
+                return new Command(x =>
+                {
+                    //TODO: confirm user action
+                    DeleteAlbum((string)x);
+                });
+            }
+        }
+
+
         public void CreateAlbum()
         {
             var model = new CreateAlbumViewModel();
@@ -87,9 +99,9 @@ namespace LiteApp.MySpace.ViewModels
             IoC.Get<IWindowManager>().ShowDialog(model);
         }
 
-        public void ViewAlbums()
+        public void Handle(RequestAlbumsViewMessage message)
         {
-            DeactivateItem(ActiveItem, true);
+            DeactivateItem(message.Requester, true);
             State = ViewState.Master;
             // This is a bit cheating: what we trying to
             // do is force to refresh covers because users
@@ -108,25 +120,12 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
-        public ICommand DeleteAlbumCommand
-        {
-            get
-            {
-                return new Command(x =>
-                    {
-                        //TODO: confirm user action
-                        DeleteAlbum((string)x);
-                    });
-            }
-        }
-
 
         protected override void OnInitialize()
         {
             LoadAlbums();
             base.OnInitialize();
         }
-
 
         void LoadAlbums()
         {
@@ -155,27 +154,44 @@ namespace LiteApp.MySpace.ViewModels
 
         void DeleteAlbum(string id)
         {
-            try
+            if (IsBusy)
+                return;
+            MessageBoxViewModel message = new MessageBoxViewModel()
             {
-                IsBusy = true;
-                PhotoServiceClient svc = new PhotoServiceClient();
-                svc.DeleteAlbumCompleted += (sender, e) =>
+                Buttons = MessageBoxButtons.YesNo,
+                MessageLevel = MessageLevel.Exclamation,
+                Header = AppStrings.DeleteAlbumMessageHeader,
+                Message = AppStrings.ConfirmDeleteAlbumMessage,
+                DisplayName = AppStrings.ConfirmationWindowTitle
+            };
+            message.Closed += (messageSender, messageEventArgs) =>
+                {
+                    if (message.Result != MessageBoxResult.Positive)
+                        return;
+
+                    try
                     {
-                        if (e.Error != null)
-                        {
-                            e.Error.Handle();
-                        }
-                        else
-                        {
-                            _albums.RefreshCurrentPage();
-                        }
-                    };
-                svc.DeleteAlbumAsync(id);
-            }
-            catch
-            {
-                IsBusy = false;
-            }
+                        IsBusy = true;
+                        PhotoServiceClient svc = new PhotoServiceClient();
+                        svc.DeleteAlbumCompleted += (sender, e) =>
+                            {
+                                if (e.Error != null)
+                                {
+                                    e.Error.Handle();
+                                }
+                                else
+                                {
+                                    _albums.RefreshCurrentPage();
+                                }
+                            };
+                        svc.DeleteAlbumAsync(id);
+                    }
+                    catch
+                    {
+                        IsBusy = false;
+                    }
+                };
+            IoC.Get<IWindowManager>().ShowDialog(message);
         }
     }
 }

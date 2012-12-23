@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GenericErrorMessage" xml:space="preserve">
+    <value>It seems some error just occurred. We apologize for the inconvenience. Please try again later.</value>
+  </data>
+  <data name="GenericErrorMessageHeader" xml:space="preserve">
+    <value>Oops!</value>
+  </data>
   <data name="GenericServerErrorMessage" xml:space="preserve">
     <value>We apologize that an error occurred on our server. Please try again later.</value>
   </data>

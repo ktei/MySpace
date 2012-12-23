@@ -9,6 +9,7 @@ using LiteApp.MySpace.Web.Helpers;
 using LiteApp.MySpace.Web.Shared;
 using MongoDB.Bson;
 using Ninject;
+using LiteApp.MySpace.Web.Logging;
 
 namespace LiteApp.MySpace.Web.Handlers
 {
@@ -27,6 +28,9 @@ namespace LiteApp.MySpace.Web.Handlers
 
         [Inject]
         public IPhotoUploadTicketPool PhotoUploadTickets { get; set; }
+
+        [Inject]
+        public ILogger Logger { get; set; }
 
         #region IHttpHandler Members
 
@@ -99,8 +103,9 @@ namespace LiteApp.MySpace.Web.Handlers
 
                 context.Response.Write(string.Join(";", coverURIs));
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.Error(ex.ToString());
                 context.Request.InputStream.Close();
                 context.Response.Write("error");
             }

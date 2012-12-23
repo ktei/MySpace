@@ -9,7 +9,12 @@
     xmlns:local="clr-namespace:LiteApp.MySpace.Views"
     xmlns:cal="http://www.caliburnproject.org"
     xmlns:photos="clr-namespace:LiteApp.MySpace.Views.Photos"
+    xmlns:converters="clr-namespace:LiteApp.MySpace.Converters"
     d:DesignWidth="640" d:DesignHeight="300">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVis"/>
+        <converters:AdminToVisibilityConverter x:Key="adminToVis"/>
+    </UserControl.Resources>
 
 
     <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
@@ -31,8 +36,12 @@
 
         <Border x:Name="LinksBorder" Style="{StaticResource NavLinksBorderStyle}" Grid.Row="1">
             <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
-                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="{Binding Strings.HomePageTitle, Source={StaticResource AppResx}}" Tag="Home" cal:Message.Attach="ActivatePage('Home')" Margin="0,0,20,0" />
-                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="{Binding Strings.PhotosPageTitle, Source={StaticResource AppResx}}" Tag="Photos" cal:Message.Attach="ActivatePage('Photos')" />
+                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="{Binding Strings.HomePageTitle, Source={StaticResource AppResx}}" Tag="Home" cal:Message.Attach="ActivatePage('Home')" />
+                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="{Binding Strings.PhotosPageTitle, Source={StaticResource AppResx}}" Tag="Photos" cal:Message.Attach="ActivatePage('Photos')"
+                                 Margin="20,0,0,0"/>
+                <HyperlinkButton Style="{StaticResource LinkStyle}" Content="{Binding Strings.LogsPageTitle, Source={StaticResource AppResx}}"
+                                 Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource adminToVis}}"
+                                 Tag="Logs" cal:Message.Attach="ActivatePage('Logs')" Margin="20,0,0,0" />
             </StackPanel>
         </Border>
 
@@ -43,7 +52,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <photos:UploadNotification/>
-                <ContentControl x:Name="ActiveItem" Padding="30,0" HorizontalContentAlignment="Stretch" Grid.Row="1"/>
+                <ContentControl x:Name="ActiveItem" Padding="10,0" HorizontalContentAlignment="Stretch" Grid.Row="1"/>
             </Grid>
         </Border>
     </Grid>

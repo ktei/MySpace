@@ -5,15 +5,16 @@ using System.Linq;
 using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Security;
+using LiteApp.MySpace.ViewModels.Message;
 
 namespace LiteApp.MySpace.ViewModels
 {
     [Export(typeof(IShell))]
-    public class ShellViewModel : Conductor<IPage>, IShell
+    public class ShellViewModel : Conductor<IPage>, IShell, IHandle<SignedOutMessage>
     {
         public ShellViewModel()
         {
-            
+            IoC.Get<IEventAggregator>().Subscribe(this);
         }
 
         [ImportMany]
@@ -40,6 +41,11 @@ namespace LiteApp.MySpace.ViewModels
         public void SignOut()
         {
             SecurityContext.Current.SignOut();
+        }
+
+        public void Handle(SignedOutMessage message)
+        {
+            ActivatePage("Home");
         }
         
         protected override void OnInitialize()

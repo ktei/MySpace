@@ -6,7 +6,7 @@
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" />
       <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/PhotoService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="PhotoService_GetPagedAlbums_InputMessage">
@@ -15,14 +15,14 @@
   <wsdl:message name="PhotoService_GetPagedAlbums_OutputMessage">
     <wsdl:part name="parameters" element="GetPagedAlbumsResponse" />
   </wsdl:message>
-  <wsdl:message name="PhotoService_SaveAlbum_InputMessage">
-    <wsdl:part name="parameters" element="SaveAlbum" />
+  <wsdl:message name="PhotoService_CreateAlbum_InputMessage">
+    <wsdl:part name="parameters" element="CreateAlbum" />
   </wsdl:message>
-  <wsdl:message name="PhotoService_SaveAlbum_OutputMessage">
-    <wsdl:part name="parameters" element="SaveAlbumResponse" />
+  <wsdl:message name="PhotoService_CreateAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="CreateAlbumResponse" />
   </wsdl:message>
-  <wsdl:message name="PhotoService_SaveAlbum_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q1:ServerFault" />
+  <wsdl:message name="PhotoService_CreateAlbum_ServerFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" name="detail" element="q1:ServerFault" />
   </wsdl:message>
   <wsdl:message name="PhotoService_UpdateAlbum_InputMessage">
     <wsdl:part name="parameters" element="UpdateAlbum" />
@@ -31,7 +31,7 @@
     <wsdl:part name="parameters" element="UpdateAlbumResponse" />
   </wsdl:message>
   <wsdl:message name="PhotoService_UpdateAlbum_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q2:ServerFault" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" name="detail" element="q2:ServerFault" />
   </wsdl:message>
   <wsdl:message name="PhotoService_DeleteAlbum_InputMessage">
     <wsdl:part name="parameters" element="DeleteAlbum" />
@@ -40,7 +40,7 @@
     <wsdl:part name="parameters" element="DeleteAlbumResponse" />
   </wsdl:message>
   <wsdl:message name="PhotoService_DeleteAlbum_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q3:ServerFault" />
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" name="detail" element="q3:ServerFault" />
   </wsdl:message>
   <wsdl:message name="PhotoService_GetPagedPhotos_InputMessage">
     <wsdl:part name="parameters" element="GetPagedPhotos" />
@@ -55,7 +55,7 @@
     <wsdl:part name="parameters" element="DeletePhotosResponse" />
   </wsdl:message>
   <wsdl:message name="PhotoService_DeletePhotos_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q4:ServerFault" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" name="detail" element="q4:ServerFault" />
   </wsdl:message>
   <wsdl:message name="PhotoService_UpdateDescription_InputMessage">
     <wsdl:part name="parameters" element="UpdateDescription" />
@@ -64,7 +64,7 @@
     <wsdl:part name="parameters" element="UpdateDescriptionResponse" />
   </wsdl:message>
   <wsdl:message name="PhotoService_UpdateDescription_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q5:ServerFault" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" name="detail" element="q5:ServerFault" />
   </wsdl:message>
   <wsdl:message name="PhotoService_GetComments_InputMessage">
     <wsdl:part name="parameters" element="GetComments" />
@@ -72,14 +72,14 @@
   <wsdl:message name="PhotoService_GetComments_OutputMessage">
     <wsdl:part name="parameters" element="GetCommentsResponse" />
   </wsdl:message>
-  <wsdl:message name="PhotoService_SaveComment_InputMessage">
-    <wsdl:part name="parameters" element="SaveComment" />
+  <wsdl:message name="PhotoService_CreateComment_InputMessage">
+    <wsdl:part name="parameters" element="CreateComment" />
   </wsdl:message>
-  <wsdl:message name="PhotoService_SaveComment_OutputMessage">
-    <wsdl:part name="parameters" element="SaveCommentResponse" />
+  <wsdl:message name="PhotoService_CreateComment_OutputMessage">
+    <wsdl:part name="parameters" element="CreateCommentResponse" />
   </wsdl:message>
-  <wsdl:message name="PhotoService_SaveComment_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q6:ServerFault" />
+  <wsdl:message name="PhotoService_CreateComment_ServerFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" name="detail" element="q6:ServerFault" />
   </wsdl:message>
   <wsdl:message name="PhotoService_DeleteComment_InputMessage">
     <wsdl:part name="parameters" element="DeleteComment" />
@@ -88,17 +88,17 @@
     <wsdl:part name="parameters" element="DeleteCommentResponse" />
   </wsdl:message>
   <wsdl:message name="PhotoService_DeleteComment_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q7:ServerFault" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" name="detail" element="q7:ServerFault" />
   </wsdl:message>
   <wsdl:portType name="PhotoService">
     <wsdl:operation name="GetPagedAlbums">
       <wsdl:input wsaw:Action="urn:PhotoService/GetPagedAlbums" message="PhotoService_GetPagedAlbums_InputMessage" />
       <wsdl:output wsaw:Action="urn:PhotoService/GetPagedAlbumsResponse" message="PhotoService_GetPagedAlbums_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SaveAlbum">
-      <wsdl:input wsaw:Action="urn:PhotoService/SaveAlbum" message="PhotoService_SaveAlbum_InputMessage" />
-      <wsdl:output wsaw:Action="urn:PhotoService/SaveAlbumResponse" message="PhotoService_SaveAlbum_OutputMessage" />
-      <wsdl:fault wsaw:Action="urn:PhotoService/SaveAlbumServerFaultFault" name="ServerFaultFault" message="PhotoService_SaveAlbum_ServerFaultFault_FaultMessage" />
+    <wsdl:operation name="CreateAlbum">
+      <wsdl:input wsaw:Action="urn:PhotoService/CreateAlbum" message="PhotoService_CreateAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="urn:PhotoService/CreateAlbumResponse" message="PhotoService_CreateAlbum_OutputMessage" />
+      <wsdl:fault wsaw:Action="urn:PhotoService/CreateAlbumServerFaultFault" name="ServerFaultFault" message="PhotoService_CreateAlbum_ServerFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateAlbum">
       <wsdl:input wsaw:Action="urn:PhotoService/UpdateAlbum" message="PhotoService_UpdateAlbum_InputMessage" />
@@ -128,10 +128,10 @@
       <wsdl:input wsaw:Action="urn:PhotoService/GetComments" message="PhotoService_GetComments_InputMessage" />
       <wsdl:output wsaw:Action="urn:PhotoService/GetCommentsResponse" message="PhotoService_GetComments_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SaveComment">
-      <wsdl:input wsaw:Action="urn:PhotoService/SaveComment" message="PhotoService_SaveComment_InputMessage" />
-      <wsdl:output wsaw:Action="urn:PhotoService/SaveCommentResponse" message="PhotoService_SaveComment_OutputMessage" />
-      <wsdl:fault wsaw:Action="urn:PhotoService/SaveCommentServerFaultFault" name="ServerFaultFault" message="PhotoService_SaveComment_ServerFaultFault_FaultMessage" />
+    <wsdl:operation name="CreateComment">
+      <wsdl:input wsaw:Action="urn:PhotoService/CreateComment" message="PhotoService_CreateComment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:PhotoService/CreateCommentResponse" message="PhotoService_CreateComment_OutputMessage" />
+      <wsdl:fault wsaw:Action="urn:PhotoService/CreateCommentServerFaultFault" name="ServerFaultFault" message="PhotoService_CreateComment_ServerFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteComment">
       <wsdl:input wsaw:Action="urn:PhotoService/DeleteComment" message="PhotoService_DeleteComment_InputMessage" />

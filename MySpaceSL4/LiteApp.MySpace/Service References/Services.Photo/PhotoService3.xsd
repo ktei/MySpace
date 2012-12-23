@@ -5,8 +5,8 @@
   <xs:element name="GetPagedAlbums">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="pageIndex" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+        <xs:element minOccurs="0" name="pageSize" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -17,14 +17,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SaveAlbum">
+  <xs:element name="CreateAlbum">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="album" nillable="true" type="q2:Album" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SaveAlbumResponse">
+  <xs:element name="CreateAlbumResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -113,17 +113,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SaveComment">
+  <xs:element name="CreateComment">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="comment" nillable="true" type="q7:PhotoComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SaveCommentResponse">
+  <xs:element name="CreateCommentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="SaveCommentResult" nillable="true" type="q8:PhotoComment" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" minOccurs="0" name="CreateCommentResult" nillable="true" type="q8:PhotoComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

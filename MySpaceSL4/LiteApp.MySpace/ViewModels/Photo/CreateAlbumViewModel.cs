@@ -63,7 +63,7 @@ namespace LiteApp.MySpace.ViewModels
                 PhotoServiceClient svc = new PhotoServiceClient();
                 Album album = new Album();
                 album.Name = Name;
-                svc.SaveAlbumCompleted += (sender, e) =>
+                svc.CreateAlbumCompleted += (sender, e) =>
                 {
                     IsBusy = false;
                     if (e.Error != null)
@@ -73,7 +73,7 @@ namespace LiteApp.MySpace.ViewModels
                     if (CreateCompleted != null)
                         CreateCompleted(this, EventArgs.Empty);
                 };
-                svc.SaveAlbumAsync(album);
+                svc.CreateAlbumAsync(album);
             }
             catch
             {

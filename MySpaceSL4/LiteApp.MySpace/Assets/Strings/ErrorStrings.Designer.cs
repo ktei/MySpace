@@ -61,6 +61,24 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It seems some error just occurred. We apologize for the inconvenience. Please try again later..
+        /// </summary>
+        public static string GenericErrorMessage {
+            get {
+                return ResourceManager.GetString("GenericErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oops!.
+        /// </summary>
+        public static string GenericErrorMessageHeader {
+            get {
+                return ResourceManager.GetString("GenericErrorMessageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We apologize that an error occurred on our server. Please try again later..
         /// </summary>
         public static string GenericServerErrorMessage {

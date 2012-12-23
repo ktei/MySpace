@@ -28,7 +28,7 @@ namespace LiteApp.MySpace.ViewModels
                     }
                     responseCallback(response);
                 };
-            client.GetPagedAlbumsAsync(pageIndex.ToString(), pageSize.ToString());
+            client.GetPagedAlbumsAsync(pageIndex, pageSize);
         }
 
         AlbumViewModel MapToAlbumViewModel(Album album)

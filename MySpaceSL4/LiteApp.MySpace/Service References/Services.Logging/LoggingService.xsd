@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="PagedResultOfLogEntrynt7Q0yEt">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="PagedResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="LogEntry" Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Entities" nillable="true" type="tns:ArrayOfLogEntry" />
+      <xs:element minOccurs="0" name="TotalItemCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PagedResultOfLogEntrynt7Q0yEt" nillable="true" type="tns:PagedResultOfLogEntrynt7Q0yEt" />
+  <xs:complexType name="ArrayOfLogEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LogEntry" nillable="true" type="tns:LogEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLogEntry" nillable="true" type="tns:ArrayOfLogEntry" />
+  <xs:complexType name="LogEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Detail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Level" type="tns:LogLevel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LogEntry" nillable="true" type="tns:LogEntry" />
+  <xs:simpleType name="LogLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Debug" />
+      <xs:enumeration value="Information" />
+      <xs:enumeration value="Warning" />
+      <xs:enumeration value="Error" />
+      <xs:enumeration value="Fatal" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LogLevel" nillable="true" type="tns:LogLevel" />
+</xs:schema>

@@ -1,4 +1,5 @@
 ﻿using LiteApp.MySpace.Entities;
+using System;
 
 namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
 {
@@ -15,7 +16,11 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
             result.CreatedBy = po.CreatedBy;
             result.CreatedOn = po.CreatedOn;
             result.PhotoCount = po.PhotoCount;
-            result.CoverURIs = po.CoverURIs;
+            if (po.CoverURIs != null)
+            {
+                result.CoverURIs = new string[po.CoverURIs.Length];
+                po.CoverURIs.CopyTo(result.CoverURIs, 0);
+            }
             result.Description = po.Description;
             return result;
         }
@@ -41,7 +46,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
         {
             Photo result = new Photo();
             result.Id = po.Id;
-            result.AlbumId = po.Id;
+            result.AlbumId = po.AlbumId;
             result.CreatedBy = po.CreatedBy;
             result.CreatedOn = po.CreatedOn;
             result.Description = po.Description;
@@ -55,7 +60,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
         {
             PhotoPO result = new PhotoPO();
             result.Id = entity.Id;
-            result.AlbumId = entity.Id;
+            result.AlbumId = entity.AlbumId;
             result.CreatedBy = entity.CreatedBy;
             result.CreatedOn = entity.CreatedOn;
             result.Description = entity.Description;
@@ -115,5 +120,55 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
         }
 
         #endregion // User
+
+        #region LogEntry
+
+        public static LogEntry ToLogEntry(this LogEntryPO po)
+        {
+            LogEntry result = new LogEntry();
+            result.Id = po.Id;
+            result.Detail = po.Detail;
+            result.CreatedOn = po.CreatedOn;
+            result.Level = ConvertEntityLogLevel(po.Level);
+            return result;
+        }
+
+        public static LogEntryPO ToLogEntryPO(this LogEntry entity)
+        {
+            LogEntryPO result = new LogEntryPO();
+            result.Id = entity.Id;
+            result.Detail = entity.Detail;
+            result.CreatedOn = entity.CreatedOn;
+            result.Level = ConvertToLoggingLogLevel(entity.Level);
+            return result;
+        }
+
+        static LogLevel ConvertEntityLogLevel(LiteApp.MySpace.Web.Logging.LogLevel level)
+        {
+            switch (level)
+            {
+                case Logging.LogLevel.Debug: return LogLevel.Debug;
+                case Logging.LogLevel.Error: return LogLevel.Error;
+                case Logging.LogLevel.Fatal: return LogLevel.Fatal;
+                case Logging.LogLevel.Information: return LogLevel.Information;
+                case Logging.LogLevel.Warning: return LogLevel.Warning;
+                default: return LogLevel.Information;
+            }
+        }
+
+        static Logging.LogLevel ConvertToLoggingLogLevel(Entities.LogLevel level)
+        {
+            switch (level)
+            {
+                case Entities.LogLevel.Debug: return Logging.LogLevel.Debug;
+                case Entities.LogLevel.Error: return Logging.LogLevel.Error;
+                case Entities.LogLevel.Fatal: return Logging.LogLevel.Fatal;
+                case Entities.LogLevel.Information: return Logging.LogLevel.Information;
+                case Entities.LogLevel.Warning: return Logging.LogLevel.Warning;
+                default: return Logging.LogLevel.Information;
+            }
+        }
+
+        #endregion // LogEntry
     }
 }

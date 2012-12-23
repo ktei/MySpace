@@ -18,12 +18,20 @@
 
     <StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Content="Upload Photo" Width="120" Height="30" cal:Message.Attach="UploadPhoto"
-                    Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"/>
-            <Button Content="Delete Photos" Width="120" Height="30" cal:Message.Attach="DeleteSelectedPhotos" Margin="10,0,0,0" 
-                    Visibility="{Binding SensitiveButtonsVisibility, Mode=OneWay}"/>
+            <HyperlinkButton cal:Message.Attach="ViewAlbums">
+                <Image Source="../../Assets/Images/previous-circle-32.png"/>
+            </HyperlinkButton>
+            <HyperlinkButton cal:Message.Attach="RefreshPhotos" Margin="10,0,0,0">
+                <Image Source="../../Assets/Images/refresh-circle-32.png"/>
+            </HyperlinkButton>
+            <HyperlinkButton cal:Message.Attach="UploadPhoto" Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}">
+                <Image Source="../../Assets/Images/upload-circle-32.png" Margin="10,0,0,0"/>
+            </HyperlinkButton>
+            <HyperlinkButton cal:Message.Attach="DeleteSelectedPhotos" Margin="10,0,0,0" Visibility="{Binding SensitiveButtonsVisibility, Mode=OneWay}">
+                <Image Source="../../Assets/Images/delete-circle-32.png"/>
+            </HyperlinkButton>
         </StackPanel>
-        <ListBox x:Name="Photos" ItemsSource="{Binding Photos, Mode=OneWay}" SelectionMode="Extended"
+        <ListBox x:Name="Photos" ItemsSource="{Binding Photos, Mode=OneWay}" SelectionMode="Single"
                       Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" MinHeight="200">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource DefaultListBoxItemStyle}">

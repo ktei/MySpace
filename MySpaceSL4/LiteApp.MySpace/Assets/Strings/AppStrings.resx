@@ -283,13 +283,13 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Upload to</value>
   </data>
   <data name="ConfirmationWindowTitle" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Confirm your action</value>
   </data>
-  <data name="ConfirmDeleteItemsMessage" xml:space="preserve">
-    <value>Selected items will be deleted permanently. Are you sure you want to continue?</value>
+  <data name="ConfirmDeletePhotoMessage" xml:space="preserve">
+    <value>Selected photo and its comments will be permanently deleted. Are you sure you want to continue?</value>
   </data>
-  <data name="DeletePhotosMessageHeader" xml:space="preserve">
-    <value>Delete photos</value>
+  <data name="DeletePhotoMessageHeader" xml:space="preserve">
+    <value>Delete photo</value>
   </data>
   <data name="HideButtonText" xml:space="preserve">
     <value>Hide</value>
@@ -299,5 +299,17 @@ So, now we have an animation element and we know how to make its copies. Let's s
   </data>
   <data name="ViewDetailsLinkText" xml:space="preserve">
     <value>View details</value>
+  </data>
+  <data name="LogsPageTitle" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="NoLogFoundMessage" xml:space="preserve">
+    <value>No log is found</value>
+  </data>
+  <data name="ConfirmDeleteAlbumMessage" xml:space="preserve">
+    <value>Deleting an album will permanently delete all its photos. Are you sure you want to continue?</value>
+  </data>
+  <data name="DeleteAlbumMessageHeader" xml:space="preserve">
+    <value>Delete album</value>
   </data>
 </root>

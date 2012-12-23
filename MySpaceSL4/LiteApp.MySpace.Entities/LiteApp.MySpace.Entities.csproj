@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="Album.cs" />
     <Compile Include="DeletePhotoParameters.cs" />
+    <Compile Include="LogEntry.cs" />
     <Compile Include="PagedResult.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="PhotoComment.cs" />

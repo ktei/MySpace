@@ -2,6 +2,8 @@
 using System.Windows;
 using LiteApp.MySpace.Services.Security;
 using System.ComponentModel;
+using Caliburn.Micro;
+using LiteApp.MySpace.ViewModels.Message;
 
 namespace LiteApp.MySpace.Security
 {
@@ -71,7 +73,7 @@ namespace LiteApp.MySpace.Security
             }
         }
 
-        public void SignOut(Action completeAction = null)
+        public void SignOut(System.Action completeAction = null)
         {
             try
             {
@@ -85,6 +87,7 @@ namespace LiteApp.MySpace.Security
                         if (completeAction != null)
                             completeAction();
                         IsBusy = false;
+                        IoC.Get<IEventAggregator>().Publish(new SignedOutMessage());
                     };
                 svc.SignOutAsync();
             }

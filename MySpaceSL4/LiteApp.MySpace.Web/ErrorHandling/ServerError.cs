@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.ServiceModel;
 
-namespace LiteApp.MySpace.Web.FaultHandling
+namespace LiteApp.MySpace.Web.ErrorHandling
 {
     [DataContract]
     public class ServerFault

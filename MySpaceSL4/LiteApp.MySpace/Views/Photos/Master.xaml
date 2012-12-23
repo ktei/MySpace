@@ -18,9 +18,11 @@
 
     <StackPanel>
         <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Albums" />
-        <Button Height="30" Content="{Binding Strings.CreateAlbumButtonText, Source={StaticResource AppResx}}" Margin="0,15,0,0" Width="120" 
-                Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"
-                HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum"/>
+        <HyperlinkButton Margin="0,15,0,0" Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"
+                         HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum">
+            <Image Source="../../Assets/Images/add-circle-32.png"/>
+            
+        </HyperlinkButton>
 
         <ItemsControl x:Name="Albums" ItemsSource="{Binding Albums, Mode=OneWay}" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" MinHeight="200">
             <ItemsControl.Template>

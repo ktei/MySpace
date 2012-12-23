@@ -2,7 +2,7 @@
 using System.Security;
 using System.Security.Permissions;
 using System.ServiceModel;
-using LiteApp.MySpace.Web.FaultHandling;
+using LiteApp.MySpace.Web.ErrorHandling;
 using System.Web;
 
 namespace LiteApp.MySpace.Web.Services

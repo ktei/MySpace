@@ -94,6 +94,7 @@
     <Content Include="LiteApp.MySpaceTestPage.html" />
     <Content Include="Handlers\PhotoReceiver.ashx" />
     <None Include="Resources\sbox-token" />
+    <Content Include="Services\LoggingService.svc" />
     <Content Include="Services\PhotoService.svc" />
     <Content Include="Services\SecurityService.svc" />
     <Content Include="Silverlight.js" />
@@ -111,6 +112,7 @@
     <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="DataAccess\IAlbumRepository.cs" />
+    <Compile Include="DataAccess\ILogRepository.cs" />
     <Compile Include="DataAccess\IPhotoRepository.cs" />
     <Compile Include="DataAccess\Mongo\AlbumRepository.cs" />
     <Compile Include="DataAccess\Mongo\BaseRepository.cs" />
@@ -120,8 +122,10 @@
     <Compile Include="DataAccess\Mongo\PO\PhotoPO.cs" />
     <Compile Include="DataAccess\Mongo\PO\PhotoCommentPO.cs" />
     <Compile Include="DataAccess\Mongo\PO\UserPO.cs" />
-    <Compile Include="FaultHandling\ServerError.cs" />
-    <Compile Include="FaultHandling\ServerFaultCode.cs" />
+    <Compile Include="ErrorHandling\ErrorHandlingBehaviorAttribute.cs" />
+    <Compile Include="ErrorHandling\GenericErrorHandler.cs" />
+    <Compile Include="ErrorHandling\ServerError.cs" />
+    <Compile Include="ErrorHandling\ServerFaultCode.cs" />
     <Compile Include="Handlers\PhotoReceiver.ashx.cs">
       <DependentUpon>PhotoReceiver.ashx</DependentUpon>
     </Compile>
@@ -129,17 +133,21 @@
     <Compile Include="Helpers\ImageProcessor.cs" />
     <Compile Include="Helpers\SharpBoxSupport.cs" />
     <Compile Include="Helpers\SharpBoxTask.cs" />
-    <Compile Include="Helpers\SharpBoxWorker.cs" />
+    <Compile Include="Helpers\SharpBoxManager.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LoggingFailedEventArgs.cs" />
-    <Compile Include="Logging\Mongo\LogEntry.cs" />
+    <Compile Include="DataAccess\Mongo\PO\LogEntryPO.cs" />
     <Compile Include="Logging\LogLevel.cs" />
-    <Compile Include="Logging\Mongo\MongoLogger.cs" />
+    <Compile Include="DataAccess\Mongo\LogRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\SupportFiles.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SupportFiles.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\LoggingService.svc.cs">
+      <DependentUpon>LoggingService.svc</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\PhotoService.svc.cs">
       <DependentUpon>PhotoService.svc</DependentUpon>
@@ -153,7 +161,7 @@
     <Compile Include="Services\SignInStatus.cs" />
     <Compile Include="Services\SignUpStatus.cs" />
     <Compile Include="Services\SilverlightFaultBehavior.cs" />
-    <Compile Include="Services\SilverlightFaultBehaviorAttribute.cs" />
+    <Compile Include="ErrorHandling\SilverlightFaultBehaviorAttribute.cs" />
     <Compile Include="Shared\DefaultPhotoUploadTicketPool.cs" />
     <Compile Include="Shared\IPhotoUploadTicketPool.cs" />
   </ItemGroup>

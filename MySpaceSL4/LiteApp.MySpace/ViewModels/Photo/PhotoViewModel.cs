@@ -292,7 +292,7 @@ namespace LiteApp.MySpace.ViewModels
             PhotoServiceClient svc = new PhotoServiceClient();
             try
             {
-                svc.SaveCommentCompleted += (sender, e) =>
+                svc.CreateCommentCompleted += (sender, e) =>
                 {
                     if (e.Error != null)
                     {
@@ -309,7 +309,7 @@ namespace LiteApp.MySpace.ViewModels
                     CommentContents = string.Empty;
                     NotifyOfPropertyChange(() => HasComment);
                 };
-                svc.SaveCommentAsync(comment);
+                svc.CreateCommentAsync(comment);
             }
             catch
             {

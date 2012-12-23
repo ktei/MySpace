@@ -10,6 +10,10 @@
                     <binaryMessageEncoding />
                     <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
                 </binding>
+                <binding name="CustomBinding_LoggingService">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
             </customBinding>
         </bindings>
         <client>
@@ -19,6 +23,9 @@
             <endpoint address="http://localhost:11846/Services/PhotoService.svc"
                 binding="customBinding" bindingConfiguration="CustomBinding_PhotoService"
                 contract="Services.Photo.PhotoService" name="CustomBinding_PhotoService" />
+            <endpoint address="http://localhost:11846/Services/LoggingService.svc"
+                binding="customBinding" bindingConfiguration="CustomBinding_LoggingService"
+                contract="Services.Logging.LoggingService" name="CustomBinding_LoggingService" />
         </client>
     </system.serviceModel>
 </configuration>

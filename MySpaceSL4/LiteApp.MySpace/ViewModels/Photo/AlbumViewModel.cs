@@ -110,6 +110,19 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
+        public void ViewAlbums()
+        {
+            IoC.Get<IEventAggregator>().Publish(new RequestAlbumsViewMessage(this));
+        }
+
+        public void RefreshPhotos()
+        {
+            if (_photos != null)
+            {
+                _photos.RefreshCurrentPage();
+            }
+        }
+
         public void UploadPhoto()
         {
             var model = IoC.Get<UploadPhotoManagerViewModel>();
@@ -127,17 +140,18 @@ namespace LiteApp.MySpace.ViewModels
                 {
                     Buttons = MessageBoxButtons.YesNo,
                     MessageLevel = MessageLevel.Exclamation,
-                    Header = AppStrings.DeletePhotosMessageHeader,
-                    Message = AppStrings.ConfirmDeleteItemsMessage,
+                    Header = AppStrings.DeletePhotoMessageHeader,
+                    Message = AppStrings.ConfirmDeletePhotoMessage,
                     DisplayName = AppStrings.ConfirmationWindowTitle
                 };
                 message.Closed += (messageSender, messageEventArgs) =>
                     {
                         if (message.Result != MessageBoxResult.Positive)
                             return;
-                        IsBusy = true;
+
                         try
                         {
+                            IsBusy = true;
                             var parameters = _photos.Where(x => x.IsSelected).Select(x =>
                                 new DeletePhotoParameters() { PhotoId = x.Id, FileName = Path.GetFileName(x.PhotoURI) }).ToList();
                             PhotoServiceClient svc = new PhotoServiceClient();

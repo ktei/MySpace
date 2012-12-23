@@ -150,7 +150,6 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             }
         }
 
-
         public Photo FindPhotoById(string photoId)
         {
             ObjectId photoObjectId;

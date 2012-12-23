@@ -4,18 +4,19 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Threading;
 using System.Web;
+using LiteApp.MySpace.Entities;
 using LiteApp.MySpace.Web.DataAccess;
-using LiteApp.MySpace.Web.FaultHandling;
+using LiteApp.MySpace.Web.ErrorHandling;
 using LiteApp.MySpace.Web.Helpers;
+using LiteApp.MySpace.Web.Logging;
 using Ninject;
 using Ninject.Web;
-using LiteApp.MySpace.Entities;
-using System.ServiceModel.Web;
 
 namespace LiteApp.MySpace.Web.Services
 {
     [ServiceContract(Namespace = "")]
     [SilverlightFaultBehavior]
+    [ErrorHandlingBehavior(typeof(GenericErrorHandler))]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class PhotoService : WebServiceBase
     {
@@ -30,22 +31,33 @@ namespace LiteApp.MySpace.Web.Services
         [Inject]
         public IPhotoRepository PhotoRepository { get; set; }
 
+        [Inject]
+        public ILogger Logger { get; set; }
+
+        [Inject]
+        public SharpBoxTaskManager CloudTaskManager { get; set; }
+
         #region Album API
 
         [OperationContract]
-        public PagedResult<Album> GetPagedAlbums(string pageIndex, string pageSize)
+        public PagedResult<Album> GetPagedAlbums(int pageIndex, int pageSize)
         {
             PagedResult<Album> result = new PagedResult<Album>();
-            result.Entities = AlbumRepository.GetPagedAlbums(int.Parse(pageIndex), int.Parse(pageSize)).ToList();
+            result.Entities = AlbumRepository.GetPagedAlbums(pageIndex, pageSize).ToList();
             result.TotalItemCount = AlbumRepository.GetTotalAlbumCount();
             return result;
         }
 
         [OperationContract]
         [FaultContract(typeof(ServerFault))]
-        public void SaveAlbum(Album album)
+        public void CreateAlbum(Album album)
         {
-            ServiceSupport.AuthorizeAndExecute(() => AlbumRepository.SaveAlbum(album));
+            ServiceSupport.AuthorizeAndExecute(() => 
+                {
+                    var albumId = AlbumRepository.SaveAlbum(album);
+                    var storage = SharpBoxSupport.OpenDropBoxStorage();
+                    storage.CreateFoldersForAlbum(albumId);
+                });
         }
 
         [OperationContract]
@@ -92,7 +104,10 @@ namespace LiteApp.MySpace.Web.Services
                     if (HttpContext.Current.IsSuperAdminLoggedIn())
                     {
                         // TODO: should we consider doing this cloud operation in another thread? How about a background worker?
-                        SharpBoxSupport.DeleteAlbum(albumId);
+                        CloudTaskManager.PublishTask(storage =>
+                            {
+                                storage.DeleteAlbum(albumId);
+                            });
                         AlbumRepository.DeleteAlbum(albumId);
                     }
                     else
@@ -112,7 +127,10 @@ namespace LiteApp.MySpace.Web.Services
                         else
                         {
                             // Delete photos by selected IDs and album ID
-                            SharpBoxSupport.DeleteAlbum(albumId);
+                            CloudTaskManager.PublishTask(storage =>
+                            {
+                                storage.DeleteAlbum(albumId);
+                            });
                             AlbumRepository.DeleteAlbum(albumId);
                         }
                     }
@@ -148,17 +166,18 @@ namespace LiteApp.MySpace.Web.Services
 
                     var photoIds = photos.Select(x => x.PhotoId);
                     
-                    // TODO: should we consider doing this cloud operation in another thread? How about a background worker?
-                    var storage = SharpBoxSupport.OpenDropBoxStorage();
-                    foreach (var photoFile in photos.Select(x => x.FileName))
-                    {
-                        storage.DeletePhoto(photoFile, albumId);
-                    }
+                    CloudTaskManager.PublishTask(storage =>
+                        {
+                            foreach (var photoFile in photos.Select(x => x.FileName))
+                            {
+                                storage.DeletePhoto(photoFile, albumId);
+                            }
+                        });
                     
                     if (HttpContext.Current.IsSuperAdminLoggedIn())
                     {
                         PhotoRepository.DeletePhotos(photoIds, albumId);
-                        AlbumRepository.UpdateCovers(album);
+                        albumCovers = AlbumRepository.UpdateCovers(album);
                     }
                     else
                     {
@@ -172,10 +191,9 @@ namespace LiteApp.MySpace.Web.Services
                         {
                             // Delete photos by selected IDs and album ID
                             PhotoRepository.DeletePhotos(photoIds, albumId);
-                            AlbumRepository.UpdateCovers(album);
+                            albumCovers = AlbumRepository.UpdateCovers(album);
                         }
                     }
-                    albumCovers = album.CoverURIs;
                 });
             return albumCovers;
         }
@@ -205,7 +223,7 @@ namespace LiteApp.MySpace.Web.Services
 
         [OperationContract]
         [FaultContract(typeof(ServerFault))]
-        public PhotoComment SaveComment(PhotoComment comment)
+        public PhotoComment CreateComment(PhotoComment comment)
         {
             ServiceSupport.AuthorizeAndExecute(() =>
                 {

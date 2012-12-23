@@ -137,7 +137,18 @@
     <Compile Include="Converters\MessageLevelToImageSourceConverter.cs" />
     <Compile Include="Converters\PhotoCommentDeleteVisibilityConverter.cs" />
     <Compile Include="Converters\PhotoUploadStatusToImageSourceConverter.cs" />
+    <Compile Include="Converters\AdminToVisibilityConverter.cs" />
+    <Compile Include="Service References\Services.Logging\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Log\LogEntryViewModel.cs" />
+    <Compile Include="ViewModels\Log\LogsPagedDataSource.cs" />
+    <Compile Include="ViewModels\Log\LogsPageViewModel.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
+    <Compile Include="ViewModels\Message\RequestAlbumsViewMessage.cs" />
+    <Compile Include="ViewModels\Message\SignedOutMessage.cs" />
     <Compile Include="ViewModels\Message\UpdateAlbumCoversMessage.cs" />
     <Compile Include="ViewModels\Photo\EditAlbumViewModel.cs" />
     <Compile Include="ViewModels\Photo\PhotoUploadStatus.cs" />
@@ -174,7 +185,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ActivePageMessage.cs" />
-    <Compile Include="ViewModels\PhotoCommentViewModel.cs" />
+    <Compile Include="ViewModels\Photo\PhotoCommentViewModel.cs" />
     <Compile Include="ViewModels\Photo\PhotoPagedDataSource.cs" />
     <Compile Include="ViewModels\Photo\PhotoViewModel.cs" />
     <Compile Include="ViewModels\Photo\AlbumPagedDataSource.cs" />
@@ -201,6 +212,9 @@
     </Compile>
     <Compile Include="Views\Helpers\ButtonExtensions.cs" />
     <Compile Include="Framework\DoubleClickBehavior.cs" />
+    <Compile Include="Views\LogsPageView.xaml.cs">
+      <DependentUpon>LogsPageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MessageBoxView.xaml.cs">
       <DependentUpon>MessageBoxView.xaml</DependentUpon>
     </Compile>
@@ -299,6 +313,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\LogsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MessageBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -361,8 +379,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\LiteApp.MySpace.Entities.Album.datasource" />
+    <None Include="Properties\DataSources\LiteApp.MySpace.Entities.LogEntry.datasource" />
     <None Include="Properties\DataSources\LiteApp.MySpace.Entities.Photo.datasource" />
     <None Include="Properties\DataSources\LiteApp.MySpace.Entities.PhotoComment.datasource" />
+    <None Include="Service References\Services.Logging\LoggingService.wsdl" />
+    <None Include="Service References\Services.Logging\LoggingService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Logging\LoggingService1.wsdl" />
+    <None Include="Service References\Services.Logging\LoggingService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Logging\LoggingService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Logging\LoggingService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Services.Photo\PhotoService.wsdl" />
     <None Include="Service References\Services.Photo\PhotoService.xsd">
       <SubType>Designer</SubType>
@@ -408,6 +441,8 @@
     <Resource Include="Assets\Images\completing-16.png" />
     <Resource Include="Assets\Images\edit-circle-32.png" />
     <Resource Include="Assets\Images\delete-circle-32.png" />
+    <Resource Include="Assets\Images\refresh-circle-32.png" />
+    <Resource Include="Assets\Images\add-circle-32.png" />
     <Content Include="Properties\AppManifest.xml" />
     <Content Include="Assets\Images\icon-scales.txt" />
     <Resource Include="Assets\Images\save-circle-32.png" />
@@ -421,6 +456,13 @@
     <None Include="Service References\Services.Photo\configuration91.svcinfo" />
     <None Include="Service References\Services.Photo\configuration.svcinfo" />
     <None Include="Service References\Services.Photo\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Services.Logging\LoggingService.disco" />
+    <None Include="Service References\Services.Logging\configuration91.svcinfo" />
+    <None Include="Service References\Services.Logging\configuration.svcinfo" />
+    <None Include="Service References\Services.Logging\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -449,6 +491,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Services.Logging\" />
     <WCFMetadataStorage Include="Service References\Services.Photo\" />
     <WCFMetadataStorage Include="Service References\Services.Security\" />
   </ItemGroup>
@@ -477,6 +520,7 @@
       <Name>LiteApp.Portable.Mvvm</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

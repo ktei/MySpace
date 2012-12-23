@@ -38,13 +38,14 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             return null;
         }
 
-        public void SaveAlbum(Album album)
+        public string SaveAlbum(Album album)
         {
             AlbumPO albumPO = album.ToAlbumPO();
             if (albumPO.CoverURIs == null)
                 albumPO.CoverURIs = new string[] { };
             albumPO.CreatedOn = DateTime.Now;
             Database.GetCollection<AlbumPO>(Collections.Albums).Save(albumPO);
+            return albumPO.Id;
         }
 
         public void DeleteAlbum(string albumId)
@@ -77,14 +78,19 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             return Convert.ToInt32(Database.GetCollection<AlbumPO>(Collections.Albums).Count());
         }
 
-        public void UpdateCovers(Album album)
+        public string[] UpdateCovers(Album album)
         {
-            var cursor = Database.GetCollection<PhotoPO>(Collections.Photos).FindAs<PhotoPO>(Query.EQ("AlbumId", ObjectId.Parse(album.Id))).SetLimit(3);
-            var covers = cursor.Select(x => x.ThumbURI).ToArray();
-
-            AlbumPO albumPO = album.ToAlbumPO();
-            albumPO.CoverURIs = covers;
-            Database.GetCollection<AlbumPO>(Collections.Albums).Save(albumPO);
+            ObjectId albumObjectId;
+            string[] covers = new string[] { };
+            if (ObjectId.TryParse(album.Id, out albumObjectId))
+            {
+                var cursor = Database.GetCollection<PhotoPO>(Collections.Photos).FindAs<PhotoPO>(Query.EQ("AlbumId", albumObjectId)).SetLimit(3);
+                covers = cursor.Select(x => x.ThumbURI).ToArray();
+                AlbumPO albumPO = album.ToAlbumPO();
+                albumPO.CoverURIs = covers;
+                Database.GetCollection<AlbumPO>(Collections.Albums).Save(albumPO);
+            }
+            return covers;
         }
     }
 }

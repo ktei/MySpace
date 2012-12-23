@@ -105,7 +105,7 @@
         <Setter Property="TextOptions.TextHintingMode" Value="Animated" />
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="MinHeight" Value="28"/>
-        <Setter Property="MinWidth" Value="78"/>
+        <!--<Setter Property="MinWidth" Value="78"/>-->
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Template">

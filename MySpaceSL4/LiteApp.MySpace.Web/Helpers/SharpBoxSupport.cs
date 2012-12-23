@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.IO;
 using AppLimit.CloudComputing.SharpBox;
 using AppLimit.CloudComputing.SharpBox.Exceptions;
-using System.IO;
 using LiteApp.MySpace.Web.Resources;
-using AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
 
 namespace LiteApp.MySpace.Web.Helpers
 {
     public static class SharpBoxSupport
     {
-        public static void DeleteAlbum(string albumId)
+        public static void DeleteAlbum(this CloudStorage storage, string albumId)
         {
             try
             {
-                var storage = OpenDropBoxStorage();
-
                 storage.DeleteFileSystemEntry(GetPhotoVirtualPath(albumId));
                 storage.DeleteFileSystemEntry(GetThumbVirtualPath(albumId));
             }
@@ -36,6 +29,12 @@ namespace LiteApp.MySpace.Web.Helpers
         public static ICloudDirectoryEntry EnsurePhotoFolder(this CloudStorage storage, string albumId)
         {
             return storage.GetFolderEx(SharpBoxSupport.GetPhotoVirtualPath(albumId));
+        }
+
+        public static void CreateFoldersForAlbum(this CloudStorage storage, string albumId)
+        {
+            storage.CreateFolder(SharpBoxSupport.GetThumbVirtualPath(albumId));
+            storage.CreateFolder(SharpBoxSupport.GetPhotoVirtualPath(albumId));
         }
 
         public static void DeletePhoto(this CloudStorage storage, string fileName, string albumId)

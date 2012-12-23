@@ -6,12 +6,13 @@ using System.Web.Security;
 using Ninject.Web;
 using LiteApp.MySpace.Web.Shared;
 using Ninject;
-using LiteApp.MySpace.Web.FaultHandling;
+using LiteApp.MySpace.Web.ErrorHandling;
 
 namespace LiteApp.MySpace.Web.Services
 {
     [ServiceContract(Namespace = "")]
     [SilverlightFaultBehavior]
+    [ErrorHandlingBehavior(typeof(GenericErrorHandler))]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class SecurityService : WebServiceBase
     {

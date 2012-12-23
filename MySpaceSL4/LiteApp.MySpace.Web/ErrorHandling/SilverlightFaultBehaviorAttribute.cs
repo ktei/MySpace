@@ -11,7 +11,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 
-namespace LiteApp.MySpace.Web.Services
+namespace LiteApp.MySpace.Web.ErrorHandling
 {
     public class SilverlightFaultBehaviorAttribute : Attribute, IServiceBehavior
     {

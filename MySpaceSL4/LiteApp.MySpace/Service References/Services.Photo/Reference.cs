@@ -17,7 +17,7 @@ namespace LiteApp.MySpace.Services.Photo {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
     public partial class ServerFault : object, System.ComponentModel.INotifyPropertyChanged {
         
         private LiteApp.MySpace.Services.Photo.ServerFaultCode FaultCodeField;
@@ -46,7 +46,7 @@ namespace LiteApp.MySpace.Services.Photo {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFaultCode", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFaultCode", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
     public enum ServerFaultCode : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -61,24 +61,24 @@ namespace LiteApp.MySpace.Services.Photo {
     public interface PhotoService {
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/GetPagedAlbums", ReplyAction="urn:PhotoService/GetPagedAlbumsResponse")]
-        System.IAsyncResult BeginGetPagedAlbums(string pageIndex, string pageSize, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginGetPagedAlbums(int pageIndex, int pageSize, System.AsyncCallback callback, object asyncState);
         
         LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Album> EndGetPagedAlbums(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/SaveAlbum", ReplyAction="urn:PhotoService/SaveAlbumResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/SaveAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
-        System.IAsyncResult BeginSaveAlbum(LiteApp.MySpace.Entities.Album album, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/CreateAlbum", ReplyAction="urn:PhotoService/CreateAlbumResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/CreateAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
+        System.IAsyncResult BeginCreateAlbum(LiteApp.MySpace.Entities.Album album, System.AsyncCallback callback, object asyncState);
         
-        void EndSaveAlbum(System.IAsyncResult result);
+        void EndCreateAlbum(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/UpdateAlbum", ReplyAction="urn:PhotoService/UpdateAlbumResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/UpdateAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/UpdateAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
         System.IAsyncResult BeginUpdateAlbum(string name, string description, string albumId, System.AsyncCallback callback, object asyncState);
         
         void EndUpdateAlbum(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeleteAlbum", ReplyAction="urn:PhotoService/DeleteAlbumResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeleteAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeleteAlbumServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
         System.IAsyncResult BeginDeleteAlbum(string albumId, System.AsyncCallback callback, object asyncState);
         
         void EndDeleteAlbum(System.IAsyncResult result);
@@ -89,13 +89,13 @@ namespace LiteApp.MySpace.Services.Photo {
         LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.Photo> EndGetPagedPhotos(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeletePhotos", ReplyAction="urn:PhotoService/DeletePhotosResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeletePhotosServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeletePhotosServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
         System.IAsyncResult BeginDeletePhotos(System.Collections.Generic.List<LiteApp.MySpace.Entities.DeletePhotoParameters> photos, string albumId, System.AsyncCallback callback, object asyncState);
         
         System.Collections.Generic.List<string> EndDeletePhotos(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/UpdateDescription", ReplyAction="urn:PhotoService/UpdateDescriptionResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/UpdateDescriptionServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/UpdateDescriptionServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
         System.IAsyncResult BeginUpdateDescription(string description, string photoId, System.AsyncCallback callback, object asyncState);
         
         void EndUpdateDescription(System.IAsyncResult result);
@@ -105,14 +105,14 @@ namespace LiteApp.MySpace.Services.Photo {
         
         System.Collections.Generic.List<LiteApp.MySpace.Entities.PhotoComment> EndGetComments(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/SaveComment", ReplyAction="urn:PhotoService/SaveCommentResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/SaveCommentServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
-        System.IAsyncResult BeginSaveComment(LiteApp.MySpace.Entities.PhotoComment comment, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/CreateComment", ReplyAction="urn:PhotoService/CreateCommentResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/CreateCommentServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
+        System.IAsyncResult BeginCreateComment(LiteApp.MySpace.Entities.PhotoComment comment, System.AsyncCallback callback, object asyncState);
         
-        LiteApp.MySpace.Entities.PhotoComment EndSaveComment(System.IAsyncResult result);
+        LiteApp.MySpace.Entities.PhotoComment EndCreateComment(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:PhotoService/DeleteComment", ReplyAction="urn:PhotoService/DeleteCommentResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeleteCommentServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Photo.ServerFault), Action="urn:PhotoService/DeleteCommentServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
         System.IAsyncResult BeginDeleteComment(string commentId, System.AsyncCallback callback, object asyncState);
         
         void EndDeleteComment(System.IAsyncResult result);
@@ -200,11 +200,11 @@ namespace LiteApp.MySpace.Services.Photo {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SaveCommentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CreateCommentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public SaveCommentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public CreateCommentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -227,11 +227,11 @@ namespace LiteApp.MySpace.Services.Photo {
         
         private System.Threading.SendOrPostCallback onGetPagedAlbumsCompletedDelegate;
         
-        private BeginOperationDelegate onBeginSaveAlbumDelegate;
+        private BeginOperationDelegate onBeginCreateAlbumDelegate;
         
-        private EndOperationDelegate onEndSaveAlbumDelegate;
+        private EndOperationDelegate onEndCreateAlbumDelegate;
         
-        private System.Threading.SendOrPostCallback onSaveAlbumCompletedDelegate;
+        private System.Threading.SendOrPostCallback onCreateAlbumCompletedDelegate;
         
         private BeginOperationDelegate onBeginUpdateAlbumDelegate;
         
@@ -269,11 +269,11 @@ namespace LiteApp.MySpace.Services.Photo {
         
         private System.Threading.SendOrPostCallback onGetCommentsCompletedDelegate;
         
-        private BeginOperationDelegate onBeginSaveCommentDelegate;
+        private BeginOperationDelegate onBeginCreateCommentDelegate;
         
-        private EndOperationDelegate onEndSaveCommentDelegate;
+        private EndOperationDelegate onEndCreateCommentDelegate;
         
-        private System.Threading.SendOrPostCallback onSaveCommentCompletedDelegate;
+        private System.Threading.SendOrPostCallback onCreateCommentCompletedDelegate;
         
         private BeginOperationDelegate onBeginDeleteCommentDelegate;
         
@@ -336,7 +336,7 @@ namespace LiteApp.MySpace.Services.Photo {
         
         public event System.EventHandler<GetPagedAlbumsCompletedEventArgs> GetPagedAlbumsCompleted;
         
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveAlbumCompleted;
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CreateAlbumCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> UpdateAlbumCompleted;
         
@@ -350,7 +350,7 @@ namespace LiteApp.MySpace.Services.Photo {
         
         public event System.EventHandler<GetCommentsCompletedEventArgs> GetCommentsCompleted;
         
-        public event System.EventHandler<SaveCommentCompletedEventArgs> SaveCommentCompleted;
+        public event System.EventHandler<CreateCommentCompletedEventArgs> CreateCommentCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeleteCommentCompleted;
         
@@ -359,7 +359,7 @@ namespace LiteApp.MySpace.Services.Photo {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginGetPagedAlbums(string pageIndex, string pageSize, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginGetPagedAlbums(int pageIndex, int pageSize, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetPagedAlbums(pageIndex, pageSize, callback, asyncState);
         }
         
@@ -369,8 +369,8 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         private System.IAsyncResult OnBeginGetPagedAlbums(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string pageIndex = ((string)(inValues[0]));
-            string pageSize = ((string)(inValues[1]));
+            int pageIndex = ((int)(inValues[0]));
+            int pageSize = ((int)(inValues[1]));
             return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginGetPagedAlbums(pageIndex, pageSize, callback, asyncState);
         }
         
@@ -387,11 +387,11 @@ namespace LiteApp.MySpace.Services.Photo {
             }
         }
         
-        public void GetPagedAlbumsAsync(string pageIndex, string pageSize) {
+        public void GetPagedAlbumsAsync(int pageIndex, int pageSize) {
             this.GetPagedAlbumsAsync(pageIndex, pageSize, null);
         }
         
-        public void GetPagedAlbumsAsync(string pageIndex, string pageSize, object userState) {
+        public void GetPagedAlbumsAsync(int pageIndex, int pageSize, object userState) {
             if ((this.onBeginGetPagedAlbumsDelegate == null)) {
                 this.onBeginGetPagedAlbumsDelegate = new BeginOperationDelegate(this.OnBeginGetPagedAlbums);
             }
@@ -407,48 +407,48 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginSaveAlbum(LiteApp.MySpace.Entities.Album album, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginSaveAlbum(album, callback, asyncState);
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginCreateAlbum(LiteApp.MySpace.Entities.Album album, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCreateAlbum(album, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        void LiteApp.MySpace.Services.Photo.PhotoService.EndSaveAlbum(System.IAsyncResult result) {
-            base.Channel.EndSaveAlbum(result);
+        void LiteApp.MySpace.Services.Photo.PhotoService.EndCreateAlbum(System.IAsyncResult result) {
+            base.Channel.EndCreateAlbum(result);
         }
         
-        private System.IAsyncResult OnBeginSaveAlbum(object[] inValues, System.AsyncCallback callback, object asyncState) {
+        private System.IAsyncResult OnBeginCreateAlbum(object[] inValues, System.AsyncCallback callback, object asyncState) {
             LiteApp.MySpace.Entities.Album album = ((LiteApp.MySpace.Entities.Album)(inValues[0]));
-            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginSaveAlbum(album, callback, asyncState);
+            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginCreateAlbum(album, callback, asyncState);
         }
         
-        private object[] OnEndSaveAlbum(System.IAsyncResult result) {
-            ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndSaveAlbum(result);
+        private object[] OnEndCreateAlbum(System.IAsyncResult result) {
+            ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndCreateAlbum(result);
             return null;
         }
         
-        private void OnSaveAlbumCompleted(object state) {
-            if ((this.SaveAlbumCompleted != null)) {
+        private void OnCreateAlbumCompleted(object state) {
+            if ((this.CreateAlbumCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.SaveAlbumCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                this.CreateAlbumCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void SaveAlbumAsync(LiteApp.MySpace.Entities.Album album) {
-            this.SaveAlbumAsync(album, null);
+        public void CreateAlbumAsync(LiteApp.MySpace.Entities.Album album) {
+            this.CreateAlbumAsync(album, null);
         }
         
-        public void SaveAlbumAsync(LiteApp.MySpace.Entities.Album album, object userState) {
-            if ((this.onBeginSaveAlbumDelegate == null)) {
-                this.onBeginSaveAlbumDelegate = new BeginOperationDelegate(this.OnBeginSaveAlbum);
+        public void CreateAlbumAsync(LiteApp.MySpace.Entities.Album album, object userState) {
+            if ((this.onBeginCreateAlbumDelegate == null)) {
+                this.onBeginCreateAlbumDelegate = new BeginOperationDelegate(this.OnBeginCreateAlbum);
             }
-            if ((this.onEndSaveAlbumDelegate == null)) {
-                this.onEndSaveAlbumDelegate = new EndOperationDelegate(this.OnEndSaveAlbum);
+            if ((this.onEndCreateAlbumDelegate == null)) {
+                this.onEndCreateAlbumDelegate = new EndOperationDelegate(this.OnEndCreateAlbum);
             }
-            if ((this.onSaveAlbumCompletedDelegate == null)) {
-                this.onSaveAlbumCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSaveAlbumCompleted);
+            if ((this.onCreateAlbumCompletedDelegate == null)) {
+                this.onCreateAlbumCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCreateAlbumCompleted);
             }
-            base.InvokeAsync(this.onBeginSaveAlbumDelegate, new object[] {
-                        album}, this.onEndSaveAlbumDelegate, this.onSaveAlbumCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginCreateAlbumDelegate, new object[] {
+                        album}, this.onEndCreateAlbumDelegate, this.onCreateAlbumCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -737,49 +737,49 @@ namespace LiteApp.MySpace.Services.Photo {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginSaveComment(LiteApp.MySpace.Entities.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginSaveComment(comment, callback, asyncState);
+        System.IAsyncResult LiteApp.MySpace.Services.Photo.PhotoService.BeginCreateComment(LiteApp.MySpace.Entities.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCreateComment(comment, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        LiteApp.MySpace.Entities.PhotoComment LiteApp.MySpace.Services.Photo.PhotoService.EndSaveComment(System.IAsyncResult result) {
-            return base.Channel.EndSaveComment(result);
+        LiteApp.MySpace.Entities.PhotoComment LiteApp.MySpace.Services.Photo.PhotoService.EndCreateComment(System.IAsyncResult result) {
+            return base.Channel.EndCreateComment(result);
         }
         
-        private System.IAsyncResult OnBeginSaveComment(object[] inValues, System.AsyncCallback callback, object asyncState) {
+        private System.IAsyncResult OnBeginCreateComment(object[] inValues, System.AsyncCallback callback, object asyncState) {
             LiteApp.MySpace.Entities.PhotoComment comment = ((LiteApp.MySpace.Entities.PhotoComment)(inValues[0]));
-            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginSaveComment(comment, callback, asyncState);
+            return ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).BeginCreateComment(comment, callback, asyncState);
         }
         
-        private object[] OnEndSaveComment(System.IAsyncResult result) {
-            LiteApp.MySpace.Entities.PhotoComment retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndSaveComment(result);
+        private object[] OnEndCreateComment(System.IAsyncResult result) {
+            LiteApp.MySpace.Entities.PhotoComment retVal = ((LiteApp.MySpace.Services.Photo.PhotoService)(this)).EndCreateComment(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnSaveCommentCompleted(object state) {
-            if ((this.SaveCommentCompleted != null)) {
+        private void OnCreateCommentCompleted(object state) {
+            if ((this.CreateCommentCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.SaveCommentCompleted(this, new SaveCommentCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.CreateCommentCompleted(this, new CreateCommentCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void SaveCommentAsync(LiteApp.MySpace.Entities.PhotoComment comment) {
-            this.SaveCommentAsync(comment, null);
+        public void CreateCommentAsync(LiteApp.MySpace.Entities.PhotoComment comment) {
+            this.CreateCommentAsync(comment, null);
         }
         
-        public void SaveCommentAsync(LiteApp.MySpace.Entities.PhotoComment comment, object userState) {
-            if ((this.onBeginSaveCommentDelegate == null)) {
-                this.onBeginSaveCommentDelegate = new BeginOperationDelegate(this.OnBeginSaveComment);
+        public void CreateCommentAsync(LiteApp.MySpace.Entities.PhotoComment comment, object userState) {
+            if ((this.onBeginCreateCommentDelegate == null)) {
+                this.onBeginCreateCommentDelegate = new BeginOperationDelegate(this.OnBeginCreateComment);
             }
-            if ((this.onEndSaveCommentDelegate == null)) {
-                this.onEndSaveCommentDelegate = new EndOperationDelegate(this.OnEndSaveComment);
+            if ((this.onEndCreateCommentDelegate == null)) {
+                this.onEndCreateCommentDelegate = new EndOperationDelegate(this.OnEndCreateComment);
             }
-            if ((this.onSaveCommentCompletedDelegate == null)) {
-                this.onSaveCommentCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSaveCommentCompleted);
+            if ((this.onCreateCommentCompletedDelegate == null)) {
+                this.onCreateCommentCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCreateCommentCompleted);
             }
-            base.InvokeAsync(this.onBeginSaveCommentDelegate, new object[] {
-                        comment}, this.onEndSaveCommentDelegate, this.onSaveCommentCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginCreateCommentDelegate, new object[] {
+                        comment}, this.onEndCreateCommentDelegate, this.onCreateCommentCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -903,7 +903,7 @@ namespace LiteApp.MySpace.Services.Photo {
                     base(client) {
             }
             
-            public System.IAsyncResult BeginGetPagedAlbums(string pageIndex, string pageSize, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginGetPagedAlbums(int pageIndex, int pageSize, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[2];
                 _args[0] = pageIndex;
                 _args[1] = pageSize;
@@ -917,16 +917,16 @@ namespace LiteApp.MySpace.Services.Photo {
                 return _result;
             }
             
-            public System.IAsyncResult BeginSaveAlbum(LiteApp.MySpace.Entities.Album album, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginCreateAlbum(LiteApp.MySpace.Entities.Album album, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = album;
-                System.IAsyncResult _result = base.BeginInvoke("SaveAlbum", _args, callback, asyncState);
+                System.IAsyncResult _result = base.BeginInvoke("CreateAlbum", _args, callback, asyncState);
                 return _result;
             }
             
-            public void EndSaveAlbum(System.IAsyncResult result) {
+            public void EndCreateAlbum(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                base.EndInvoke("SaveAlbum", _args, result);
+                base.EndInvoke("CreateAlbum", _args, result);
             }
             
             public System.IAsyncResult BeginUpdateAlbum(string name, string description, string albumId, System.AsyncCallback callback, object asyncState) {
@@ -1010,16 +1010,16 @@ namespace LiteApp.MySpace.Services.Photo {
                 return _result;
             }
             
-            public System.IAsyncResult BeginSaveComment(LiteApp.MySpace.Entities.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginCreateComment(LiteApp.MySpace.Entities.PhotoComment comment, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = comment;
-                System.IAsyncResult _result = base.BeginInvoke("SaveComment", _args, callback, asyncState);
+                System.IAsyncResult _result = base.BeginInvoke("CreateComment", _args, callback, asyncState);
                 return _result;
             }
             
-            public LiteApp.MySpace.Entities.PhotoComment EndSaveComment(System.IAsyncResult result) {
+            public LiteApp.MySpace.Entities.PhotoComment EndCreateComment(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                LiteApp.MySpace.Entities.PhotoComment _result = ((LiteApp.MySpace.Entities.PhotoComment)(base.EndInvoke("SaveComment", _args, result)));
+                LiteApp.MySpace.Entities.PhotoComment _result = ((LiteApp.MySpace.Entities.PhotoComment)(base.EndInvoke("CreateComment", _args, result)));
                 return _result;
             }
             

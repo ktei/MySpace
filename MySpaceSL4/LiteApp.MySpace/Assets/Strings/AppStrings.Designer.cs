@@ -126,7 +126,7 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirm.
+        ///   Looks up a localized string similar to Confirm your action.
         /// </summary>
         public static string ConfirmationWindowTitle {
             get {
@@ -144,11 +144,20 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected items will be deleted permanently. Are you sure you want to continue?.
+        ///   Looks up a localized string similar to Deleting an album will permanently delete all its photos. Are you sure you want to continue?.
         /// </summary>
-        public static string ConfirmDeleteItemsMessage {
+        public static string ConfirmDeleteAlbumMessage {
             get {
-                return ResourceManager.GetString("ConfirmDeleteItemsMessage", resourceCulture);
+                return ResourceManager.GetString("ConfirmDeleteAlbumMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected photo and its comments will be permanently deleted. Are you sure you want to continue?.
+        /// </summary>
+        public static string ConfirmDeletePhotoMessage {
+            get {
+                return ResourceManager.GetString("ConfirmDeletePhotoMessage", resourceCulture);
             }
         }
         
@@ -189,6 +198,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete album.
+        /// </summary>
+        public static string DeleteAlbumMessageHeader {
+            get {
+                return ResourceManager.GetString("DeleteAlbumMessageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string DeleteButtonText {
@@ -198,11 +216,11 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete photos.
+        ///   Looks up a localized string similar to Delete photo.
         /// </summary>
-        public static string DeletePhotosMessageHeader {
+        public static string DeletePhotoMessageHeader {
             get {
-                return ResourceManager.GetString("DeletePhotosMessageHeader", resourceCulture);
+                return ResourceManager.GetString("DeletePhotoMessageHeader", resourceCulture);
             }
         }
         
@@ -288,6 +306,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logs.
+        /// </summary>
+        public static string LogsPageTitle {
+            get {
+                return ResourceManager.GetString("LogsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string NameLabel {
@@ -320,6 +347,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string NoCommentFoundMessage {
             get {
                 return ResourceManager.GetString("NoCommentFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No log is found.
+        /// </summary>
+        public static string NoLogFoundMessage {
+            get {
+                return ResourceManager.GetString("NoLogFoundMessage", resourceCulture);
             }
         }
         
