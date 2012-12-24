@@ -81,7 +81,7 @@ namespace LiteApp.MySpace.ViewModels
 
         public string CreationInfo
         {
-            get { return string.Format(AppStrings.CreationInfoFormat, CreatedBy, CreatedOn); }
+            get { return string.Format(AppStrings.CreationInfoFormat, CreatedBy, CreatedOn.ToShortDateString()); }
         }
 
         public CoverViewModel[] Covers

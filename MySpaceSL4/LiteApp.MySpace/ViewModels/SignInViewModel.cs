@@ -63,6 +63,12 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
+        public bool KeepSignedIn
+        {
+            get;
+            set;
+        }
+
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -89,7 +95,7 @@ namespace LiteApp.MySpace.ViewModels
             if (this.Validator.HasErrors)
                 return;
             IsBusy = true;
-            SecurityContext.Current.SignIn(UserName, Password, result =>
+            SecurityContext.Current.SignIn(UserName, Password, KeepSignedIn, result =>
             {
                 if (!result.Success)
                 {
@@ -98,7 +104,8 @@ namespace LiteApp.MySpace.ViewModels
                         MessageLevel = ViewModels.MessageLevel.Exclamation,
                         Buttons = MessageBoxButtons.OK,
                         Header = AppStrings.SignInFailedMessageHeader,
-                        Message = result.Error
+                        Message = result.Error,
+                        DisplayName = AppStrings.SignInWindowTitle
                     };
                     IoC.Get<IWindowManager>().ShowDialog(messageBox);
                 }

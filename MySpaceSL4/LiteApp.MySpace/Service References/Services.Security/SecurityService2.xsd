@@ -6,6 +6,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isPersistent" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -42,6 +43,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ActivateUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activationTicket" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActivateUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services" minOccurs="0" name="ActivateUserResult" nillable="true" type="q3:ActivationUserResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RequestPhotoUploadTicket">
     <xs:complexType>
       <xs:sequence>
@@ -64,7 +79,7 @@
   <xs:element name="IsAuthenticatedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="IsAuthenticatedResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="IsAuthenticatedResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

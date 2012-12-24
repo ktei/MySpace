@@ -102,7 +102,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             LogEntryPO entry = new LogEntryPO();
             entry.Level = level;
             entry.Detail = string.Format(detail, parameters);
-            entry.CreatedOn = DateTime.Now;
+            entry.CreatedOn = DateTime.Now.ToUniversalTime();
             return entry;
         }
 

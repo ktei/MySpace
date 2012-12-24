@@ -61,11 +61,29 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User activation.
+        /// </summary>
+        public static string ActivationUserWindowTitle {
+            get {
+                return ResourceManager.GetString("ActivationUserWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add more files.
         /// </summary>
         public static string AddMoreFilesButtonText {
             get {
                 return ResourceManager.GetString("AddMoreFilesButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Albums.
+        /// </summary>
+        public static string AlbumsPageTitle {
+            get {
+                return ResourceManager.GetString("AlbumsPageTitle", resourceCulture);
             }
         }
         
@@ -77,6 +95,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string ALot {
             get {
                 return ResourceManager.GetString("ALot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application error.
+        /// </summary>
+        public static string ApplicationErrorWindowTitle {
+            get {
+                return ResourceManager.GetString("ApplicationErrorWindowTitle", resourceCulture);
             }
         }
         
@@ -122,6 +149,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string CloseButtonText {
             get {
                 return ResourceManager.GetString("CloseButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string CommentsLabel {
+            get {
+                return ResourceManager.GetString("CommentsLabel", resourceCulture);
             }
         }
         
@@ -279,6 +315,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        public static string FailedMessageHeader {
+            get {
+                return ResourceManager.GetString("FailedMessageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Give your album a name.
         /// </summary>
         public static string GiveAlbumName {
@@ -311,6 +356,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string Intro {
             get {
                 return ResourceManager.GetString("Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep me signed in.
+        /// </summary>
+        public static string KeepMeSignedInLabel {
+            get {
+                return ResourceManager.GetString("KeepMeSignedInLabel", resourceCulture);
             }
         }
         
@@ -383,6 +437,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string NotRegisteredYetMessage {
             get {
                 return ResourceManager.GetString("NotRegisteredYetMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not signed in.
+        /// </summary>
+        public static string NotSignedInMessage {
+            get {
+                return ResourceManager.GetString("NotSignedInMessage", resourceCulture);
             }
         }
         
@@ -531,11 +594,29 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have successfully signed up. Please check your email to activate your account..
+        /// </summary>
+        public static string SignUpSuccessMessage {
+            get {
+                return ResourceManager.GetString("SignUpSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign up.
         /// </summary>
         public static string SignUpWindowTitle {
             get {
                 return ResourceManager.GetString("SignUpWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Succeeded.
+        /// </summary>
+        public static string SucceededMessageHeader {
+            get {
+                return ResourceManager.GetString("SucceededMessageHeader", resourceCulture);
             }
         }
         

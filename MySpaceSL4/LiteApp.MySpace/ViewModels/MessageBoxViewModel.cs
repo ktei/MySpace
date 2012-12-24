@@ -128,6 +128,7 @@ namespace LiteApp.MySpace.ViewModels
     public enum MessageLevel
     {
         Information = 0,
+        Success,
         Exclamation,
         Error
     }

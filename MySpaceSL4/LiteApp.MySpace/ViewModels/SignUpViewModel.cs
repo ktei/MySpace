@@ -153,22 +153,43 @@ namespace LiteApp.MySpace.ViewModels
 
         static void HandleSignUpResult(SignUpStatus status)
         {
+            if (status == SignUpStatus.Success)
+            {
+                Execute.OnUIThread(() =>
+                {
+                    MessageBoxViewModel message = new MessageBoxViewModel();
+                    message.DisplayName = AppStrings.SignUpWindowTitle;
+                    message.Header = AppStrings.SucceededMessageHeader;
+                    message.MessageLevel = MessageLevel.Success;
+                    message.Message = AppStrings.SignUpSuccessMessage;
+                    IoC.Get<IWindowManager>().ShowDialog(message);
+                });
+            }
+            else
+            {
+                var errorMessage = GetSignUpErrorMessage(status);
+                Execute.OnUIThread(() =>
+                {
+                    MessageBoxViewModel message = new MessageBoxViewModel();
+                    message.DisplayName = AppStrings.SignUpWindowTitle;
+                    message.Header = AppStrings.FailedMessageHeader;
+                    message.MessageLevel = MessageLevel.Exclamation;
+                    message.Message = errorMessage;
+                    IoC.Get<IWindowManager>().ShowDialog(message);
+                });
+            }
+        }
+
+        static string GetSignUpErrorMessage(SignUpStatus status)
+        {
             switch (status)
             {
-                case SignUpStatus.Success:
-                    break;
-                case SignUpStatus.InvalidPassword:
-                    break;
-                case SignUpStatus.InvalidEmail:
-                    break;
-                case SignUpStatus.DuplicateUserName:
-                    break;
-                case SignUpStatus.DuplicateEmail:
-                    break;
-                case SignUpStatus.ServerError:
-                    break;
-                default:
-                    break;
+                case SignUpStatus.ServerError: return ErrorStrings.GenericErrorMessage;
+                case SignUpStatus.DuplicateUserName: return ErrorStrings.SignUpFailed_DuplicateUserName;
+                case SignUpStatus.DuplicateEmail: return ErrorStrings.SignUpFailed_DuplicateEmail;
+                case SignUpStatus.InvalidEmail: return ErrorStrings.InvalidEmail;
+                case SignUpStatus.InvalidPassword: return ErrorStrings.SignUpFailed_InvalidPassword;
+                default: return string.Empty;
             }
         }
     }

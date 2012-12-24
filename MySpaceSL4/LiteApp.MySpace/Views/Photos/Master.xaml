@@ -17,21 +17,25 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Albums" />
-        <HyperlinkButton Margin="0,15,0,0" Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"
+        <TextBlock Style="{StaticResource HeaderTextStyle}" Text="{Binding Strings.AlbumsPageTitle, Source={StaticResource AppResx}}" />
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <HyperlinkButton cal:Message.Attach="RefreshData">
+                <Image Source="../../Assets/Images/refresh-circle-32.png"/>
+            </HyperlinkButton>
+            <HyperlinkButton Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}" Margin="10,0,0,0"
                          HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum">
-            <Image Source="../../Assets/Images/add-circle-32.png"/>
-            
-        </HyperlinkButton>
+                <Image Source="../../Assets/Images/add-circle-32.png"/>
+            </HyperlinkButton>
+        </StackPanel>
 
-        <ItemsControl x:Name="Albums" ItemsSource="{Binding Albums, Mode=OneWay}" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" MinHeight="200">
+        <ItemsControl x:Name="Albums" ItemsSource="{Binding Albums, Mode=OneWay}" Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource boolToVisReverse}}">
             <ItemsControl.Template>
                 <ControlTemplate TargetType="ItemsControl">
                     <Grid>
                         <TextBlock Text="{Binding Strings.NoAlbumFoundMessage, Source={StaticResource AppResx}}" Style="{StaticResource BlackLabelTextStyle}" VerticalAlignment="Center" FontSize="22" 
                                            FontFamily="{StaticResource HeaderFontFamily}"
                                            Foreground="{StaticResource DisabledForegroundBrush}"
-                                           Visibility="{Binding HasAlbum, Mode=OneWay, Converter={StaticResource boolToVisReverse}}"/>
+                                           Visibility="{Binding HasAlbum, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" Margin="0,50"/>
                         <ItemsPresenter Visibility="{Binding HasAlbum, Mode=OneWay, Converter={StaticResource boolToVis}}"/>
                     </Grid>
                 </ControlTemplate>

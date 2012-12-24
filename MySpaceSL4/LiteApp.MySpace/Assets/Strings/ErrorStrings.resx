@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivationFailed_InvalidTicket" xml:space="preserve">
+    <value>Activation failed because the activation ticket is invalid.</value>
+  </data>
+  <data name="ActivationFailed_ServerError" xml:space="preserve">
+    <value>Activation failed because server experienced an error. Please try again later.</value>
+  </data>
   <data name="GenericErrorMessage" xml:space="preserve">
     <value>It seems some error just occurred. We apologize for the inconvenience. Please try again later.</value>
   </data>
@@ -125,6 +131,12 @@
   </data>
   <data name="GenericServerErrorMessage" xml:space="preserve">
     <value>We apologize that an error occurred on our server. Please try again later.</value>
+  </data>
+  <data name="InactiveAccountMessage" xml:space="preserve">
+    <value>Your account has not been activated.</value>
+  </data>
+  <data name="InvalidCredentialsMessage" xml:space="preserve">
+    <value>Provided credentials are invalid. Please check your user name and password.</value>
   </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>The e-mail address provided is invalid. Please check the value and try again.</value>
@@ -135,7 +147,19 @@
   <data name="PasswordsDoNotMatch" xml:space="preserve">
     <value>Passwords do not match.</value>
   </data>
+  <data name="SignUpFailed_DuplicateEmail" xml:space="preserve">
+    <value>An account with the same email already exists. Please sign up with a different email.</value>
+  </data>
+  <data name="SignUpFailed_DuplicateUserName" xml:space="preserve">
+    <value>An account with the same user name already exists. Please sign up with a different user name.</value>
+  </data>
+  <data name="SignUpFailed_InvalidPassword" xml:space="preserve">
+    <value>The password is invalid. Please sign up with a valid password.</value>
+  </data>
   <data name="UnknownServerErrorMessage" xml:space="preserve">
     <value>We apologize for the inconvenience. An unknown error occurred. Please try again later.</value>
+  </data>
+  <data name="UserAlreadyActivatedMessage" xml:space="preserve">
+    <value>User {0} has already been activated.</value>
   </data>
 </root>

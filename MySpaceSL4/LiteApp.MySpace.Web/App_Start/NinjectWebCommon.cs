@@ -15,6 +15,7 @@ namespace LiteApp.MySpace.Web.App_Start
     using LiteApp.MySpace.Web.Helpers;
     using LiteApp.MySpace.Web.Shared;
     using LiteApp.MySpace.Web.Logging;
+    using LiteApp.MySpace.Web.Security;
 
     public static class NinjectWebCommon 
     {
@@ -65,6 +66,7 @@ namespace LiteApp.MySpace.Web.App_Start
             kernel.Bind<ILogRepository>().To<LogRepository>();
             kernel.Bind<ILogger>().To<LogRepository>().InSingletonScope();
             kernel.Bind<SharpBoxTaskManager>().To<SharpBoxTaskManager>().InSingletonScope();
+            kernel.Bind<ICryptography>().To<Cryptography>().InSingletonScope();
         }        
     }
 }

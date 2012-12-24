@@ -7,6 +7,7 @@ using System.Linq;
 using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.ViewModels;
+using LiteApp.MySpace.Security;
 
 namespace LiteApp.MySpace
 {
@@ -50,6 +51,7 @@ namespace LiteApp.MySpace
             batch.AddExportedValue<IWindowManager>(new WindowManager());
             batch.AddExportedValue<IEventAggregator>(new EventAggregator());
             batch.AddExportedValue<UploadPhotoManagerViewModel>(new UploadPhotoManagerViewModel());
+            //batch.AddExportedValue<ICookieManager>(new IsolatedStorageCookieManager());
             batch.AddExportedValue(container);
 
             container.Compose(batch);

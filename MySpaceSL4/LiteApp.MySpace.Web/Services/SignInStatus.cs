@@ -9,6 +9,7 @@ namespace LiteApp.MySpace.Web.Services
     {
         Success = 0,
         WrongCredentials,
+        Inactive,
         ServerError
     }
 }

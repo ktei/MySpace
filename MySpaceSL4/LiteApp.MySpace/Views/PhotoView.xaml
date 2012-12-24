@@ -77,7 +77,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Comments" Style="{StaticResource HeaderTextStyle}"/>
+                    <TextBlock Text="{Binding Strings.CommentsLabel, Source={StaticResource AppResx}}" Style="{StaticResource HeaderTextStyle}"/>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1"
                                 Visibility="{Binding IsAuthenticated, Mode=OneWay, Converter={StaticResource boolToVisReverse}, Source={StaticResource SecurityContext}}">

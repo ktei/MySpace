@@ -138,6 +138,10 @@
     <Compile Include="Converters\PhotoCommentDeleteVisibilityConverter.cs" />
     <Compile Include="Converters\PhotoUploadStatusToImageSourceConverter.cs" />
     <Compile Include="Converters\AdminToVisibilityConverter.cs" />
+    <Compile Include="Security\ActivationResult.cs" />
+    <Compile Include="Security\IsolatedStorageCookieManager.cs" />
+    <Compile Include="Security\ICookieManager.cs" />
+    <Compile Include="Security\UserInfoCookie.cs" />
     <Compile Include="Service References\Services.Logging\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -414,6 +418,9 @@
     <None Include="Service References\Services.Photo\PhotoService4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\Services.Security\LiteApp.MySpace.Services.Security.ActivationUserResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\Services.Security\LiteApp.MySpace.Services.Security.SignInStaus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -433,9 +440,9 @@
     </None>
     <Resource Include="Assets\Images\photo.png" />
     <Resource Include="Assets\Images\add.png" />
-    <Resource Include="Assets\Images\exclamation.png" />
-    <Resource Include="Assets\Images\error.png" />
-    <Resource Include="Assets\Images\information.png" />
+    <Resource Include="Assets\Images\exclamation-48.png" />
+    <Resource Include="Assets\Images\error-48.png" />
+    <Resource Include="Assets\Images\information-48.png" />
     <Resource Include="Assets\Images\success-16.png" />
     <Resource Include="Assets\Images\cancel-16.png" />
     <Resource Include="Assets\Images\error-16.png" />
@@ -444,6 +451,8 @@
     <Resource Include="Assets\Images\delete-circle-32.png" />
     <Resource Include="Assets\Images\refresh-circle-32.png" />
     <Resource Include="Assets\Images\add-circle-32.png" />
+    <Resource Include="Assets\Images\success-48.png" />
+    <Content Include="Dependencies\Newtonsoft.Json.dll" />
     <Content Include="Properties\AppManifest.xml" />
     <Content Include="Assets\Images\icon-scales.txt" />
     <Resource Include="Assets\Images\save-circle-32.png" />
@@ -486,6 +495,7 @@
     <EmbeddedResource Include="Assets\Strings\ErrorStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

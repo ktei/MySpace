@@ -97,7 +97,7 @@ namespace LiteApp.MySpace.Web.Handlers
                 photo.PhotoURI = photoURI;
                 photo.ThumbURI = thumbURI;
                 photo.AlbumId = parameters.AlbumId;
-                photo.CreatedOn = DateTime.Now;
+                photo.CreatedOn = DateTime.Now.ToUniversalTime();
                 photo.CreatedBy = parameters.User;
                 PhotoRepository.SavePhoto(photo);
 

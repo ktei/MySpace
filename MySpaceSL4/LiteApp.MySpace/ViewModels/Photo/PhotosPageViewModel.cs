@@ -123,6 +123,14 @@ namespace LiteApp.MySpace.ViewModels
             }
         }
 
+        public void RefreshData()
+        {
+            if (_albums != null)
+            {
+                _albums.RefreshCurrentPage();
+            }
+        }
+
         protected override void OnActivate()
         {
             base.OnActivate();

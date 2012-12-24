@@ -13,10 +13,20 @@
     </UserControl.Resources>
     <Grid>
         <Grid Visibility="{Binding IsBusy, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVisReverse}}">
-            <HyperlinkButton Content="{Binding Strings.SignInButtonText, Source={StaticResource AppResx}}" cal:Message.Attach="SignIn" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
-            Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVisReverse}}"/>
-            <HyperlinkButton Content="{Binding Strings.SignOutButtonText, Source={StaticResource AppResx}}" cal:Message.Attach="SignOut" Style="{StaticResource WhiteHyperlinkButtonStyle}" HorizontalAlignment="Left"
-            Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}" />
+            <StackPanel Orientation="Horizontal" Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVisReverse}}">
+                <TextBlock Text="{Binding Strings.NotSignedInMessage, Source={StaticResource AppResx}}" VerticalAlignment="Center" MaxWidth="200" TextTrimming="WordEllipsis" TextWrapping="NoWrap"
+                           Foreground="White" Style="{StaticResource ContentTextStyle}"/>
+                <HyperlinkButton Content="{Binding Strings.SignInButtonText, Source={StaticResource AppResx}}" Margin="5,0,0,0"
+                                 cal:Message.Attach="SignIn" Style="{StaticResource WhiteHyperlinkButtonStyle}"
+                                 VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Visibility="{Binding IsAuthenticated, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}">
+                <TextBlock Text="{Binding User.Name, Source={StaticResource SecurityContext}}" VerticalAlignment="Center" MaxWidth="200" TextTrimming="WordEllipsis" TextWrapping="NoWrap"
+                           Foreground="White" Style="{StaticResource ContentTextStyle}"/>
+                <HyperlinkButton Content="{Binding Strings.SignOutButtonText, Source={StaticResource AppResx}}" VerticalAlignment="Center" Margin="5,0,0,0"
+                                 cal:Message.Attach="SignOut" Style="{StaticResource WhiteHyperlinkButtonStyle}"/>
+            </StackPanel>
         </Grid>
         <TextBlock Style="{StaticResource ContentTextStyle}" Foreground="White"
                    Visibility="{Binding IsBusy, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"

@@ -20,6 +20,7 @@
                 <TextBox x:Name="UserName" Text="{Binding UserName, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                 <TextBlock Text="{Binding Strings.PasswordLabel, Source={StaticResource AppResx}}" Style="{StaticResource BlackLabelTextStyle}" Margin="0,10,0,0"/>
                 <PasswordBox x:Name="Password" Password="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                <CheckBox IsChecked="{Binding KeepSignedIn, Mode=TwoWay}" Content="{Binding Strings.KeepMeSignedInLabel, Source={StaticResource AppResx}}" Margin="0,10,0,0"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0">
                 <TextBlock Text="{Binding Strings.NotRegisteredYetMessage, Source={StaticResource AppResx}}" Style="{StaticResource ContentTextStyle}" Foreground="Black"/>

@@ -26,6 +26,12 @@
   <wsdl:message name="SecurityService_SignUp_OutputMessage">
     <wsdl:part name="parameters" element="SignUpResponse" />
   </wsdl:message>
+  <wsdl:message name="SecurityService_ActivateUser_InputMessage">
+    <wsdl:part name="parameters" element="ActivateUser" />
+  </wsdl:message>
+  <wsdl:message name="SecurityService_ActivateUser_OutputMessage">
+    <wsdl:part name="parameters" element="ActivateUserResponse" />
+  </wsdl:message>
   <wsdl:message name="SecurityService_RequestPhotoUploadTicket_InputMessage">
     <wsdl:part name="parameters" element="RequestPhotoUploadTicket" />
   </wsdl:message>
@@ -53,6 +59,10 @@
     <wsdl:operation name="SignUp">
       <wsdl:input wsaw:Action="urn:SecurityService/SignUp" message="SecurityService_SignUp_InputMessage" />
       <wsdl:output wsaw:Action="urn:SecurityService/SignUpResponse" message="SecurityService_SignUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivateUser">
+      <wsdl:input wsaw:Action="urn:SecurityService/ActivateUser" message="SecurityService_ActivateUser_InputMessage" />
+      <wsdl:output wsaw:Action="urn:SecurityService/ActivateUserResponse" message="SecurityService_ActivateUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RequestPhotoUploadTicket">
       <wsdl:input wsaw:Action="urn:SecurityService/RequestPhotoUploadTicket" message="SecurityService_RequestPhotoUploadTicket_InputMessage" />

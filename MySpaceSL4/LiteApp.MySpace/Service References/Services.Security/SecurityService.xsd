@@ -4,6 +4,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="Success" />
       <xs:enumeration value="WrongCredentials" />
+      <xs:enumeration value="Inactive" />
       <xs:enumeration value="ServerError" />
     </xs:restriction>
   </xs:simpleType>
@@ -19,4 +20,20 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="SignUpStatus" nillable="true" type="tns:SignUpStatus" />
+  <xs:complexType name="ActivationUserResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Status" type="tns:ActivationUserStatus" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ActivationUserResult" nillable="true" type="tns:ActivationUserResult" />
+  <xs:simpleType name="ActivationUserStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="UserNotFound" />
+      <xs:enumeration value="AlreadyActivated" />
+      <xs:enumeration value="ServerError" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ActivationUserStatus" nillable="true" type="tns:ActivationUserStatus" />
 </xs:schema>

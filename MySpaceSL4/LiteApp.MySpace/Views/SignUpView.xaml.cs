@@ -18,6 +18,12 @@ namespace LiteApp.MySpace.Views
             this.Unloaded += SignUpView_Unloaded;
         }
 
+        protected override void OnOpened()
+        {
+            base.OnOpened();
+            UserName.Focus();
+        }
+
         void RegistrationView_Loaded(object sender, RoutedEventArgs e)
         {
             _model = (SignUpViewModel)this.DataContext;

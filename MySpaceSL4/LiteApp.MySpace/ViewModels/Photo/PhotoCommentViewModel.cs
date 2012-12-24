@@ -17,6 +17,7 @@ namespace LiteApp.MySpace.ViewModels
     public class PhotoCommentViewModel : PropertyChangedBase
     {
         bool _isDeleting;
+        DateTime _createdOn;
 
         public PhotoCommentViewModel()
         {
@@ -35,7 +36,17 @@ namespace LiteApp.MySpace.ViewModels
 
         public string CreatedBy { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn
+        {
+            get { return _createdOn; }
+            set
+            {
+                if (_createdOn != value)
+                {
+                    _createdOn = value.ToLocalDateTime();
+                }
+            }
+        }
 
         public string Contents { get; set; }
 

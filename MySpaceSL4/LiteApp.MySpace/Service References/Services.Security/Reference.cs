@@ -26,7 +26,10 @@ namespace LiteApp.MySpace.Services.Security {
         WrongCredentials = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        ServerError = 2,
+        Inactive = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ServerError = 3,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -50,6 +53,68 @@ namespace LiteApp.MySpace.Services.Security {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ServerError = 5,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ActivationUserResult", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
+    public partial class ActivationUserResult : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private LiteApp.MySpace.Services.Security.ActivationUserStatus StatusField;
+        
+        private string UserNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public LiteApp.MySpace.Services.Security.ActivationUserStatus Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ActivationUserStatus", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.Services")]
+    public enum ActivationUserStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Success = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UserNotFound = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AlreadyActivated = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ServerError = 3,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -98,7 +163,7 @@ namespace LiteApp.MySpace.Services.Security {
     public interface SecurityService {
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/SignIn", ReplyAction="urn:SecurityService/SignInResponse")]
-        System.IAsyncResult BeginSignIn(string userName, string password, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginSignIn(string userName, string password, bool isPersistent, System.AsyncCallback callback, object asyncState);
         
         LiteApp.MySpace.Services.Security.SignInStaus EndSignIn(System.IAsyncResult result);
         
@@ -112,6 +177,11 @@ namespace LiteApp.MySpace.Services.Security {
         
         LiteApp.MySpace.Services.Security.SignUpStatus EndSignUp(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/ActivateUser", ReplyAction="urn:SecurityService/ActivateUserResponse")]
+        System.IAsyncResult BeginActivateUser(string activationTicket, System.AsyncCallback callback, object asyncState);
+        
+        LiteApp.MySpace.Services.Security.ActivationUserResult EndActivateUser(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/RequestPhotoUploadTicket", ReplyAction="urn:SecurityService/RequestPhotoUploadTicketResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Security.ServerFault), Action="urn:SecurityService/RequestPhotoUploadTicketServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
         System.IAsyncResult BeginRequestPhotoUploadTicket(string requestToken, System.AsyncCallback callback, object asyncState);
@@ -121,7 +191,7 @@ namespace LiteApp.MySpace.Services.Security {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:SecurityService/IsAuthenticated", ReplyAction="urn:SecurityService/IsAuthenticatedResponse")]
         System.IAsyncResult BeginIsAuthenticated(System.AsyncCallback callback, object asyncState);
         
-        bool EndIsAuthenticated(System.IAsyncResult result);
+        string EndIsAuthenticated(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -168,6 +238,25 @@ namespace LiteApp.MySpace.Services.Security {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ActivateUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ActivateUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public LiteApp.MySpace.Services.Security.ActivationUserResult Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((LiteApp.MySpace.Services.Security.ActivationUserResult)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class RequestPhotoUploadTicketCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -196,10 +285,10 @@ namespace LiteApp.MySpace.Services.Security {
             this.results = results;
         }
         
-        public bool Result {
+        public string Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
+                return ((string)(this.results[0]));
             }
         }
     }
@@ -225,6 +314,12 @@ namespace LiteApp.MySpace.Services.Security {
         private EndOperationDelegate onEndSignUpDelegate;
         
         private System.Threading.SendOrPostCallback onSignUpCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginActivateUserDelegate;
+        
+        private EndOperationDelegate onEndActivateUserDelegate;
+        
+        private System.Threading.SendOrPostCallback onActivateUserCompletedDelegate;
         
         private BeginOperationDelegate onBeginRequestPhotoUploadTicketDelegate;
         
@@ -297,6 +392,8 @@ namespace LiteApp.MySpace.Services.Security {
         
         public event System.EventHandler<SignUpCompletedEventArgs> SignUpCompleted;
         
+        public event System.EventHandler<ActivateUserCompletedEventArgs> ActivateUserCompleted;
+        
         public event System.EventHandler<RequestPhotoUploadTicketCompletedEventArgs> RequestPhotoUploadTicketCompleted;
         
         public event System.EventHandler<IsAuthenticatedCompletedEventArgs> IsAuthenticatedCompleted;
@@ -306,8 +403,8 @@ namespace LiteApp.MySpace.Services.Security {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginSignIn(string userName, string password, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginSignIn(userName, password, callback, asyncState);
+        System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginSignIn(string userName, string password, bool isPersistent, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSignIn(userName, password, isPersistent, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -318,7 +415,8 @@ namespace LiteApp.MySpace.Services.Security {
         private System.IAsyncResult OnBeginSignIn(object[] inValues, System.AsyncCallback callback, object asyncState) {
             string userName = ((string)(inValues[0]));
             string password = ((string)(inValues[1]));
-            return ((LiteApp.MySpace.Services.Security.SecurityService)(this)).BeginSignIn(userName, password, callback, asyncState);
+            bool isPersistent = ((bool)(inValues[2]));
+            return ((LiteApp.MySpace.Services.Security.SecurityService)(this)).BeginSignIn(userName, password, isPersistent, callback, asyncState);
         }
         
         private object[] OnEndSignIn(System.IAsyncResult result) {
@@ -334,11 +432,11 @@ namespace LiteApp.MySpace.Services.Security {
             }
         }
         
-        public void SignInAsync(string userName, string password) {
-            this.SignInAsync(userName, password, null);
+        public void SignInAsync(string userName, string password, bool isPersistent) {
+            this.SignInAsync(userName, password, isPersistent, null);
         }
         
-        public void SignInAsync(string userName, string password, object userState) {
+        public void SignInAsync(string userName, string password, bool isPersistent, object userState) {
             if ((this.onBeginSignInDelegate == null)) {
                 this.onBeginSignInDelegate = new BeginOperationDelegate(this.OnBeginSignIn);
             }
@@ -350,7 +448,8 @@ namespace LiteApp.MySpace.Services.Security {
             }
             base.InvokeAsync(this.onBeginSignInDelegate, new object[] {
                         userName,
-                        password}, this.onEndSignInDelegate, this.onSignInCompletedDelegate, userState);
+                        password,
+                        isPersistent}, this.onEndSignInDelegate, this.onSignInCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -447,6 +546,52 @@ namespace LiteApp.MySpace.Services.Security {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginActivateUser(string activationTicket, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginActivateUser(activationTicket, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        LiteApp.MySpace.Services.Security.ActivationUserResult LiteApp.MySpace.Services.Security.SecurityService.EndActivateUser(System.IAsyncResult result) {
+            return base.Channel.EndActivateUser(result);
+        }
+        
+        private System.IAsyncResult OnBeginActivateUser(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string activationTicket = ((string)(inValues[0]));
+            return ((LiteApp.MySpace.Services.Security.SecurityService)(this)).BeginActivateUser(activationTicket, callback, asyncState);
+        }
+        
+        private object[] OnEndActivateUser(System.IAsyncResult result) {
+            LiteApp.MySpace.Services.Security.ActivationUserResult retVal = ((LiteApp.MySpace.Services.Security.SecurityService)(this)).EndActivateUser(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnActivateUserCompleted(object state) {
+            if ((this.ActivateUserCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ActivateUserCompleted(this, new ActivateUserCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ActivateUserAsync(string activationTicket) {
+            this.ActivateUserAsync(activationTicket, null);
+        }
+        
+        public void ActivateUserAsync(string activationTicket, object userState) {
+            if ((this.onBeginActivateUserDelegate == null)) {
+                this.onBeginActivateUserDelegate = new BeginOperationDelegate(this.OnBeginActivateUser);
+            }
+            if ((this.onEndActivateUserDelegate == null)) {
+                this.onEndActivateUserDelegate = new EndOperationDelegate(this.OnEndActivateUser);
+            }
+            if ((this.onActivateUserCompletedDelegate == null)) {
+                this.onActivateUserCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnActivateUserCompleted);
+            }
+            base.InvokeAsync(this.onBeginActivateUserDelegate, new object[] {
+                        activationTicket}, this.onEndActivateUserDelegate, this.onActivateUserCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult LiteApp.MySpace.Services.Security.SecurityService.BeginRequestPhotoUploadTicket(string requestToken, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginRequestPhotoUploadTicket(requestToken, callback, asyncState);
         }
@@ -498,7 +643,7 @@ namespace LiteApp.MySpace.Services.Security {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        bool LiteApp.MySpace.Services.Security.SecurityService.EndIsAuthenticated(System.IAsyncResult result) {
+        string LiteApp.MySpace.Services.Security.SecurityService.EndIsAuthenticated(System.IAsyncResult result) {
             return base.Channel.EndIsAuthenticated(result);
         }
         
@@ -507,7 +652,7 @@ namespace LiteApp.MySpace.Services.Security {
         }
         
         private object[] OnEndIsAuthenticated(System.IAsyncResult result) {
-            bool retVal = ((LiteApp.MySpace.Services.Security.SecurityService)(this)).EndIsAuthenticated(result);
+            string retVal = ((LiteApp.MySpace.Services.Security.SecurityService)(this)).EndIsAuthenticated(result);
             return new object[] {
                     retVal};
         }
@@ -612,10 +757,11 @@ namespace LiteApp.MySpace.Services.Security {
                     base(client) {
             }
             
-            public System.IAsyncResult BeginSignIn(string userName, string password, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[2];
+            public System.IAsyncResult BeginSignIn(string userName, string password, bool isPersistent, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[3];
                 _args[0] = userName;
                 _args[1] = password;
+                _args[2] = isPersistent;
                 System.IAsyncResult _result = base.BeginInvoke("SignIn", _args, callback, asyncState);
                 return _result;
             }
@@ -652,6 +798,19 @@ namespace LiteApp.MySpace.Services.Security {
                 return _result;
             }
             
+            public System.IAsyncResult BeginActivateUser(string activationTicket, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = activationTicket;
+                System.IAsyncResult _result = base.BeginInvoke("ActivateUser", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public LiteApp.MySpace.Services.Security.ActivationUserResult EndActivateUser(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                LiteApp.MySpace.Services.Security.ActivationUserResult _result = ((LiteApp.MySpace.Services.Security.ActivationUserResult)(base.EndInvoke("ActivateUser", _args, result)));
+                return _result;
+            }
+            
             public System.IAsyncResult BeginRequestPhotoUploadTicket(string requestToken, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = requestToken;
@@ -671,9 +830,9 @@ namespace LiteApp.MySpace.Services.Security {
                 return _result;
             }
             
-            public bool EndIsAuthenticated(System.IAsyncResult result) {
+            public string EndIsAuthenticated(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                bool _result = ((bool)(base.EndInvoke("IsAuthenticated", _args, result)));
+                string _result = ((string)(base.EndInvoke("IsAuthenticated", _args, result)));
                 return _result;
             }
         }

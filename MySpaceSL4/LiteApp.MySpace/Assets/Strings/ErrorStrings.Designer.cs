@@ -61,6 +61,24 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activation failed because the activation ticket is invalid..
+        /// </summary>
+        public static string ActivationFailed_InvalidTicket {
+            get {
+                return ResourceManager.GetString("ActivationFailed_InvalidTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activation failed because server experienced an error. Please try again later..
+        /// </summary>
+        public static string ActivationFailed_ServerError {
+            get {
+                return ResourceManager.GetString("ActivationFailed_ServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to It seems some error just occurred. We apologize for the inconvenience. Please try again later..
         /// </summary>
         public static string GenericErrorMessage {
@@ -84,6 +102,24 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string GenericServerErrorMessage {
             get {
                 return ResourceManager.GetString("GenericServerErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your account has not been activated..
+        /// </summary>
+        public static string InactiveAccountMessage {
+            get {
+                return ResourceManager.GetString("InactiveAccountMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provided credentials are invalid. Please check your user name and password..
+        /// </summary>
+        public static string InvalidCredentialsMessage {
+            get {
+                return ResourceManager.GetString("InvalidCredentialsMessage", resourceCulture);
             }
         }
         
@@ -115,11 +151,47 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An account with the same email already exists. Please sign up with a different email..
+        /// </summary>
+        public static string SignUpFailed_DuplicateEmail {
+            get {
+                return ResourceManager.GetString("SignUpFailed_DuplicateEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An account with the same user name already exists. Please sign up with a different user name..
+        /// </summary>
+        public static string SignUpFailed_DuplicateUserName {
+            get {
+                return ResourceManager.GetString("SignUpFailed_DuplicateUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password is invalid. Please sign up with a valid password..
+        /// </summary>
+        public static string SignUpFailed_InvalidPassword {
+            get {
+                return ResourceManager.GetString("SignUpFailed_InvalidPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We apologize for the inconvenience. An unknown error occurred. Please try again later..
         /// </summary>
         public static string UnknownServerErrorMessage {
             get {
                 return ResourceManager.GetString("UnknownServerErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} has already been activated..
+        /// </summary>
+        public static string UserAlreadyActivatedMessage {
+            get {
+                return ResourceManager.GetString("UserAlreadyActivatedMessage", resourceCulture);
             }
         }
     }

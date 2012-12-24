@@ -90,7 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\LiteApp.MySpace.xap" />
-    <Content Include="LiteApp.MySpaceTestPage.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="LiteApp.MySpaceTestPage.html" />
     <Content Include="Handlers\PhotoReceiver.ashx" />
     <None Include="Resources\sbox-token" />
@@ -129,7 +129,9 @@
     <Compile Include="Handlers\PhotoReceiver.ashx.cs">
       <DependentUpon>PhotoReceiver.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Security\Cryptography.cs" />
     <Compile Include="Helpers\DI.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\ImageProcessor.cs" />
     <Compile Include="Helpers\SharpBoxSupport.cs" />
     <Compile Include="Helpers\SharpBoxTask.cs" />
@@ -145,6 +147,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SupportFiles.resx</DependentUpon>
     </Compile>
+    <Compile Include="Security\ICryptography.cs" />
+    <Compile Include="Services\ActivationUserResult.cs" />
+    <Compile Include="Services\ActivationUserStatus.cs" />
     <Compile Include="Services\LoggingService.svc.cs">
       <DependentUpon>LoggingService.svc</DependentUpon>
       <SubType>Component</SubType>

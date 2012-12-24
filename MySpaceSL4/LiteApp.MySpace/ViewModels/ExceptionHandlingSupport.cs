@@ -11,7 +11,7 @@ namespace LiteApp.MySpace.ViewModels
     {
         public static void Handle(this Exception ex)
         {
-            var model = new MessageBoxViewModel() { MessageLevel = MessageLevel.Error, Buttons = MessageBoxButtons.OK, Header = AppStrings.OperationFailedMessageHeader };
+            var model = new MessageBoxViewModel() { MessageLevel = MessageLevel.Error, Buttons = MessageBoxButtons.OK, Header = ErrorStrings.GenericErrorMessageHeader };
             if (ex is FaultException<ServerFault>)
             {
                 FaultException<ServerFault> faultEx = (FaultException<ServerFault>)ex;

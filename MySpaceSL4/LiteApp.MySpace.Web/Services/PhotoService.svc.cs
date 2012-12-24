@@ -239,11 +239,12 @@ namespace LiteApp.MySpace.Web.Services
         [FaultContract(typeof(ServerFault))]
         public PhotoComment CreateComment(PhotoComment comment)
         {
+            PhotoComment result = null;
             ServiceSupport.AuthorizeAndExecute(() =>
                 {
-                    PhotoRepository.SaveComment(comment);
+                    result = PhotoRepository.SaveComment(comment);
                 });
-            return comment;
+            return result;
         }
 
         [OperationContract]

@@ -38,7 +38,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
         public void SavePhoto(Photo photo)
         {
             PhotoPO photoPO = photo.ToPhotoPO();
-            photoPO.CreatedOn = DateTime.Now;
+            photoPO.CreatedOn = DateTime.Now.ToUniversalTime();
             Database.GetCollection<PhotoPO>(Collections.Photos).Save(photoPO);
         }
 
@@ -85,11 +85,12 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             }
         }
 
-        public void SaveComment(PhotoComment comment)
+        public PhotoComment SaveComment(PhotoComment comment)
         {
             PhotoCommentPO commentPO = comment.ToPhotoCommentPO();
-            commentPO.CreatedOn = DateTime.Now;
+            commentPO.CreatedOn = DateTime.Now.ToUniversalTime();
             Database.GetCollection<PhotoCommentPO>(Collections.PhotoComments).Save(commentPO);
+            return commentPO.ToPhotoComment();
         }
 
         public void DeleteComment(string commentId, string createdBy = null)
