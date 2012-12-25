@@ -6,12 +6,15 @@ using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Services.Photo;
 using LiteApp.MySpace.ViewModels.Message;
 using LiteApp.MySpace.Assets.Strings;
+using LiteApp.MySpace.Security;
 
 namespace LiteApp.MySpace.ViewModels
 {
     [Export(typeof(IPage))]
     [PageMetadata("Photos")]
-    public class PhotosPageViewModel : Conductor<AlbumViewModel>, IPage, IHandle<RequestAlbumsViewMessage>
+    public class PhotosPageViewModel : Conductor<AlbumViewModel>, IPage, 
+        IHandle<RequestAlbumsViewMessage>, 
+        IHandle<SignedOutMessage>
     {
         ServerSidePagedCollectionView<AlbumViewModel> _albums;
         bool _isBusy;
@@ -108,7 +111,7 @@ namespace LiteApp.MySpace.ViewModels
             State = ViewState.Master;
             // This is a bit cheating: what we trying to
             // do is force to refresh covers because users
-            // may changed to album view before all covers were
+            // might have changed to album view before all covers were
             // loaded and if we don't do this, the covers will
             // always stay as IsLoading
             foreach (var a in _albums)
@@ -121,6 +124,16 @@ namespace LiteApp.MySpace.ViewModels
                     cover.SourceURI = sourceURI;
                 }
             }
+        }
+
+        public void Handle(SignedOutMessage message)
+        {
+            if (ActiveItem != null)
+            {
+                DeactivateItem(ActiveItem, true);
+            }
+            State = ViewState.Master;
+            UnloadAlbums();
         }
 
         public void RefreshData()
@@ -140,12 +153,7 @@ namespace LiteApp.MySpace.ViewModels
         protected override void OnDeactivate(bool close)
         {
             base.OnDeactivate(close);
-            if (_albums != null)
-            {
-                _albums.PageChanging -= _albums_PageChanging;
-                _albums.PageChanged -= _albums_PageChanged;
-                _albums = null;
-            }
+            UnloadAlbums();
         }
 
         void LoadAlbums()
@@ -213,6 +221,16 @@ namespace LiteApp.MySpace.ViewModels
                     }
                 };
             IoC.Get<IWindowManager>().ShowDialog(message);
+        }
+
+        void UnloadAlbums()
+        {
+            if (_albums != null)
+            {
+                _albums.PageChanging -= _albums_PageChanging;
+                _albums.PageChanged -= _albums_PageChanged;
+                _albums = null;
+            }
         }
     }
 }

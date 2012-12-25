@@ -147,6 +147,9 @@
   <data name="PasswordsDoNotMatch" xml:space="preserve">
     <value>Passwords do not match.</value>
   </data>
+  <data name="PhotoUploadFailureToolTip" xml:space="preserve">
+    <value>Upload failed due to an error.</value>
+  </data>
   <data name="SignUpFailed_DuplicateEmail" xml:space="preserve">
     <value>An account with the same email already exists. Please sign up with a different email.</value>
   </data>

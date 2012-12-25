@@ -1,5 +1,5 @@
 ﻿
-namespace LiteApp.MySpace.ViewModels.Message
+namespace LiteApp.MySpace.Security
 {
     public class SignedOutMessage
     {

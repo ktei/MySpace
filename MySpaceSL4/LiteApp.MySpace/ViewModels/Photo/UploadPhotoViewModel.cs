@@ -9,6 +9,7 @@ using LiteApp.MySpace.Services.Security;
 using LiteApp.MySpace.Views.Helpers;
 using LiteApp.MySpace.Security;
 using LiteApp.MySpace.ViewModels.Message;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -81,6 +82,22 @@ namespace LiteApp.MySpace.ViewModels
                 {
                     _status = value;
                     NotifyOfPropertyChange(() => Status);
+                    NotifyOfPropertyChange(() => StatusDescription);
+                }
+            }
+        }
+
+        public string StatusDescription
+        {
+            get
+            {
+                switch (_status)
+                {
+                    case PhotoUploadStatus.Canceled: return AppStrings.CancelledToolTip;
+                    case PhotoUploadStatus.Completing: return AppStrings.PhotoUploadCompletingToolTip;
+                    case PhotoUploadStatus.Error: return ErrorStrings.PhotoUploadFailureToolTip;
+                    case PhotoUploadStatus.Succeeded: return AppStrings.PhotoUploadSuccessToolTip;
+                    default: return string.Empty;
                 }
             }
         }

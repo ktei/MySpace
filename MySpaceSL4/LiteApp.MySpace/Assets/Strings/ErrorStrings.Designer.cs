@@ -151,6 +151,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload failed due to an error..
+        /// </summary>
+        public static string PhotoUploadFailureToolTip {
+            get {
+                return ResourceManager.GetString("PhotoUploadFailureToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An account with the same email already exists. Please sign up with a different email..
         /// </summary>
         public static string SignUpFailed_DuplicateEmail {

@@ -47,7 +47,7 @@
                                 <HyperlinkButton Grid.Column="1" Content="Cancel" VerticalAlignment="Center"
                                                  Visibility="{Binding CanCancel, Converter={StaticResource boolToVis}, Mode=OneWay}" cal:Message.Attach="CancelUpload"/>
                                 <Image Source="{Binding Status, Mode=OneWay, Converter={StaticResource statusToImageSource}}" Grid.Column="1" VerticalAlignment="Center"
-                                       Visibility="{Binding CanCancel, Converter={StaticResource boolToVisReverse}, Mode=OneWay}"/>
+                                       Visibility="{Binding CanCancel, Converter={StaticResource boolToVisReverse}, Mode=OneWay}" ToolTipService.ToolTip="{Binding StatusDescription, Mode=OneWay}"/>
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay}" Height="10" Maximum="1" Minimum="0" Grid.Row="1" Grid.ColumnSpan="2"/>
                             </Grid>
                         </DataTemplate>

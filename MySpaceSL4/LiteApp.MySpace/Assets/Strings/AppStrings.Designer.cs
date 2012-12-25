@@ -135,6 +135,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancelled.
+        /// </summary>
+        public static string CancelledToolTip {
+            get {
+                return ResourceManager.GetString("CancelledToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel upload.
         /// </summary>
         public static string CancelUploadMessageHeader {
@@ -414,7 +423,9 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Hi, welcome my friend. You are now on my personal site and please be free to look around but it is not recommended to hack this innocent place.
+        ///
+        ///I created this by Silverlight 4, WCF and Mongo database. There is no particular purpose of building this, but I do like programming and designing and writing code for this small site indeed brought me a lot fun, and it still does. Another reason is that I think this could be used as a personal photo base, where me, my family and friends can upload photos and shar [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Intro {
             get {
@@ -554,6 +565,24 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string PhotosPageTitle {
             get {
                 return ResourceManager.GetString("PhotosPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The photo is being saved by server..
+        /// </summary>
+        public static string PhotoUploadCompletingToolTip {
+            get {
+                return ResourceManager.GetString("PhotoUploadCompletingToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The photo has been successfully uploaded.
+        /// </summary>
+        public static string PhotoUploadSuccessToolTip {
+            get {
+                return ResourceManager.GetString("PhotoUploadSuccessToolTip", resourceCulture);
             }
         }
         

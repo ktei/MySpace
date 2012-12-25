@@ -9,7 +9,7 @@ namespace LiteApp.MySpace.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            string createdBy = System.Convert.ToString(parameter);
+            string createdBy = System.Convert.ToString(value);
             return (SecurityContext.Current.IsSuperAdminSignedIn() || SecurityContext.Current.IsUserSignedIn(createdBy)) ? 
                 Visibility.Visible : Visibility.Collapsed;
         }

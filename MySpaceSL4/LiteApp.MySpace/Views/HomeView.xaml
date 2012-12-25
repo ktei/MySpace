@@ -14,7 +14,7 @@
                 <Border Style="{StaticResource PhotoFrameBorder}" HorizontalAlignment="Left">
                     <Image Source="../Assets/Images/me.png" Width="256" Height="219" />
                 </Border>
-                <TextBlock Text="{Binding Strings.Intro, Source={StaticResource AppResx}}" Style="{StaticResource ContentTextStyle}"/>
+                <TextBlock Text="{Binding Strings.Intro, Source={StaticResource AppResx}}" Style="{StaticResource ContentTextStyle}" TextWrapping="Wrap" Width="700"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

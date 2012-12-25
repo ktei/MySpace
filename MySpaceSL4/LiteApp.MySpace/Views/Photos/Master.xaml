@@ -94,7 +94,7 @@
                                 <TextBlock Text="{Binding CreationInfo, Mode=OneWay}" TextWrapping="NoWrap" Grid.Row="1" TextTrimming="WordEllipsis" Style="{StaticResource ContentTextStyle}" FontSize="12"/>
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="2" BorderThickness="0" Height="60">
                                     <TextBlock Text="{Binding Description, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" 
-                                                       FontStyle="Italic" TextWrapping="Wrap">
+                                               FontSize="12" TextWrapping="Wrap">
                                     </TextBlock>
                                 </ScrollViewer>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Margin="0,5,0,0">

@@ -148,7 +148,9 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Home</value>
   </data>
   <data name="Intro" xml:space="preserve">
-    <value />
+    <value>Hi, welcome my friend. You are now on my personal site and please be free to look around but it is not recommended to hack this innocent place.
+
+I created this by Silverlight 4, WCF and Mongo database. There is no particular purpose of building this, but I do like programming and designing and writing code for this small site indeed brought me a lot fun, and it still does. Another reason is that I think this could be used as a personal photo base, where me, my family and friends can upload photos and share them with each other.</value>
   </data>
   <data name="NoButtonText" xml:space="preserve">
     <value>No</value>
@@ -389,5 +391,14 @@ So, now we have an animation element and we know how to make its copies. Let's s
   </data>
   <data name="UnfinishedPhotoUploadsMessageHeader" xml:space="preserve">
     <value>You have unfinished uploads</value>
+  </data>
+  <data name="CancelledToolTip" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="PhotoUploadCompletingToolTip" xml:space="preserve">
+    <value>The photo is being saved by server.</value>
+  </data>
+  <data name="PhotoUploadSuccessToolTip" xml:space="preserve">
+    <value>The photo has been successfully uploaded</value>
   </data>
 </root>
