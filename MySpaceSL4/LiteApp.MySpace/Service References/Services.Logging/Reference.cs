@@ -17,7 +17,7 @@ namespace LiteApp.MySpace.Services.Logging {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
     public partial class ServerFault : object, System.ComponentModel.INotifyPropertyChanged {
         
         private LiteApp.MySpace.Services.Logging.ServerFaultCode FaultCodeField;
@@ -46,7 +46,7 @@ namespace LiteApp.MySpace.Services.Logging {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFaultCode", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerFaultCode", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
     public enum ServerFaultCode : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -61,7 +61,7 @@ namespace LiteApp.MySpace.Services.Logging {
     public interface LoggingService {
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:LoggingService/GetPagedLogs", ReplyAction="urn:LoggingService/GetPagedLogsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Logging.ServerFault), Action="urn:LoggingService/GetPagedLogsServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling")]
+        [System.ServiceModel.FaultContractAttribute(typeof(LiteApp.MySpace.Services.Logging.ServerFault), Action="urn:LoggingService/GetPagedLogsServerFaultFault", Name="ServerFault", Namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling")]
         System.IAsyncResult BeginGetPagedLogs(int pageIndex, int pageSize, System.AsyncCallback callback, object asyncState);
         
         LiteApp.MySpace.Entities.PagedResult<LiteApp.MySpace.Entities.LogEntry> EndGetPagedLogs(System.IAsyncResult result);

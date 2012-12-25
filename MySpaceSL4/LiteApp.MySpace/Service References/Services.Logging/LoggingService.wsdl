@@ -3,7 +3,7 @@
   <wsdl:types>
     <xsd:schema targetNamespace="/Imports">
       <xsd:import schemaLocation="http://localhost:11846/Services/LoggingService.svc?xsd=xsd0" />
-      <xsd:import schemaLocation="http://localhost:11846/Services/LoggingService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" />
+      <xsd:import schemaLocation="http://localhost:11846/Services/LoggingService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" />
       <xsd:import schemaLocation="http://localhost:11846/Services/LoggingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:11846/Services/LoggingService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Entities" />
     </xsd:schema>
@@ -15,7 +15,7 @@
     <wsdl:part name="parameters" element="GetPagedLogsResponse" />
   </wsdl:message>
   <wsdl:message name="LoggingService_GetPagedLogs_ServerFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.FaultHandling" name="detail" element="q1:ServerFault" />
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LiteApp.MySpace.Web.ErrorHandling" name="detail" element="q1:ServerFault" />
   </wsdl:message>
   <wsdl:portType name="LoggingService">
     <wsdl:operation name="GetPagedLogs">

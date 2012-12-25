@@ -22,7 +22,6 @@
   <xs:element name="ArrayOfLogEntry" nillable="true" type="tns:ArrayOfLogEntry" />
   <xs:complexType name="LogEntry">
     <xs:sequence>
-      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Detail" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
