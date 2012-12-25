@@ -6,6 +6,7 @@ using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Security;
 using LiteApp.MySpace.ViewModels.Message;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -40,7 +41,29 @@ namespace LiteApp.MySpace.ViewModels
 
         public void SignOut()
         {
-            SecurityContext.Current.SignOut();
+            var uploadPhotoManager = IoC.Get<UploadPhotoManagerViewModel>();
+            if (uploadPhotoManager.HasMoreTasks())
+            {
+                MessageBoxViewModel message = new MessageBoxViewModel();
+                message.DisplayName = AppStrings.SignOutWindowTitle;
+                message.Header = AppStrings.UnfinishedPhotoUploadsMessageHeader;
+                message.Message = AppStrings.UnfinishedPhotoUploadsMessage;
+                message.Buttons = MessageBoxButtons.YesNo;
+                message.MessageLevel = MessageLevel.Question;
+                message.Closed += (mSender, mEventArgs) =>
+                {
+                    if (message.Result == MessageBoxResult.Positive)
+                    {
+                        uploadPhotoManager.Clear();
+                        SecurityContext.Current.SignOut();
+                    }
+                };
+                IoC.Get<IWindowManager>().ShowDialog(message);
+            }
+            else
+            {
+                SecurityContext.Current.SignOut();
+            }
         }
 
         public void Handle(SignedOutMessage message)

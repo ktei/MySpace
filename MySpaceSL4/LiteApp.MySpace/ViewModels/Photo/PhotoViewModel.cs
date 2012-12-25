@@ -33,6 +33,8 @@ namespace LiteApp.MySpace.ViewModels
             SecurityContext.Current.PropertyChanged += SecurityContext_PropertyChanged;
         }
 
+        public event EventHandler RequestClose;
+
         public string Id { get; set; }
 
         public string AlbumId { get; set; }
@@ -85,6 +87,8 @@ namespace LiteApp.MySpace.ViewModels
         public string PhotoURI { get; set; }
 
         public string ThumbURI { get; set; }
+
+        public string DownloadURI { get; set; }
 
         public bool IsLoadingThumb
         {
@@ -226,6 +230,13 @@ namespace LiteApp.MySpace.ViewModels
                         DeleteComment(model);
                     });
             }
+        }
+
+        public void Download()
+        {
+            if (RequestClose != null)
+                RequestClose(this, EventArgs.Empty);
+            System.Windows.Browser.HtmlPage.PopupWindow(new Uri(DownloadURI), "_blank", null);
         }
 
         public void EditDescription()

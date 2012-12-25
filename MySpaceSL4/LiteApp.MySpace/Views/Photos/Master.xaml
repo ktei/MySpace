@@ -19,10 +19,11 @@
     <StackPanel>
         <TextBlock Style="{StaticResource HeaderTextStyle}" Text="{Binding Strings.AlbumsPageTitle, Source={StaticResource AppResx}}" />
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-            <HyperlinkButton cal:Message.Attach="RefreshData">
+            <HyperlinkButton cal:Message.Attach="RefreshData" ToolTipService.ToolTip="{Binding Strings.RefreshToolTip, Source={StaticResource AppResx}}">
                 <Image Source="../../Assets/Images/refresh-circle-32.png"/>
             </HyperlinkButton>
             <HyperlinkButton Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}" Margin="10,0,0,0"
+                             ToolTipService.ToolTip="{Binding Strings.CreateAlbumToolTip, Source={StaticResource AppResx}}"
                          HorizontalAlignment="Left" cal:Message.Attach="CreateAlbum">
                 <Image Source="../../Assets/Images/add-circle-32.png"/>
             </HyperlinkButton>
@@ -94,27 +95,26 @@
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="2" BorderThickness="0" Height="60">
                                     <TextBlock Text="{Binding Description, Mode=OneWay}" Style="{StaticResource ContentTextStyle}" 
                                                        FontStyle="Italic" TextWrapping="Wrap">
-                                        <!--<Run Text="&#13;" />-->
-                                        <!--<Run Text="{Binding Description, Mode=OneWay}"/>-->
                                     </TextBlock>
                                 </ScrollViewer>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Margin="0,5,0,0">
-                                    <HyperlinkButton cal:Message.Attach="ViewAlbum('$dataContext')">
+                                    <HyperlinkButton cal:Message.Attach="ViewAlbum('$dataContext')" ToolTipService.ToolTip="{Binding Strings.BrowseAlbumToolTip, Source={StaticResource AppResx}}">
                                         <Image Source="../../Assets/Images/open-circle-32.png"/>
                                     </HyperlinkButton>
 
-                                    <HyperlinkButton Margin="10,0,0,0"
+                                    <HyperlinkButton Margin="10,0,0,0" ToolTipService.ToolTip="{Binding Strings.UploadPhotosToolTip, Source={StaticResource AppResx}}"
                                             Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"
                                             cal:Message.Attach="UploadPhoto">
                                         <Image Source="../../Assets/Images/upload-circle-32.png"/>
                                     </HyperlinkButton>
 
-                                    <HyperlinkButton Margin="10,0,0,0" cal:Message.Attach="EditAlbum('$dataContext')"
+                                    <HyperlinkButton Margin="10,0,0,0" cal:Message.Attach="EditAlbum('$dataContext')" ToolTipService.ToolTip="{Binding Strings.EditToolTip, Source={StaticResource AppResx}}"
                                                      Visibility="{Binding SensitiveButtonsVisibility, Mode=OneWay}">
                                         <Image Source="../../Assets/Images/edit-circle-32.png"/>
                                     </HyperlinkButton>
 
                                     <HyperlinkButton CommandParameter="{Binding Id, Mode=OneWay}" Visibility="{Binding SensitiveButtonsVisibility, Mode=OneWay}"
+                                                     ToolTipService.ToolTip="{Binding Strings.DeleteToolTip, Source={StaticResource AppResx}}"
                                                     Command="{Binding DataContext.DeleteAlbumCommand, Mode=OneWay, ElementName=Albums}" Margin="10,0,0,0">
                                         <Image Source="../../Assets/Images/delete-circle-32.png"/>
                                     </HyperlinkButton>

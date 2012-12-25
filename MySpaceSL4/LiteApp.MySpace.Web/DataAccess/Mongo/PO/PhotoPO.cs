@@ -19,6 +19,8 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
 
         public string Description { get; set; }
 
+        public string DownloadURI { get; set; }
+
         public string PhotoURI { get; set; }
 
         public string ThumbURI { get; set; }

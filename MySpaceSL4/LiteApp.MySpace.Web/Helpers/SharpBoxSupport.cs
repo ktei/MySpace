@@ -13,6 +13,7 @@ namespace LiteApp.MySpace.Web.Helpers
             {
                 storage.DeleteFileSystemEntry(GetPhotoVirtualPath(albumId));
                 storage.DeleteFileSystemEntry(GetThumbVirtualPath(albumId));
+                storage.DeleteFileSystemEntry(GetDownloadVirtualPath(albumId));
             }
             catch (SharpBoxException ex)
             {
@@ -31,18 +32,26 @@ namespace LiteApp.MySpace.Web.Helpers
             return storage.GetFolderEx(SharpBoxSupport.GetPhotoVirtualPath(albumId));
         }
 
+        public static ICloudDirectoryEntry EnsureDownloadFolder(this CloudStorage storage, string albumId)
+        {
+            return storage.GetFolderEx(SharpBoxSupport.GetDownloadVirtualPath(albumId));
+        }
+
         public static void CreateFoldersForAlbum(this CloudStorage storage, string albumId)
         {
             storage.CreateFolder(SharpBoxSupport.GetThumbVirtualPath(albumId));
             storage.CreateFolder(SharpBoxSupport.GetPhotoVirtualPath(albumId));
+            storage.CreateFolder(SharpBoxSupport.GetDownloadVirtualPath(albumId));
         }
 
         public static void DeletePhoto(this CloudStorage storage, string fileName, string albumId)
         {
             var thumbPath = GetThumbVirtualPath(albumId) + "/" + fileName;
             var photoPath = GetPhotoVirtualPath(albumId) + "/" + fileName;
+            var downloadPath = GetDownloadVirtualPath(albumId) + "/" + fileName;
             storage.DeleteFileSystemEntry(thumbPath);
             storage.DeleteFileSystemEntry(photoPath);
+            storage.DeleteFileSystemEntry(downloadPath);
         }
 
         public static CloudStorage OpenDropBoxStorage()
@@ -72,6 +81,11 @@ namespace LiteApp.MySpace.Web.Helpers
         static string GetPhotoVirtualPath(string albumId)
         {
             return "/Public/MySpace/Photos/" + albumId;
+        }
+
+        static string GetDownloadVirtualPath(string albumId)
+        {
+            return "/Public/MySpace/Download/" + albumId;
         }
 
         static ICloudDirectoryEntry GetFolderEx(this CloudStorage storage, string path)

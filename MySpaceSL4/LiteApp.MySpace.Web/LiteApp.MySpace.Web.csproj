@@ -134,7 +134,6 @@
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\ImageProcessor.cs" />
     <Compile Include="Helpers\SharpBoxSupport.cs" />
-    <Compile Include="Helpers\SharpBoxTask.cs" />
     <Compile Include="Helpers\SharpBoxManager.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LoggingFailedEventArgs.cs" />

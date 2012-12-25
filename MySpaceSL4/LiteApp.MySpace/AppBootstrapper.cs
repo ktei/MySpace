@@ -8,6 +8,7 @@ using Caliburn.Micro;
 using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.ViewModels;
 using LiteApp.MySpace.Security;
+using LiteApp.MySpace.Assets.Strings;
 
 namespace LiteApp.MySpace
 {
@@ -51,10 +52,22 @@ namespace LiteApp.MySpace
             batch.AddExportedValue<IWindowManager>(new WindowManager());
             batch.AddExportedValue<IEventAggregator>(new EventAggregator());
             batch.AddExportedValue<UploadPhotoManagerViewModel>(new UploadPhotoManagerViewModel());
-            //batch.AddExportedValue<ICookieManager>(new IsolatedStorageCookieManager());
             batch.AddExportedValue(container);
 
             container.Compose(batch);
+        }
+
+        protected override void OnUnhandledException(object sender, System.Windows.ApplicationUnhandledExceptionEventArgs e)
+        {
+            
+            MessageBoxViewModel message = new MessageBoxViewModel();
+            message.DisplayName = AppStrings.ApplicationErrorWindowTitle;
+            message.Header = ErrorStrings.GenericErrorMessageHeader;
+            message.Message = ErrorStrings.GenericErrorMessage;
+            message.Buttons = MessageBoxButtons.OK;
+            message.MessageLevel = MessageLevel.Error;
+            IoC.Get<IWindowManager>().ShowDialog(message);
+            e.Handled = true;
         }
     }
 }

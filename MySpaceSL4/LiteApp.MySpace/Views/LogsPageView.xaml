@@ -19,7 +19,7 @@
         <StackPanel>
             <TextBlock Style="{StaticResource HeaderTextStyle}" Text="{Binding Strings.LogsPageTitle, Source={StaticResource AppResx}}" />
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <HyperlinkButton cal:Message.Attach="RefreshData">
+                <HyperlinkButton cal:Message.Attach="RefreshData" ToolTipService.ToolTip="{Binding Strings.RefreshToolTip, Source={StaticResource AppResx}}">
                     <Image Source="../Assets/Images/refresh-circle-32.png"/>
                 </HyperlinkButton>
             </StackPanel>

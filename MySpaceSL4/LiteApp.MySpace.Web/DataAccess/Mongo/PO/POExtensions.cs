@@ -54,6 +54,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
             result.CreatedBy = po.CreatedBy;
             result.CreatedOn = po.CreatedOn;
             result.Description = po.Description;
+            result.DownloadURI = po.DownloadURI;
             result.PhotoURI = po.PhotoURI;
             result.ThumbURI = po.ThumbURI;
             result.CommentCount = po.CommentCount;
@@ -68,6 +69,7 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo.PO
             result.CreatedBy = entity.CreatedBy;
             result.CreatedOn = entity.CreatedOn;
             result.Description = entity.Description;
+            result.DownloadURI = entity.DownloadURI;
             result.PhotoURI = entity.PhotoURI;
             result.ThumbURI = entity.ThumbURI;
             result.CommentCount = entity.CommentCount;

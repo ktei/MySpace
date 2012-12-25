@@ -242,7 +242,7 @@ namespace LiteApp.MySpace.Web.Services
             PhotoComment result = null;
             ServiceSupport.AuthorizeAndExecute(() =>
                 {
-                    result = PhotoRepository.SaveComment(comment);
+                    result = PhotoRepository.CreateComment(comment);
                 });
             return result;
         }

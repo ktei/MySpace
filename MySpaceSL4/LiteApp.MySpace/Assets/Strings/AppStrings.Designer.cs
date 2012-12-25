@@ -117,6 +117,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse album.
+        /// </summary>
+        public static string BrowseAlbumToolTip {
+            get {
+                return ResourceManager.GetString("BrowseAlbumToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string CancelButtonText {
@@ -216,6 +225,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create new album.
+        /// </summary>
+        public static string CreateAlbumToolTip {
+            get {
+                return ResourceManager.GetString("CreateAlbumToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create album.
         /// </summary>
         public static string CreateAlbumWindowTitle {
@@ -270,6 +288,24 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete selected photo.
+        /// </summary>
+        public static string DeleteSelectedPhotoToolTip {
+            get {
+                return ResourceManager.GetString("DeleteSelectedPhotoToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DeleteToolTip {
+            get {
+                return ResourceManager.GetString("DeleteToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This comment is being deleted....
         /// </summary>
         public static string DeletingCommentMessage {
@@ -297,11 +333,38 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download original photo.
+        /// </summary>
+        public static string DownloadOriginalPhotoToolTip {
+            get {
+                return ResourceManager.GetString("DownloadOriginalPhotoToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit album.
         /// </summary>
         public static string EditAlbumWindowTitle {
             get {
                 return ResourceManager.GetString("EditAlbumWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit description.
+        /// </summary>
+        public static string EditDescriptionToolTip {
+            get {
+                return ResourceManager.GetString("EditDescriptionToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string EditToolTip {
+            get {
+                return ResourceManager.GetString("EditToolTip", resourceCulture);
             }
         }
         
@@ -513,11 +576,29 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string RefreshToolTip {
+            get {
+                return ResourceManager.GetString("RefreshToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string SaveButtonText {
             get {
                 return ResourceManager.GetString("SaveButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save description.
+        /// </summary>
+        public static string SaveDescriptionToolTip {
+            get {
+                return ResourceManager.GetString("SaveDescriptionToolTip", resourceCulture);
             }
         }
         
@@ -540,11 +621,20 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Signing you in....
+        ///   Looks up a localized string similar to Signing in....
         /// </summary>
         public static string SigningInMessage {
             get {
                 return ResourceManager.GetString("SigningInMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signing out....
+        /// </summary>
+        public static string SigningOutMessage {
+            get {
+                return ResourceManager.GetString("SigningOutMessage", resourceCulture);
             }
         }
         
@@ -581,6 +671,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string SignOutButtonText {
             get {
                 return ResourceManager.GetString("SignOutButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign out.
+        /// </summary>
+        public static string SignOutWindowTitle {
+            get {
+                return ResourceManager.GetString("SignOutWindowTitle", resourceCulture);
             }
         }
         
@@ -639,6 +738,24 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some photos are being uploaded. If you sign out now, all the uploads will be stopped immediately. Are you sure you want to continue?.
+        /// </summary>
+        public static string UnfinishedPhotoUploadsMessage {
+            get {
+                return ResourceManager.GetString("UnfinishedPhotoUploadsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have unfinished uploads.
+        /// </summary>
+        public static string UnfinishedPhotoUploadsMessageHeader {
+            get {
+                return ResourceManager.GetString("UnfinishedPhotoUploadsMessageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload.
         /// </summary>
         public static string UploadButtonText {
@@ -648,7 +765,7 @@ namespace LiteApp.MySpace.Assets.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploaded by {0} on {1}.
+        ///   Looks up a localized string similar to Uploaded by {0} at {1}.
         /// </summary>
         public static string UploadInfoFormat {
             get {
@@ -671,6 +788,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string UploadPhotoInstruction {
             get {
                 return ResourceManager.GetString("UploadPhotoInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload photos.
+        /// </summary>
+        public static string UploadPhotosToolTip {
+            get {
+                return ResourceManager.GetString("UploadPhotosToolTip", resourceCulture);
             }
         }
         
@@ -698,6 +824,15 @@ namespace LiteApp.MySpace.Assets.Strings {
         public static string UserNameLabel {
             get {
                 return ResourceManager.GetString("UserNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View albums.
+        /// </summary>
+        public static string ViewAlbumsToolTip {
+            get {
+                return ResourceManager.GetString("ViewAlbumsToolTip", resourceCulture);
             }
         }
         

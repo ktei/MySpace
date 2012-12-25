@@ -18,16 +18,18 @@
 
     <StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <HyperlinkButton cal:Message.Attach="ViewAlbums">
+            <HyperlinkButton cal:Message.Attach="ViewAlbums" ToolTipService.ToolTip="{Binding Strings.ViewAlbumsToolTip, Source={StaticResource AppResx}}">
                 <Image Source="../../Assets/Images/previous-circle-32.png"/>
             </HyperlinkButton>
-            <HyperlinkButton cal:Message.Attach="RefreshPhotos" Margin="10,0,0,0">
+            <HyperlinkButton cal:Message.Attach="RefreshPhotos" Margin="10,0,0,0" ToolTipService.ToolTip="{Binding Strings.RefreshToolTip, Source={StaticResource AppResx}}">
                 <Image Source="../../Assets/Images/refresh-circle-32.png"/>
             </HyperlinkButton>
-            <HyperlinkButton cal:Message.Attach="UploadPhoto" Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}">
+            <HyperlinkButton cal:Message.Attach="UploadPhoto" Visibility="{Binding IsAuthenticated, Mode=OneWay, Source={StaticResource SecurityContext}, Converter={StaticResource boolToVis}}"
+                             ToolTipService.ToolTip="{Binding Strings.UploadPhotosToolTip, Source={StaticResource AppResx}}">
                 <Image Source="../../Assets/Images/upload-circle-32.png" Margin="10,0,0,0"/>
             </HyperlinkButton>
-            <HyperlinkButton cal:Message.Attach="DeleteSelectedPhotos" Margin="10,0,0,0" Visibility="{Binding SensitiveButtonsVisibility, Mode=OneWay}">
+            <HyperlinkButton cal:Message.Attach="DeleteSelectedPhotos" Margin="10,0,0,0" Visibility="{Binding SensitiveButtonsVisibility, Mode=OneWay}"
+                             ToolTipService.ToolTip="{Binding Strings.DeleteSelectedPhotoToolTip, Source={StaticResource AppResx}}">
                 <Image Source="../../Assets/Images/delete-circle-32.png"/>
             </HyperlinkButton>
         </StackPanel>

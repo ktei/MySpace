@@ -2,14 +2,15 @@
 using System.Drawing;
 using System.Web;
 using System.Web.SessionState;
+using AppLimit.CloudComputing.SharpBox;
 using AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
 using LiteApp.MySpace.Entities;
 using LiteApp.MySpace.Web.DataAccess;
 using LiteApp.MySpace.Web.Helpers;
+using LiteApp.MySpace.Web.Logging;
 using LiteApp.MySpace.Web.Shared;
 using MongoDB.Bson;
 using Ninject;
-using LiteApp.MySpace.Web.Logging;
 
 namespace LiteApp.MySpace.Web.Handlers
 {
@@ -50,11 +51,6 @@ namespace LiteApp.MySpace.Web.Handlers
                 if (!VerifyTicket(parameters.RequestToken, parameters.Ticket))
                     throw new Exception("No valid ticket for this request was found.");
 
-                var storage = SharpBoxSupport.OpenDropBoxStorage();
-                var photoFolder = storage.EnsurePhotoFolder(parameters.AlbumId);
-                var thumbFolder = storage.EnsureThumbFolder(parameters.AlbumId);
-                var newFileName = ObjectId.GenerateNewId() + parameters.FileExtension;
-
                 // Check request content length and actual stream length
                 // If they're not equal, it means the client canceled the uploading
                 bool lengthsMatched = context.Request.ContentLength == context.Request.InputStream.Length;
@@ -63,44 +59,23 @@ namespace LiteApp.MySpace.Web.Handlers
                     return;
                 }
 
-                // Compress photo and upload
-                using (var img = Image.FromStream(context.Request.InputStream))
-                {
-                    using (var photoStream = img.ResampleAsStream(720, 445))
-                    {
-                        photoStream.Position = 0;
-                        storage.UploadFile(photoStream, newFileName, photoFolder);
-                    }
-                }
-
-                context.Request.InputStream.Position = 0; // Set stream starting position back for next read
-                // Generate thumbnail and upload
-                using (var img = Image.FromStream(context.Request.InputStream))
-                {
-                    using (var thumStream = img.ResampleAsStream(192, 119))
-                    {
-                        thumStream.Position = 0;
-                        storage.UploadFile(thumStream, newFileName, thumbFolder);
-                    }
-                }
-
-                // Retrieve photo and thumbnail URIs
-                string thumbURI = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
-                    storage.GetFileSystemObject(newFileName, thumbFolder)).AbsoluteUri;
-                string photoURI = DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
-                    storage.GetFileSystemObject(newFileName, photoFolder)).AbsoluteUri;
+                var storage = SharpBoxSupport.OpenDropBoxStorage();
+                var newFileName = ObjectId.GenerateNewId() + parameters.FileExtension;
+                string downloadURI = UploadDownlaodable(context, storage, newFileName, parameters.AlbumId);
+                string photoURI = UploadPhoto(context, storage, newFileName, parameters.AlbumId);
+                string thumbURI = UploadThumbnail(context, storage, newFileName, parameters.AlbumId);
                 storage.Close();
 
-                // Store data to database
                 string[] coverURIs = AlbumRepository.UpdateCover(parameters.AlbumId, thumbURI);
-                Photo photo = new Photo();
-                photo.PhotoURI = photoURI;
-                photo.ThumbURI = thumbURI;
-                photo.AlbumId = parameters.AlbumId;
-                photo.CreatedOn = DateTime.Now.ToUniversalTime();
-                photo.CreatedBy = parameters.User;
-                PhotoRepository.SavePhoto(photo);
-
+                Photo photo = new Photo()
+                {
+                    PhotoURI = photoURI,
+                    ThumbURI = thumbURI,
+                    DownloadURI = downloadURI,
+                    AlbumId = parameters.AlbumId,
+                    CreatedBy = parameters.User
+                };
+                PhotoRepository.CreatePhoto(photo);
                 context.Response.Write(string.Join(";", coverURIs));
             }
             catch (Exception ex)
@@ -112,6 +87,53 @@ namespace LiteApp.MySpace.Web.Handlers
         }
 
         #endregion
+
+        string UploadDownlaodable(HttpContext context, CloudStorage storage, string newFileName, string albumId)
+        {
+            var downloadFolder = storage.EnsureDownloadFolder(albumId);
+            using (var img = Image.FromStream(context.Request.InputStream))
+            {
+                using (var photoStream = img.ResampleAsStream(img.Width, img.Height))
+                {
+                    photoStream.Position = 0;
+                    storage.UploadFile(photoStream, newFileName, downloadFolder);
+                }
+            }
+            return DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
+                    storage.GetFileSystemObject(newFileName, downloadFolder)).AbsoluteUri;
+        }
+
+        string UploadPhoto(HttpContext context, CloudStorage storage, string newFileName, string albumId)
+        {
+            context.Request.InputStream.Position = 0;
+            var photoFolder = storage.EnsurePhotoFolder(albumId);
+            using (var img = Image.FromStream(context.Request.InputStream))
+            {
+                using (var photoStream = img.ResampleAsStream(720, 445))
+                {
+                    photoStream.Position = 0;
+                    storage.UploadFile(photoStream, newFileName, photoFolder);
+                }
+            }
+            return DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
+                    storage.GetFileSystemObject(newFileName, photoFolder)).AbsoluteUri;
+        }
+
+        string UploadThumbnail(HttpContext context, CloudStorage storage, string newFileName, string albumId)
+        {
+            context.Request.InputStream.Position = 0;
+            var thumbFolder = storage.EnsureThumbFolder(albumId);
+            using (var img = Image.FromStream(context.Request.InputStream))
+            {
+                using (var thumStream = img.ResampleAsStream(192, 119))
+                {
+                    thumStream.Position = 0;
+                    storage.UploadFile(thumStream, newFileName, thumbFolder);
+                }
+            }
+            return DropBoxStorageProviderTools.GetPublicObjectUrl(storage.CurrentAccessToken,
+                storage.GetFileSystemObject(newFileName, thumbFolder)).AbsoluteUri;
+        }
 
         UploadParameters GetParametersFromRequest(HttpContext context)
         {

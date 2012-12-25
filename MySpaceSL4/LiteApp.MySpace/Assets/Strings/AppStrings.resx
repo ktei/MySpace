@@ -190,7 +190,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Sign-in failed</value>
   </data>
   <data name="SigningInMessage" xml:space="preserve">
-    <value>Signing you in...</value>
+    <value>Signing in...</value>
   </data>
   <data name="SignInRequiredMessageHeader" xml:space="preserve">
     <value>Sign-in is required</value>
@@ -316,7 +316,7 @@ So, now we have an animation element and we know how to make its copies. Let's s
     <value>Created by {0} on {1}</value>
   </data>
   <data name="UploadInfoFormat" xml:space="preserve">
-    <value>Uploaded by {0} on {1}</value>
+    <value>Uploaded by {0} at {1}</value>
   </data>
   <data name="AlbumsPageTitle" xml:space="preserve">
     <value>Albums</value>
@@ -344,5 +344,50 @@ So, now we have an animation element and we know how to make its copies. Let's s
   </data>
   <data name="SucceededMessageHeader" xml:space="preserve">
     <value>Succeeded</value>
+  </data>
+  <data name="BrowseAlbumToolTip" xml:space="preserve">
+    <value>Browse album</value>
+  </data>
+  <data name="CreateAlbumToolTip" xml:space="preserve">
+    <value>Create new album</value>
+  </data>
+  <data name="DeleteSelectedPhotoToolTip" xml:space="preserve">
+    <value>Delete selected photo</value>
+  </data>
+  <data name="DeleteToolTip" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DownloadOriginalPhotoToolTip" xml:space="preserve">
+    <value>Download original photo</value>
+  </data>
+  <data name="EditDescriptionToolTip" xml:space="preserve">
+    <value>Edit description</value>
+  </data>
+  <data name="EditToolTip" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="RefreshToolTip" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="SaveDescriptionToolTip" xml:space="preserve">
+    <value>Save description</value>
+  </data>
+  <data name="UploadPhotosToolTip" xml:space="preserve">
+    <value>Upload photos</value>
+  </data>
+  <data name="ViewAlbumsToolTip" xml:space="preserve">
+    <value>View albums</value>
+  </data>
+  <data name="SigningOutMessage" xml:space="preserve">
+    <value>Signing out...</value>
+  </data>
+  <data name="SignOutWindowTitle" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="UnfinishedPhotoUploadsMessage" xml:space="preserve">
+    <value>Some photos are being uploaded. If you sign out now, all the uploads will be stopped immediately. Are you sure you want to continue?</value>
+  </data>
+  <data name="UnfinishedPhotoUploadsMessageHeader" xml:space="preserve">
+    <value>You have unfinished uploads</value>
   </data>
 </root>

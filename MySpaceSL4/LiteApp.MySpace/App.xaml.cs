@@ -14,20 +14,7 @@ namespace LiteApp.MySpace
         public App()
         {
             this.Startup += this.Application_Startup;
-            this.UnhandledException += App_UnhandledException;
-
             InitializeComponent();
-        }
-
-        void App_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
-        {
-            MessageBoxViewModel message = new MessageBoxViewModel();
-            message.DisplayName = AppStrings.ApplicationErrorWindowTitle;
-            message.Header = ErrorStrings.GenericErrorMessageHeader;
-            message.Message = ErrorStrings.GenericErrorMessage;
-            message.Buttons = MessageBoxButtons.OK;
-            message.MessageLevel = MessageLevel.Error;
-            IoC.Get<IWindowManager>().ShowDialog(message);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

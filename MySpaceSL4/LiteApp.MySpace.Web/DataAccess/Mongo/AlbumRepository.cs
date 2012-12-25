@@ -43,7 +43,8 @@ namespace LiteApp.MySpace.Web.DataAccess.Mongo
             AlbumPO albumPO = album.ToAlbumPO();
             if (albumPO.CoverURIs == null)
                 albumPO.CoverURIs = new string[] { };
-            albumPO.CreatedOn = DateTime.Now.ToUniversalTime();
+            if (string.IsNullOrEmpty(album.Id)) // Don't update this property if the entity is not new
+                albumPO.CreatedOn = DateTime.Now.ToUniversalTime();
             Database.GetCollection<AlbumPO>(Collections.Albums).Save(albumPO);
             return albumPO.Id;
         }

@@ -9,20 +9,35 @@ namespace LiteApp.MySpace.Views
 {
     public partial class PhotoView : ChildWindow
     {
+        PhotoViewModel _model;
+
         public PhotoView()
         {
             InitializeComponent();
+            this.Loaded += PhotoView_Loaded;
             this.Unloaded += PhotoView_Unloaded;
+        }
+
+        void PhotoView_Loaded(object sender, RoutedEventArgs e)
+        {
+            _model = (PhotoViewModel)this.DataContext;
+            _model.RequestClose += _model_RequestClose;
         }
 
         void PhotoView_Unloaded(object sender, RoutedEventArgs e)
         {
-            ((PhotoViewModel)this.DataContext).IsLoadingPhoto = true;
+            _model.IsLoadingPhoto = true;
+            _model.RequestClose -= _model_RequestClose;
+        }
+
+        void _model_RequestClose(object sender, System.EventArgs e)
+        {
+            this.DialogResult = false;
         }
 
         private void Image_ImageOpened(object sender, RoutedEventArgs e)
         {
-            ((PhotoViewModel)this.DataContext).IsLoadingPhoto = false;
+            _model.IsLoadingPhoto = false;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

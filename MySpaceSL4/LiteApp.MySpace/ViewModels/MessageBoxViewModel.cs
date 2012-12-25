@@ -130,6 +130,7 @@ namespace LiteApp.MySpace.ViewModels
         Information = 0,
         Success,
         Exclamation,
+        Question,
         Error
     }
 

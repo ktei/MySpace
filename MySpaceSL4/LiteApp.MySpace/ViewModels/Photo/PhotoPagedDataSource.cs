@@ -47,7 +47,8 @@ namespace LiteApp.MySpace.ViewModels
                 CreatedBy = photo.CreatedBy,
                 Description = photo.Description,
                 ThumbURI = photo.ThumbURI,
-                PhotoURI = photo.PhotoURI
+                PhotoURI = photo.PhotoURI,
+                DownloadURI = photo.DownloadURI
             };
         }
     }

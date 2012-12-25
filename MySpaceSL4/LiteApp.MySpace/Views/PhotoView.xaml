@@ -44,19 +44,24 @@
                                            Visibility="{Binding IsLoadingPhoto, Mode=OneWay, Converter={StaticResource boolToVis}}" />
             </Grid>
             <StackPanel Margin="0,15,15,0" Grid.Row="2">
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <HyperlinkButton cal:Message.Attach="Download" ToolTipService.ToolTip="{Binding Strings.DownloadOriginalPhotoToolTip, Source={StaticResource AppResx}}">
+                            <Image Source="../Assets/Images/download-circle-32.png"/>
+                        </HyperlinkButton>
+                        <Grid Visibility="{Binding EditDescriptionButtonVisibility, Mode=OneWay}">
+                            <HyperlinkButton ToolTipService.ToolTip="{Binding Strings.EditDescriptionToolTip, Source={StaticResource AppResx}}"
+                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" cal:Message.Attach="EditDescription">
+                                <Image Source="../Assets/Images/edit-circle-32.png" Margin="5,0,0,0"/>
+                            </HyperlinkButton>
+                            <HyperlinkButton ToolTipService.ToolTip="{Binding Strings.SaveDescriptionToolTip, Source={StaticResource AppResx}}" 
+                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" cal:Message.Attach="SaveDescription">
+                                <Image Source="../Assets/Images/save-circle-32.png" Margin="5,0,0,0"/>
+                            </HyperlinkButton>
+                        </Grid>
+                    </StackPanel>
                     <TextBlock Text="{Binding Strings.DescriptionLabel, Source={StaticResource AppResx}}" 
                                        Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" />
-                    <Grid Visibility="{Binding EditDescriptionButtonVisibility, Mode=OneWay}">
-                        <HyperlinkButton 
-                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVisReverse}}" cal:Message.Attach="EditDescription">
-                            <Image Source="../Assets/Images/edit-circle-32.png" Margin="5,0,0,0"/>
-                        </HyperlinkButton>
-                        <HyperlinkButton 
-                                Visibility="{Binding IsEditingDescription, Mode=OneWay, Converter={StaticResource boolToVis}}" cal:Message.Attach="SaveDescription">
-                            <Image Source="../Assets/Images/save-circle-32.png" Margin="5,0,0,0"/>
-                        </HyperlinkButton>
-                    </Grid>
                 </StackPanel>
                 <Grid Height="60">
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">

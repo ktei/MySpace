@@ -112,7 +112,7 @@ namespace LiteApp.MySpace.Security
             try
             {
                 IsBusy = true;
-                Status = "Signing in...";
+                Status = AppStrings.SigningInMessage;
                 var svc = new SecurityServiceClient();
 
                 svc.SignInCompleted += (sender, e) =>
@@ -154,7 +154,7 @@ namespace LiteApp.MySpace.Security
             try
             {
                 IsBusy = true;
-                Status = "Signing out...";
+                Status = AppStrings.SigningOutMessage;
                 var svc = new SecurityServiceClient();
                 svc.SignOutCompleted += (sender, e) =>
                     {

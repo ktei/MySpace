@@ -5,6 +5,7 @@ using LiteApp.MySpace.Framework;
 using LiteApp.MySpace.Security;
 using LiteApp.Portable.Mvvm.Validation;
 using LiteApp.MySpace.Assets.Strings;
+using System.Threading;
 
 namespace LiteApp.MySpace.ViewModels
 {

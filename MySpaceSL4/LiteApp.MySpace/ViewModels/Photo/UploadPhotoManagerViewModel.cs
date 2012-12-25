@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using Caliburn.Micro;
 using LiteApp.MySpace.Assets.Strings;
+using LiteApp.MySpace.Security;
+using System.ComponentModel;
 
 namespace LiteApp.MySpace.ViewModels
 {
@@ -78,20 +80,18 @@ namespace LiteApp.MySpace.ViewModels
             {
                 _pendingTasks.Clear();
             }
+            foreach (var task in _archivedTasks)
+            {
+                task.CancelUpload();
+            }
             _archivedTasks.Clear();
             _clearing = false;
+            RefreshTasks();
         }
 
         public bool HasMoreTasks()
         {
-            int activeTaskCount = GetActiveTaskCount();
-            int pendingTaskCount;
-            lock (_pendingTasks)
-            {
-                pendingTaskCount = _pendingTasks.Count(x => x.Status != PhotoUploadStatus.Canceled);
-            }
-            IncompleteTasks = activeTaskCount + pendingTaskCount;
-            NotifyOfPropertyChange(() => FirstActiveTask);
+            RefreshTasks();
             return IncompleteTasks > 0;
         }
 
@@ -142,6 +142,18 @@ namespace LiteApp.MySpace.ViewModels
                 if (NoMoreTasks != null)
                     NoMoreTasks(this, EventArgs.Empty);
             }
+        }
+
+        void RefreshTasks()
+        {
+            int activeTaskCount = GetActiveTaskCount();
+            int pendingTaskCount;
+            lock (_pendingTasks)
+            {
+                pendingTaskCount = _pendingTasks.Count(x => x.Status != PhotoUploadStatus.Canceled);
+            }
+            IncompleteTasks = activeTaskCount + pendingTaskCount;
+            NotifyOfPropertyChange(() => FirstActiveTask);
         }
 
         int GetActiveTaskCount()
